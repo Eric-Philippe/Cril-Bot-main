@@ -4,17 +4,17 @@ const { TOKEN } = require("./token.json");
 
 const { PREFIX } = require("./config.json");
 
+const { cmdGrabber } = require("./commands/commandsGrabber");
+
 client.on("ready", () => {
   console.log(`Logged into: ${client.user.tag}`);
 });
 
 //Test Comment
 client.on("messageCreate", (msg) => {
-  if (msg.content === PREFIX + "chat") {
-    msg.reply(
-      "https://tenor.com/view/sleep-cat-two-cat-cat-cat-love-gif-23651667"
-    );
-  }
+  if (msg.author.bot) return;
+  if (msg.author.id === client.user.id) return;
+  cmdGrabber(msg);
 });
 
 client.login(TOKEN);
