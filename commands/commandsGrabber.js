@@ -16,7 +16,6 @@ module.exports.cmdGrabber = function (msg) {
   try {
     commands[cmd].func(msg, client);
   } catch (err) {
-    console.log(err.name);
     if (err.name === "ReferenceError") {
       msg.reply(
         "⚙️ | Erreur dans le programme, merci de contacter l'administration !"
