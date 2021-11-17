@@ -1,6 +1,7 @@
 const { client } = require("./utils/client");
 
 const { TOKEN } = require("./token.json");
+const { PREFIX } = require("./config.json");
 
 const { cmdGrabber } = require("./commands/commandsGrabber");
 
@@ -12,7 +13,9 @@ client.on("ready", () => {
 client.on("messageCreate", (msg) => {
   if (msg.author.bot) return;
   if (msg.author.id === client.user.id) return;
-  cmdGrabber(msg);
+  if (msg.content.startsWith(PREFIX)) {
+    cmdGrabber(msg);
+  }
 });
 
 client.login(TOKEN);
