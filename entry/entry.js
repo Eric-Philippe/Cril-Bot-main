@@ -46,6 +46,15 @@ module.exports = class Entry {
   selfDestruction(channel) {}
 
   createMessageEntry(channel) {
+
+    const row = new Discord.MessageActionRow()
+    .addComponents(
+      new Discord.MessageButton()
+      .setCustomId("button")
+      .setLabel("Entrer")
+      .setStyle("PRIMARY")
+    )
+
     let embed = new Discord.MessageEmbed()
       .setColor(MAIN_COLOR)
       .setTitle(`Bienvenue ${this.user.tag} !`)
@@ -58,36 +67,30 @@ module.exports = class Entry {
         "Etape 3",
         "Amorce des premières manipulations nécessaire pour le Cril !"
       )
-      .addField("", "")
-      .addField('Cliquez sur la réaction ``"✔️"`` pour passer à la suite.')
+      .addField(".", "**.**")
+      .addField("Instruction : ",  'Cliquez sur la réaction ``"✔️"`` pour passer à la suite.')
       .setAuthor("Cril", this.guild.iconURL())
       .setThumbnail(this.user.avatarURL())
       .setTimestamp();
 
-    channel.send({ embeds: [embed] });
+    let m = channel.send({ ephemeral: true, embeds: [embed], components: [row] })
+
+    return m;
   }
 
   async __init__() {
     this.channel = await this.createChannel();
-    this.createMessageEntry(this.channel).then((m) => {
-      this.display = m;
-      m.react("✔️");
-    });
+    this.display = await this.createMessageEntry(this.channel);
+    this.buttonCollector(this.display);
   }
 
-  emoteCollector(msg) {
-    const filter = (reaction, user) => {
-      return reaction.emoji.name === "✔️" && user.id === this.user.id;
-    };
-
-    const collector = msg.createReactionCollector({ filter, time: 15000 });
-
-    collector.on("collect", (reaction, user) => {
-      console.log(reaction.emoji.name);
+  buttonCollector(msg) {
+    const filter = (interaction) => interaction.customId === 'button' && interaction.user.id === this.user.id;
+    const collector = msg.createMessageComponentCollector({ filter, max: 1, time: 15_000 });
+    collector.on('collect', i => {
+      i.deferUpdate();
+      msg.channel.send("Yey");
     });
-
-    collector.on("end", (collected) => {
-      console.log(collected.size);
-    });
+    collector.on('end', collected => console.log(`Collected ${collected.size} items`));
   }
 };

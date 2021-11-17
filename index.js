@@ -5,6 +5,7 @@ const { PREFIX } = require("./config.json");
 
 const { cmdGrabber } = require("./commands/commandsGrabber");
 const Entry = require("./entry/entry");
+const Discord = require("discord.js");
 
 client.on("ready", () => {
   console.log(`Logged into: ${client.user.tag}`);
@@ -24,5 +25,9 @@ client.on("guildMemberAdd", (member) => {
   if (member.user.id === client.user.id) return;
   new Entry(member);
 });
+
+client.on('interactionCreate', async interaction => {
+
+})
 
 client.login(TOKEN);
