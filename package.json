@@ -1,0 +1,22 @@
+{
+  "name": "cril-bot",
+  "version": "1.0.0",
+  "description": "Cril Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zaorhion/Cril-Bot.git"
+  },
+  "author": "Zaorhion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zaorhion/Cril-Bot/issues"
+  },
+  "homepage": "https://github.com/Zaorhion/Cril-Bot#readme",
+  "dependencies": {
+    "discord.js": "^13.3.1"
+  }
+}
