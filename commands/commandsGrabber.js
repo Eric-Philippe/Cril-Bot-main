@@ -18,10 +18,12 @@ module.exports.cmdGrabber = function (msg) {
     commands[cmd].func(msg, client);
   } catch (err) {
     if (err.name === "ReferenceError") {
+      // Command Error
       msg.reply(
         "⚙️ | Erreur dans le programme, merci de contacter l'administration !"
       );
     } else {
+      // Program Error
       msg.reply(
         "❌ | Merci d'entrer une commande valide ! : ``La commande n'existe pas !``"
       );
