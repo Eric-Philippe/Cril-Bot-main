@@ -1,6 +1,7 @@
 {
   "PREFIX": "!",
   "MAIN_COLOR": "#C60800",
+  "SECOND_COLOR": ["#2548a8", "#69a825"],
   "CHANNEL": {},
   "CATEGORY": {
     "entry": "910515893853900801"

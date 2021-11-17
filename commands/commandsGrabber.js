@@ -5,6 +5,7 @@ const { PREFIX } = require("../config.json");
 const { commands } = require("./commands");
 
 /**
+ *  Command Launcher
  *
  * @param {Discord.Message} msg
  * @param {Discord.Client} client
