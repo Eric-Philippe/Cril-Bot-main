@@ -4,6 +4,7 @@ const { TOKEN } = require("./token.json");
 const { PREFIX } = require("./config.json");
 
 const { cmdGrabber } = require("./commands/commandsGrabber");
+const Entry = require("./entry/entry");
 
 client.on("ready", () => {
   console.log(`Logged into: ${client.user.tag}`);
@@ -16,6 +17,12 @@ client.on("messageCreate", (msg) => {
   if (msg.content.startsWith(PREFIX)) {
     cmdGrabber(msg);
   }
+});
+
+client.on("guildMemberAdd", (member) => {
+  if (member.user.bot) return;
+  if (member.user.id === client.user.id) return;
+  new Entry(member);
 });
 
 client.login(TOKEN);

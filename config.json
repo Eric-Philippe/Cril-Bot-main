@@ -1,3 +1,8 @@
 {
-    "PREFIX": "!"
+  "PREFIX": "!",
+  "MAIN_COLOR": "#C60800",
+  "CHANNEL": {},
+  "CATEGORY": {
+    "entry": "910515893853900801"
+  }
 }
