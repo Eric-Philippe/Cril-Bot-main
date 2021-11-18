@@ -18,8 +18,9 @@
   "ICON": {
     "rules": "https://cdn.discordapp.com/attachments/477449962020405268/910794044186173471/pngegg.png"
   },
-  "CHANNEL": {},
+  "CHANNELS": { "welcome": "910240188968620045" },
   "CATEGORY": {
     "entry": "910515893853900801"
-  }
+  },
+  "ROLES": { "etu": "910826454604984330" }
 }

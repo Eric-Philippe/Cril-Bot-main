@@ -8,7 +8,7 @@ const {
   template4,
 } = require("./entryTemplate");
 
-const { CATEGORY, DEPARTMENT } = require("../config.json");
+const { CATEGORY, DEPARTMENT, ROLES, CHANNELS } = require("../config.json");
 
 /**
  * @Class Entry system fir incoming user on the server
@@ -338,6 +338,9 @@ module.exports = class Entry {
 
         return false;
       }
+    } else if (this.page === 4) {
+      this.__terminate__();
+      return false;
     } else {
       return true;
     }
@@ -351,7 +354,7 @@ module.exports = class Entry {
    * @param {Discord.MessageActionRow} interaction
    */
   async updateMessageEmbed(msg, template) {
-    //msg.reactions.removeAll();
+    msg.reactions.removeAll();
 
     await msg.edit({
       ephemeral: true,
@@ -394,6 +397,28 @@ module.exports = class Entry {
     if (this.messageCollec) {
       this.messageCollec.stop();
       this.messageCollec = undefined;
+    }
+  }
+
+  async __terminate__() {
+    try {
+      await this.member.setNickname(
+        `${this.userInfo[0]} ${this.userInfo[1]} ${this.userInfo[2]}`
+      );
+      let new_role = this.guild.roles.cache.find((r) => r.id === ROLES.etu);
+      await this.member.roles.add(new_role);
+
+      await this.channel.delete();
+
+      let new_channel = this.guild.channels.cache.find(
+        (c) => c.id === CHANNELS.welcome
+      );
+      if (!new_channel) return;
+      await new_channel.send(`Bienvenue ${this.user} !`);
+
+      await this.user.send("Des info's cools");
+    } catch (err) {
+      console.log(err);
     }
   }
 };
