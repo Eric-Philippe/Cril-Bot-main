@@ -53,6 +53,7 @@ exports.pollRequest = async function (reaction) {
   if (!msg) return;
   if (!msg.embeds[0]) return;
   let parent_embed = msg.embeds[0];
+  if (!parent_embed.author) return;
   if (parent_embed.author.name != "SONDAGE") return;
 
   let total = 0; // Total of reaction
