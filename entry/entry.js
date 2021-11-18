@@ -1,6 +1,12 @@
 const Discord = require("discord.js");
 
-const { template0, template1 } = require("./entryTemplate");
+const {
+  template0,
+  template1,
+  template2,
+  template3,
+  template4,
+} = require("./entryTemplate");
 
 const { CATEGORY, DEPARTMENT } = require("../config.json");
 
@@ -20,6 +26,7 @@ module.exports = class Entry {
     this.guild = member.guild; //Member Guild
     this.user = member.user; //User object from Member
     this.userInfo = []; //Array for the first second name and Department user
+    this.verify = false;
 
     this.page = 0; //Step of the Entry
     this.underPage = 0; // Under step for the first page
@@ -68,6 +75,15 @@ module.exports = class Entry {
           this.userInfo[2],
           titleArray[this.underPage]
         );
+        break;
+      case 2:
+        template = await template2(this.member, this.page);
+        break;
+      case 3:
+        template = await template3(this.member, this.page);
+        break;
+      case 4:
+        template = await template4(this.member, this.page);
         break;
     }
 
@@ -132,16 +148,19 @@ module.exports = class Entry {
     const collector = msg.createMessageComponentCollector({
       filter,
       max: 1,
-      time: 20000,
+      time: 30000,
       errors: ["time"],
     });
 
     this.buttonCollec = collector;
 
-    collector.on("collect", (i) => {
+    collector.on("collect", async (i) => {
       switch (i.customId) {
         case "entryButton": // Validation
-          this.page = 1;
+          let balise = await this.nextPageManager(i);
+          if (balise) {
+            this.page = this.page + 1;
+          }
           break;
         /** Allow to go all around the pages */
         case "nextUnderButton": // Next under step
@@ -178,18 +197,17 @@ module.exports = class Entry {
    * @param {Discord.Message} msg
    */
   reactionCollector(msg) {
-    const reacArray = []; //
+    const reacArray = ["✅"]; //
 
     const filter = (reaction, user) => {
       return (
-        reacArray.includes(reaction.emoji.name) && user.id === this.user.id
+        user.id === this.user.id && reacArray.includes(reaction.emoji.name)
       );
     };
 
     const collector = msg.createReactionCollector({
       filter,
-      max: 1,
-      time: 150000,
+      time: 30000,
       errors: ["time"],
     });
 
@@ -197,6 +215,9 @@ module.exports = class Entry {
 
     collector.on("collect", (reaction, user) => {
       switch (reaction.emoji.name) {
+        case "✅":
+          this.verify = true;
+          break;
       }
     });
 
@@ -245,7 +266,7 @@ module.exports = class Entry {
     const collector = msg.channel.createMessageCollector({
       filter,
       max: 1,
-      time: 1500000,
+      time: 30000,
       errors: ["time"],
     });
 
@@ -277,22 +298,78 @@ module.exports = class Entry {
   }
 
   /**
+   * Check if the followings things are respected to change the page
+   *
+   * @param {Discord.Interaction} i
+   *
+   */
+  async nextPageManager(i) {
+    if (this.page === 1) {
+      // Need to verify if all the element are completed
+      if (this.userInfo[0] && this.userInfo[1] && this.userInfo[2]) {
+        return true;
+      } else {
+        await this.channel
+          .send(
+            "``❌ | Merci de valider tous les éléments avant de passer à la suite !``"
+          )
+          .then((m) => {
+            setTimeout(() => {
+              m.delete();
+            }, 5000);
+          });
+
+        return false;
+      }
+    } else if (this.page === 3) {
+      // Rules consent
+      if (this.verify) {
+        return true;
+      } else {
+        await this.channel
+          .send(
+            "``❌ | Merci de cliquer sur la réaction pour pouvoir passer à la suite !``"
+          )
+          .then((m) => {
+            setTimeout(() => {
+              m.delete();
+            }, 5000);
+          });
+
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
+
+  /**
    * Update the selected embed
    *
    * @param {Discord.Message} msg
    * @param {Discord.MessageEmbed} embed
    * @param {Discord.MessageActionRow} interaction
    */
-  updateMessageEmbed(msg, template) {
-    msg.edit({
+  async updateMessageEmbed(msg, template) {
+    //msg.reactions.removeAll();
+
+    await msg.edit({
       ephemeral: true,
       embeds: [template.embed],
       components: [template.row],
     });
+
+    if (this.page === 3) {
+      await msg.react("✅");
+    }
   }
 
+  /**
+   * Destroy the all process
+   */
   async autoDestruction() {
     try {
+      await this.resetCollector();
       await this.channel.delete();
       await this.user.send("Message de renvoi passif");
       await this.member.kick("timeOut");

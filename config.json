@@ -15,6 +15,9 @@
     "GEAP",
     "GEAR"
   ],
+  "ICON": {
+    "rules": "https://cdn.discordapp.com/attachments/477449962020405268/910794044186173471/pngegg.png"
+  },
   "CHANNEL": {},
   "CATEGORY": {
     "entry": "910515893853900801"

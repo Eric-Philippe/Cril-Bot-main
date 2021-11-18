@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-const { MAIN_COLOR, SECOND_COLOR } = require("../config.json");
+const { MAIN_COLOR, SECOND_COLOR, ICON } = require("../config.json");
 /**
  *
  * @typedef {Object} Template
@@ -81,7 +81,7 @@ module.exports.template1 = function (
       .setStyle("SECONDARY"),
 
     new Discord.MessageButton()
-      .setCustomId("validateButton")
+      .setCustomId("entryButton")
       .setLabel("Valider")
       .setStyle("PRIMARY")
       .setEmoji("✔️")
@@ -93,7 +93,7 @@ module.exports.template1 = function (
     .setAuthor("Cril", msg.guild.iconURL())
     .setThumbnail(msg.author.avatarURL())
     .setDescription(
-      "Merci d'entrer votre prénom, votre nom puis votre département"
+      "Merci d'entrer votre prénom, votre nom puis votre département \n Changer de champs grâce au boutons en bas !"
     )
     .addField("Prénom", "``" + firstname_ + "``", true)
     .addField("Nom", "``" + secondname_ + "``", true)
@@ -101,18 +101,126 @@ module.exports.template1 = function (
     .setTimestamp();
 
   if (title === "Département") {
-    embed.addField("INFO", "``1``", true);
-    embed.addField("BIO", "``2``", true);
-    embed.addField("CHIM", "``3``", true);
-    embed.addField("CIV", "``4``", true);
-    embed.addField("GE2I", "``5``", true);
-    embed.addField("GMP", "``6``", true);
-    embed.addField("GCCD", "``7``", true);
-    embed.addField("MP", "``8``", true);
-    embed.addField("GEAP", "``9``", true);
-    embed.addField("GEAR", "``10``", true);
+    embed.addField("INFO : ", "Entrez ``1``", true);
+    embed.addField("BIO : ", "Entrez ``2``", true);
+    embed.addField("CHIM : ", "Entrez ``3``", true);
+    embed.addField("CIV : ", "Entrez ``4``", true);
+    embed.addField("GE2I : ", "Entrez ``5``", true);
+    embed.addField("GMP : ", "Entrez ``6``", true);
+    embed.addField("GCCD : ", "Entrez ``7``", true);
+    embed.addField("MP : ", "Entrez ``8``", true);
+    embed.addField("GEAP : ", "Entrez ``9``", true);
+    embed.addField("GEAR : ", "Entrez ``10``", true);
     embed.addField("⚙️ | Merci d'entrer une valeur", "Numérique");
   }
+
+  return { embed, row, collector_require };
+};
+
+/**
+ *  Constructor of the second template page
+ *
+ * @param {Discord.Message} msg
+ * @param {Number}
+
+ * @return {Template} The template object
+ */
+module.exports.template2 = function (member, page) {
+  const collector_require = [0]; // Button collector
+
+  const row = new Discord.MessageActionRow().addComponents(
+    new Discord.MessageButton()
+      .setCustomId("entryButton")
+      .setLabel("Entrer")
+      .setStyle("PRIMARY")
+      .setEmoji("✔️")
+  );
+
+  let embed = new Discord.MessageEmbed()
+    .setColor(SECOND_COLOR[2])
+    .setTitle(`Les règles !`)
+    .setDescription("Lorem Ipsum")
+    .addField("Règle 1", "Trucs chiants")
+    .addField("Règle 2", "Trucs chiants")
+    .addField("Règle 3", "Trucs chiants")
+    .addField("Règle 4", "Trucs chiants")
+    .setAuthor("Cril", member.guild.iconURL())
+    .setThumbnail(ICON.rules)
+    .setFooter(`${page + 1}/5`)
+    .setTimestamp();
+
+  return { embed, row, collector_require };
+};
+
+/**
+ *  Constructor of the third template page
+ *
+ * @param {Discord.Message} msg
+ * @param {Number}
+
+ * @return {Template} The template object
+ */
+module.exports.template3 = function (member, page) {
+  const collector_require = [0, 1]; // Button collector
+
+  const row = new Discord.MessageActionRow().addComponents(
+    new Discord.MessageButton()
+      .setCustomId("entryButton")
+      .setLabel("Entrer")
+      .setStyle("PRIMARY")
+      .setEmoji("✔️")
+  );
+
+  let embed = new Discord.MessageEmbed()
+    .setColor(SECOND_COLOR[2])
+    .setTitle(`Les règles !`)
+    .setDescription(
+      "Cliquez sur la réaction pour valider le consentement à l'application de ces règles."
+    )
+    .addField("Règle 5", "Trucs chiants")
+    .addField("Règle 6", "Trucs chiants")
+    .addField("Règle 7", "Trucs chiants")
+    .addField("Règle 8", "Trucs chiants")
+    .setAuthor("Cril", member.guild.iconURL())
+    .setThumbnail(ICON.rules)
+    .setFooter(`${page + 1}/5`)
+    .setTimestamp();
+
+  return { embed, row, collector_require };
+};
+
+/**
+ *  Constructor of the fourth template page
+ *
+ * @param {Discord.Message} msg
+ * @param {Number}
+
+ * @return {Template} The template object
+ */
+module.exports.template4 = function (member, page) {
+  const collector_require = [0]; // Button collector
+
+  const row = new Discord.MessageActionRow().addComponents(
+    new Discord.MessageButton()
+      .setCustomId("entryButton")
+      .setLabel("Entrer sur le serveur")
+      .setStyle("PRIMARY")
+      .setEmoji("✔️")
+  );
+
+  let embed = new Discord.MessageEmbed()
+    .setColor(SECOND_COLOR[2])
+    .setTitle(`Premières manipulation !`)
+    .setDescription("https://www.youtube.com/watch?v=SZmADlOhkQk")
+    .setURL("https://www.youtube.com/watch?v=SZmADlOhkQk")
+    .addField(
+      "Info",
+      "Toutes ces infos sont disponibles plus précisément grâce à la commande ``!help``"
+    )
+    .setAuthor("Cril", member.guild.iconURL())
+    .setThumbnail(ICON.rules)
+    .setFooter(`${page + 1}/5`)
+    .setTimestamp();
 
   return { embed, row, collector_require };
 };

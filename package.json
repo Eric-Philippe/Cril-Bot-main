@@ -18,5 +18,8 @@
   "homepage": "https://github.com/Zaorhion/Cril-Bot#readme",
   "dependencies": {
     "discord.js": "^13.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0"
   }
 }
