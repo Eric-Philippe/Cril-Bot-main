@@ -6,6 +6,8 @@ const { PREFIX } = require("./config.json"); // Prefix
 const { cmdGrabber } = require("./commands/commandsGrabber"); // Manager / Launcher for the commands
 const Entry = require("./entry/entry"); // Manager for the entry system
 
+const { poll, pollRequest } = require("./commands/poll");
+
 /** Wake up on ready state */
 client.on("ready", () => {
   console.log(`Logged into: ${client.user.tag}`);
@@ -18,6 +20,15 @@ client.on("messageCreate", (msg) => {
   if (msg.content.startsWith(PREFIX)) {
     cmdGrabber(msg);
   }
+});
+
+client.on("messageReactionAdd", async (reaction, user) => {
+  if (user.bot) return;
+  await pollRequest(reaction);
+});
+client.on("messageReactionRemove", async (reaction, user) => {
+  if (user.bot) return;
+  await pollRequest(reaction);
 });
 
 /** Wake up on new member income */

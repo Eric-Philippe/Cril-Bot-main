@@ -8,8 +8,6 @@ const { commands } = require("./commands");
  *  Command Launcher
  *
  * @param {Discord.Message} msg
- * @param {Discord.Client} client
- * @param {String} cmd
  */
 module.exports.cmdGrabber = function (msg) {
   let cmd = msg.content.split(" ")[0].slice(PREFIX.length);

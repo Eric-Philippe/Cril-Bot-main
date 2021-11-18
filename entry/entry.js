@@ -302,6 +302,8 @@ module.exports = class Entry {
    *
    * @param {Discord.Interaction} i
    *
+   * @return {Boolean}
+   *
    */
   async nextPageManager(i) {
     if (this.page === 1) {
@@ -400,6 +402,10 @@ module.exports = class Entry {
     }
   }
 
+  /**
+   *
+   * Close and end the system
+   */
   async __terminate__() {
     try {
       await this.member.setNickname(
