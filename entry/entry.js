@@ -132,7 +132,7 @@ module.exports = class Entry {
     const collector = msg.createMessageComponentCollector({
       filter,
       max: 1,
-      time: 150_000,
+      time: 20000,
       errors: ["time"],
     });
 
@@ -164,7 +164,12 @@ module.exports = class Entry {
 
       i.deferUpdate();
     });
-    collector.on("end", (collected) => {});
+
+    collector.on("end", (collected, reason) => {
+      if (reason === "time") {
+        this.autoDestruction();
+      }
+    });
   }
 
   /**
@@ -195,8 +200,10 @@ module.exports = class Entry {
       }
     });
 
-    collector.on("end", (collected) => {
-      console.log(`Collected ${collected.size} items`);
+    collector.on("end", (collected, reason) => {
+      if (reason === "time") {
+        this.autoDestruction();
+      }
     });
   }
 
@@ -262,7 +269,11 @@ module.exports = class Entry {
       this.__initSelector__();
     });
 
-    collector.on("end", (collected) => {});
+    collector.on("end", (collected, reason) => {
+      if (reason === "time") {
+        this.autoDestruction();
+      }
+    });
   }
 
   /**
@@ -280,11 +291,11 @@ module.exports = class Entry {
     });
   }
 
-  autoDestruction() {
+  async autoDestruction() {
     try {
-      this.channel.delete();
-      this.member.kick("timeOut");
-      this.user.send("Message de renvoi passif");
+      await this.channel.delete();
+      await this.user.send("Message de renvoi passif");
+      await this.member.kick("timeOut");
     } catch (err) {
       console.log(err);
     }
@@ -297,12 +308,15 @@ module.exports = class Entry {
   resetCollector() {
     if (this.buttonCollec) {
       this.buttonCollec.stop();
+      this.buttonCollec = undefined;
     }
     if (this.reactionCollec) {
       this.reactionCollec.stop();
+      this.reactionCollec = undefined;
     }
     if (this.messageCollec) {
       this.messageCollec.stop();
+      this.messageCollec = undefined;
     }
   }
 };

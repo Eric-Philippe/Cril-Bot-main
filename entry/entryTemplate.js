@@ -63,9 +63,9 @@ module.exports.template1 = function (
   SCHOOL,
   title
 ) {
-  let firstname_ = firstname || "Nan";
-  let secondname_ = secondname || "Nan";
-  let SCHOOL_ = SCHOOL || "Nan";
+  let firstname_ = firstname || "Non renseigné";
+  let secondname_ = secondname || "Non renseigné";
+  let SCHOOL_ = SCHOOL || "Non renseigné";
 
   const collector_require = [0, 2]; // Button collector - Message collector
 
