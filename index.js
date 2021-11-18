@@ -22,12 +22,17 @@ client.on("messageCreate", (msg) => {
   }
 });
 
+/** Wake up on reaction added */
 client.on("messageReactionAdd", async (reaction, user) => {
   if (user.bot) return;
+  if (reaction.message.author.id != client.user.id) return;
   await pollRequest(reaction);
 });
+
+/** Wake up on reaction removed */
 client.on("messageReactionRemove", async (reaction, user) => {
   if (user.bot) return;
+  if (reaction.message.author.id != client.user.id) return;
   await pollRequest(reaction);
 });
 
