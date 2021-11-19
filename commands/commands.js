@@ -1,6 +1,6 @@
 const { test } = require("./test");
 
-const { poll } = require("./poll");
+const Poll = require("./poll");
 
 /**
  * Export of all the commands
@@ -16,7 +16,7 @@ module.exports.commands = {
   poll: {
     name: "poll",
     desc: "Lance un sondage",
-    func: poll,
+    func: Poll.poll,
     perm: [1],
   },
 };

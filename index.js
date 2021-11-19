@@ -6,7 +6,8 @@ const { PREFIX } = require("./config.json"); // Prefix
 const { cmdGrabber } = require("./commands/commandsGrabber"); // Manager / Launcher for the commands
 const Entry = require("./entry/entry"); // Manager for the entry system
 
-const { poll, pollRequest } = require("./commands/poll");
+const { pollRequest } = require("./commands/poll");
+const Reminder = require("./commands/remindMe");
 
 /** Wake up on ready state */
 client.on("ready", () => {
@@ -20,19 +21,25 @@ client.on("messageCreate", (msg) => {
   if (msg.content.startsWith(PREFIX)) {
     cmdGrabber(msg);
   }
+
+  if (msg.content.startsWith("test")) {
+    Reminder.test();
+  }
 });
 
 /** Wake up on reaction added */
 client.on("messageReactionAdd", async (reaction, user) => {
   if (user.bot) return;
-  if (reaction.message.author.id != client.user.id) return;
+  let msg = await reaction.message.channel.messages.fetch(reaction.message.id);
+  if (!msg.author.bot) return;
   await pollRequest(reaction);
 });
 
 /** Wake up on reaction removed */
 client.on("messageReactionRemove", async (reaction, user) => {
   if (user.bot) return;
-  if (reaction.message.author.id != client.user.id) return;
+  let msg = await reaction.message.channel.messages.fetch(reaction.message.id);
+  if (!msg.author.bot) return;
   await pollRequest(reaction);
 });
 
