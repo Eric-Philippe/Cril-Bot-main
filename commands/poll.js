@@ -17,7 +17,9 @@ exports.poll = function (msg) {
     //Close Question
     choice_array.push("Oui", "Non");
   } else {
-    for (let i = 3; i < args.length; i = i + 2) {
+    max = args.length;
+    if (args.length > 22) max = 22;
+    for (let i = 3; i < max; i = i + 2) {
       choice_array.push(args[i]);
     }
   }
