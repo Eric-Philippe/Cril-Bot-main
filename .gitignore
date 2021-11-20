@@ -1,4 +1,5 @@
 node_modules/
 token.json
+mysql.json
 payloads.json
 .DS_Store

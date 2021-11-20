@@ -1,4 +1,7 @@
+require("require-sql");
+
 const { client } = require("./utils/client"); //Client object
+const { con } = require("./utils/mysql");
 
 const { TOKEN } = require("./token.json"); // ¨Private token
 const { PREFIX } = require("./config.json"); // Prefix
@@ -7,23 +10,23 @@ const { cmdGrabber } = require("./commands/commandsGrabber"); // Manager / Launc
 const Entry = require("./entry/entry"); // Manager for the entry system
 
 const { pollRequest } = require("./commands/poll");
-const Reminder = require("./commands/remindMe");
 
 /** Wake up on ready state */
 client.on("ready", () => {
   console.log(`Logged into: ${client.user.tag}`);
+
+  con.connect(function (err) {
+    if (err) console.log(err);
+    console.log("Connected to database !");
+  });
 });
 
 /** Wake up on message sent */
-client.on("messageCreate", (msg) => {
+client.on("messageCreate", async (msg) => {
   if (msg.author.bot) return;
   if (msg.author.id === client.user.id) return;
   if (msg.content.startsWith(PREFIX)) {
     cmdGrabber(msg);
-  }
-
-  if (msg.content.startsWith("test")) {
-    Reminder.test();
   }
 });
 
