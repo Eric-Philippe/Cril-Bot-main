@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 require("require-sql"); // Package needed
 
 const { MAIN_COLOR } = require("../config.json"); // Get the main_color of the bot
+const { reminder_img } = require("../img/embedImg.json"); // Get the thumbnail url
 
 const { insertSQL } = require("../SQL/INSERT/insertSQL"); // Get the SQL insert function for the Reminder obj
 
@@ -155,9 +156,7 @@ module.exports = class createReminderObject {
       .setColor(MAIN_COLOR)
       .setFooter(`Demandé par : ${msg.author.tag}`, msg.author.avatarURL())
       .setTimestamp()
-      .setThumbnail(
-        "https://cdn.discordapp.com/attachments/911765013423878215/911768975862558740/rappel.png"
-      );
+      .setThumbnail(reminder_img);
 
     msg.channel.send({ embeds: [embed] }); // Send the confirmation embed
   }
@@ -199,9 +198,7 @@ module.exports = class createReminderObject {
               )
               .addField("#️⃣ | ID du rappel : ", `#${REMINDER[i].id_reminder}`)
               .setFooter("Provided by Cril Bot")
-              .setThumbnail(
-                "https://cdn.discordapp.com/attachments/911765013423878215/911768975862558740/rappel.png"
-              );
+              .setThumbnail(reminder_img);
 
             let USER;
             con.query(

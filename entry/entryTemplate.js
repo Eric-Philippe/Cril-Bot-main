@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 
-const { MAIN_COLOR, SECOND_COLOR, ICON } = require("../config.json");
+const { MAIN_COLOR, SECOND_COLOR } = require("../config.json");
+const { rules_img } = require("../img/embedImg.json");
 /**
  *
  * @typedef {Object} Template
@@ -145,7 +146,7 @@ module.exports.template2 = function (member, page) {
     .addField("Règle 3", "Trucs chiants")
     .addField("Règle 4", "Trucs chiants")
     .setAuthor("Cril", member.guild.iconURL())
-    .setThumbnail(ICON.rules)
+    .setThumbnail(rules_img)
     .setFooter(`${page + 1}/5`)
     .setTimestamp();
 
@@ -182,7 +183,7 @@ module.exports.template3 = function (member, page) {
     .addField("Règle 7", "Trucs chiants")
     .addField("Règle 8", "Trucs chiants")
     .setAuthor("Cril", member.guild.iconURL())
-    .setThumbnail(ICON.rules)
+    .setThumbnail(rules_img)
     .setFooter(`${page + 1}/5`)
     .setTimestamp();
 
@@ -218,7 +219,7 @@ module.exports.template4 = function (member, page) {
       "Toutes ces infos sont disponibles plus précisément grâce à la commande ``!help``"
     )
     .setAuthor("Cril", member.guild.iconURL())
-    .setThumbnail(ICON.rules)
+    .setThumbnail(rules_img)
     .setFooter(`${page + 1}/5`)
     .setTimestamp();
 

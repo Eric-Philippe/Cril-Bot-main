@@ -13,6 +13,7 @@ module.exports = class Poll {
 
     let question = args[1];
     let choice_array = [];
+    let max;
 
     if (!args[3]) {
       //Close Question
