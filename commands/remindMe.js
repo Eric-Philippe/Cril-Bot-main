@@ -1,6 +1,16 @@
 const Discord = require("discord.js");
+require("require-sql");
 
 const { insertSQL } = require("../SQL/INSERT/insertSQL");
+
+const { con } = require("../utils/mysql");
+
+const query_Date = require("../SQL/READ/SELECT_DATE.sql");
+const query_clear_user = require("../SQL/DELETE/CLEAR_USERS.sql");
+const query_clear_concerner = require("../SQL/DELETE/CLEAR_CONCERNER.sql");
+const query_clear_reminder = require("../SQL/DELETE/CLEAR_REMINDER.sql");
+
+const { client } = require("../utils/client");
 
 /**
  * remindMe Class
@@ -108,4 +118,73 @@ module.exports = class createReminderObject {
   }
 
   static remindYou() {}
+
+  static callback(p) {
+    return p;
+  }
+
+  static remindCheck() {
+    setTimeout(function () {
+      let solution;
+      con.query(
+        query_Date,
+        [new Date()],
+        async function (err, results, fileds) {
+          if (!err) solution = JSON.parse(JSON.stringify(results));
+          console.log(`${solution.length} rappel(s) demandé(s)`);
+          if (solution.length === 0) return;
+          let users = [];
+          for (let i = 0; i < solution.length; i++) {
+            users.push(solution[i].id_user);
+          }
+
+          let embedReminder = new Discord.MessageEmbed()
+            .setTitle("Vous avez un rappel !")
+            .setColor("RANDOM")
+            .addField("🗨️ | Intitulé du rappel : ", solution[0].remind)
+            .addField(
+              "🕔 | Date de la demande : ",
+              "``" + solution[0].c_date + "``",
+              true
+            )
+            .addField(
+              "🕣 | Date visée  : ",
+              "``" + solution[0].t_date + "``",
+              true
+            )
+            .addField("#️⃣ | ID du rappel : ", `#${solution[0].id_reminder}`)
+            .setFooter("Provided by Cril Bot")
+            .setThumbnail(
+              "https://cdn.discordapp.com/attachments/911765013423878215/911768975862558740/rappel.png"
+            );
+
+          for (let i = 0; i < users.length; i++) {
+            try {
+              let user = await client.users.cache.find(
+                (u) => u.id === users[i]
+              );
+              await user.send({ embeds: [embedReminder] });
+            } catch (err) {
+              console.log(err);
+            }
+          }
+
+          con.query(
+            query_clear_concerner,
+            [solution[0].id_reminder],
+            function (err, result, fileds) {
+              con.query(
+                query_clear_user,
+                [solution[0].id_user],
+                function (err, result, fields) {
+                  con.query(query_clear_reminder, [solution[0].id_reminder]);
+                }
+              );
+            }
+          );
+        }
+      );
+      createReminderObject.remindCheck();
+    }, 60 * 1000);
+  }
 };
