@@ -14,10 +14,6 @@ const Reminder = require("./commands/remindMe");
 
 /** Wake up on ready state */
 client.on("ready", async () => {
-  let user = await client.users.cache.find(
-    (u) => u.id === "387291278670430208"
-  );
-  console.log(user);
   console.log(`Logged into: ${client.user.tag}`);
 
   con.connect(function (err) {

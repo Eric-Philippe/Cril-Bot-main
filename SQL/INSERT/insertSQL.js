@@ -17,7 +17,9 @@ exports.insertSQL = async function (reminder) {
         con.query(
           query_Users, // ADD ONE
           [reminder.users_id[0]],
-          function (err, result, fields) {}
+          function (err, result, fields) {
+            if (err) throw err;
+          }
         );
       }
     }
@@ -29,7 +31,6 @@ exports.insertSQL = async function (reminder) {
     async function (err, result, fields) {
       if (err) throw err;
       insertID = await result.insertId;
-      console.log(insertID);
       await con.query(
         query_Concerner,
         [insertID, reminder.users_id[0]],

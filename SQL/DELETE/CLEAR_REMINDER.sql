@@ -1,3 +1,3 @@
-DELETE
-FROM Reminder
-WHERE id_reminder= ?;
+DELETE 
+FROM Reminder 
+WHERE id_reminder=?;

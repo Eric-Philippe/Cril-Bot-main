@@ -6,9 +6,9 @@ const {
   template2,
   template3,
   template4,
-} = require("./entryTemplate");
+} = require("./entryTemplate"); // All the embed for the system
 
-const { CATEGORY, DEPARTMENT, ROLES, CHANNELS } = require("../config.json");
+const { CATEGORY, DEPARTMENT, ROLES, CHANNELS } = require("../config.json"); // Stuff to be use on the system
 
 /**
  * @Class Entry system fir incoming user on the server
@@ -76,13 +76,13 @@ module.exports = class Entry {
           titleArray[this.underPage]
         );
         break;
-      case 2:
+      case 2: // Rules 1
         template = await template2(this.member, this.page);
         break;
-      case 3:
+      case 3: // Rules 2
         template = await template3(this.member, this.page);
         break;
-      case 4:
+      case 4: // Final validation
         template = await template4(this.member, this.page);
         break;
     }
