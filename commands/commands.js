@@ -3,6 +3,7 @@ const { test } = require("./test");
 const Poll = require("./poll");
 const Reminder = require("./remindMe");
 const { resetSQL } = require("../SQL/RESET/resetSQL");
+const Miscellanous = require("./miscellanous");
 
 /**
  * Export of all the commands
@@ -12,6 +13,27 @@ module.exports.commands = {
     name: "test",
     desc: "Commande de test",
     func: test,
+    perm: [0],
+  },
+
+  userinfo: {
+    name: "userinfo",
+    desc: "Affiche les infos de l'utilisateur cible",
+    func: Miscellanous.userinfo,
+    perm: [0],
+  },
+
+  embed: {
+    name: "embed",
+    desc: "Créateur d'embed",
+    func: Miscellanous.createEmbed,
+    perm: [2],
+  },
+
+  dice: {
+    name: "dice",
+    desc: "Lancer un dé",
+    func: Miscellanous.dice,
     perm: [0],
   },
 

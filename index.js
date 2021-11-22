@@ -11,6 +11,7 @@ const Entry = require("./entry/entry"); // Manager for the entry system
 
 const { pollRequest } = require("./commands/poll");
 const Reminder = require("./commands/remindMe");
+const { DiscordAPIError } = require("discord.js");
 
 /** Wake up on ready state */
 client.on("ready", async () => {

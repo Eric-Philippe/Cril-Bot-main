@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 const { MAIN_COLOR, SECOND_COLOR } = require("../config.json");
-const { rules_img } = require("../img/embedImg.json");
+const { rules_img, gifTemplate1 } = require("../img/embedImg.json");
 /**
  *
  * @typedef {Object} Template
@@ -70,6 +70,21 @@ module.exports.template1 = function (
 
   const collector_require = [0, 2]; // Button collector - Message collector
 
+  let txt_instruction;
+  switch (title) {
+    case "Prénom":
+      txt_instruction = "Merci d'entrer votre prénom **dans le chat** en bas !";
+      break;
+    case "Nom de Famille":
+      txt_instruction =
+        "Merci d'entrer votre nom de famille **dans le chat** en bas !";
+      break;
+    case "Département":
+      txt_instruction =
+        "Merci d'entrer le numéro correspondant à votre département d'étude **dans le chat** en bas";
+      break;
+  }
+
   const row = new Discord.MessageActionRow().addComponents(
     new Discord.MessageButton()
       .setCustomId("beforeUnderButton")
@@ -94,11 +109,12 @@ module.exports.template1 = function (
     .setAuthor("Cril", msg.guild.iconURL())
     .setThumbnail(msg.author.avatarURL())
     .setDescription(
-      "Merci d'entrer votre prénom, votre nom puis votre département \n Changer de champs grâce au boutons en bas !"
+      `<a:check_rainbow:912332999410999346> ${txt_instruction} \n Changer de champs grâce au boutons en bas !`
     )
     .addField("Prénom", "``" + firstname_ + "``", true)
     .addField("Nom", "``" + secondname_ + "``", true)
     .addField("Département", "``" + SCHOOL_ + "``", true)
+    .setImage(gifTemplate1)
     .setTimestamp();
 
   if (title === "Département") {

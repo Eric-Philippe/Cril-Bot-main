@@ -23,6 +23,7 @@ module.exports.cmdGrabber = function (msg) {
       );
     } else {
       // Program Error
+      console.log(err);
       msg.reply(
         "❌ | Merci d'entrer une commande valide ! : ``La commande n'existe pas !``"
       );
