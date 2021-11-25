@@ -68,6 +68,7 @@ module.exports = class Entry {
         break;
       case 1: //User Info Page
         let titleArray = ["Prénom", "Nom de Famille", "Département"];
+        this.titleArray = titleArray;
         template = await template1(
           this.msg,
           this.userInfo[0],
@@ -148,7 +149,7 @@ module.exports = class Entry {
     const collector = msg.createMessageComponentCollector({
       filter,
       max: 1,
-      time: 30000,
+      time: 300000,
       errors: ["time"],
     });
 
@@ -207,7 +208,7 @@ module.exports = class Entry {
 
     const collector = msg.createReactionCollector({
       filter,
-      time: 30000,
+      time: 300000,
       errors: ["time"],
     });
 
@@ -258,7 +259,7 @@ module.exports = class Entry {
         // Department : Int -> Choice
       } else if (this.underPage === 2) {
         if (!isNaN(Number(m.content))) {
-          return true;
+          if (Number(m.content) <= DEPARTMENT.length + 1) return true;
         }
       }
     };
@@ -266,7 +267,7 @@ module.exports = class Entry {
     const collector = msg.channel.createMessageCollector({
       filter,
       max: 1,
-      time: 30000,
+      time: 300000,
       errors: ["time"],
     });
 
@@ -286,6 +287,20 @@ module.exports = class Entry {
       }
 
       m.delete(); // Clear the channel from the last message
+      this.underPage = this.underPage + 1;
+      m.channel
+        .send(
+          `✔️ | Votre ${
+            this.titleArray[this.underPage]
+          } a bien été définit sur ${
+            this.userInfo[this.underPage]
+          }. Merci d'entrer le champ suivant !`
+        )
+        .then((m) => {
+          setTimeout(() => {
+            m.delete();
+          }, 5 * 1000);
+        });
 
       this.__initSelector__();
     });

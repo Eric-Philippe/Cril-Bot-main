@@ -73,15 +73,16 @@ module.exports.template1 = function (
   let txt_instruction;
   switch (title) {
     case "Prénom":
-      txt_instruction = "Merci d'entrer votre prénom **dans le chat** en bas !";
+      txt_instruction =
+        "Merci d'__entrer__ puis d'__envoyer__ votre prénom **dans le chat** en bas !";
       break;
     case "Nom de Famille":
       txt_instruction =
-        "Merci d'entrer votre nom de famille **dans le chat** en bas !";
+        "Merci d'__entrer__ puis d'__envoyer__ votre nom de famille **dans le chat** en bas !";
       break;
     case "Département":
       txt_instruction =
-        "Merci d'entrer le numéro correspondant à votre département d'étude **dans le chat** en bas";
+        "Merci d'__entrer__ puis d'__envoyer__ le numéro correspondant à votre département d'étude **dans le chat** en bas";
       break;
   }
 
