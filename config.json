@@ -3,17 +3,16 @@
   "MAIN_COLOR": "#C60800",
   "SECOND_COLOR": ["#2548a8", "#69a825"],
   "DEPARTMENT": [
-    "INFO",
-    "BIO",
-    "CHIM",
-    "CIV",
-    "GE2I",
+    "GEAR",
     "GMP",
-    "GMP",
-    "GCCD",
-    "MP",
     "GEAP",
-    "GEAR"
+    "GCCD",
+    "INFOCOM",
+    "MEPH",
+    "GCGP",
+    "INFO",
+    "GEII",
+    "TECH DE CO"
   ],
   "CHANNELS": { "welcome": "910240188968620045" },
   "CATEGORY": {

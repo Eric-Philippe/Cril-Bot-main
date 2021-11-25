@@ -67,14 +67,15 @@ module.exports = class Entry {
         template = await template0(this.member);
         break;
       case 1: //User Info Page
-        let titleArray = ["Prénom", "Nom de Famille", "Département"];
+        let titleArray = ["Prénom", "Nom de Famille", "Département d'étude"];
         this.titleArray = titleArray;
         template = await template1(
           this.msg,
           this.userInfo[0],
           this.userInfo[1],
           this.userInfo[2],
-          titleArray[this.underPage]
+          titleArray[this.underPage],
+          this.underPage
         );
         break;
       case 2: // Rules 1
@@ -164,13 +165,6 @@ module.exports = class Entry {
           }
           break;
         /** Allow to go all around the pages */
-        case "nextUnderButton": // Next under step
-          if (this.underPage === 2) {
-            this.underPage = 0;
-          } else {
-            this.underPage = this.underPage + 1;
-          }
-          break;
         case "beforeUnderButton": // Before under step
           if (this.underPage === 0) {
             this.underPage = 2;
@@ -287,10 +281,12 @@ module.exports = class Entry {
       }
 
       m.delete(); // Clear the channel from the last message
-      this.underPage = this.underPage + 1;
+      console.log(this.underPage);
+      console.log("=======");
+      console.log(this.underPage);
       m.channel
         .send(
-          `✔️ | Votre ${
+          `<a:check_rainbow:912332999410999346> | Votre ${
             this.titleArray[this.underPage]
           } a bien été définit sur ${
             this.userInfo[this.underPage]
@@ -302,6 +298,7 @@ module.exports = class Entry {
           }, 5 * 1000);
         });
 
+      this.underPage = this.underPage === 2 ? 0 : this.underPage + 1;
       this.__initSelector__();
     });
 

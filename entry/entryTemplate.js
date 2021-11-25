@@ -32,7 +32,7 @@ module.exports.template0 = function (member) {
     .setColor(MAIN_COLOR)
     .setTitle(`Bienvenue ${member.user.tag} !`)
     .setDescription(
-      "Bienvenue sur le serveur du Cril ! Tu suivra les étapes suivantes pour valider ton entrée dans ce dernier !"
+      "Bienvenue sur le serveur du Cril ! Tu **suivra** les étapes suivantes pour valider ton entrée dans ce dernier !"
     )
     .addField("Etape 1", "Entrée de ton prénom et de ton nom !")
     .addField("Etape 2", "Lecture du règlement")
@@ -62,7 +62,8 @@ module.exports.template1 = function (
   firstname,
   secondname,
   SCHOOL,
-  title
+  title,
+  step
 ) {
   let firstname_ = firstname || "Non renseigné";
   let secondname_ = secondname || "Non renseigné";
@@ -80,9 +81,9 @@ module.exports.template1 = function (
       txt_instruction =
         "Merci d'__entrer__ puis d'__envoyer__ votre nom de famille **dans le chat** en bas !";
       break;
-    case "Département":
+    case "Département d'étude":
       txt_instruction =
-        "Merci d'__entrer__ puis d'__envoyer__ le numéro correspondant à votre département d'étude **dans le chat** en bas";
+        "Merci d'__entrer__ puis d'__envoyer__ le **numéro** correspondant à votre département d'étude **dans le chat** en bas";
       break;
   }
 
@@ -90,11 +91,6 @@ module.exports.template1 = function (
     new Discord.MessageButton()
       .setCustomId("beforeUnderButton")
       .setLabel("Champ précédent")
-      .setStyle("SECONDARY"),
-
-    new Discord.MessageButton()
-      .setCustomId("nextUnderButton")
-      .setLabel("Champ suivant")
       .setStyle("SECONDARY"),
 
     new Discord.MessageButton()
@@ -110,26 +106,34 @@ module.exports.template1 = function (
     .setAuthor("Cril", msg.guild.iconURL())
     .setThumbnail(msg.author.avatarURL())
     .setDescription(
-      `<a:check_rainbow:912332999410999346> ${txt_instruction} \n Changer de champs grâce au boutons en bas !`
+      `<a:check_rainbow:912332999410999346> ${txt_instruction} \n | Revenez sur le champs grâce précédent grâce au bouton en bas !`
     )
-    .addField("Prénom", "``" + firstname_ + "``", true)
-    .addField("Nom", "``" + secondname_ + "``", true)
-    .addField("Département", "``" + SCHOOL_ + "``", true)
+    .addField("Prénom", "``" + firstname_ + "``\n", true)
+    .addField("Nom", "``" + secondname_ + "``\n", true)
+    .addField("Département", "``" + SCHOOL_ + "``\n", true)
     .setImage(gifTemplate1)
-    .setTimestamp();
+    .setTimestamp()
+    .setFooter(
+      `Etape ${
+        step + 1
+      } / 3 : ${title} \n Cliquez sur valider une fois tous les champs renseignés !`
+    );
 
-  if (title === "Département") {
-    embed.addField("INFO : ", "Entrez ``1``", true);
-    embed.addField("BIO : ", "Entrez ``2``", true);
-    embed.addField("CHIM : ", "Entrez ``3``", true);
-    embed.addField("CIV : ", "Entrez ``4``", true);
-    embed.addField("GE2I : ", "Entrez ``5``", true);
-    embed.addField("GMP : ", "Entrez ``6``", true);
-    embed.addField("GCCD : ", "Entrez ``7``", true);
-    embed.addField("MP : ", "Entrez ``8``", true);
-    embed.addField("GEAP : ", "Entrez ``9``", true);
-    embed.addField("GEAR : ", "Entrez ``10``", true);
-    embed.addField("⚙️ | Merci d'entrer une valeur", "Numérique");
+  if (title === "Département d'étude") {
+    embed.addField(
+      "Département : ",
+      "**[1]** : 📕 - GEAR \n **[2]** : 🛠️ - GMP \n **[3]** : 📗 - GEAP \n  **[4]** : 🏗️ - GCCD \n  **[5]** : 💾 - INFOCOM \n  ",
+      true
+    );
+    embed.addField(
+      "Département : ",
+      "**[6]** : 🔭 - MEPH \n **[7]** : 🔬 - GCGP \n **[8]** : 💻 - INFO \n  **[9]** : 💡 - GEII \n  **[10]** : 📈 - TECH DE CO \n  ",
+      true
+    );
+    embed.addField(
+      "⚙️ | Instruction",
+      "Merci d'entrer une valeur __**Numérique**__"
+    );
   }
 
   return { embed, row, collector_require };
