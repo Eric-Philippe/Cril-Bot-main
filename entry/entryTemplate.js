@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 
 const { MAIN_COLOR, SECOND_COLOR } = require("../config.json");
 const { rules_img, gifTemplate1 } = require("../img/embedImg.json");
+const { CHECK_EMOTE, GEAR_EMOTE } = require("../img/emote.json");
 /**
  *
  * @typedef {Object} Template
@@ -106,7 +107,7 @@ module.exports.template1 = function (
     .setAuthor("Cril", msg.guild.iconURL())
     .setThumbnail(msg.author.avatarURL())
     .setDescription(
-      `<a:check_rainbow:912332999410999346> ${txt_instruction} \n | Revenez sur le champs grâce précédent grâce au bouton en bas !`
+      `${CHECK_EMOTE} ${txt_instruction} \n | Revenez sur le champs grâce précédent grâce au bouton en bas !`
     )
     .addField("Prénom", "``" + firstname_ + "``\n", true)
     .addField("Nom", "``" + secondname_ + "``\n", true)
@@ -119,7 +120,7 @@ module.exports.template1 = function (
       } / 3 : ${title} \n Cliquez sur valider une fois tous les champs renseignés !`
     );
 
-  if (title === "Département d'étude") {
+  if (step === 2) {
     embed.addField(
       "Département : ",
       "**[1]** : 📕 - GEAR \n **[2]** : 🛠️ - GMP \n **[3]** : 📗 - GEAP \n  **[4]** : 🏗️ - GCCD \n  **[5]** : 💾 - INFOCOM \n  ",
@@ -131,7 +132,7 @@ module.exports.template1 = function (
       true
     );
     embed.addField(
-      "⚙️ | Instruction",
+      `${GEAR_EMOTE} | Instruction`,
       "Merci d'entrer une valeur __**Numérique**__"
     );
   }

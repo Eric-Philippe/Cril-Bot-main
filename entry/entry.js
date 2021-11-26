@@ -8,6 +8,7 @@ const {
   template4,
 } = require("./entryTemplate"); // All the embed for the system
 
+const { CHECK_EMOTE } = require("../img/emote.json");
 const { CATEGORY, DEPARTMENT, ROLES, CHANNELS } = require("../config.json"); // Stuff to be use on the system
 
 /**
@@ -281,12 +282,9 @@ module.exports = class Entry {
       }
 
       m.delete(); // Clear the channel from the last message
-      console.log(this.underPage);
-      console.log("=======");
-      console.log(this.underPage);
       m.channel
         .send(
-          `<a:check_rainbow:912332999410999346> | Votre ${
+          `${CHECK_EMOTE} | Votre ${
             this.titleArray[this.underPage]
           } a bien été définit sur ${
             this.userInfo[this.underPage]
