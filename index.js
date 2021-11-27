@@ -11,7 +11,7 @@ const Entry = require("./entry/entry"); // Manager for the entry system
 
 const { pollRequest } = require("./commands/poll");
 const Reminder = require("./commands/remindMe");
-const { DiscordAPIError } = require("discord.js");
+const { questionPicker } = require("./helpSystem/levenshteinDis");
 
 /** Wake up on ready state */
 client.on("ready", async () => {
@@ -30,6 +30,16 @@ client.on("messageCreate", async (msg) => {
   if (msg.author.id === client.user.id) return;
   if (msg.content.startsWith(PREFIX)) {
     cmdGrabber(msg);
+  }
+
+  try {
+    let delta = await questionPicker(msg.content);
+    console.log(delta);
+    msg.reply(
+      `Question trouvée : ${delta[0][0]} avec un indice d'approche de ${delta[0][1]} dans le domaine ${delta[0][2]}`
+    );
+  } catch (err) {
+    console.log(err);
   }
 });
 
