@@ -80,13 +80,17 @@ const valueWordsFunc = async function (S1, S2) {
 const questionPicker = async function (str1) {
   let valuePhrase, valueWords;
   let answer_response = [];
+  let closest_question = ["", 1000, ""];
   for (let y = 0; y < RESPONSE_LENGTH; y++) {
-    answer_response.push(["", 1000, ""]);
+    answer_response.push(closest_question);
   }
 
   for (let field in QUESTION) {
+    // Loop on category
     let questions = QUESTION[field];
+    closest_question = ["", 1000, ""];
     for (let j = 0; j < questions.length; j++) {
+      // Loop on question of the category
       valuePhrase = await levenshteinDistance(questions[j], str1);
       valuePhrase =
         Math.round(
@@ -97,11 +101,19 @@ const questionPicker = async function (str1) {
       let final =
         Math.min(valuePhrase, valueWords) * 0.8 +
         Math.max(valuePhrase, valueWords) * 0.2;
-      for (let x = 0; x < answer_response.length; x++) {
-        if (final < answer_response[x][1]) {
-          answer_response.splice(x, 1, [questions[j], final, field]);
-          break;
-        }
+
+      if (closest_question[1] > final)
+        closest_question = [questions[j], final, field];
+    }
+
+    for (let x = 0; x < answer_response.length; x++) {
+      if (closest_question[1] < answer_response[x][1]) {
+        answer_response.splice(x, 1, [
+          closest_question[0],
+          closest_question[1],
+          closest_question[2],
+        ]);
+        break;
       }
     }
   }

@@ -1,18 +1,24 @@
 {
   "QUESTION": {
-    "FIND_MOODLE": ["Ou est Moodle ?", "Comment aller sur Moodle"],
-    "DELAY": ["Je vais être en retard", "Je risque d'être en retard"],
-    "ABSENCE": ["Je vais être absent", "Je risque d'être absent"],
+    "FIND_MOODLE": ["Ou est Moodle ?", "Comment aller sur Moodle", "Moodle ?"],
+    "DELAY": [
+      "Je vais être en retard",
+      "Je risque d'être en retard",
+      "Je suis en retard"
+    ],
     "UNSUBSCRIBE": [
       "Pouvez vous me désinscrire ?",
-      "Pourrais-je annuler mon activité ?"
+      "Pourrais-je annuler mon activité ?",
+      "Je vais être absent",
+      "Je risque d'être absent"
     ],
+    "PREVIOUS_ABSENCE": ["J'étais absent", "J'étais pas présent"],
     "FIND_ACTIVITY": [
       "Ou se trouve mon activité ?",
-      "Sur quelle discussion je dois aller ?"
+      "Sur quelle discussion je dois aller ?",
+      "Ou se trouve mon coaching ?"
     ],
     "VALIDATION_TIME_ACTIVITY": ["Activité pas validée"],
-    "FIND_COACHING": ["Ou se trouve mon coaching ?"],
     "DISCORD_CONNECT": [
       "Comment je me connecte dans l'appel ?",
       "Je n'arrive pas à me connecter"

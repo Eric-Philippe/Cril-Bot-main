@@ -1,54 +1,53 @@
 const Discord = require("discord.js");
 
-const question_mark =
-  "https://cdn.discordapp.com/attachments/739553949199106158/914227536785989642/Ouf7Ajd.png";
+const AnswerZero = require("./answerLevelZero");
+
+const { questionPicker } = require("./questionPicker");
+const { filter } = require("./filter");
 
 module.exports = class chatBot {
+  constructor(msg) {
+    this.msg = msg;
+    this.channel = msg.channel;
+    this.content = msg.content;
+    this.answer_array;
+    this.__init__(msg);
+  }
+
   /**
+   * Main Component of the ChatBot system
+   * Launcher of the auto-answers
    *
    * @param {Discord.Message} msg
-   * @param {Array<>} alternative
    */
-  static find_moodle(msg, isCmd) {
-    let link = "https://moodle.iut-tlse3.fr/login/index.php";
+  async __init__(msg) {
+    let user_filter = await filter(msg);
+    if (!user_filter) return; // Deny if WrongChannel, Admin, talkedRecently,
+    this.answer_array = await questionPicker(msg.content);
+    if (this.answer_array[0][1] > 20) return; // Deny if the answers found are too far from the question
+    console.log(this.answer_array);
+    this.__selector__(0);
+  }
 
-    let embedMoodle = new Discord.MessageEmbed()
-      .setTitle("Lien vers moodle")
-      .setColor("#f98012")
-      .setURL(link)
-      .setDescription(link)
-      .setImage(
-        "https://moodle.iut-tlse3.fr/pluginfile.php/102032/course/overviewfiles/Imagea.png"
-      )
-      .setThumbnail(
-        "https://cdn.discordapp.com/attachments/739553949199106158/914221388980711484/moodle-logo-300x225.png"
-      )
-      .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
-
-    if (isCmd) {
-      const row = new Discord.MessageActionRow().addComponents(
-        new Discord.MessageButton()
-          .setCustomId("Happy")
-          .setLabel("Oui")
-          .setStyle("SUCCESS")
-          .setEmoji("✔️"),
-
-        new Discord.MessageButton()
-          .setCustomId("Unhappy")
-          .setLabel("Non")
-          .setStyle("DANGER")
-          .setEmoji("❌")
-      );
-
-      embedMoodle.setFooter(`Cela répond-il à votre question ?`, question_mark);
-
-      msg.channel
-        .send({ embeds: [embedMoodle], components: [row] })
-        .then((m) => {
-          chatBot.buttonCollector(msg, m, isCmd);
-        });
-    } else {
-      msg.channel.send({ embeds: [embedMoodle] });
+  __selector__(step) {
+    switch (this.answer_array[step][2]) {
+      case "DELAY":
+        break;
+      case "FIND_MOODLE":
+        AnswerZero.find_moodle(this.msg, true);
+        break;
+      case "FIND_FICHE":
+        break;
+      case "FIND_ACTIVITY":
+        break;
+      case "VALIDATION_TIME_ACTIVITY":
+        break;
+      case "PREVIOUS_ABSENCE":
+        break;
+      case "UNSUBSCRIBE":
+        break;
+      case "DISCORD_CONNECT":
+        break;
     }
   }
 
@@ -56,9 +55,8 @@ module.exports = class chatBot {
    *
    * @param {Discord.Message} msg_user
    * @param {Discord.Message} msg_bot
-   * @param {Array<>} answer_array
    */
-  static buttonCollector(msg_user, msg_bot, answer_array) {
+  static buttonCollector(msg_user, msg_bot) {
     const filter = (interaction) =>
       interaction.user.id === msg_user.author.id && interaction.isButton();
     const collector = msg_bot.createMessageComponentCollector({

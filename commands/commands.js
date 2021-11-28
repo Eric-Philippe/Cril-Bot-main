@@ -4,6 +4,7 @@ const Poll = require("./poll");
 const Reminder = require("./remindMe");
 const { resetSQL } = require("../SQL/RESET/resetSQL");
 const Miscellanous = require("./miscellanous");
+const AnswerZero = require("../helpSystem/answerLevelZero");
 
 /**
  * Export of all the commands
@@ -20,6 +21,13 @@ module.exports.commands = {
     name: "userinfo",
     desc: "Affiche les infos de l'utilisateur cible",
     func: Miscellanous.userinfo,
+    perm: [0],
+  },
+
+  avatar: {
+    name: "avatar",
+    desc: "Affiche l'avatar de l'utilisateur",
+    func: Miscellanous.getAvatar,
     perm: [0],
   },
 
@@ -41,6 +49,13 @@ module.exports.commands = {
     name: "poll",
     desc: "Lance un sondage",
     func: Poll.poll,
+    perm: [1],
+  },
+
+  Moodle: {
+    name: "Moodle",
+    desc: "Envoie un lien Moodle",
+    func: AnswerZero.find_moodle,
     perm: [1],
   },
 

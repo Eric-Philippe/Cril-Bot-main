@@ -119,6 +119,25 @@ module.exports = class Miscellanous {
   }
 
   /**
+   * Display the avatar of the targeted user
+   *
+   * @param {Discord.Message} msg
+   */
+  static getAvatar(msg) {
+    const member = msg.mentions.members.first() || msg.member;
+    const user = member.user;
+
+    let embed = new Discord.MessageEmbed()
+      .setTitle(`Avatar de ${user.tag}`)
+      .setColor(MAIN_COLOR)
+      .setImage(user.avatarURL())
+      .setFooter(`Demandé par : ${msg.author.tag}`, msg.author.avatarURL())
+      .setTimestamp();
+
+    msg.channel.send({ embeds: [embed] });
+  }
+
+  /**
    * Return a number int beetween 0 and max param
    *
    * @param {Number} max
