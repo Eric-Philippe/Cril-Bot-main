@@ -13,7 +13,7 @@ module.exports.cmdGrabber = function (msg) {
   let cmd = msg.content.split(" ")[0].slice(PREFIX.length);
 
   try {
-    commands[cmd].func(msg, client);
+    commands[cmd].func(msg);
   } catch (err) {
     if (err.name === "ReferenceError") {
       // Command Error

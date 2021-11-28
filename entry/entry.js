@@ -292,7 +292,11 @@ module.exports = class Entry {
         )
         .then((m) => {
           setTimeout(() => {
-            m.delete();
+            try {
+              m.delete();
+            } catch (err) {
+              console.log(err);
+            }
           }, 5 * 1000);
         });
 
@@ -344,14 +348,18 @@ module.exports = class Entry {
           )
           .then((m) => {
             setTimeout(() => {
-              m.delete();
+              try {
+                m.delete();
+              } catch (err) {
+                console.log(err);
+              }
             }, 5000);
           });
 
         return false;
       }
     } else if (this.page === 4) {
-      this.__terminate__();
+      await this.__terminate__();
       return false;
     } else {
       return true;
@@ -416,15 +424,15 @@ module.exports = class Entry {
    *
    * Close and end the system
    */
-  async __terminate__() {
-    try {
+  __terminate__() {
+    setTimeout(async () => {
       await this.member.setNickname(
         `${this.userInfo[0]} ${this.userInfo[1]} ${this.userInfo[2]}`
       );
-      let new_role = this.guild.roles.cache.find((r) => r.id === ROLES.etu);
+      let new_role = await this.guild.roles.cache.find(
+        (r) => r.id === ROLES.etu
+      );
       await this.member.roles.add(new_role);
-
-      await this.channel.delete();
 
       let new_channel = this.guild.channels.cache.find(
         (c) => c.id === CHANNELS.welcome
@@ -433,8 +441,8 @@ module.exports = class Entry {
       await new_channel.send(`Bienvenue ${this.user} !`);
 
       await this.user.send("Des info's cools");
-    } catch (err) {
-      console.log(err);
-    }
+
+      await this.channel.delete();
+    }, 1000);
   }
 };

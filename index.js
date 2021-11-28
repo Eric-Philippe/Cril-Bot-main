@@ -11,7 +11,9 @@ const Entry = require("./entry/entry"); // Manager for the entry system
 
 const { pollRequest } = require("./commands/poll");
 const Reminder = require("./commands/remindMe");
+
 const { questionPicker } = require("./helpSystem/levenshteinDis");
+const chatBot = require("./helpSystem/chatBot");
 
 /** Wake up on ready state */
 client.on("ready", async () => {
@@ -38,6 +40,9 @@ client.on("messageCreate", async (msg) => {
     msg.reply(
       `Question trouvée : ${delta[0][0]} avec un indice d'approche de ${delta[0][1]} dans le domaine ${delta[0][2]}`
     );
+    if (delta[0][2] === "FIND_MOODLE") {
+      chatBot.find_moodle(msg, delta);
+    }
   } catch (err) {
     console.log(err);
   }
