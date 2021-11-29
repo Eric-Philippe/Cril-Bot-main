@@ -37,6 +37,7 @@ module.exports = class chatBot {
         AnswerZero.find_moodle(this.msg, true);
         break;
       case "FIND_FICHE":
+        AnswerZero.find_fiche(this.msg, true);
         break;
       case "FIND_ACTIVITY":
         break;

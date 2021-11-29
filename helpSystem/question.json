@@ -12,11 +12,14 @@
       "Je vais être absent",
       "Je risque d'être absent"
     ],
+    "SUBSCRIBE": ["Ou est ce que je m'inscrit ?", "Comment je réserve ?"],
     "PREVIOUS_ABSENCE": ["J'étais absent", "J'étais pas présent"],
     "FIND_ACTIVITY": [
       "Ou se trouve mon activité ?",
       "Sur quelle discussion je dois aller ?",
-      "Ou se trouve mon coaching ?"
+      "Ou se trouve mon coaching ?",
+      "Dans quel channel je vais ?",
+      "Je ne sais pas si je suis au bon endroit"
     ],
     "VALIDATION_TIME_ACTIVITY": ["Activité pas validée"],
     "DISCORD_CONNECT": [
