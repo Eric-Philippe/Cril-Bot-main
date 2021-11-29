@@ -81,9 +81,6 @@ const questionPicker = async function (str1) {
   let valuePhrase, valueWords;
   let answer_response = [];
   let closest_question = ["", 1000, ""];
-  for (let y = 0; y < RESPONSE_LENGTH; y++) {
-    answer_response.push(closest_question);
-  }
 
   for (let field in QUESTION) {
     // Loop on category
@@ -106,17 +103,15 @@ const questionPicker = async function (str1) {
         closest_question = [questions[j], final, field];
     }
 
-    for (let x = 0; x < answer_response.length; x++) {
-      if (closest_question[1] < answer_response[x][1]) {
-        answer_response.splice(x, 1, [
-          closest_question[0],
-          closest_question[1],
-          closest_question[2],
-        ]);
-        break;
-      }
-    }
+    answer_response.push(closest_question);
   }
+
+  answer_response.sort((a, b) => {
+    a[1] - b[1];
+  });
+
+  answer_response = answer_response.slice(0, RESPONSE_LENGTH);
+
   return answer_response;
 };
 

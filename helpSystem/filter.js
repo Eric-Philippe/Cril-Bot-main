@@ -28,7 +28,6 @@ const filter = async function (msg, category) {
   let member_roles = member.roles.cache.toJSON();
   let isMod = member_roles.some((item) => roles.includes(item.id));
   if (isMod) return;
-  console.log(category);
   if (msg.channel.id != support_channel && category != "FIND_ACTIVITY") return;
   let user = msg.author;
   if (talkedRecently.has(user.id)) return;

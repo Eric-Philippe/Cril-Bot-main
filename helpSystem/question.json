@@ -45,7 +45,6 @@
     "DISCORD_CONNECT": [
       "Comment je me connecte dans l'appel ?",
       "Je n'arrive pas à me connecter"
-    ],
-    "TERMINATOR": ["Qui est Skynet ?"]
+    ]
   }
 }
