@@ -31,19 +31,23 @@ module.exports = class chatBot {
 
   __selector__(step) {
     switch (this.answer_array[step][2]) {
-      case "DELAY":
-        break;
       case "FIND_MOODLE":
         AnswerZero.find_moodle(this.msg, true);
+        break;
+      case "FIND_RESACRIL":
+        AnswerZero.find_ResaCril(this.msg, true);
         break;
       case "FIND_FICHE":
         AnswerZero.find_fiche(this.msg, true);
         break;
-      case "FIND_ACTIVITY":
-        break;
       case "VALIDATION_TIME_ACTIVITY":
+        AnswerZero.find_Validation(this.msg, true);
+        break;
+      case "DELAY":
         break;
       case "PREVIOUS_ABSENCE":
+        break;
+      case "FIND_ACTIVITY":
         break;
       case "UNSUBSCRIBE":
         break;

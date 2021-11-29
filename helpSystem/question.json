@@ -1,19 +1,31 @@
 {
   "QUESTION": {
     "FIND_MOODLE": ["Ou est Moodle ?", "Comment aller sur Moodle", "Moodle ?"],
+    "FIND_RESACRIL": [
+      "Ou est Résacril",
+      "Ou est ce que je m'inscrit ?",
+      "Comment je réserve ?"
+    ],
+    "FIND_FICHE": [
+      "Ou est ce qu'on peut trouver les fiches ?",
+      "Ou peut on faire les fiches"
+    ],
+    "VALIDATION_TIME_ACTIVITY": [
+      "Activité pas validée",
+      "Combien de temps prend ma validation ?",
+      "J'ai déposé ma fiche avec du retard"
+    ],
     "DELAY": [
       "Je vais être en retard",
       "Je risque d'être en retard",
       "Je suis en retard"
     ],
-    "UNSUBSCRIBE": [
-      "Pouvez vous me désinscrire ?",
-      "Pourrais-je annuler mon activité ?",
-      "Je vais être absent",
-      "Je risque d'être absent"
+    "PREVIOUS_ABSENCE": [
+      "J'étais absent",
+      "J'étais pas présent",
+      "Je n'étais pas là"
     ],
-    "SUBSCRIBE": ["Ou est ce que je m'inscrit ?", "Comment je réserve ?"],
-    "PREVIOUS_ABSENCE": ["J'étais absent", "J'étais pas présent"],
+
     "FIND_ACTIVITY": [
       "Ou se trouve mon activité ?",
       "Sur quelle discussion je dois aller ?",
@@ -21,14 +33,17 @@
       "Dans quel channel je vais ?",
       "Je ne sais pas si je suis au bon endroit"
     ],
-    "VALIDATION_TIME_ACTIVITY": ["Activité pas validée"],
+    "UNSUBSCRIBE": [
+      "Pouvez vous me désinscrire ?",
+      "Pourrais-je annuler mon activité ?",
+      "Je vais être absent",
+      "Je risque d'être absent",
+      "Je ne pourrai pas être là",
+      "J'ai un empêchement de dernière minute"
+    ],
     "DISCORD_CONNECT": [
       "Comment je me connecte dans l'appel ?",
       "Je n'arrive pas à me connecter"
-    ],
-    "FIND_FICHE": [
-      "Ou est ce qu'on peut trouver les fiches ?",
-      "Ou peut on faire les fiches"
     ],
     "TERMINATOR": ["Qui est Skynet ?"]
   }
