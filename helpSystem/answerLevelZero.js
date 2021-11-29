@@ -3,7 +3,13 @@ const Discord = require("discord.js");
 const question_mark =
   "https://cdn.discordapp.com/attachments/739553949199106158/914227536785989642/Ouf7Ajd.png";
 
-const { GIF_FICHE, IMG_MOODLE } = require("./ressource.json");
+const {
+  GIF_FICHE,
+  GIF_RESACRIL,
+  IMG_MOODLE,
+  IMG_CRIL,
+  IMG_RESACRIL,
+} = require("./ressource.json");
 
 module.exports = class AnswerZero {
   /**
@@ -14,6 +20,10 @@ module.exports = class AnswerZero {
    * @returns
    */
   static async __embedSend__(msg, embed, isHelp) {
+    embed.addField(
+      "📧 | En cas de doute contactez-nous par mail : ",
+      "cril.langues@iut-tlse3.fr"
+    );
     if (isHelp) {
       const row = new Discord.MessageActionRow().addComponents(
         new Discord.MessageButton()
@@ -29,7 +39,10 @@ module.exports = class AnswerZero {
           .setEmoji("❌")
       );
 
-      embed.setFooter(`Cela répond-il à votre question ?`, question_mark);
+      embed.setFooter(
+        `Cette réponse correspond-elle à votre demande ?`,
+        question_mark
+      );
 
       return await msg.channel.send({
         embeds: [embed],
@@ -66,6 +79,26 @@ module.exports = class AnswerZero {
   }
 
   /**
+   * Return the Embed with RésaCril's link
+   *
+   * @param {Discord.Message} msg
+   * @param {Boolean} isHelp
+   */
+  static async find_ResaCril(msg, isHelp) {
+    let link =
+      "http://resacril.iut-tlse3.fr/etudiant/recapitulatifPlanningEtudiant/";
+    let resacrilEmbed = new Discord.MessageEmbed()
+      .setTitle("Lien vers RésaCril")
+      .setColor("#18b5a0")
+      .setDescription(link)
+      .setImage(IMG_RESACRIL)
+      .setThumbnail(IMG_CRIL)
+      .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
+
+    return await AnswerZero.__embedSend__(msg, resacrilEmbed, isHelp);
+  }
+
+  /**
    * Return the Embed with Fiche's link
    *
    * @param {Discord.Message} msg
@@ -76,7 +109,7 @@ module.exports = class AnswerZero {
 
     let ficheEmbed = new Discord.MessageEmbed()
       .setTitle("Lien vers les fiches")
-      .setColor("DARK_ORANGE")
+      .setColor("#18b5a0")
       .setDescription(link)
       .setImage(GIF_FICHE)
       .setThumbnail(IMG_MOODLE)
@@ -84,9 +117,36 @@ module.exports = class AnswerZero {
 
     return await AnswerZero.__embedSend__(msg, ficheEmbed, isHelp);
   }
-
-  static async find_ResaCril(msg, isHelp) {
+  /**
+   * Return the Embed with Activity Time's link
+   *
+   * @param {Discord.Message} msg
+   * @param {Boolean} isHelp
+   */
+  static async find_Validation(msg, isHelp) {
     let link =
       "http://resacril.iut-tlse3.fr/etudiant/recapitulatifPlanningEtudiant/";
+
+    let validationEmbed = new Discord.MessageEmbed()
+      .setTitle("Lien vers les validations")
+      .setColor("#18b5a0")
+      .setDescription(link)
+      .setImage(GIF_RESACRIL)
+      .setThumbnail(IMG_CRIL)
+      .addField(
+        "⏱️ | Temps d'attente pour une validation : ",
+        "``" +
+          "En général votre activité aura un statut sous une semaine." +
+          "``"
+      )
+      .addField(
+        "⚠️ | Attention : ",
+        "``" +
+          "Vérifiez que votre fiche a bien été enregistrée dans Moodle." +
+          "``"
+      )
+      .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
+
+    return await AnswerZero.__embedSend__(msg, validationEmbed, isHelp);
   }
 };
