@@ -1,6 +1,11 @@
 {
   "roles": ["914578737964675132", "914578777529532436", "914578803152531477"],
   "support_channel": "914578678854332506",
+  "activities_channel": [
+    "914852794815631411",
+    "914852808090611722",
+    "914852823282364446"
+  ],
   "IMG_MOODLE": "https://cdn.discordapp.com/attachments/739553949199106158/914221388980711484/moodle-logo-300x225.png",
   "IMG_CRIL": "https://cdn.discordapp.com/attachments/739553949199106158/914821785617326130/unknown.png",
   "IMG_RESACRIL": "https://cdn.discordapp.com/attachments/739553949199106158/914823596738748416/unknown.png",

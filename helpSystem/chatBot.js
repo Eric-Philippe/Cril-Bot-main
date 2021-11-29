@@ -5,6 +5,8 @@ const AnswerZero = require("./answerLevelZero");
 const { questionPicker } = require("./questionPicker");
 const { filter } = require("./filter");
 
+const { support_channel } = require("./ressource.json");
+
 module.exports = class chatBot {
   constructor(msg) {
     this.msg = msg;
@@ -21,10 +23,12 @@ module.exports = class chatBot {
    * @param {Discord.Message} msg
    */
   async __init__(msg) {
-    let user_filter = await filter(msg);
-    if (!user_filter) return; // Deny if WrongChannel, Admin, talkedRecently,
     this.answer_array = await questionPicker(msg.content);
     if (this.answer_array[0][1] > 20) return; // Deny if the answers found are too far from the question
+
+    let user_filter = await filter(msg, this.answer_array[0][2]);
+    if (!user_filter) return; // Deny if WrongChannel, Admin, talkedRecently,
+
     console.log(this.answer_array);
     this.__selector__(0);
   }
@@ -48,6 +52,7 @@ module.exports = class chatBot {
       case "PREVIOUS_ABSENCE":
         break;
       case "FIND_ACTIVITY":
+        this.msg.reply("SALUT TOI");
         break;
       case "UNSUBSCRIBE":
         break;
