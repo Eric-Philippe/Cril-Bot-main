@@ -9,6 +9,8 @@ const {
   IMG_MOODLE,
   IMG_CRIL,
   IMG_RESACRIL,
+  IMG_LATE,
+  DISCORD_IMG,
 } = require("./ressource.json");
 
 module.exports = class AnswerZero {
@@ -83,6 +85,8 @@ module.exports = class AnswerZero {
    *
    * @param {Discord.Message} msg
    * @param {Boolean} isHelp
+   *
+   * @returns {Discord.Message} Message
    */
   static async find_ResaCril(msg, isHelp) {
     let link =
@@ -103,6 +107,8 @@ module.exports = class AnswerZero {
    *
    * @param {Discord.Message} msg
    * @param {Boolean} isHelp
+   *
+   * @returns {Discord.Message} Message
    */
   static async find_fiche(msg, isHelp) {
     let link = "https://moodle.iut-tlse3.fr/login/index.php";
@@ -122,6 +128,8 @@ module.exports = class AnswerZero {
    *
    * @param {Discord.Message} msg
    * @param {Boolean} isHelp
+   *
+   * @returns {Discord.Message} Message
    */
   static async find_Validation(msg, isHelp) {
     let link =
@@ -148,5 +156,109 @@ module.exports = class AnswerZero {
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, validationEmbed, isHelp);
+  }
+
+  /**
+   *  Return the embed for delay
+   *
+   * @param {Discord.Message} msg
+   * @param {Boolean} isHelp
+   * @returns {Discord.Message} Message
+   */
+  static async delay(msg, isHelp) {
+    let delayEmbed = new Discord.MessageEmbed()
+      .setTitle("Désirez vous déclarer un retard ?")
+      .setColor("#8a3851")
+      .setDescription(
+        "Votre validation entrainera une notification des responsables afin de signaler votre retard."
+      )
+      .setThumbnail(IMG_LATE)
+      .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
+
+    return await AnswerZero.__embedSend__(msg, delayEmbed, isHelp);
+  }
+
+  /**
+   *  Return the embed for previous absences
+   *
+   * @param {Discord.Message} msg
+   * @param {Boolean} isHelp
+   * @returns {Discord.Message} Message
+   */
+  static async previous_absence(msg, isHelp) {
+    let p_absenceEmbed = new Discord.MessageEmbed()
+      .setTitle("Désirez-vous déclarer une absence passée ?")
+      .setColor("#9fae71")
+      .setDescription(
+        "Votre validation entrainera une notification des responsables afin de signaler votre précédente absence."
+      )
+      .setThumbnail(IMG_LATE)
+      .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
+
+    return await AnswerZero.__embedSend__(msg, p_absenceEmbed, isHelp);
+  }
+
+  /**
+   *  Return the embed for the activity finder assistanc
+   *
+   * @param {Discord.Message} msg
+   * @param {Boolean} isHelp
+   * @returns {Discord.Message} Message
+   */
+  static async find_activity(msg, isHelp) {
+    let activity_embed = new Discord.MessageEmbed()
+      .setTitle(
+        "Désirez-vous de l'aide pour vous guider pour trouver vos channels d'activités ?"
+      )
+      .setColor("#71aea6")
+      .setDescription(
+        "Votre validation entrainera une ouverture d'une page d'aide afin de vous diriger pour votre activité."
+      )
+      .setThumbnail(IMG_LATE)
+      .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
+
+    return await AnswerZero.__embedSend__(msg, activity_embed, isHelp);
+  }
+
+  /**
+   *  Return the embed for the unsubscribe ticket
+   *
+   * @param {Discord.Message} msg
+   * @param {Boolean} isHelp
+   * @returns {Discord.Message} Message
+   */
+  static async unsubscribe(msg, isHelp) {
+    let unsubscribeEmbed = new Discord.MessageEmbed()
+      .setTitle(
+        "Désirez-vous vous désinscrire ou déclarer une absence à venir ?"
+      )
+      .setColor("#71aea6")
+      .setDescription(
+        "Votre validation entrainera une ouverture d'un ticket afin de traiter votre demande."
+      )
+      .setThumbnail(IMG_LATE)
+      .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
+
+    return await AnswerZero.__embedSend__(msg, unsubscribeEmbed, isHelp);
+  }
+
+  /**
+   *  Return the embed for the Discord Assistance
+   *
+   * @param {Discord.Message} msg
+   * @param {Boolean} isHelp
+   * @returns {Discord.Message} Message
+   */
+  static async discord_assist(msg, isHelp) {
+    let discordEmbed = new Discord.MessageEmbed()
+      .setTitle("Désirez-vous de l'aide pour vous connecter sur Discord ?")
+      .setColor("#6365b0")
+      .setDescription(
+        "Votre validation entrainera une page d'assistance afin de vous guider pour faire fonctionner votre Discord."
+      )
+      .setThumbnail(DISCORD_IMG)
+      .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
+
+    return await AnswerZero.__embedSend__(msg, discordEmbed, isHelp);
   }
 };

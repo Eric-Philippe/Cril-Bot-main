@@ -1,6 +1,10 @@
 {
   "QUESTION": {
-    "FIND_MOODLE": ["Ou est Moodle ?", "Comment aller sur Moodle", "Moodle ?"],
+    "FIND_MOODLE": [
+      "Ou est Moodle ?",
+      "Comment aller sur Moodle",
+      "Je cherche Moodle"
+    ],
     "FIND_RESACRIL": [
       "Ou est Résacril",
       "Ou est ce que je m'inscrit ?",

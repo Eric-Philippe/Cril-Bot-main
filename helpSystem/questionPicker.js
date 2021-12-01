@@ -106,11 +106,11 @@ const questionPicker = async function (str1) {
     answer_response.push(closest_question);
   }
 
-  answer_response.sort((a, b) => {
-    a[1] - b[1];
+  answer_reponse = await answer_response.sort((a, b) => {
+    return a[1] - b[1];
   });
 
-  answer_response = answer_response.slice(0, RESPONSE_LENGTH);
+  answer_response.slice(0, RESPONSE_LENGTH);
 
   return answer_response;
 };

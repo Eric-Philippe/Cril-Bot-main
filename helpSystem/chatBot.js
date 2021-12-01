@@ -50,6 +50,7 @@ module.exports = class chatBot {
 
   async __selector__(step) {
     let level = 0;
+    console.log(this.answer_array);
     switch (this.answer_array[step][2]) {
       case "FIND_MOODLE":
         this.msg_embed = await AnswerZero.find_moodle(this.msg, true);
@@ -64,19 +65,23 @@ module.exports = class chatBot {
         this.msg_embed = await AnswerZero.find_Validation(this.msg, true);
         break;
       case "DELAY":
+        this.msg_embed = await AnswerZero.delay(this.msg, true);
         level = 1;
         break;
       case "PREVIOUS_ABSENCE":
+        this.msg_embed = await AnswerZero.previous_absence(this.msg, true);
         level = 1;
         break;
       case "FIND_ACTIVITY":
-        this.msg_embed = await this.msg.reply("SALUT TOI");
+        this.msg_embed = await AnswerZero.find_activity(this.msg, true);
         level = 2;
         break;
       case "UNSUBSCRIBE":
+        this.msg_embed = await AnswerZero.unsubscribe(this.msg, true);
         level = 2;
         break;
       case "DISCORD_CONNECT":
+        this.msg_embed = await AnswerZero.discord_assist(this.msg, true);
         level = 2;
         break;
     }
