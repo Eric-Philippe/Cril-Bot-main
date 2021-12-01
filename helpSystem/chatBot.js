@@ -22,6 +22,14 @@ module.exports = class chatBot {
     this.msg_embed = msg.msg_embed;
 
     /**
+     *  The function linked to a specific answer leveled
+     *
+     * @type {Function}
+     * @public
+     */
+    this.func = this.default_func_validation;
+
+    /**
      * The answer array return by the questionPicker
      *
      * @type {Array<Array<String, Number, String>>}
@@ -108,11 +116,7 @@ module.exports = class chatBot {
     collector.on("collect", async (i) => {
       switch (i.customId) {
         case "Happy":
-          if (level === 0) {
-            msg_user.reply("Merci d'avoir répondu !");
-          } else {
-            this.__launcher__();
-          }
+          this.__launcher__();
           break;
         case "Unhappy":
           if (this.step === 2) {
@@ -138,9 +142,11 @@ module.exports = class chatBot {
     collector.on("end", (collected, reason) => {});
   }
 
+  default_func_validation() {
+    return this.msg.reply("Merci d'avoir répondu !");
+  }
+
   __launcher__() {
-    if (this.step === 0) {
-    } else {
-    }
+    this.func(this.msg);
   }
 };
