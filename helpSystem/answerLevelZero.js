@@ -212,7 +212,7 @@ module.exports = class AnswerZero {
       )
       .setColor("#71aea6")
       .setDescription(
-        "Votre validation entrainera une ouverture d'une page d'aide afin de vous diriger pour votre activité."
+        "Cliquer sur le bouton vert 'oui' entrainera une ouverture d'une page d'aide afin de vous diriger vers votre activité."
       )
       .setThumbnail(IMG_LATE)
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
@@ -234,7 +234,7 @@ module.exports = class AnswerZero {
       )
       .setColor("#71aea6")
       .setDescription(
-        "Votre validation entrainera une ouverture d'un ticket afin de traiter votre demande."
+        "Cliquer sur le bouton vert 'oui' entrainera une ouverture d'un ticket afin de traiter votre demande."
       )
       .setThumbnail(IMG_LATE)
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
@@ -254,7 +254,7 @@ module.exports = class AnswerZero {
       .setTitle("Désirez-vous de l'aide pour vous connecter sur Discord ?")
       .setColor("#6365b0")
       .setDescription(
-        "Votre validation entrainera une page d'assistance afin de vous guider pour faire fonctionner votre Discord."
+        "Cliquer sur le bouton vert 'oui' entrainera une page d'assistance afin de vous guider pour faire fonctionner votre Discord."
       )
       .setThumbnail(DISCORD_IMG)
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());

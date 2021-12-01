@@ -110,7 +110,7 @@ const questionPicker = async function (str1) {
     return a[1] - b[1];
   });
 
-  answer_response.slice(0, RESPONSE_LENGTH);
+  answer_response = await answer_response.slice(0, RESPONSE_LENGTH);
 
   return answer_response;
 };
