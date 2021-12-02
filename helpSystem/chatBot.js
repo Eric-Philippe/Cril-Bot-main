@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 
 const AnswerZero = require("./answerLevelZero");
+const Find_Activty = require("./find_activity/find_activity");
 
 const { questionPicker } = require("./questionPicker");
 const { filter } = require("./filter");
@@ -74,14 +75,17 @@ module.exports = class chatBot {
         break;
       case "DELAY":
         this.msg_embed = await AnswerZero.delay(this.msg, true);
+        this.func = AnswerZero.mention_reponsable_delay;
         level = 1;
         break;
       case "PREVIOUS_ABSENCE":
         this.msg_embed = await AnswerZero.previous_absence(this.msg, true);
+        this.func = AnswerZero.mention_reponsable_pastA;
         level = 1;
         break;
       case "FIND_ACTIVITY":
         this.msg_embed = await AnswerZero.find_activity(this.msg, true);
+        this.func = Find_Activty;
         level = 2;
         break;
       case "UNSUBSCRIBE":
@@ -116,7 +120,7 @@ module.exports = class chatBot {
     collector.on("collect", async (i) => {
       switch (i.customId) {
         case "Happy":
-          this.__launcher__();
+          this.__launcher__(level);
           break;
         case "Unhappy":
           if (this.step === 2) {
@@ -126,6 +130,7 @@ module.exports = class chatBot {
           } else {
             this.step = this.step + 1;
             msg_user.reply("Je m'occupe de vous. . .").then((m) => {
+              i.de;
               setTimeout(() => {
                 m.delete();
               }, 1000 * 3);
@@ -146,7 +151,12 @@ module.exports = class chatBot {
     return this.msg.reply("Merci d'avoir répondu !");
   }
 
-  __launcher__() {
-    this.func(this.msg);
+  __launcher__(level) {
+    try {
+      if (level === 2) return new this.func(this.msg, this.msg_embed);
+      this.func(this.msg);
+    } catch (err) {
+      console.log(err);
+    }
   }
 };

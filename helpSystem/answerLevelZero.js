@@ -13,6 +13,8 @@ const {
   DISCORD_IMG,
 } = require("./ressource.json");
 
+const main_ress = require("../config.json");
+
 module.exports = class AnswerZero {
   /**
    *
@@ -260,5 +262,43 @@ module.exports = class AnswerZero {
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, discordEmbed, isHelp);
+  }
+
+  /**
+   * Return the func for delayed student
+   *
+   * @param {Discord.Message} msg
+   * @param {String} category
+   */
+  static async mention_reponsable_delay(msg) {
+    let embedDelay = new Discord.MessageEmbed()
+      .setColor("RANDOM")
+      .setDescription(msg.content)
+      .setThumbnail(msg.author.avatarURL())
+      .setTimestamp()
+      .setTitle(`${msg.author.username} connait un retard.`);
+
+    msg.channel.send(`||<@&${main_ress.ROLES.resp}>||`);
+    msg.channel.send({ embeds: [embedDelay] });
+    msg.delete();
+  }
+
+  /**
+   * Return the func for past absent student
+   *
+   * @param {Discord.Message} msg
+   * @param {String} category
+   */
+  static async mention_reponsable_pastA(msg) {
+    let embedPastA = new Discord.MessageEmbed()
+      .setColor("RANDOM")
+      .setDescription(msg.content)
+      .setThumbnail(msg.author.avatarURL())
+      .setTimestamp()
+      .setTitle(`${msg.author.username} connait une absence passée !.`);
+
+    msg.channel.send(`||<@&${main_ress.ROLES.resp}>||`);
+    msg.channel.send({ embeds: [embedPastA] });
+    msg.delete();
   }
 };

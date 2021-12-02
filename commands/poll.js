@@ -52,7 +52,6 @@ module.exports = class Poll {
    * @param {Discord.MessageReaction} reaction
    */
   static async pollRequest(reaction) {
-    console.log("hey");
     if (!reaction.message.channel) return;
     let msg = await reaction.message.channel.messages.fetch(
       reaction.message.id
