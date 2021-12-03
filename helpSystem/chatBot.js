@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 
 const AnswerZero = require("./answerLevelZero");
 const Find_Activty = require("./find_activity/find_activity");
+const Unsubscribe = require("./unsubscribe/unsubscribe");
 
 const { questionPicker } = require("./questionPicker");
 const { filter } = require("./filter");
@@ -49,6 +50,7 @@ module.exports = class chatBot {
    */
   async __init__(msg) {
     this.answer_array = await questionPicker(msg.content);
+    console.log(this.answer_array[0][1]);
     if (this.answer_array[0][1] > 20) return; // Deny if the answers found are too far from the question
 
     let user_filter = await filter(msg, this.answer_array[0]);
@@ -89,7 +91,8 @@ module.exports = class chatBot {
         level = 2;
         break;
       case "UNSUBSCRIBE":
-        //this.msg_embed = await AnswerZero.unsubscribe(this.msg, true);
+        this.msg_embed = await AnswerZero.unsubscribe(this.msg, true);
+        this.func = Unsubscribe;
         level = 2;
         break;
       case "DISCORD_CONNECT":

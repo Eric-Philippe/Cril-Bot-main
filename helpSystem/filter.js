@@ -26,9 +26,9 @@ const filter = async function (msg, answer) {
   if (
     msg.channel.id != CHANNELS.SUPPORT_CHANNEL &&
     answer[2] != "FIND_ACTIVITY"
-  )
-    return;
-  if (answer[2] === "FIND_ACTIVITY" && answer[1] > 6) return;
+  ) {
+    if (answer[1] > 6) return;
+  }
   let user = msg.author;
   if (talkedRecently.has(user.id)) return;
   talkedRecently.add(user.id);

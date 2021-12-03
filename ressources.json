@@ -10,6 +10,7 @@
   "EMOTE": {
     "CHECK_EMOTE": "<a:check_rainbow:912332999410999346>",
     "GEAR_EMOTE": "<a:gear:913427115855196183>",
+    "BATTE_EMOTE": "<:BouletShooter:916386368966524988>",
     "NB_EMOTE": ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
   },
   "GIF": {
@@ -77,7 +78,8 @@
     ]
   },
   "CATEGORY": {
-    "ENTRY": "910515893853900801"
+    "ENTRY": "910515893853900801",
+    "UNSUB": "916374391678443581"
   },
   "IUT": {
     "MOODLE_LINK": "https://moodle.iut-tlse3.fr/login/index.php",
