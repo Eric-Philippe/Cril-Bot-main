@@ -1,11 +1,6 @@
 const Discord = require("discord.js");
-const { con } = require("../utils/mysql");
 
-const {
-  roles,
-  support_channel,
-  activities_channel,
-} = require("./ressource.json");
+const { ROLES, CHANNELS } = require("../ressources.json");
 const CoolDown_Min = 2;
 
 const talkedRecently = new Set();
@@ -14,21 +9,26 @@ const talkedRecently = new Set();
  * Filter the user for the chatBot
  *
  * @param {Discord.Message} msg
- * @param {String} category
+ * @param {Array} Answer
  *
  * @returns {Boolean} boolean
  */
-const filter = async function (msg, category) {
+const filter = async function (msg, answer) {
   if (
-    msg.channel.id != support_channel &&
-    !activities_channel.includes(msg.channel.id)
+    msg.channel.id != CHANNELS.SUPPORT_CHANNEL &&
+    !CHANNELS.ACTIVITIES_CHANNEL.includes(msg.channel.id)
   )
     return;
   let member = msg.member;
   let member_roles = member.roles.cache.toJSON();
-  let isMod = member_roles.some((item) => roles.includes(item.id));
+  let isMod = member_roles.some((item) => ROLES.MOD_ROLES.includes(item.id));
   if (isMod) return;
-  if (msg.channel.id != support_channel && category != "FIND_ACTIVITY") return;
+  if (
+    msg.channel.id != CHANNELS.SUPPORT_CHANNEL &&
+    answer[2] != "FIND_ACTIVITY"
+  )
+    return;
+  if (answer[2] === "FIND_ACTIVITY" && answer[1] > 6) return;
   let user = msg.author;
   if (talkedRecently.has(user.id)) return;
   talkedRecently.add(user.id);

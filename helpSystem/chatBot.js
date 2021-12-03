@@ -51,7 +51,7 @@ module.exports = class chatBot {
     this.answer_array = await questionPicker(msg.content);
     if (this.answer_array[0][1] > 20) return; // Deny if the answers found are too far from the question
 
-    let user_filter = await filter(msg, this.answer_array[0][2]);
+    let user_filter = await filter(msg, this.answer_array[0]);
     if (!user_filter) return; // Deny if WrongChannel, Admin, talkedRecently,
 
     this.__selector__(this.step);
@@ -89,11 +89,11 @@ module.exports = class chatBot {
         level = 2;
         break;
       case "UNSUBSCRIBE":
-        this.msg_embed = await AnswerZero.unsubscribe(this.msg, true);
+        //this.msg_embed = await AnswerZero.unsubscribe(this.msg, true);
         level = 2;
         break;
       case "DISCORD_CONNECT":
-        this.msg_embed = await AnswerZero.discord_assist(this.msg, true);
+        //this.msg_embed = await AnswerZero.discord_assist(this.msg, true);
         level = 2;
         break;
     }

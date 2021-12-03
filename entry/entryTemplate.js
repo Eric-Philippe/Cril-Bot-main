@@ -1,8 +1,7 @@
 const Discord = require("discord.js");
 
-const { MAIN_COLOR, SECOND_COLOR } = require("../config.json");
-const { rules_img, gifTemplate1 } = require("../img/embedImg.json");
-const { CHECK_EMOTE, GEAR_EMOTE } = require("../img/emote.json");
+const { IMG, GIF, EMOTE, COLOR } = require("../ressources.json"); // Ressources required for the system
+
 /**
  *
  * @typedef {Object} Template
@@ -30,7 +29,7 @@ module.exports.template0 = function (member) {
   );
 
   let embed = new Discord.MessageEmbed()
-    .setColor(MAIN_COLOR)
+    .setColor(COLOR.MAIN_COLOR)
     .setTitle(`Bienvenue ${member.user.tag} !`)
     .setDescription(
       "Bienvenue sur le serveur du Cril ! Tu **suivra** les étapes suivantes pour valider ton entrée dans ce dernier !"
@@ -103,16 +102,16 @@ module.exports.template1 = function (
 
   const embed = new Discord.MessageEmbed()
     .setTitle("Présentation : " + title)
-    .setColor(SECOND_COLOR[0])
+    .setColor(COLOR.SECOND_COLOR[0])
     .setAuthor("Cril", msg.guild.iconURL())
     .setThumbnail(msg.author.avatarURL())
     .setDescription(
-      `${CHECK_EMOTE} ${txt_instruction} \n | Revenez sur le champs grâce précédent grâce au bouton en bas !`
+      `${EMOTE.CHECK_EMOTE} ${txt_instruction} \n | Revenez sur le champs grâce précédent grâce au bouton en bas !`
     )
     .addField("Prénom", "``" + firstname_ + "``\n", true)
     .addField("Nom", "``" + secondname_ + "``\n", true)
     .addField("Département", "``" + SCHOOL_ + "``\n", true)
-    .setImage(gifTemplate1)
+    .setImage(GIF.ENTRY_GIF)
     .setTimestamp()
     .setFooter(
       `Etape ${
@@ -132,7 +131,7 @@ module.exports.template1 = function (
       true
     );
     embed.addField(
-      `${GEAR_EMOTE} | Instruction`,
+      `${EMOTE.GEAR_EMOTE} | Instruction`,
       "Merci d'entrer une valeur __**Numérique**__"
     );
   }
@@ -160,7 +159,7 @@ module.exports.template2 = function (member, page) {
   );
 
   let embed = new Discord.MessageEmbed()
-    .setColor(SECOND_COLOR[2])
+    .setColor(COLOR.SECOND_COLOR[2])
     .setTitle(`Les règles !`)
     .setDescription("Lorem Ipsum")
     .addField("Règle 1", "Trucs chiants")
@@ -168,7 +167,7 @@ module.exports.template2 = function (member, page) {
     .addField("Règle 3", "Trucs chiants")
     .addField("Règle 4", "Trucs chiants")
     .setAuthor("Cril", member.guild.iconURL())
-    .setThumbnail(rules_img)
+    .setThumbnail(IMG.RULES_LOGO)
     .setFooter(`${page + 1}/5`)
     .setTimestamp();
 
@@ -195,7 +194,7 @@ module.exports.template3 = function (member, page) {
   );
 
   let embed = new Discord.MessageEmbed()
-    .setColor(SECOND_COLOR[2])
+    .setColor(COLOR.SECOND_COLOR[2])
     .setTitle(`Les règles !`)
     .setDescription(
       "Cliquez sur la réaction pour valider le consentement à l'application de ces règles."
@@ -205,7 +204,7 @@ module.exports.template3 = function (member, page) {
     .addField("Règle 7", "Trucs chiants")
     .addField("Règle 8", "Trucs chiants")
     .setAuthor("Cril", member.guild.iconURL())
-    .setThumbnail(rules_img)
+    .setThumbnail(IMG.RULES_LOGO)
     .setFooter(`${page + 1}/5`)
     .setTimestamp();
 
@@ -232,7 +231,7 @@ module.exports.template4 = function (member, page) {
   );
 
   let embed = new Discord.MessageEmbed()
-    .setColor(SECOND_COLOR[2])
+    .setColor(COLOR.SECOND_COLOR[2])
     .setTitle(`Premières manipulation !`)
     .setDescription("https://www.youtube.com/watch?v=SZmADlOhkQk")
     .setURL("https://www.youtube.com/watch?v=SZmADlOhkQk")
@@ -241,7 +240,7 @@ module.exports.template4 = function (member, page) {
       "Toutes ces infos sont disponibles plus précisément grâce à la commande ``!help``"
     )
     .setAuthor("Cril", member.guild.iconURL())
-    .setThumbnail(rules_img)
+    .setThumbnail(IMG.RULES_LOGO)
     .setFooter(`${page + 1}/5`)
     .setTimestamp();
 

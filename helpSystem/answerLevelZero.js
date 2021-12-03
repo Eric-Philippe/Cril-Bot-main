@@ -1,19 +1,6 @@
 const Discord = require("discord.js");
 
-const question_mark =
-  "https://cdn.discordapp.com/attachments/739553949199106158/914227536785989642/Ouf7Ajd.png";
-
-const {
-  GIF_FICHE,
-  GIF_RESACRIL,
-  IMG_MOODLE,
-  IMG_CRIL,
-  IMG_RESACRIL,
-  IMG_LATE,
-  DISCORD_IMG,
-} = require("./ressource.json");
-
-const main_ress = require("../config.json");
+const { ROLES, IMG, GIF, IUT } = require("../ressources.json");
 
 module.exports = class AnswerZero {
   /**
@@ -45,7 +32,7 @@ module.exports = class AnswerZero {
 
       embed.setFooter(
         `Cette réponse correspond-elle à votre demande ?`,
-        question_mark
+        IMG.QUESTION_LOGO
       );
 
       return await msg.channel.send({
@@ -66,17 +53,13 @@ module.exports = class AnswerZero {
    * @returns {Discord.Message} Message
    */
   static async find_moodle(msg, isHelp) {
-    let link = "https://moodle.iut-tlse3.fr/login/index.php";
-
     let embedMoodle = new Discord.MessageEmbed()
       .setTitle("Lien vers moodle")
       .setColor("#f98012")
-      .setURL(link)
-      .setDescription(link)
-      .setImage(
-        "https://moodle.iut-tlse3.fr/pluginfile.php/102032/course/overviewfiles/Imagea.png"
-      )
-      .setThumbnail(IMG_MOODLE)
+      .setURL(IUT.MOODLE_LINK)
+      .setDescription(IUT.MOODLE_LINK)
+      .setImage(IMG.ENGLISH_CRIL_LOGO)
+      .setThumbnail(IMG.MOODLE_LOGO)
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, embedMoodle, isHelp);
@@ -91,14 +74,12 @@ module.exports = class AnswerZero {
    * @returns {Discord.Message} Message
    */
   static async find_ResaCril(msg, isHelp) {
-    let link =
-      "http://resacril.iut-tlse3.fr/etudiant/recapitulatifPlanningEtudiant/";
     let resacrilEmbed = new Discord.MessageEmbed()
       .setTitle("Lien vers RésaCril")
       .setColor("#18b5a0")
-      .setDescription(link)
-      .setImage(IMG_RESACRIL)
-      .setThumbnail(IMG_CRIL)
+      .setDescription(IUT.RESACRIL_LINK)
+      .setImage(IMG.RESACRIL_MENU)
+      .setThumbnail(IMG.CRIL_LOGO)
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, resacrilEmbed, isHelp);
@@ -113,14 +94,12 @@ module.exports = class AnswerZero {
    * @returns {Discord.Message} Message
    */
   static async find_fiche(msg, isHelp) {
-    let link = "https://moodle.iut-tlse3.fr/login/index.php";
-
     let ficheEmbed = new Discord.MessageEmbed()
       .setTitle("Lien vers les fiches")
       .setColor("#18b5a0")
-      .setDescription(link)
-      .setImage(GIF_FICHE)
-      .setThumbnail(IMG_MOODLE)
+      .setDescription(IUT.MOODLE_LINK)
+      .setImage(GIF.FICHES_MOODLE_GIF)
+      .setThumbnail(IMG.MOODLE_LOGO)
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, ficheEmbed, isHelp);
@@ -134,15 +113,12 @@ module.exports = class AnswerZero {
    * @returns {Discord.Message} Message
    */
   static async find_Validation(msg, isHelp) {
-    let link =
-      "http://resacril.iut-tlse3.fr/etudiant/recapitulatifPlanningEtudiant/";
-
     let validationEmbed = new Discord.MessageEmbed()
       .setTitle("Lien vers les validations")
       .setColor("#18b5a0")
-      .setDescription(link)
-      .setImage(GIF_RESACRIL)
-      .setThumbnail(IMG_CRIL)
+      .setDescription(IUT.RESACRIL_LINK)
+      .setImage(GIF.RESACRIL_GIF)
+      .setThumbnail(IMG.CRIL_LOGO)
       .addField(
         "⏱️ | Temps d'attente pour une validation : ",
         "``" +
@@ -174,7 +150,7 @@ module.exports = class AnswerZero {
       .setDescription(
         "Votre validation entrainera une notification des responsables afin de signaler votre retard."
       )
-      .setThumbnail(IMG_LATE)
+      .setThumbnail(IMG.DELAY_LOGO)
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, delayEmbed, isHelp);
@@ -194,7 +170,7 @@ module.exports = class AnswerZero {
       .setDescription(
         "Votre validation entrainera une notification des responsables afin de signaler votre précédente absence."
       )
-      .setThumbnail(IMG_LATE)
+      .setThumbnail(IMG.DELAY_LOGO)
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, p_absenceEmbed, isHelp);
@@ -216,7 +192,7 @@ module.exports = class AnswerZero {
       .setDescription(
         "Cliquer sur le bouton vert 'oui' entrainera une ouverture d'une page d'aide afin de vous diriger vers votre activité."
       )
-      .setThumbnail(IMG_LATE)
+      .setThumbnail(IMG.DELAY_LOGO)
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, activity_embed, isHelp);
@@ -238,7 +214,7 @@ module.exports = class AnswerZero {
       .setDescription(
         "Cliquer sur le bouton vert 'oui' entrainera une ouverture d'un ticket afin de traiter votre demande."
       )
-      .setThumbnail(IMG_LATE)
+      .setThumbnail(IMG.DELAY_LOGO)
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, unsubscribeEmbed, isHelp);
@@ -258,7 +234,7 @@ module.exports = class AnswerZero {
       .setDescription(
         "Cliquer sur le bouton vert 'oui' entrainera une page d'assistance afin de vous guider pour faire fonctionner votre Discord."
       )
-      .setThumbnail(DISCORD_IMG)
+      .setThumbnail(IMG.DISCORD_LOGO)
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, discordEmbed, isHelp);
@@ -278,7 +254,7 @@ module.exports = class AnswerZero {
       .setTimestamp()
       .setTitle(`${msg.author.username} connait un retard.`);
 
-    msg.channel.send(`||<@&${main_ress.ROLES.resp}>||`);
+    msg.channel.send(`||<@&${ROLES.MOD_ROLES[0]}>||`);
     msg.channel.send({ embeds: [embedDelay] });
     msg.delete();
   }
@@ -297,7 +273,7 @@ module.exports = class AnswerZero {
       .setTimestamp()
       .setTitle(`${msg.author.username} connait une absence passée !.`);
 
-    msg.channel.send(`||<@&${main_ress.ROLES.resp}>||`);
+    msg.channel.send(`||<@&${ROLES.MOD_ROLES[0]}>||`);
     msg.channel.send({ embeds: [embedPastA] });
     msg.delete();
   }

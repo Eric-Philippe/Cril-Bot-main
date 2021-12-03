@@ -1,0 +1,98 @@
+{
+  "SERVER": {
+    "ID": "688866481689329773"
+  },
+  "COLOR": {
+    "MAIN_COLOR": "#C60800",
+    "SECOND_COLOR": ["#2548a8", "#69a825"]
+  },
+
+  "EMOTE": {
+    "CHECK_EMOTE": "<a:check_rainbow:912332999410999346>",
+    "GEAR_EMOTE": "<a:gear:913427115855196183>",
+    "NB_EMOTE": ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
+  },
+  "GIF": {
+    "ENTRY_GIF": "https://cdn.discordapp.com/attachments/579303130886569984/913426387401052240/screen-capture_online-video-cutter.com.gif",
+    "FICHES_MOODLE_GIF": "https://cdn.discordapp.com/attachments/739553949199106158/914788681934602270/screen-capture_online-video-cutter.com.gif",
+    "RESACRIL_GIF": "https://cdn.discordapp.com/attachments/739553949199106158/914826761051705364/screen-capture_online-video-cutter.com_1.gif"
+  },
+  "IMG": {
+    "RULES_LOGO": "https://cdn.discordapp.com/attachments/477449962020405268/910794044186173471/pngegg.png",
+    "MOODLE_LOGO": "https://cdn.discordapp.com/attachments/739553949199106158/914221388980711484/moodle-logo-300x225.png",
+    "CRIL_LOGO": "https://cdn.discordapp.com/attachments/739553949199106158/914821785617326130/unknown.png",
+    "DELAY_LOGO": "https://cdn.discordapp.com/attachments/887602470472269844/915539092404576266/backpacker-running.png",
+    "DISCORD_LOGO": "https://media.discordapp.net/attachments/739553949199106158/915532193005174784/Discord_Logo_sans_texte.svg.png",
+    "REMINDER_LOGO": "https://cdn.discordapp.com/attachments/911765013423878215/911768975862558740/rappel.png",
+    "QUESTION_LOGO": "https://cdn.discordapp.com/attachments/739553949199106158/914227536785989642/Ouf7Ajd.png",
+    "ENGLISH_CRIL_LOGO": "https://moodle.iut-tlse3.fr/pluginfile.php/102032/course/overviewfiles/Imagea.png",
+
+    "RESACRIL_MENU": "https://cdn.discordapp.com/attachments/739553949199106158/914823596738748416/unknown.png",
+    "ACTIVTY_NAME": "https://cdn.discordapp.com/attachments/739553949199106158/915933365767651358/unknown.png",
+    "CHANNEL_FD_EXEMPLE": "https://media.discordapp.net/attachments/739553949199106158/916115543659016252/Sans_titre-1.jpg",
+    "CHANNEL_TD_EXEMPLE": "https://media.discordapp.net/attachments/739553949199106158/916119215294009415/Sans_titre-1.jpg",
+    "CHANNEL_STREAM_EXMEPLE": "https://media.discordapp.net/attachments/739553949199106158/916119214752940083/Sans_titre-3.jpg",
+    "CHANNEL_GAMES_EXEMPLE": "https://media.discordapp.net/attachments/739553949199106158/916119214992027678/Sans_titre-2.jpg",
+    "CHANNEL_COACH_EXEMPLE": "https://cdn.discordapp.com/attachments/739553949199106158/916128643925835796/unknown.png"
+  },
+  "VIDEOS": [],
+  "ROLES": {
+    "ETU": "910826454604984330",
+    "MOD_ROLES": [
+      "914578737964675132",
+      "914578777529532436",
+      "914578803152531477"
+    ]
+  },
+  "CHANNELS": {
+    "WELCOME": "910240188968620045",
+    "SUPPORT_CHANNEL": "914578678854332506",
+    "ACTIVITIES_CHANNEL": [
+      "914852794815631411",
+      "914852808090611722",
+      "914852823282364446"
+    ],
+    "ACTIVITIES_CHANNEL_ESP": [
+      "727899478056632330",
+      "727900704450150520",
+      "689829334625550345",
+      "695582800618848374",
+      "",
+      "727900885031583904",
+      "727900934478233690",
+      "826134070618226708"
+    ],
+    "ACTIVITIES_CHANNEL_ANG": [
+      "727899569584865330",
+      "727899855397322863",
+      "727900101313429525",
+      "727900294012338176",
+      "804318511777185812",
+      "727900581024235560",
+      "727546294473850901",
+      "725722105148342384",
+      "773825924490723349",
+      "727898516369965117",
+      "772820470277210122"
+    ]
+  },
+  "CATEGORY": {
+    "ENTRY": "910515893853900801"
+  },
+  "IUT": {
+    "MOODLE_LINK": "https://moodle.iut-tlse3.fr/login/index.php",
+    "RESACRIL_LINK": "http://resacril.iut-tlse3.fr/etudiant/recapitulatifPlanningEtudiant/",
+    "DEPARTMENT": [
+      "GEAR",
+      "GMP",
+      "GEAP",
+      "GCCD",
+      "INFOCOM",
+      "MEPH",
+      "GCGP",
+      "INFO",
+      "GEII",
+      "TECH DE CO"
+    ]
+  }
+}

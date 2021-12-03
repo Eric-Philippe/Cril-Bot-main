@@ -1,9 +1,7 @@
 const Discord = require("discord.js");
-// npm install xhr2
-var XMLHttpRequest = require("xhr2");
 
 const moment = require("moment");
-const { MAIN_COLOR } = require("../config.json");
+const { COLOR } = require("../ressources.json");
 
 module.exports = class Miscellanous {
   /**
@@ -25,7 +23,7 @@ module.exports = class Miscellanous {
 
     let embed = new Discord.MessageEmbed()
       .setTitle("🎲 | Rolling dice")
-      .setColor(MAIN_COLOR)
+      .setColor(COLOR.MAIN_COLOR)
       .addField("📉 - Résultat : ", "``" + String(result) + "``");
 
     msg.reply({ embeds: [embed] });
@@ -41,7 +39,7 @@ module.exports = class Miscellanous {
     const user = member.user;
     let embed = new Discord.MessageEmbed()
       .setTitle(`Informations à propos de ${user.tag}`)
-      .setColor(MAIN_COLOR)
+      .setColor(COLOR.MAIN_COLOR)
       .setThumbnail(user.avatarURL())
       .addField("Pseudo : ", user.username, true)
       .addField("ID : ", user.id, true)
@@ -103,7 +101,7 @@ module.exports = class Miscellanous {
       return msg.reply("Merci de rédiger du contenu pour votre embed !");
 
     let embed = new Discord.MessageEmbed()
-      .setColor(MAIN_COLOR)
+      .setColor(COLOR.MAIN_COLOR)
       .setDescription(desc)
       .setFooter("Le cril", msg.guild.iconURL());
     if (title) embed.setTitle(title);
@@ -129,7 +127,7 @@ module.exports = class Miscellanous {
 
     let embed = new Discord.MessageEmbed()
       .setTitle(`Avatar de ${user.tag}`)
-      .setColor(MAIN_COLOR)
+      .setColor(COLOR.MAIN_COLOR)
       .setImage(user.avatarURL())
       .setFooter(`Demandé par : ${msg.author.tag}`, msg.author.avatarURL())
       .setTimestamp();

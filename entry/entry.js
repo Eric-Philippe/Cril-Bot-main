@@ -8,8 +8,7 @@ const {
   template4,
 } = require("./entryTemplate"); // All the embed for the system
 
-const { CHECK_EMOTE } = require("../img/emote.json");
-const { CATEGORY, DEPARTMENT, ROLES, CHANNELS } = require("../config.json"); // Stuff to be use on the system
+const { EMOTE, CATEGORY, CHANNELS, ROLES, IUT } = require("../ressources.json"); // Ressources required for the system
 
 /**
  * @Class Entry system fir incoming user on the server
@@ -113,7 +112,7 @@ module.exports = class Entry {
    */
   async createChannel() {
     let category = this.guild.channels.cache.find(
-      (c) => c.type === "GUILD_CATEGORY" && c.id === CATEGORY.entry
+      (c) => c.type === "GUILD_CATEGORY" && c.id === CATEGORY.ENTRY
     ); // Parent Category
 
     if (!category) return;
@@ -254,7 +253,7 @@ module.exports = class Entry {
         // Department : Int -> Choice
       } else if (this.underPage === 2) {
         if (!isNaN(Number(m.content))) {
-          if (Number(m.content) <= DEPARTMENT.length + 1) return true;
+          if (Number(m.content) <= IUT.DEPARTMENT.length + 1) return true;
         }
       }
     };
@@ -277,14 +276,14 @@ module.exports = class Entry {
           this.userInfo[1] = m.content.toUpperCase(); // UperCase Secondname
           break;
         case 2:
-          this.userInfo[2] = DEPARTMENT[Number(m.content) - 1]; // Choice
+          this.userInfo[2] = IUT.DEPARTMENT[Number(m.content) - 1]; // Choice
           break;
       }
 
       m.delete(); // Clear the channel from the last message
       m.channel
         .send(
-          `${CHECK_EMOTE} | Votre ${
+          `${EMOTE.CHECK_EMOTE} | Votre ${
             this.titleArray[this.underPage]
           } a bien été définit sur ${
             this.userInfo[this.underPage]
@@ -430,12 +429,12 @@ module.exports = class Entry {
         `${this.userInfo[0]} ${this.userInfo[1]} ${this.userInfo[2]}`
       );
       let new_role = await this.guild.roles.cache.find(
-        (r) => r.id === ROLES.etu
+        (r) => r.id === ROLES.ETU
       );
       await this.member.roles.add(new_role);
 
       let new_channel = this.guild.channels.cache.find(
-        (c) => c.id === CHANNELS.welcome
+        (c) => c.id === CHANNELS.WELCOME
       );
       if (!new_channel) return;
       await new_channel.send(`Bienvenue ${this.user} !`);

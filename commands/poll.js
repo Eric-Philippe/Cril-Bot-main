@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MAIN_COLOR, NB_EMOTE } = require("../config.json");
+const { COLOR, EMOTE } = require("../ressources.json");
 
 module.exports = class Poll {
   /**
@@ -28,20 +28,20 @@ module.exports = class Poll {
 
     let pollEmbed = new Discord.MessageEmbed()
       .setTitle("📊 " + question)
-      .setColor(MAIN_COLOR)
+      .setColor(COLOR.MAIN_COLOR)
       .setFooter(`#️⃣ | Demandé par ${msg.author.tag}`)
       .setAuthor("SONDAGE");
 
     for (let i = 0; i < choice_array.length; i++) {
       pollEmbed.addField(
-        NB_EMOTE[i] + " " + choice_array[i],
+        EMOTE.NB_EMOTE[i] + " " + choice_array[i],
         "``" + "⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛" + "`` | 0.0% (0)"
       );
     }
 
     msg.channel.send({ embeds: [pollEmbed] }).then((m) => {
       for (let i = 0; i < choice_array.length; i++) {
-        m.react(NB_EMOTE[i]);
+        m.react(EMOTE.NB_EMOTE[i]);
       }
     });
   }
