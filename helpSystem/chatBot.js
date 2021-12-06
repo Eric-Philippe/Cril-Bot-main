@@ -50,7 +50,6 @@ module.exports = class chatBot {
    */
   async __init__(msg) {
     this.answer_array = await questionPicker(msg.content);
-    console.log(this.answer_array[0][1]);
     if (this.answer_array[0][1] > 20) return; // Deny if the answers found are too far from the question
 
     let user_filter = await filter(msg, this.answer_array[0]);
