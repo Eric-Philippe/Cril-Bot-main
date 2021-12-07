@@ -2,7 +2,7 @@
 
 # Cril-Bot-main
 
-<img width="50" height="50" align="right" style="float: left; margin: 0 10px 0 0;" alt="Discord" src= "https://cdn.discordapp.com/attachments/579303130886569984/917747646947549234/89525899-811a7c00-d819-11ea-847f-a8be447b75e1.png" href="https://discord.gg/Za9zxTH">
+<img width="50" height="50" align="right" style="float: right; margin: 0 10px 0 0;" alt="Discord" src= "https://cdn.discordapp.com/attachments/579303130886569984/917747646947549234/89525899-811a7c00-d819-11ea-847f-a8be447b75e1.png" href="https://discord.gg/Za9zxTH">
 
 ---
 
