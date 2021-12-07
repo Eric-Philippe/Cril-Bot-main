@@ -14,8 +14,6 @@ const Reminder = require("./commands/remindMe");
 
 const chatBot = require("./helpSystem/chatBot");
 
-const { help } = require("./commands/commands");
-
 /** Wake up on ready state */
 client.on("ready", async () => {
   console.log(`Logged into: ${client.user.tag}`);
@@ -31,7 +29,6 @@ client.on("ready", async () => {
 client.on("messageCreate", async (msg) => {
   if (msg.author.bot) return;
   if (msg.author.id === client.user.id) return;
-  help(msg);
   if (msg.content.startsWith(PREFIX)) {
     cmdGrabber(msg);
   } else {

@@ -5,8 +5,19 @@ const { resetSQL } = require("../SQL/RESET/resetSQL");
 const Miscellanous = require("./miscellanous");
 const AnswerZero = require("../helpSystem/answerLevelZero");
 
+/**
+ *  Launcher of the help command
+ *
+ * @param {Discord.Message} msg
+ */
 const help = function (msg) {
-  new Help(msg);
+  let args = msg.content.split(" "); // Targeted cmd
+  if (commands[`${args[1]}`]) {
+    helpHelp(msg, commands[`${args[1]}`]); // Targeted help
+  } else {
+    // If does not exists, display them all
+    new Help(msg);
+  }
 };
 
 /**
@@ -18,9 +29,8 @@ const commands = {
     desc: "Commande de test",
     func: test,
     perm: [-1],
-    help: "Test du bot",
     format: "test",
-    exemple: ["test"],
+    exemple: [["test", "Lance la commande de test"]],
   },
 
   help: {
@@ -28,9 +38,11 @@ const commands = {
     desc: "Affiche la commande d'aide aux commandes",
     func: help,
     perm: [0],
-    help: "Aide",
     format: "help <Nom Commande>",
-    exemple: ["help", "help help"],
+    exemple: [
+      ["help", "Affiche les pages de toutes les commandes"],
+      ["help userinfo", "Affiche l'aide sur la commande userinfo"],
+    ],
   },
 
   userinfo: {
@@ -38,9 +50,14 @@ const commands = {
     desc: "Affiche les infos de l'utilisateur cible",
     func: Miscellanous.userinfo,
     perm: [0],
-    help: "Affiche les informations de l'utilisateur",
     format: "userinfo <@User>",
-    exemple: ["userinfo", "userinfo @User"],
+    exemple: [
+      [
+        "userinfo",
+        "Affiche les informations utilisateur de l'auteur du message",
+      ],
+      ["userinfo @Skynet", "Affiche les informations de l'utilisateur Skynet"],
+    ],
   },
 
   avatar: {
@@ -48,9 +65,11 @@ const commands = {
     desc: "Affiche l'avatar de l'utilisateur",
     func: Miscellanous.getAvatar,
     perm: [0],
-    help: "Affiche l'avatar de l'utilisateur",
     format: "avatar <@User>",
-    exemple: ["avatar", "avatar @User"],
+    exemple: [
+      ["avatar", "Affiche l'avatar de l'auteur du message"],
+      ["avatar @Marie", "Affiche l'avatar de l'utilisateur Marie"],
+    ],
   },
 
   embed: {
@@ -58,11 +77,13 @@ const commands = {
     desc: "Créateur d'embed",
     func: Miscellanous.createEmbed,
     perm: [2],
-    help: "Créer un cadre de couleur avec plusieurs paramètres",
     format: 'embed <"t Titre t"> <"img URL img"> [Contenu du cadre]',
     exemple: [
-      "embed Salut Je suis un Cadre",
-      'embed "t Je suis un Titre t" "img URL img" Salut je suis une description !',
+      ["embed Salut", "Envoi un embed avec pour description 'Salut'"],
+      [
+        'embed "t Je suis un Titre t" "img URL img" Salut je suis une description !',
+        "Envoi un embed avec comme titre 'Je suis un titre', avec pour image l'URL' et comme description 'Salut je suis une description'",
+      ],
     ],
   },
 
@@ -71,9 +92,11 @@ const commands = {
     desc: "Lancer un dé",
     func: Miscellanous.dice,
     perm: [0],
-    help: "Lancer un dé",
     format: "dice <Nombre de Face>",
-    exemple: ["dice", "dice 64"],
+    exemple: [
+      ["dice", "Lance un dé à 6 faces"],
+      ["dice 64", "Lancé un dé de 64 faces"],
+    ],
   },
 
   poll: {
@@ -81,12 +104,17 @@ const commands = {
     desc: "Lance un sondage",
     func: Poll.poll,
     perm: [1],
-    help: "Créer un sondage",
     format:
       'poll ["Titre"] <"Proposition1"> <"Proposition2"> ... <"Proposition10">',
     exemple: [
-      'poll "Je suis un sondage"',
-      'poll "Je suis un super sondage" "Un peu" "beaucoup" "clairement"',
+      [
+        'poll "Je suis un sondage ?"',
+        "Créer un sondage avec une question fermée sur le sujet 'Je suis un sondage ?'",
+      ],
+      [
+        'poll "Je suis un super sondage" "Un peu" "beaucoup" "clairement"',
+        "Créer un sondage avec comme propositions 'Un peu', 'beaucoup', 'clairement'",
+      ],
     ],
   },
 
@@ -95,9 +123,14 @@ const commands = {
     desc: "Envoie un lien Moodle",
     func: AnswerZero.find_moodle,
     perm: [1],
-    help: "Affiche le lien vers Moodle",
     format: "Moodle <@User>",
-    exemple: ["Moodle", "Moodle @User"],
+    exemple: [
+      ["Moodle", "Envoyer un cadre avec le lien vers Moodle"],
+      [
+        "Moodle @Teluob",
+        "Adresse un cadre avec le lien vers Moodle auprès de l'utilisateur Teluob",
+      ],
+    ],
   },
 
   remindme: {
@@ -105,9 +138,13 @@ const commands = {
     desc: "Rappel",
     func: Reminder.remindMe,
     perm: [0],
-    help: "Créer le rappel à une date donnée",
     format: "remindme [DD/MM/YYYY] [HHhMM] [Rappel]",
-    exemple: ["remindme 13/05/2022 10h00 Activité Thématique"],
+    exemple: [
+      [
+        "remindme 13/05/2022 10h00 Activité Thématique",
+        "Créer un rappel pour le 13 mai 2022 à 10h00 avec pour sujet : 'Activité Thématique'",
+      ],
+    ],
   },
 
   resetDB: {
@@ -115,24 +152,25 @@ const commands = {
     desc: "Reset de la base de donnée",
     func: resetSQL,
     perm: [3],
-    help: "Reset la base donnée",
     format: "resetDB",
-    exemple: ["NE PAS UTILISER"],
+    exemple: [["NE PAS UTILISER", "JUST NO"]],
   },
 };
 
 module.exports.commands = commands; // Export all the command for the launcher
 
-// ############# Help command #############
+// ####################### Help command #########################
 const Discord = require("discord.js");
 
 const { IMG, ROLES } = require("../ressources.json"); // Import Help Logo
+const { PREFIX } = require("../config.json"); // Prefix import
 
 /**
- * Help Display
+ * Commands Navigation Display Class
  */
 class Help {
   /**
+   *  Constructor of the navigation
    *
    * @param {Discord.Message} msg
    */
@@ -144,6 +182,9 @@ class Help {
     this.__init__();
   }
 
+  /**
+   * Initiate the first parameters of the source embed
+   */
   async __init__() {
     let embed = await embed1(this.msg); // Initiate the first embed
     await this.channel.send({ embeds: [embed] }).then(async (m) => {
@@ -240,9 +281,10 @@ class Help {
 }
 
 /**
+ *  Return the free commands Embed
  *
  * @param {Discord.Message} m
- * @returns
+ * @returns {Discord.MessageEmbed} Embed
  */
 const embed1 = function (m) {
   let embed = new Discord.MessageEmbed()
@@ -256,9 +298,9 @@ const embed1 = function (m) {
     .addField("Page 1 : ", "📗 - Commandes tout Utilisateur", true)
     .addField("Page 2 : ", "📘 - Commandes Tuteurs / Assistants", true)
     .addField("Page 3 : ", "📕 - Commandes Responsables", true)
-    .addField("Page suivante : ", "⏭️ -  Avancer d'une page", true)
     .addField("Page précédente : ", "⏮️ - Reculer d'une page", true)
-    .addField("‎", "‎")
+    .addField("Page suivante : ", "⏭️ -  Avancer d'une page", true)
+    .addField("‎", "‎") // Blank Fields
 
     .addField(
       "🔘 | Nom de la commande",
@@ -274,15 +316,17 @@ const embed1 = function (m) {
   roles_array.push(ROLES.ETU); // All the allowed role for this page
   let roles_user = [...m.member.roles.cache.keys()]; // Array with user's roles
 
-  let isAllowed = roles_user.find((element) => roles_array.includes(element));
+  let isAllowed = roles_user.find((element) => roles_array.includes(element)); // If user is allowed to have access to thoses cmd
 
-  let i = 0;
+  let i = 0; // Counter off cmd avaibles for the user
   if (isAllowed) {
     for (const property in commands) {
+      // Loop on all the command of perm level 0
       if (commands[property]["perm"][0] === 0) {
         let cmd = commands[property];
+        // Update the final embed
         embed.addField(
-          `🔘 | ${cmd["name"]}`,
+          `🔘 | ${PREFIX + cmd["name"]}`,
           "**``" + cmd["desc"] + "``** \n" + "``" + cmd["format"] + "``"
         );
         i++;
@@ -290,11 +334,17 @@ const embed1 = function (m) {
     }
   }
 
-  if (i === 0) embed.setDescription("Aucune commande accessible !");
+  if (i === 0) embed.setDescription("Aucune commande accessible !"); // Case if no cmd avaiable
 
   return embed;
 };
 
+/**
+ * Return the tutor commands
+ *
+ * @param {Discord.Message} m
+ * @returns {Discord.MessageEmbed} Embed
+ */
 const embed2 = function (m) {
   let embed = new Discord.MessageEmbed()
     .setTitle("Commandes Disponibles de niveau 2 (Assistants / Tuteurs)")
@@ -307,8 +357,8 @@ const embed2 = function (m) {
     .addField("Page 1 : ", "📗 - Commandes tout Utilisateur", true)
     .addField("Page 2 : ", "📘 - Commandes Tuteurs / Assistants", true)
     .addField("Page 3 : ", "📕 - Commandes Responsables", true)
-    .addField("Page suivante : ", "⏭️ -  Avancer d'une page", true)
     .addField("Page précédente : ", "⏮️ - Reculer d'une page", true)
+    .addField("Page suivante : ", "⏭️ -  Avancer d'une page", true)
     .addField("‎", "‎")
 
     .addField(
@@ -327,14 +377,16 @@ const embed2 = function (m) {
   let isAllowed = roles_user.find((element) => roles_array.includes(element));
   // Return id if finded, undefiened if not found
 
-  let i = 0;
+  let i = 0; // Number of cmd avaiable
   if (isAllowed) {
     // Show all command avaible for this user
     for (const property in commands) {
+      // Loop all around the commands of perm level 1
       if (commands[property]["perm"][0] === 1) {
         let cmd = commands[property];
+        // Update the final Embed
         embed.addField(
-          `🔘 | ${cmd["name"]}`,
+          `🔘 | ${PREFIX + cmd["name"]}`,
           "**``" + cmd["desc"] + "``** \n" + "``" + cmd["format"] + "``"
         );
         i++;
@@ -342,11 +394,17 @@ const embed2 = function (m) {
     }
   }
 
-  if (i === 0) embed.setDescription("Aucune commande accessible !");
+  if (i === 0) embed.setDescription("Aucune commande accessible !"); // Case of no cmd avaiable
 
   return embed;
 };
 
+/**
+ * Return the Admin commands Embed
+ *
+ * @param {Discord.Message} m
+ * @returns {Discord.MessageEmbed} Embed
+ */
 const embed3 = function (m) {
   let embed = new Discord.MessageEmbed()
     .setTitle("Commandes Disponibles de niveau 3 (Reponsables)")
@@ -359,8 +417,8 @@ const embed3 = function (m) {
     .addField("Page 1 : ", "📗 - Commandes tout Utilisateur", true)
     .addField("Page 2 : ", "📘 - Commandes Tuteurs / Assistants", true)
     .addField("Page 3 : ", "📕 - Commandes Responsables", true)
-    .addField("Page suivante : ", "⏭️ -  Avancer d'une page", true)
     .addField("Page précédente : ", "⏮️ - Reculer d'une page", true)
+    .addField("Page suivante : ", "⏭️ -  Avancer d'une page", true)
     .addField("‎", "‎")
 
     .addField(
@@ -376,15 +434,17 @@ const embed3 = function (m) {
   let roles_array = [ROLES.MOD_ROLES[0]]; // All the allowed role for this page
   let roles_user = [...m.member.roles.cache.keys()]; // Array with user's roles
 
-  let isAllowed = roles_user.find((element) => roles_array.includes(element));
+  let isAllowed = roles_user.find((element) => roles_array.includes(element)); // Perm level satisfaction
 
-  let i = 0;
+  let i = 0; // Number of cmd avaiable
   if (isAllowed) {
     for (const property in commands) {
+      // Loop all around the commands of perm level 2
       if (commands[property]["perm"][0] === 2) {
         let cmd = commands[property];
+        // Update the final Embed
         embed.addField(
-          `🔘 | ${cmd["name"]}`,
+          `🔘 | ${PREFIX + cmd["name"]}`,
           "**``" + cmd["desc"] + "``** \n" + "``" + cmd["format"] + "``"
         );
         i++;
@@ -392,9 +452,45 @@ const embed3 = function (m) {
     }
   }
 
-  if (i === 0) embed.setDescription("Aucune commande accessible !");
+  if (i === 0) embed.setDescription("Aucune commande accessible !"); // Case of no cmd avaiable
 
   return embed;
 };
 
-module.exports.help = help;
+/**
+ *  Help about all the command
+ *
+ * @param {Discord.Message} msg
+ * @param {Object} cmd
+ */
+const helpHelp = function (msg, cmd) {
+  let embedHelp = new Discord.MessageEmbed() // Embed Help Creator
+    .setAuthor("🔎 | Cril Aide")
+    .setTitle(`Aide de la commande ${cmd.name}`) // Name of the targeted cmd
+    .setThumbnail(IMG.HELP_LOGO) //Gif Help Logo from @Tatsumaki bot
+    .setColor("RED")
+    .setDescription("```" + cmd.desc + "```") // Description of the cmd
+    .setFooter(
+      `Légende : [] => Paramètres Obligatoires - <> => Paramètres Facultatifs`,
+      msg.member.guild.iconURL()
+    )
+    .addField("Format : ", "``" + cmd.format + "``"); // Formaat of the cmd
+  for (const element in cmd.exemple) {
+    // Display all the exemples avaibles with their result
+    embedHelp.addField(
+      "Exemple : ",
+      "``" +
+        "🔘| " +
+        PREFIX +
+        cmd.exemple[element][0] + // Input exemple
+        "``" +
+        "\n **-**" +
+        cmd.exemple[element][1], // Output exemple
+      true
+    );
+  }
+
+  msg.channel.send({ embeds: [embedHelp] }); // Send the embed
+};
+
+module.exports.help = help; // Export the parent launcher
