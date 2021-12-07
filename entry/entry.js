@@ -46,12 +46,12 @@ module.exports = class Entry {
    */
   async __init__() {
     let firstname, secondname, school;
-    this.userInfo.push(firstname, secondname, school);
+    this.userInfo.push(firstname, secondname, school); // Initiate the default information
 
-    this.channel = await this.createChannel();
+    this.channel = await this.createChannel(); // Create the Entry Channel
 
-    let embed = new Discord.MessageEmbed().setTitle("Initialisation . . .");
-    this.msg = await this.channel.send({ embeds: [embed] });
+    let embed = new Discord.MessageEmbed().setTitle("Initialisation . . ."); // Notify
+    this.msg = await this.channel.send({ embeds: [embed] }); // Send embed in the new Channel
 
     this.__initSelector__();
   }
@@ -181,6 +181,7 @@ module.exports = class Entry {
 
     collector.on("end", (collected, reason) => {
       if (reason === "time") {
+        // Auto Cleaner
         this.autoDestruction();
       }
     });
@@ -195,6 +196,7 @@ module.exports = class Entry {
     const reacArray = ["✅"]; //
 
     const filter = (reaction, user) => {
+      // [AuthorIdOnly, EmojiOnly]
       return (
         user.id === this.user.id && reacArray.includes(reaction.emoji.name)
       );
@@ -217,6 +219,7 @@ module.exports = class Entry {
     });
 
     collector.on("end", (collected, reason) => {
+      // Auto Cleaner
       if (reason === "time") {
         this.autoDestruction();
       }
