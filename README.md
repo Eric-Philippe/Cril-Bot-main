@@ -1,4 +1,4 @@
-<img width="250" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="Cril" src="https://media.discordapp.net/attachments/579303130886569984/917748391570731118/logo_CRIL.jpg?width=1050&height=655">
+<img width="150" height="95" align="left" style="float: left; margin: 0 10px 0 0;" alt="Cril" src="https://media.discordapp.net/attachments/579303130886569984/917748391570731118/logo_CRIL.jpg?width=1050&height=655">
 
 # Cril-Bot-main
 
