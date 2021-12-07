@@ -78,9 +78,9 @@ const valueWordsFunc = async function (S1, S2) {
  * @returns {Array<Array<String, Number, String>>}
  */
 const questionPicker = async function (str1) {
-  let valuePhrase, valueWords;
-  let answer_response = [];
-  let closest_question = ["", 1000, ""];
+  let valuePhrase, valueWords; // Two coeff' to determine the closest question of the input
+  let answer_response = []; // Array of answer
+  let closest_question = ["", 1000, ""]; // Default closest question = as null
 
   for (let field in QUESTION) {
     // Loop on category
@@ -88,31 +88,32 @@ const questionPicker = async function (str1) {
     closest_question = ["", 1000, ""];
     for (let j = 0; j < questions.length; j++) {
       // Loop on question of the category
-      valuePhrase = await levenshteinDistance(questions[j], str1);
+      valuePhrase = await levenshteinDistance(questions[j], str1); // Number of edit needed
       valuePhrase =
         Math.round(
           (valuePhrase - 0.8 * Math.abs(questions[j].length - str1.length)) * 10
-        ) / 10;
-      valueWords = await valueWordsFunc(questions[j], str1);
+        ) / 10; // Get an usable value
+      valueWords = await valueWordsFunc(questions[j], str1); // Value of words place
 
       let final =
         Math.min(valuePhrase, valueWords) * 0.8 +
-        Math.max(valuePhrase, valueWords) * 0.2;
+        Math.max(valuePhrase, valueWords) * 0.2; // Final = 80%(farValue) + 20%(closestValue)
 
       if (closest_question[1] > final)
+        // Pick the closest question of the category
         closest_question = [questions[j], final, field];
     }
 
-    answer_response.push(closest_question);
+    answer_response.push(closest_question); // Add the closest question to the array
   }
 
   answer_reponse = await answer_response.sort((a, b) => {
     return a[1] - b[1];
-  });
+  }); // Sort by the most little coeff'
 
-  answer_response = await answer_response.slice(0, RESPONSE_LENGTH);
+  answer_response = await answer_response.slice(0, RESPONSE_LENGTH); // Keep only the 3 first values
 
   return answer_response;
 };
 
-exports.questionPicker = questionPicker;
+exports.questionPicker = questionPicker; // Export the question Picker func

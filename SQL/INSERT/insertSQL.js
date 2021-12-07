@@ -1,15 +1,23 @@
-require("require-sql");
+require("require-sql"); // SQL Interpreter
 
-const { con } = require("../../utils/mysql");
+const { con } = require("../../utils/mysql"); // Connexion DB
 
+// ALL SQL Request
 const query_Users = require("./INSERT_USERS.sql");
 const query_Reminder = require("./INSERT_REMINDER.sql");
 const query_Concerner = require("./INSERT_CONCERNER.sql");
 const query_Users_READ = require("../READ/USER_ID_FILTER.sql");
 
+/**
+ * Add a new reminder Object at the DB
+ *
+ * @param {Object} reminder
+ */
 exports.insertSQL = async function (reminder) {
   con.query(
-    query_Users_READ, // EXIST OR NOT
+    query_Users_READ, // We don't add user if the user already got a Reminder
+    // One user can have 1 at n Reminder
+    // One Reminder can concern 1 at n User
     [reminder.users_id[0]],
     function (err, result, fields) {
       if (err) throw err;
@@ -40,6 +48,4 @@ exports.insertSQL = async function (reminder) {
       );
     }
   );
-
-  let insertID;
 };

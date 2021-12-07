@@ -28,6 +28,12 @@ module.exports = class embedFA {
     return [embedMain, `✅`];
   }
 
+  /**
+   *  Return the menu activity with all the reaction needed
+   *
+   * @param {Discord.Message} msg
+   * @returns {Array<Discord.MessageEmbed, string>} Private Template
+   */
   static async menu_activity(msg) {
     let embedMenu = new Discord.MessageEmbed()
       .setTitle("Merci de séléctionner l'activité que vous allez faire.")
@@ -50,6 +56,12 @@ module.exports = class embedFA {
     return [embedMenu, "🙋", "🦸", "🃏", "🎮", "🎓"];
   }
 
+  /**
+   * Return the free activities Embed
+   *
+   * @param {Discord.Message} msg
+   * @returns {Array<Discord.MessageEmbed, String} Private Template
+   */
   static async fd_embed(msg) {
     let freeDisEmbed = new Discord.MessageEmbed()
       .setTitle(
@@ -89,6 +101,12 @@ module.exports = class embedFA {
     return [freeDisEmbed, "❌"];
   }
 
+  /**
+   * Return the thematic Discussion Embed
+   *
+   * @param {Discord.Message} msg
+   * @returns {Array<Discord.MessageEmbed, String>}
+   */
   static async theme_discEmbed(msg) {
     let themeDiscEmbed = new Discord.MessageEmbed()
       .setTitle("Voici les channels correspondants à votre activité.")
@@ -112,6 +130,11 @@ module.exports = class embedFA {
     return [themeDiscEmbed, "❌"];
   }
 
+  /**
+   * Return the games channel display Embed
+   * @param {Discord.Message} msg
+   * @returns {Array<Discord.MessageEmbed, String>}
+   */
   static async games_Embed(msg) {
     let gamesEmbed = new Discord.MessageEmbed()
       .setTitle("Voici les channels correspondants à votre activité.")
@@ -135,6 +158,11 @@ module.exports = class embedFA {
     return [gamesEmbed, "❌"];
   }
 
+  /**
+   * Return the stream channel display Embed
+   * @param {Discord.Message} msg
+   * @returns {Array<Discord.MessageEmbed, String>}
+   */
   static async stream_Embed(msg) {
     let streamEmbed = new Discord.MessageEmbed()
       .setTitle("Voici les channels correspondants à votre activité.")
@@ -162,6 +190,11 @@ module.exports = class embedFA {
     return [streamEmbed, "❌"];
   }
 
+  /**
+   * Return the coaching channel display Embed
+   * @param {Discord.Message} msg
+   * @returns {Array<Discord.MessageEmbed, String>}
+   */
   static async coach_Embed(msg) {
     let coachEmbed = new Discord.MessageEmbed()
       .setTitle("Voici les channels correspondants à votre activité.")
