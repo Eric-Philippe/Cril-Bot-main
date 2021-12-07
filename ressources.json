@@ -82,6 +82,14 @@
     "ENTRY": "910515893853900801",
     "UNSUB": "916374391678443581"
   },
+  "MENTION_TOPIC_CHANNEL": {
+    "BOOKWORM": [],
+    "MANGA": [],
+    "VIDEO_GAMES": [],
+    "SPORTS": [],
+    "MOVIES": [],
+    "TEST": ["917868461609353267", "917868484824817664"]
+  },
   "IUT": {
     "MOODLE_LINK": "https://moodle.iut-tlse3.fr/login/index.php",
     "RESACRIL_LINK": "http://resacril.iut-tlse3.fr/etudiant/recapitulatifPlanningEtudiant/",

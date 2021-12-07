@@ -20,6 +20,7 @@ const filter = async function (msg, answer) {
     !CHANNELS.ACTIVITIES_CHANNEL.includes(msg.channel.id)
   )
     return;
+  if (msg.content.length < 10) return;
   let member = msg.member;
   let member_roles = member.roles.cache.toJSON();
   let isMod = member_roles.some((item) => ROLES.MOD_ROLES.includes(item.id));

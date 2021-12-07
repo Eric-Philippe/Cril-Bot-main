@@ -4,6 +4,7 @@ const Reminder = require("./remindMe");
 const { resetSQL } = require("../SQL/RESET/resetSQL");
 const Miscellanous = require("./miscellanous");
 const AnswerZero = require("../helpSystem/answerLevelZero");
+const { topicChannelMention } = require("./topicChannelMention");
 
 /**
  *  Launcher of the help command
@@ -83,6 +84,20 @@ const commands = {
       [
         'embed "t Je suis un Titre t" "img URL img" Salut je suis une description !',
         "Envoi un embed avec comme titre 'Je suis un titre', avec pour image l'URL' et comme description 'Salut je suis une description'",
+      ],
+    ],
+  },
+
+  topic: {
+    name: "topic",
+    desc: "Mentionne le rôle correspondant au topic du channel",
+    func: topicChannelMention,
+    perm: [2],
+    format: "topic [Contenu du message à envoyer]",
+    exemple: [
+      [
+        'topic Vive les livres (Dans le channel "📚-books")',
+        'Envoie "Vive les livres" avec la mention @bookworm',
       ],
     ],
   },

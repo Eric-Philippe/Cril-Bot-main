@@ -3,9 +3,7 @@ const Discord = require("discord.js");
 module.exports.ClientOptions = {
   restTimeOffset: 0,
   allowedMentions: {
-    parse: [
-      /* "roles", "users", "everyone"*/
-    ],
+    parse: ["roles", "users"],
     repliedUser: false,
   },
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
