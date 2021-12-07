@@ -9,3 +9,36 @@
 This project is a Bot Discord for the Languages and International Relations Centre of my school (IUT Informatique [FR]Toulouse Paul Sabatier). Everything is developed under the NPM discord.js 13.3.1 module, all in JavaScript (NodeJs). In the same way, it involves SQL working under a MYSQL database.
 
 ---
+
+## Features
+
+### Automatic System
+
+- 1 ⚙️ ChatBot for helps for lost students
+- 2 🗳️ Entry System to be able to register students
+- 3 ✉️ Reminder working on a indepedant Database
+- 4 👩‍💼 Message Reaction Roles
+
+### Commands
+
+Cril-bot offers (non-exhaustive list):
+
+- 1 🖨️ Miscellanous commands (userinfo, coffee, avatar,dice, embed...)
+- 2 😀 Interactive polls and draws
+- 3 👑 Commands Permission Manager
+
+---
+
+## Highly flexible over time
+
+> The bot was built in such a way as to have an architecture to be able to easily evolve over time
+
+---
+
+## Links
+
+- [GitHub](https://github.com/Zaorhion/Cril-Bot-main)
+
+## Contributing
+
+> Thank you to the language centers for allowing me to undertake this project. Particularly to Louise and Marie for their help.
