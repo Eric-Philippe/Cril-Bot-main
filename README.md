@@ -6,7 +6,7 @@
 
 ---
 
-This project is a Bot Discord for the Languages and International Relations Centre of my school (IUT Informatique [FR]Toulouse Paul Sabatier). Everything is developed under the NPM discord.js 13.3.1 module, all in JavaScript (NodeJs). In the same way, it involves SQL working under a MYSQL database.
+This project is a Discord Bot for the Languages and International Relations Centre of my school (IUT Informatique [FR]Toulouse Paul Sabatier). Everything is developed under the NPM discord.js 13.3.1 module, all in JavaScript (NodeJs). In the same way, it involves SQL working under a MYSQL database.
 
 ---
 
@@ -41,4 +41,10 @@ Cril-bot offers (non-exhaustive list):
 
 ## Contributing
 
-> Thank you to the language centers for allowing me to undertake this project. Particularly to Louise and Marie for their help.
+> Thank you to the language centers for allowing me to undertake this project. Particularly to Louise and Marie for their help, and all the B.Tester.
+
+---
+
+## License
+
+Cril Bot is licensed under the GPL 3.0 license. See the file `LICENSE` for more information. If you plan to use any part of this source code in your own bot, I would be grateful if you would include some form of credit somewhere.
