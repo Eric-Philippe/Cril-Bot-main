@@ -51,5 +51,5 @@ Cril Bot is licensed under the GPL 3.0 license. See the file `LICENSE` for more 
 
 ## Author
 
-@Zaorhion
+@Zaorhion : Eric PHILIPPE
 Discord : Sunrise#1318
