@@ -102,6 +102,15 @@ const commands = {
     ],
   },
 
+  coffee: {
+    name: "coffee",
+    desc: "Give power with coffee GIF",
+    func: Miscellanous.coffee,
+    perm: [1],
+    format: "coffee",
+    exemple: [["coffee", "Envoie un gif de café"]],
+  },
+
   dice: {
     name: "dice",
     desc: "Lancer un dé",

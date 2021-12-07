@@ -1,5 +1,14 @@
 const Discord = require("discord.js");
 
+const { TENOR_TOKEN } = require("../token.json");
+const Tenor = require("tenorjs").client({
+  Key: TENOR_TOKEN,
+  Filter: "medium",
+  Locale: "en_US",
+  MediaFilter: "basic",
+  DateFormat: "D//MM/YYYY - H:mm:ss A",
+});
+
 const moment = require("moment");
 const { COLOR } = require("../ressources.json");
 
@@ -133,6 +142,33 @@ module.exports = class Miscellanous {
       .setTimestamp();
 
     msg.channel.send({ embeds: [embed] });
+  }
+
+  /**
+   * Return a gorgeous embed with coffee
+   *
+   * @param {Discord.Message} msg
+   */
+  static coffee(msg) {
+    let i = Miscellanous.getRandomInt(4, 1); // Get random Int betwee, 1 and 3 (include)
+    let name = "coffee"; // Default research name
+    // Change a bit the search depend on the int
+    switch (i) {
+      case 2:
+        name = "coffee porn";
+        break;
+      case 3:
+        name = "need coffee";
+        break;
+    }
+    Tenor.Search.Random(name, "1").then(async (Results) => {
+      // Search random gif
+      let embed = new Discord.MessageEmbed() // Embed Constructor
+        .setImage(Results[0].media[0].gif.url)
+        .setColor("#6f4e37")
+        .setTitle("A coffee for you <3");
+      msg.reply({ embeds: [embed] }); // Send the embed
+    });
   }
 
   /**
