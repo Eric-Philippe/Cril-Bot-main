@@ -6,6 +6,6 @@
 
 ---
 
-Ce projet est un Bot Discord pour le centre de langue de mon établissement scolaire (IUT Informatique Toulouse Paul Sabaitier). Le tout est développé sous le module NPM discord.js 13.3.1, le tout en JavaScript (NodeJs). Il implique de la même manière du SQL travaillant sous une base de donnée MYSQL.
+This project is a Bot Discord for the Languages and International Relations Centre of my school (IUT Informatique [FR]Toulouse Paul Sabatier). Everything is developed under the NPM discord.js 13.3.1 module, all in JavaScript (NodeJs). In the same way, it involves SQL working under a MYSQL database.
 
 ---
