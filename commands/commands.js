@@ -5,6 +5,7 @@ const { resetSQL } = require("../SQL/RESET/resetSQL");
 const Miscellanous = require("./miscellanous");
 const AnswerZero = require("../helpSystem/answerLevelZero");
 const { topicChannelMention } = require("./topicChannelMention");
+const { addReacRole } = require("../reactionrole");
 
 /**
  *  Launcher of the help command
@@ -32,6 +33,20 @@ const commands = {
     perm: [-1],
     format: "test",
     exemple: [["test", "Lance la commande de test"]],
+  },
+
+  addReacRole: {
+    name: "addReacRole",
+    desc: "Ajoute les réaction pour un message de RolesReaction",
+    func: addReacRole,
+    perm: [-1],
+    format: "addReacRole (Répondre au message ciblé)",
+    exemple: [
+      [
+        "addReacRole (Ciblé sur le cadre en réponse)",
+        "Ajoute les réaction nécessaires au message avec l'ID du message répondu",
+      ],
+    ],
   },
 
   help: {
