@@ -5,7 +5,7 @@ const { resetSQL } = require("../SQL/RESET/resetSQL");
 const Miscellanous = require("./miscellanous");
 const AnswerZero = require("../helpSystem/answerLevelZero");
 const { topicChannelMention } = require("./topicChannelMention");
-const { addReacRole } = require("../reactionrole");
+const { addReacRole, addTS } = require("../pluginEmbed");
 
 /**
  *  Launcher of the help command
@@ -45,6 +45,21 @@ const commands = {
       [
         "addReacRole (Ciblé sur le cadre en réponse)",
         "Ajoute les réaction nécessaires au message avec l'ID du message répondu",
+      ],
+    ],
+  },
+
+  addTS: {
+    name: "addTS",
+    desc: "Créer un nouveau tirage au sort sur un embed",
+    func: addTS,
+    perm: [-1],
+    format:
+      "addTS [[Nombre Réponse, Numéro de la bonne réponse]] [Nombre d'heure]",
+    exemple: [
+      [
+        "addTS [3, 2] 5",
+        "Ajoute un tirage au sort de 3 propositions, avec la réponse 2 comme solution, pendant 5h",
       ],
     ],
   },

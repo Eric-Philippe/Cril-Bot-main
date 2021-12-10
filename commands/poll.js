@@ -50,8 +50,10 @@ module.exports = class Poll {
    *  Update the receipt or withdrawal of a reaction on a poll
    *
    * @param {Discord.MessageReaction} reaction
+   * @param {Discord.User} user
+   * @param {Boolean} isAdded
    */
-  static async pollRequest(reaction) {
+  static async pollRequest(reaction, user, isAdded) {
     if (!reaction.message.channel) return;
     let msg = await reaction.message.channel.messages.fetch(
       reaction.message.id
@@ -62,6 +64,15 @@ module.exports = class Poll {
     let parent_embed = msg.embeds[0];
     if (!parent_embed.author) return;
     if (parent_embed.author.name != "SONDAGE") return;
+    if (!reaction.message.reactions.cache) return;
+
+    if (isAdded) {
+      for (let element of reaction.message.reactions.cache) {
+        if (element[0] != reaction.emoji.name) {
+          reaction.message.reactions.resolve(element[0]).users.remove(user.id);
+        }
+      }
+    }
 
     let total = 0; // Total of reaction
     let current_state = []; // Current state of the all reactions

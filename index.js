@@ -14,7 +14,7 @@ const Reminder = require("./commands/remindMe");
 
 const chatBot = require("./helpSystem/chatBot");
 
-const { reactionRole } = require("./reactionrole");
+const { reactionRole } = require("./pluginEmbed");
 
 /** Wake up on ready state */
 client.on("ready", async () => {
@@ -48,7 +48,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
   let msg = await reaction.message.channel.messages.fetch(reaction.message.id);
   if (!msg.author.bot) return;
   reactionRole(reaction, user);
-  await pollRequest(reaction);
+  await pollRequest(reaction, user, true);
 });
 
 /** Wake up on reaction removed */
@@ -57,7 +57,7 @@ client.on("messageReactionRemove", async (reaction, user) => {
   let msg = await reaction.message.channel.messages.fetch(reaction.message.id);
   if (!msg.author.bot) return;
   reactionRole(reaction, user);
-  await pollRequest(reaction);
+  await pollRequest(reaction, user, false);
 });
 
 /** Wake up on new member income */

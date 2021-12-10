@@ -175,6 +175,7 @@ module.exports = class createReminderObject {
         [new Date()],
         async function (err, results, fields) {
           if (!err) REMINDER = JSON.parse(JSON.stringify(results));
+          if (!REMINDER) return;
           if (REMINDER.length === 0) return;
           console.log(`${REMINDER.length} rappel(s) demandé(s)`);
 
