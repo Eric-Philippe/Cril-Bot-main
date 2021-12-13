@@ -31,8 +31,6 @@ module.exports.reactionRole = async function (reaction, user) {
   )
     return; // Return if msg is not from a bot, and in another channel
 
-  console.log("CC");
-
   let ArrayRoles = []; // Roles linkeds
 
   let entries = Object.entries(MENTION_TOPIC_CHANNEL); // Ressources Object to Array
@@ -73,8 +71,6 @@ module.exports.addReacRole = async function (msg) {
     // Add all the reaction to the message
     await msg_target.react(ArrayReac[element]);
   }
-
-  msg.delete(); // Clean
 };
 
 /**
@@ -85,6 +81,7 @@ module.exports.addReacRole = async function (msg) {
 module.exports.addTS = async function (msg) {
   let member = msg.member; // Member
   let isMod = await member.roles.cache.find((r) => r.id === ROLES.MOD_ROLES[0]); // Role finder
+  let channel = msg.channel; // Cache the message
 
   if (!isMod) return; // Perm check
 
@@ -99,77 +96,85 @@ module.exports.addTS = async function (msg) {
   var mySubString = msg.content.substring(
     msg.content.indexOf("[") + 1,
     msg.content.lastIndexOf("]")
-  );
-  console.log(mySubString); // Amount, Solution
+  ); // Answer parameters
 
-  let answers_info = mySubString.split(",");
-  if (!answers_info[1]) return;
+  let answers_info = mySubString.split(","); // [Amount, Solution]
+  if (!answers_info[1]) return; // Error Handler
 
-  let answers_amount = answers_info[0];
-  let answer_correct = answers_info[1];
+  let answers_amount = answers_info[0]; // Amount
+  let answer_correct = answers_info[1]; // Number of the Solution
 
-  if (isNaN(answers_amount)) return;
+  if (isNaN(answers_amount)) return; // Type Error
 
-  if (answer_correct < 1 || answer_correct > answers_amount) return;
+  if (answer_correct < 1 || answer_correct > answers_amount) return; // Solution check
 
-  if (!args[2]) return;
-  if (isNaN(args[2])) return;
+  if (!args[2]) return; // Hour parameter
+  if (isNaN(args[2])) return; // Type hour argument check
 
-  let time_hour = Number(args[2]);
-  if (time_hour < 1 || time_hour > 24) return;
+  let time_hour = Number(args[2]); // Convert String into Number + clean variable
+  if (time_hour < 1 || time_hour > 24) return; // Draw are occuring between 1 hour and 24h
 
-  let choice_emote = [];
+  let choice_emote = []; // Emote listened
 
   for (let i = 1; i <= answers_amount; i++) {
-    await msg_target.react(EMOTE.NB_EMOTE[i - 1]);
-    await choice_emote.push(EMOTE.NB_EMOTE[i - 1]);
+    // Loop around the draw choices
+    await msg_target.react(EMOTE.NB_EMOTE[i - 1]); // React in consequence
+    await choice_emote.push(EMOTE.NB_EMOTE[i - 1]); // Update the choice emote listener
   }
 
-  let correctEmote = EMOTE.NB_EMOTE[answer_correct - 1];
+  let correctEmote = EMOTE.NB_EMOTE[answer_correct - 1]; // Setup the good answer
 
   const filter = (reaction, user) => {
+    // [Emote => EmoteListened]
     return choice_emote.includes(reaction.emoji.name);
   };
 
   const collector = await msg_target.createReactionCollector({
     filter,
-    time: 1000 * 60 * 60 * time_hour,
+    time: 1000 * 60 * 60 * time_hour, // Hour * Argument
   });
 
   await collector.on("collect", (reaction, full_user) => {
-    if (full_user.bot) return;
+    if (full_user.bot) return; // Not listen to bot
+    // Check if user already voted
     for (element of reaction.message.reactions.cache) {
+      // Loop all around the reactions of the message
       if (element[0] != reaction.emoji.name) {
+        // Not check the new vote
         reaction.message.reactions
           .resolve(element[0])
-          .users.remove(full_user.id);
+          .users.remove(full_user.id); // Remove the past vote
       }
     }
   });
 
   collector.on("end", async (collected, reason) => {
-    let msg_target_updated = await msg.channel.messages.fetch(id); // Find the message to work with
-    let finalUsers = [];
-    if (!msg_target_updated) return;
+    let msg_target_updated = await channel.messages.fetch(id); // Find the message to work with
+    let finalUsers = []; // Final winners array
+    if (!msg_target_updated) return; // If msg get deleted during that lapse of time
     for (element of msg_target_updated.reactions.cache) {
+      // Loop all around the final reactions
       if (element[0] === correctEmote) {
-        let array_correctUsers = await element[1].users.cache.map((u) => u);
+        // Only work with the users who finded the good answer
+        let array_correctUsers = await element[1].users.cache.map((u) => u); // Map to Array
         for (u in array_correctUsers) {
+          // Bot safe
           if (!array_correctUsers[u].bot) {
-            await finalUsers.push(array_correctUsers[u]);
+            await finalUsers.push(array_correctUsers[u]); // Final push to array
           }
         }
       }
     }
 
     if (finalUsers.length != 0) {
-      let winner = finalUsers[Math.floor(Math.random() * finalUsers.length)];
+      // If at least one user voted the good answer
+      let winner = finalUsers[Math.floor(Math.random() * finalUsers.length)]; // RANDOM PICK
 
-      msg.channel.send(
+      channel.send(
         `Le gagnant est ${winner} en ayant choisi la réponse ${correctEmote} ! Bravo :D`
-      );
+      ); // Winner message annonce
     } else {
-      msg.channel.send("Personne n'a trouvé la bonne réponse !");
+      channel.send("Personne n'a trouvé la bonne réponse !"); // Empty Message annonce
     }
   });
 };

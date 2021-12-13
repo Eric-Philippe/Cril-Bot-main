@@ -16,7 +16,10 @@
   "GIF": {
     "ENTRY_GIF": "https://cdn.discordapp.com/attachments/579303130886569984/913426387401052240/screen-capture_online-video-cutter.com.gif",
     "FICHES_MOODLE_GIF": "https://cdn.discordapp.com/attachments/739553949199106158/914788681934602270/screen-capture_online-video-cutter.com.gif",
-    "RESACRIL_GIF": "https://cdn.discordapp.com/attachments/739553949199106158/914826761051705364/screen-capture_online-video-cutter.com_1.gif"
+    "RESACRIL_GIF": "https://cdn.discordapp.com/attachments/739553949199106158/914826761051705364/screen-capture_online-video-cutter.com_1.gif",
+    "DISCORD_PHONE": "https://cdn.discordapp.com/attachments/739553949199106158/919008368197238824/phone.gif",
+    "DISCORD_NAV": "https://cdn.discordapp.com/attachments/739553949199106158/919008369178730526/nav.gif",
+    "DISCORD_APP": "https://cdn.discordapp.com/attachments/739553949199106158/919008368738316308/app.gif"
   },
   "IMG": {
     "RULES_LOGO": "https://cdn.discordapp.com/attachments/477449962020405268/910794044186173471/pngegg.png",
@@ -78,6 +81,9 @@
       "772820470277210122"
     ],
     "REAC_ROLE": "918073952759349328"
+  },
+  "VOCALS": {
+    "JUST_CHATTING": "821723322181484574"
   },
   "CATEGORY": {
     "ENTRY": "910515893853900801",

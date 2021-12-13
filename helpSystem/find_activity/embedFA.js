@@ -1,4 +1,4 @@
-let Discord = require("discord.js");
+const Discord = require("discord.js");
 
 let { SERVER, CHANNELS, IMG, EMOTE, IUT } = require("../../ressources.json");
 

@@ -177,7 +177,7 @@ module.exports = class AnswerZero {
   }
 
   /**
-   *  Return the embed for the activity finder assistanc
+   *  Return the embed for the activity finder assistance
    *
    * @param {Discord.Message} msg
    * @param {Boolean} isHelp
@@ -271,7 +271,7 @@ module.exports = class AnswerZero {
       .setDescription(msg.content)
       .setThumbnail(msg.author.avatarURL())
       .setTimestamp()
-      .setTitle(`${msg.author.username} connait une absence passée !.`);
+      .setTitle(`${msg.author.username} connait une absence passée !`);
 
     msg.channel.send(`||<@&${ROLES.MOD_ROLES[0]}>||`);
     msg.channel.send({ embeds: [embedPastA] });

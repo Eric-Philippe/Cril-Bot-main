@@ -35,7 +35,7 @@ module.exports = class Miscellanous {
       .setColor(COLOR.MAIN_COLOR)
       .addField("📉 - Résultat : ", "``" + String(result) + "``");
 
-    msg.reply({ embeds: [embed] });
+    msg.channel.send({ embeds: [embed] });
   }
 
   /**
@@ -167,7 +167,7 @@ module.exports = class Miscellanous {
         .setImage(Results[0].media[0].gif.url)
         .setColor("#6f4e37")
         .setTitle("A coffee for you <3");
-      msg.reply({ embeds: [embed] }); // Send the embed
+      msg.channel.send({ embeds: [embed] }); // Send the embed
     });
   }
 

@@ -29,4 +29,5 @@ module.exports.cmdGrabber = function (msg) {
       );
     }
   }
+  msg.delete();
 };

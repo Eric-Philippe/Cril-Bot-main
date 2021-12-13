@@ -34,6 +34,4 @@ module.exports.topicChannelMention = async function (msg) {
 
   await msg.channel.send(`||<@&${mention_role.id}>||`); // Send the mention
   await msg.channel.send({ embeds: [embed] }); // Send the content embed
-
-  await msg.delete(); // Clear the input msg
 };

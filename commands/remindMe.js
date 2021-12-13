@@ -145,8 +145,6 @@ module.exports = class createReminderObject {
 
     let users_id = [msg.author.id]; // Array of user who'll receive the reminder
 
-    msg.delete(); // Clear the input message
-
     await insertSQL({ target_date, current_date, remind, users_id }); // Add the Reminder object to the SQL Databse
 
     // Validation Embed

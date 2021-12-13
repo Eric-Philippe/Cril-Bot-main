@@ -1,20 +1,22 @@
-require("require-sql");
-
 const { client } = require("./utils/client"); //Client object
-const { con } = require("./utils/mysql");
+const { con } = require("./utils/mysql"); // Database Connexion
 
 const { TOKEN } = require("./token.json"); // ¨Private token
 const { PREFIX } = require("./config.json"); // Prefix
 
+// ############ Self Independant ##############
+const Reminder = require("./commands/remindMe"); // RemindMe SelfIncrement
+
+// ############ All Messages ##################
 const { cmdGrabber } = require("./commands/commandsGrabber"); // Manager / Launcher for the commands
+const chatBot = require("./helpSystem/chatBot"); // Chat Bot Help Support
+
+// ############ Member Add Update #############
 const Entry = require("./entry/entry"); // Manager for the entry system
 
-const { pollRequest } = require("./commands/poll");
-const Reminder = require("./commands/remindMe");
-
-const chatBot = require("./helpSystem/chatBot");
-
-const { reactionRole } = require("./pluginEmbed");
+// ############ Reaction Update ###############
+const { pollRequest } = require("./commands/poll"); // Poll Update
+const { reactionRole } = require("./pluginEmbed"); // ReactionRole Message
 
 /** Wake up on ready state */
 client.on("ready", async () => {
@@ -34,11 +36,7 @@ client.on("messageCreate", async (msg) => {
   if (msg.content.startsWith(PREFIX)) {
     cmdGrabber(msg);
   } else {
-    try {
-      new chatBot(msg);
-    } catch (err) {
-      console.log(err);
-    }
+    new chatBot(msg);
   }
 });
 
@@ -47,7 +45,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
   if (user.bot) return;
   let msg = await reaction.message.channel.messages.fetch(reaction.message.id);
   if (!msg.author.bot) return;
-  reactionRole(reaction, user);
+  await reactionRole(reaction, user);
   await pollRequest(reaction, user, true);
 });
 
@@ -56,7 +54,7 @@ client.on("messageReactionRemove", async (reaction, user) => {
   if (user.bot) return;
   let msg = await reaction.message.channel.messages.fetch(reaction.message.id);
   if (!msg.author.bot) return;
-  reactionRole(reaction, user);
+  await reactionRole(reaction, user);
   await pollRequest(reaction, user, false);
 });
 
