@@ -1,6 +1,4 @@
 const Discord = require("discord.js");
-const { max } = require("moment");
-const { NULL } = require("mysql/lib/protocol/constants/types");
 
 const embedDS = require("./embedDS");
 
@@ -26,11 +24,15 @@ module.exports = class DiscordVoiceSupport {
   }
 
   async __init__() {
-    let array_components = await embedDS.plateformEmbed(msg);
+    let array_components = await embedDS.plateformEmbed(this.msg);
     this.current_embed = array_components[0];
     await array_components.shift();
     this.emote_array = array_components;
-    await this.__editEmbed__();
+    this.msg_embed.delete();
+    this.msg_embed = await this.msg.channel.send({
+      embeds: [this.current_embed],
+    });
+    this.__updateReac__();
     await this.reactionCollector(this.msg_embed, this.emote_array, this.user);
   }
 
@@ -55,7 +57,7 @@ module.exports = class DiscordVoiceSupport {
       max: 1,
     });
 
-    collector.on("collect", (reaction, user) => {
+    collector.on("collect", async (reaction, user) => {
       await this.emoteSelector(reaction.emoji.name);
       await this.__embedSelector__();
       this.__editEmbed__();
@@ -79,12 +81,13 @@ module.exports = class DiscordVoiceSupport {
    */
   async __updateReac__() {
     this.msg_embed.reactions.removeAll();
-    for (let i = 0; i < this.array_components.length; i++) {
+    for (let i = 0; i < this.emote_array.length; i++) {
       await this.msg_embed.react(this.emote_array[i]);
     }
   }
 
   __embedSelector__() {
+    console.log(this.page);
     let array_components;
     switch (this.page) {
       case 1:
@@ -93,8 +96,11 @@ module.exports = class DiscordVoiceSupport {
     }
 
     this.current_embed = array_components[0];
-    array_components.shift();
-    this.emote_array = array_components;
+    if (array_components[1]) {
+      array_components.shift();
+      this.emote_array = array_components;
+    }
+    this.emote_array = [];
   }
 
   /**

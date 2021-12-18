@@ -4,6 +4,7 @@ const Discord = require("discord.js");
 const AnswerZero = require("./answerLevelZero");
 const Find_Activty = require("./find_activity/find_activity");
 const Unsubscribe = require("./unsubscribe/unsubscribe");
+const DiscordVoiceSupport = require("./discord_voice/main");
 
 // Helper import
 const { questionPicker } = require("./questionPicker");
@@ -103,7 +104,8 @@ module.exports = class chatBot {
         level = 2;
         break;
       case "DISCORD_CONNECT":
-        //this.msg_embed = await AnswerZero.discord_assist(this.msg, true);
+        this.msg_embed = await AnswerZero.discord_assist(this.msg, true);
+        this.func = DiscordVoiceSupport;
         level = 2;
         break;
     }
