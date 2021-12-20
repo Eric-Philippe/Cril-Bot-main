@@ -348,7 +348,7 @@ module.exports.RulesEmbed = function (member) {
     )
     .addField(
       "Info",
-      "Toutes ces infos sont disponibles plus précisément grâce à la commande ``!help``"
+      "Des infos supplémentaires sont disponibles plus précisément grâce à la commande ``!help``"
     )
     .setAuthor("Cril", member.guild.iconURL())
     .setThumbnail(IMG.RULES_LOGO)

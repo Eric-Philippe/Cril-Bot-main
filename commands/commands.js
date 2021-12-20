@@ -159,6 +159,15 @@ const commands = {
     ],
   },
 
+  Rules: {
+    name: "Rules",
+    desc: "Envoie le cadre avec toutes les règles",
+    func: manualLauncherHelp.rules_embed,
+    perm: [1],
+    format: "Rules",
+    exemple: [["Rules", "Envoyer un cadre avec les règles"]],
+  },
+
   Moodle: {
     name: "Moodle",
     desc: "Envoie un lien Moodle",
