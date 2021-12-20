@@ -56,10 +56,18 @@ module.exports = class AnswerZero {
     let embedMoodle = new Discord.MessageEmbed()
       .setTitle("Lien vers moodle")
       .setColor("#f98012")
-      .setURL(IUT.MOODLE_LINK)
-      .setDescription(IUT.MOODLE_LINK)
       .setImage(IMG.ENGLISH_CRIL_LOGO)
       .setThumbnail(IMG.MOODLE_LOGO)
+      .addField(
+        "🇪🇸 | Espagnol : ",
+        `[Lien cliquable vers Moodle](${IUT.MOODLE_LINK_ESP})`,
+        true
+      )
+      .addField(
+        "🇬🇧 | Anglais : ",
+        `[Lien cliquable vers Moodle](${IUT.MOODLE_LINK_ANG})`,
+        true
+      )
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, embedMoodle, isHelp);
@@ -97,9 +105,18 @@ module.exports = class AnswerZero {
     let ficheEmbed = new Discord.MessageEmbed()
       .setTitle("Lien vers les fiches")
       .setColor("#18b5a0")
-      .setDescription(IUT.MOODLE_LINK)
       .setImage(GIF.FICHES_MOODLE_GIF)
       .setThumbnail(IMG.MOODLE_LOGO)
+      .addField(
+        "🇪🇸 | Espagnol : ",
+        `[Lien cliquable vers Moodle](${IUT.MOODLE_LINK_ESP})`,
+        true
+      )
+      .addField(
+        "🇬🇧 | Anglais : ",
+        `[Lien cliquable vers Moodle](${IUT.MOODLE_LINK_ANG})`,
+        true
+      )
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL());
 
     return await AnswerZero.__embedSend__(msg, ficheEmbed, isHelp);

@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 
+const manualLauncherHelp = require("../manualLauncher");
 const embedFA = require("./embedFA");
 /**
  * Activity Finder Class
@@ -9,12 +10,15 @@ module.exports = class Find_Activity {
    *
    * @param {Discord.Message} msg
    * @param {Discord.Message} msg_embed
+   * @param {Discord.User} user
    */
-  constructor(msg, msg_embed) {
+  constructor(msg, msg_embed, user) {
     this.msg = msg;
     this.msg_embed = msg_embed;
+    this.user = user || msg.author; // Can be use by the author or a targeted command
     this.current_embed = null; // Mother Embed
     this.array_component = null; // Stuff needed wich comes with the embed
+    this.complement_embed = null; // Additionnal Embed
     this.page = 0; // Current page
     this.__init__();
   }
@@ -23,6 +27,12 @@ module.exports = class Find_Activity {
    * Initiate the array componenents, the embedMessage and the reaction that comes with
    */
   async __init__() {
+    if (!this.msg_embed && this.user === this.msg.author)
+      // If ManualLaunch without a target
+      return this.msg.delete();
+    if (!this.msg_embed && this.user != this.msg.author) {
+      this.msg.channel.send(`||<@${this.user.id}>||`);
+    }
     this.array_component = await embedFA.main_page(this.msg); // Initiate the first Embed
     if (this.msg_embed) this.msg_embed.delete(); // Clear the past msg_embed (Picker parent)
     this.msg_embed = await this.msg.channel.send({
@@ -57,6 +67,7 @@ module.exports = class Find_Activity {
         break;
       case 1.5:
         this.array_component = await embedFA.coach_Embed(this.msg);
+        this.complement_embed = await manualLauncherHelp.packEmbed(this.msg);
         break;
     }
 
@@ -74,8 +85,7 @@ module.exports = class Find_Activity {
     const filter = (reaction, user) => {
       return (
         // [AuthorId Only, EmojiArrayOnly]
-        user.id === this.msg.author.id &&
-        emote_array.includes(reaction.emoji.name)
+        user.id === this.user.id && emote_array.includes(reaction.emoji.name)
       );
     };
 
@@ -89,6 +99,10 @@ module.exports = class Find_Activity {
       if (reaction.emoji.name === "❌") {
         // Go back to the first page
         this.page = 1;
+        if (this.complement_embed) {
+          this.complement_embed.delete();
+          this.complement_embed = null;
+        }
       } else if (this.page === 1) {
         // Selector of all the under pages
         switch (reaction.emoji.name) {

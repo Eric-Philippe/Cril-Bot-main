@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 
 let { SERVER, CHANNELS, IMG, EMOTE, IUT } = require("../../ressources.json");
+const ACA = CHANNELS.ACTIVITIES_CHANNELS_ANG;
+const ACE = CHANNELS.ACTIVITIES_CHANNELS_ESP;
 
 module.exports = class embedFA {
   /**
@@ -70,33 +72,30 @@ module.exports = class embedFA {
       .setColor("DARK_GOLD")
       .setImage(IMG.CHANNEL_FD_EXEMPLE)
       .setDescription(
-        `${EMOTE.CHECK_EMOTE} | Cliquez sur le lien de l'activité correspondante ! \n Afin d'accéder au vocal de l'activité, **__trouver le channel homonyme__** (qui a le même nom) que celui textuel sur votre gauche !`
+        `${EMOTE.CHECK_EMOTE} | Cliquez sur la partie en __surbrillance bleue__ avec **l'icone '#'** pour accéder au channel désiré \n  Cliquez sur la partie en __surbrillance bleue__ avec **l'icone '🔊'** pour accéder au channel vocal désiré`
       )
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL())
       .addField(
         "🇬🇧 | Anglais : ",
-        `[⭐ Débutant](${vc_link(CHANNELS.ACTIVITIES_CHANNEL_ANG[0])}) \n` +
-          `[⭐⭐ Intérmédiaire](${vc_link(
-            CHANNELS.ACTIVITIES_CHANNEL_ANG[1]
-          )}) \n` +
-          `[⭐⭐⭐ Avancé](${vc_link(CHANNELS.ACTIVITIES_CHANNEL_ANG[2])}) \n` +
-          `[🙋 Tous niveaux 1](${vc_link(
-            CHANNELS.ACTIVITIES_CHANNEL_ANG[3]
-          )}) \n` +
-          `[🙋 Tous niveaux 2](${vc_link(CHANNELS.ACTIVITIES_CHANNEL_ANG[4])})`,
+        `\n **[⭐ Débutant]** : \n <#${ACA.FREE_BEG[0]}> \n <#${ACA.FREE_BEG[1]}> \n\n` +
+          `**[⭐⭐ Intérmédiaire]** : \n <#${ACA.FREE_INT[0]}> \n <#${ACA.FREE_INT[1]}> \n\n` +
+          `**[⭐⭐⭐ Avancé]** : \n <#${ACA.FREE_HARD[0]}> \n <#${ACA.FREE_HARD[1]}> \n\n` +
+          `**[🙋 Tous niveaux 1]** : \n <#${ACA.FREE_ALL1[0]}> \n <#${ACA.FREE_ALL1[1]}> \n\n` +
+          `**[🙋 Tous niveaux 2]** : \n <#${ACA.FREE_ALL2[0]}> \n <#${ACA.FREE_ALL2[1]}> \n\n`,
 
         true
       )
       .addField(
         "🇪🇸 | Espagnol : ",
-        `[⭐ Débutant](${vc_link(CHANNELS.ACTIVITIES_CHANNEL_ESP[0])}) \n` +
-          `[⭐⭐ Intérmédiaire](${vc_link(
-            CHANNELS.ACTIVITIES_CHANNEL_ESP[1]
-          )}) \n` +
-          `[⭐⭐⭐ Avancé](${vc_link(CHANNELS.ACTIVITIES_CHANNEL_ESP[2])}) \n` +
-          `[🙋 Tous niveaux 1](${vc_link(CHANNELS.ACTIVITIES_CHANNEL_ESP[3])})`,
+        `\n **[⭐ Débutant]** : \n <#${ACE.FREE_BEG[0]}> \n <#${ACE.FREE_BEG[1]}> \n\n` +
+          `**[⭐⭐ Intérmédiaire]** : \n <#${ACE.FREE_INT[0]}> \n <#${ACE.FREE_INT[1]}> \n\n` +
+          `**[⭐⭐⭐ Avancé]** : \n <#${ACE.FREE_HARD[0]}> \n <#${ACE.FREE_HARD[1]}> \n\n` +
+          `**[🙋 Tous niveaux 1]** : \n <#${ACE.FREE_ALL[0]}> \n <#${ACE.FREE_ALL[1]}>`,
 
         true
+      )
+      .setFooter(
+        "Pour ceux sur téléphone, merci de chercher les noms correspondants sur les channels à votre gauche."
       );
     return [freeDisEmbed, "❌"];
   }
@@ -118,12 +117,12 @@ module.exports = class embedFA {
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL())
       .addField(
         "🇪🇸 | Espagnol : ",
-        `[🦸 Thématique](${vc_link(CHANNELS.ACTIVITIES_CHANNEL_ESP[5])})`,
+        `\n **[🦸 Thématique]** : \n <#${ACE.THEME[0]}> \n <#${ACE.THEME[1]}> \n\n`,
         true
       )
       .addField(
         "🇬🇧 | Anglais : ",
-        `[🦸 Thématique](${vc_link(CHANNELS.ACTIVITIES_CHANNEL_ANG[5])})`,
+        `\n **[🦸 Thématique]** : \n <#${ACA.THEME[0]}> \n <#${ACA.THEME[1]}>`,
         true
       );
 
@@ -145,16 +144,16 @@ module.exports = class embedFA {
       )
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL())
       .addField(
-        "🇪🇸 | Espagnol : ",
-        `[🃏 Jeux](${vc_link(CHANNELS.ACTIVITIES_CHANNEL_ESP[6])})`,
+        "🇬🇧 | Anglais : ",
+        `\n **[🃏 Jeux]** : \n <#${ACA.GAME1[0]}> \n <#${ACA.GAME1[1]}> \n\n` +
+          `**[🃏 Jeux2]** : \n <#${ACA.GAME2[0]}> \n <#${ACA.GAME2[1]}> \n\n`,
         true
       )
       .addField(
-        "🇬🇧 | Anglais : ",
-        `[🃏 Jeux](${vc_link(CHANNELS.ACTIVITIES_CHANNEL_ANG[6])})`,
+        "🇪🇸 | Espagnol : ",
+        `\n **[🃏 Jeux]** : \n <#${ACE.GAME[0]}> \n <#${ACE.GAME[1]}>`,
         true
       );
-
     return [gamesEmbed, "❌"];
   }
 
@@ -174,16 +173,12 @@ module.exports = class embedFA {
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL())
       .addField(
         "🇪🇸 | Espagnol : ",
-        `[🎮 Conférences-Stream](${vc_link(
-          CHANNELS.ACTIVITIES_CHANNEL_ESP[7]
-        )})`,
+        `\n **[🎮 Conférences-Stream]** : \n <#${ACE.STREAM[0]}> \n <#${ACE.STREAM[1]}> \n\n`,
         true
       )
       .addField(
         "🇬🇧 | Anglais : ",
-        `[🎮 Conférences-Stream](${vc_link(
-          CHANNELS.ACTIVITIES_CHANNEL_ANG[7]
-        )})`,
+        `\n **[🎮 Conférences-Stream]** : \n <#${ACA.STREAM[0]}> \n <#${ACA.STREAM[1]}>`,
         true
       );
 
@@ -206,32 +201,16 @@ module.exports = class embedFA {
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL())
       .addField(
         "🥇 Première fois : ",
-        `[🎓 Première Séance Coaching](${vc_link(
-          CHANNELS.ACTIVITIES_CHANNEL_ESP[8]
-        )})`,
+        `\n **[🎓 Première Séance Coaching]** : \n <#${ACA.COACHING1[0]}> \n\n`,
         true
       )
       .addField(
         "📌 Habitué(e) : ",
-        `[🎓 Guidage Coaching A](${vc_link(
-          CHANNELS.ACTIVITIES_CHANNEL_ANG[9]
-        )}) \n ` +
-          `[🎓 Guidage Coaching B](${vc_link(
-            CHANNELS.ACTIVITIES_CHANNEL_ANG[10]
-          )}) \n `,
+        `\n **[🎓 Guidage Coaching A]** : \n <#${ACA.COACHING2[0]}> \n\n ` +
+          `**[🎓 Guidage Coaching B]** : \n <#${ACA.COACHING3[0]}> \n `,
         true
       );
 
     return [coachEmbed, "❌"];
   }
-};
-
-/**
- * Return valid VoiceChat URL
- *
- * @param {String} id
- * @returns {String} link
- */
-const vc_link = function (id) {
-  return `https://discordapp.com/channels/${SERVER.ID}/${id}`;
 };

@@ -4,6 +4,8 @@ const Reminder = require("./remindMe");
 const { resetSQL } = require("../SQL/RESET/resetSQL");
 const Miscellanous = require("./miscellanous");
 const AnswerZero = require("../helpSystem/answerLevelZero");
+const manualLauncherHelp = require("../helpSystem/manualLauncher");
+const aliasTxt = require("./aliasTxt");
 const { topicChannelMention } = require("./topicChannelMention");
 const { addReacRole, addTS } = require("../pluginEmbed");
 
@@ -103,31 +105,28 @@ const commands = {
     ],
   },
 
-  embed: {
-    name: "embed",
-    desc: "Créateur d'embed",
-    func: Miscellanous.createEmbed,
-    perm: [2],
-    format: 'embed <"t Titre t"> <"img URL img"> [Contenu du cadre]',
+  dice: {
+    name: "dice",
+    desc: "Lancer un dé",
+    func: Miscellanous.dice,
+    perm: [0],
+    format: "dice <Nombre de Face>",
     exemple: [
-      ["embed Salut", "Envoi un embed avec pour description 'Salut'"],
-      [
-        'embed "t Je suis un Titre t" "img URL img" Salut je suis une description !',
-        "Envoi un embed avec comme titre 'Je suis un titre', avec pour image l'URL' et comme description 'Salut je suis une description'",
-      ],
+      ["dice", "Lance un dé à 6 faces"],
+      ["dice 64", "Lancé un dé de 64 faces"],
     ],
   },
 
-  topic: {
-    name: "topic",
-    desc: "Mentionne le rôle correspondant au topic du channel",
-    func: topicChannelMention,
-    perm: [2],
-    format: "topic [Contenu du message à envoyer]",
+  remindme: {
+    name: "remindme",
+    desc: "Rappel",
+    func: Reminder.remindMe,
+    perm: [0],
+    format: "remindme [DD/MM/YYYY] [HHhMM] [Rappel]",
     exemple: [
       [
-        'topic Vive les livres (Dans le channel "📚-books")',
-        'Envoie "Vive les livres" avec la mention @bookworm',
+        "remindme 13/05/2022 10h00 Activité Thématique",
+        "Créer un rappel pour le 13 mai 2022 à 10h00 avec pour sujet : 'Activité Thématique'",
       ],
     ],
   },
@@ -139,18 +138,6 @@ const commands = {
     perm: [1],
     format: "coffee",
     exemple: [["coffee", "Envoie un gif de café"]],
-  },
-
-  dice: {
-    name: "dice",
-    desc: "Lancer un dé",
-    func: Miscellanous.dice,
-    perm: [0],
-    format: "dice <Nombre de Face>",
-    exemple: [
-      ["dice", "Lance un dé à 6 faces"],
-      ["dice 64", "Lancé un dé de 64 faces"],
-    ],
   },
 
   poll: {
@@ -178,25 +165,152 @@ const commands = {
     func: AnswerZero.find_moodle,
     perm: [1],
     format: "Moodle <@User>",
+    exemple: [["Moodle", "Envoyer un cadre avec le lien vers Moodle"]],
+  },
+
+  Resacril: {
+    name: "Resacril",
+    desc: "Envoie un lien vers Résacril",
+    func: AnswerZero.find_ResaCril,
+    perm: [1],
+    format: "Resacril <@User>",
+    exemple: [["Resacril", "Envoyer un cadre avec le lien vers Resacril"]],
+  },
+
+  Fiches: {
+    name: "Fiches",
+    desc: "Envoie un lien vers la création de fiche",
+    func: AnswerZero.find_fiche,
+    perm: [1],
+    format: "Fiches <@User>",
     exemple: [
-      ["Moodle", "Envoyer un cadre avec le lien vers Moodle"],
+      ["Fiches", "Envoyer un cadre avec le lien vers la création de fiche"],
+    ],
+  },
+
+  Validation: {
+    name: "Validation",
+    desc: "Envoie un lien vers la validation RésaCril",
+    func: AnswerZero.find_Validation,
+    perm: [1],
+    format: "Validation <@User>",
+    exemple: [
+      ["Validation", "Envoyer un cadre avec le lien vers la création de fiche"],
+    ],
+  },
+
+  Pack: {
+    name: "Pack",
+    desc: "Envoie un lien vers les pack spécifiques Moodle",
+    func: manualLauncherHelp.packEmbed,
+    perm: [1],
+    format: "Pack <@User>",
+    exemple: [
+      ["Pack", "Envoyer un cadre avec le lien vers la création de fiche"],
+    ],
+  },
+
+  FindActivity: {
+    name: "FindActivity",
+    desc: "Envoie la procédure pour trouver les channels d'activités",
+    func: manualLauncherHelp.findChannel,
+    perm: [1],
+    format: "FindActivity <@User>",
+    exemple: [
       [
-        "Moodle @Teluob",
-        "Adresse un cadre avec le lien vers Moodle auprès de l'utilisateur Teluob",
+        "FindActivity @Teluob",
+        "Envoie la procédure auprès de l'utilisateur Teluob pour trouver son channel d'activité",
       ],
     ],
   },
 
-  remindme: {
-    name: "remindme",
-    desc: "Rappel",
-    func: Reminder.remindMe,
-    perm: [0],
-    format: "remindme [DD/MM/YYYY] [HHhMM] [Rappel]",
+  DiscordAs: {
+    name: "DiscordAs",
+    desc: "Envoie la procédure pour corriger les problèmes de vocaux.",
+    func: manualLauncherHelp.discord_assistance,
+    perm: [1],
+    format: "DiscordAs <@User>",
     exemple: [
       [
-        "remindme 13/05/2022 10h00 Activité Thématique",
-        "Créer un rappel pour le 13 mai 2022 à 10h00 avec pour sujet : 'Activité Thématique'",
+        "DiscordAs @Teluob",
+        "Envoie la procédure auprès de l'utilisateur Teluob pour corriger ses problèmes de son",
+      ],
+    ],
+  },
+
+  deb: {
+    name: "deb",
+    desc: "Envoie la template de message de début de parcours à faire.",
+    func: aliasTxt.deb,
+    perm: [1],
+    format: "deb",
+    exemple: [["deb", "Envoie la template du début de parcours à faire."]],
+  },
+
+  debcomm: {
+    name: "debcomm",
+    desc: "Envoie la template de la fiche de début de coaching commentée.",
+    func: aliasTxt.debcomm,
+    perm: [1],
+    format: "debcomm",
+    exemple: [
+      [
+        "debcomm",
+        "Envoie la template de la fiche de début de coaching commentée.",
+      ],
+    ],
+  },
+
+  fcomm: {
+    name: "fcomm",
+    desc: "Envoie la template de la dernière fiche de parcours commentée.",
+    func: aliasTxt.fcomm,
+    perm: [1],
+    format: "fcomm",
+    exemple: [
+      ["fcomm", "Envoie la template de la dernière fiche coaching commentée."],
+    ],
+  },
+
+  newCreneaux: {
+    name: "newCreneaux",
+    desc: "Mentionne les Etudiants puis envoie la template de message de nouveaux crénaux disponibles.",
+    func: aliasTxt.newCreneaux,
+    perm: [2],
+    format: "newCreneaux",
+    exemple: [
+      [
+        "newCreneaux",
+        "Mentionne les Etudiants puis envoie la template de message de nouveaux crénaux disponibles.",
+      ],
+    ],
+  },
+
+  embed: {
+    name: "embed",
+    desc: "Créateur d'embed",
+    func: Miscellanous.createEmbed,
+    perm: [2],
+    format: 'embed <"t Titre t"> <"img URL img"> [Contenu du cadre]',
+    exemple: [
+      ["embed Salut", "Envoi un embed avec pour description 'Salut'"],
+      [
+        'embed "t Je suis un Titre t" "img URL img" Salut je suis une description !',
+        "Envoi un embed avec comme titre 'Je suis un titre', avec pour image l'URL' et comme description 'Salut je suis une description'",
+      ],
+    ],
+  },
+
+  topic: {
+    name: "topic",
+    desc: "Mentionne le rôle correspondant au topic du channel",
+    func: topicChannelMention,
+    perm: [2],
+    format: "topic [Contenu du message à envoyer]",
+    exemple: [
+      [
+        'topic Vive les livres (Dans le channel "📚-books")',
+        'Envoie "Vive les livres" avec la mention @bookworm',
       ],
     ],
   },

@@ -6,6 +6,8 @@ const {
   template2,
   template3,
   template4,
+  DMEmbed,
+  RulesEmbed,
 } = require("./entryTemplate"); // All the embed for the system
 
 const { EMOTE, CATEGORY, CHANNELS, ROLES, IUT } = require("../ressources.json"); // Ressources required for the system
@@ -442,7 +444,11 @@ module.exports = class Entry {
       if (!new_channel) return;
       await new_channel.send(`Bienvenue ${this.user} !`);
 
-      await this.user.send("Des info's cools");
+      let rules_embed = await RulesEmbed(this.member);
+      let dm_embed = await DMEmbed(this.member);
+      await this.user.send({
+        embeds: [rules_embed, dm_embed],
+      });
 
       await this.channel.delete();
     }, 1000);
