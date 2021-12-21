@@ -25,13 +25,6 @@ module.exports.ClientOptions = {
     //Discord.Intents.FLAGS.DIRECT_MESSAGE_TYPING
   ],
   presence: {
-    activities: [
-      {
-        name: "you",
-        type: "WATCHING",
-        url: "https://www.youtube.com/watch?v=SZmADlOhkQk",
-      },
-    ],
     status: "dnd",
   },
 };

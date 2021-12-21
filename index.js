@@ -6,6 +6,7 @@ const { PREFIX } = require("./config.json"); // Prefix
 
 // ############ Self Independant ##############
 const Reminder = require("./commands/remindMe"); // RemindMe SelfIncrement
+const { statusEdit } = require("./utils/status");
 
 // ############ All Messages ##################
 const { cmdGrabber } = require("./commands/commandsGrabber"); // Manager / Launcher for the commands
@@ -21,6 +22,8 @@ const { reactionRole } = require("./pluginEmbed"); // ReactionRole Message
 /** Wake up on ready state */
 client.on("ready", async () => {
   console.log(`Logged into: ${client.user.tag}`);
+
+  statusEdit();
 
   con.connect(function (err) {
     if (err) console.log(err);
