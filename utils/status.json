@@ -36,6 +36,13 @@
     ["$ construire sa propre ps5 parce que ça suffit maintenant", 1],
     ["$ ranger sa bibliothèque par couleurs", 1],
     ["$ plier son linge", 1],
-    ["$ rire à la blague de $", 2]
+    ["$ rire à la blague de $", 2],
+    ["$ ne pas rire à la blague de $, en même temps ekke n'était pas drôle", 2],
+    ["$ chercher les dragon ball", 1],
+    ["$ révéler à Luke qu'il est son fils", 1],
+    ["$ monter dans la DeLorean de $", 2],
+    ["$ faire de l'aqua poney", 1],
+    ["$ pédaler dans la semoule", 1],
+    ["$ se demander ce que $ et $ font", 3]
   ]
 }
