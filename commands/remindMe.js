@@ -48,7 +48,7 @@ module.exports = class createReminderObject {
     //  Check if all argument exists
     if (!args[1]) return msg.reply("Merci d'entrer une date !");
     if (!args[2]) return msg.reply("Merci d'entrer une heure !");
-    if (!args[3]) return msg.reply("Merci d'entrer une raison !");
+    if (!args[3]) return msg.reply("Merci d'entrer un intitulé !");
 
     // === Date verification ===
     let date = args[1];
@@ -93,7 +93,7 @@ module.exports = class createReminderObject {
       return msg.reply("Merci d'entrer un jour valide !");
     // Year Field overrun
     if (year < current_year || year > current_year + 2)
-      return msg.reply("Merci d'entre une année valide !");
+      return msg.reply("Merci d'entrer une année valide !");
 
     // === Time verification ===
     let time = args[2];
@@ -138,7 +138,7 @@ module.exports = class createReminderObject {
 
     // Check if date is before the current date
     if (target_date < current_date)
-      return msg.reply("Merci d'entrer une date futur !");
+      return msg.reply("Merci d'entrer une date future !");
     //*  Checking & validation of the arguments |END]*/
 
     let remind = args.slice(3).join(" "); // Reminder title

@@ -15,7 +15,7 @@ module.exports = class embedDS {
       .setTitle("Merci de choisir la plateforme sur laquelle vous êtes !")
       .setColor(D_COLOR)
       .setDescription(
-        `${EMOTE.CHECK_EMOTE} | Merci de **__cliquer sur la réaction__** correspondant à la plateforme sur laquelle vous êtes sur Discord.`
+        `${EMOTE.CHECK_EMOTE} | Merci de **__cliquer sur la réaction__** correspondante à la plateforme sur laquelle vous êtes sur Discord.`
       )
       .addField(
         "Plateformes : ",
@@ -37,7 +37,7 @@ module.exports = class embedDS {
       .setTitle("Quel est votre soucis ?")
       .setColor(D_COLOR)
       .setDescription(
-        `${EMOTE.CHECK_EMOTE} | Merci de **__cliquer sur la réaction__** correspondant à votre soucis actuel.`
+        `${EMOTE.CHECK_EMOTE} | Merci de **__cliquer sur la réaction__** correspondante à votre soucis actuel.`
       )
       .addField(
         "Problème : ",
@@ -72,12 +72,12 @@ module.exports = class embedDS {
       case "APP":
         url = GIF.DISCORD_APP;
         txt =
-          "Passez votre curseur sur la liste au milieu à gauche, puis descendez jusque dans le channel  vocal désiré !";
+          "Passez votre curseur sur la liste au milieu à gauche, puis descendez jusque dans le channel vocal désiré !";
         break;
       case "NAV":
         url = GIF.DISCORD_NAV;
         txt =
-          "Passez votre curseur sur la liste au milieu à gauche, puis descendez jusque dans le channel  vocal désiré !";
+          "Passez votre curseur sur la liste au milieu à gauche, puis descendez jusque dans le channel vocal désiré !";
         break;
     }
 
@@ -179,7 +179,7 @@ module.exports = class embedDS {
         break;
       case "NAV":
         txt =
-          "Avez-vous bien connecté des écouteurs sur l'ordinateur ? Sont-ils encore fonctionnels ? Avez-vous authorisé Discord à utiliser vos périphériques ? Sinon, relancez Discord";
+          "Avez-vous bien connecté des écouteurs sur l'ordinateur ? Sont-ils encore fonctionnels ? Avez-vous autorisé Discord à utiliser vos périphériques ? Sinon, relancez Discord";
         url = IMG.DISCORD_AUTH_SOUND;
         break;
     }

@@ -40,13 +40,13 @@ module.exports.template0 = function (member) {
     .setColor(COLOR.MAIN_COLOR)
     .setTitle(`Bienvenue ${member.user.tag} !`)
     .setDescription(
-      "Bienvenue sur le serveur du Cril ! Tu **suivra** les étapes suivantes pour valider ton entrée dans ce dernier !"
+      "Bienvenue sur le serveur du Cril ! Tu **suivras** les étapes suivantes pour valider ton entrée dans ce dernier !"
     )
-    .addField("Etape 1", "Entrée de ton prénom et de ton nom !")
+    .addField("Etape 1 (Prochaine)", "Entrée de ton prénom et de ton nom !")
     .addField("Etape 2", "Lecture du règlement")
     .addField(
       "Etape 3",
-      "Amorce des premières manipulations nécessaire pour le Cril !"
+      "Amorce des premières manipulations nécessaires pour le Cril !"
     )
     .setAuthor("Cril", member.guild.iconURL())
     .setThumbnail(member.user.avatarURL())
@@ -114,7 +114,7 @@ module.exports.template1 = function (
     .setAuthor("Cril", msg.guild.iconURL())
     .setThumbnail(msg.author.avatarURL())
     .setDescription(
-      `${EMOTE.CHECK_EMOTE} ${txt_instruction} \n | Revenez sur le champs grâce précédent grâce au bouton en bas !`
+      `${EMOTE.CHECK_EMOTE} ${txt_instruction} \n | Revenez sur le champ précédent grâce au bouton en bas !`
     )
     .addField("Prénom", "``" + firstname_ + "``\n", true)
     .addField("Nom", "``" + secondname_ + "``\n", true)
@@ -267,8 +267,8 @@ module.exports.template4 = function (member, page) {
     .setDescription(IUT.YT_LINK)
     .setURL(IUT.YT_LINK)
     .addField(
-      "Info",
-      "Toutes ces infos sont disponibles plus précisément grâce à la commande ``!help``"
+      "Info' : ",
+      "Toutes ces informations sont disponibles plus précisément grâce à la commande ``!help``"
     )
     .setAuthor("Cril", member.guild.iconURL())
     .setThumbnail(IMG.RULES_LOGO)
@@ -289,15 +289,15 @@ module.exports.template4 = function (member, page) {
 module.exports.DMEmbed = function (member) {
   let embed = new Discord.MessageEmbed()
     .setColor(COLOR.SECOND_COLOR[2])
-    .setTitle(`Lien utiles !`)
+    .setTitle(`Liens utiles !`)
     .addField("Lien vers RésaCril", IUT.RESACRIL_LINK)
     .addField("Lien vers Moodle Anglais", IUT.MOODLE_LINK_ANG)
     .addField("Lien vers Moodle Espagnol", IUT.MOODLE_LINK_ESP)
     .addField("Lien vers la chaine de tuto", IUT.YT_LINK)
     .addField("Email d'assistance : ", "cril.langues@iut-tlse3.fr")
     .addField(
-      "Info",
-      "Toutes ces infos sont disponibles plus précisément grâce à la commande ``!help``"
+      "Info' : ",
+      "Toutes ces informations sont disponibles plus précisément grâce à la commande ``!help``"
     )
     .setAuthor("Cril", member.guild.iconURL())
     .setTimestamp();

@@ -112,7 +112,7 @@ module.exports = class embedFA {
       .setColor("DARK_GOLD")
       .setImage(IMG.CHANNEL_TD_EXEMPLE)
       .setDescription(
-        `${EMOTE.CHECK_EMOTE} | Cliquez sur le lien de l'activité correspondante ! \n Afin d'accéder au vocal de l'activité, **__trouver le channel homonyme__** (qui a le même nom) que celui textuel sur votre gauche !`
+        `${EMOTE.CHECK_EMOTE} | Cliquez sur la partie en __surbrillance bleue__ avec **l'icone '#'** pour accéder au channel désiré \n  Cliquez sur la partie en __surbrillance bleue__ avec **l'icone '🔊'** pour accéder au channel vocal désiré`
       )
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL())
       .addField(
@@ -140,7 +140,7 @@ module.exports = class embedFA {
       .setColor("DARK_GOLD")
       .setImage(IMG.CHANNEL_GAMES_EXEMPLE)
       .setDescription(
-        `${EMOTE.CHECK_EMOTE} | Cliquez sur le lien de l'activité correspondante ! \n Afin d'accéder au vocal de l'activité, **__trouver le channel homonyme__** (qui a le même nom) que celui textuel sur votre gauche !`
+        `${EMOTE.CHECK_EMOTE} | Cliquez sur la partie en __surbrillance bleue__ avec **l'icone '#'** pour accéder au channel désiré \n  Cliquez sur la partie en __surbrillance bleue__ avec **l'icone '🔊'** pour accéder au channel vocal désiré`
       )
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL())
       .addField(
@@ -168,7 +168,7 @@ module.exports = class embedFA {
       .setColor("DARK_GOLD")
       .setImage(IMG.CHANNEL_STREAM_EXMEPLE)
       .setDescription(
-        `${EMOTE.CHECK_EMOTE} | Cliquez sur le lien de l'activité correspondante ! \n Afin d'accéder au vocal de l'activité, **__trouver le channel homonyme__** (qui a le même nom) que celui textuel sur votre gauche !`
+        `${EMOTE.CHECK_EMOTE} | Cliquez sur la partie en __surbrillance bleue__ avec **l'icone '#'** pour accéder au channel désiré \n  Cliquez sur la partie en __surbrillance bleue__ avec **l'icone '🔊'** pour accéder au channel vocal désiré`
       )
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL())
       .addField(
@@ -196,7 +196,7 @@ module.exports = class embedFA {
       .setColor("DARK_GOLD")
       .setImage(IMG.CHANNEL_COACH_EXEMPLE)
       .setDescription(
-        `${EMOTE.CHECK_EMOTE} | Cliquez sur le lien de l'activité correspondante ! \n S'il s'agit de votre **__première séance__**, merci de séléctionner le channel correspondant ainsi que de vous assurer que votre [__fiche début de parcours__](${IUT.MOODLE_LINK}) est bien complétée. \n Assurez-vous également de lire les messages épinglés en haut à droite ! \n`
+        `${EMOTE.CHECK_EMOTE} | Cliquez sur la partie en __surbrillance bleue__ avec **l'icone '#'** pour accéder au channel désiré \n  Cliquez sur la partie en __surbrillance bleue__ avec **l'icone '🔊'** pour accéder au channel vocal désiré`
       )
       .setAuthor(`Demandé par ${msg.author.username}`, msg.author.avatarURL())
       .addField(

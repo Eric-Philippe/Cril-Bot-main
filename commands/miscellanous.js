@@ -6,7 +6,7 @@ const Tenor = require("tenorjs").client({
   Filter: "medium",
   Locale: "en_US",
   MediaFilter: "basic",
-  DateFormat: "D//MM/YYYY - H:mm:ss A",
+  DateFormat: "DD/MM/YYYY - H:mm:ss A",
 });
 
 const moment = require("moment");
@@ -66,7 +66,7 @@ module.exports = class Miscellanous {
           member.roles.cache
             .filter((r) => r.id !== msg.guild.id)
             .map((roles) => `\`${roles.name}\``)
-            .join(" **|** ") || "Pas de Roles"
+            .join(" **|** ") || "Pas de Rôle"
         }`,
         true
       )
@@ -155,7 +155,7 @@ module.exports = class Miscellanous {
     // Change a bit the search depend on the int
     switch (i) {
       case 2:
-        name = "coffee porn";
+        name = "coffee time";
         break;
       case 3:
         name = "need coffee";

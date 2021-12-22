@@ -39,14 +39,14 @@ const commands = {
 
   addReacRole: {
     name: "addReacRole",
-    desc: "Ajoute les réaction pour un message de RolesReaction",
+    desc: "Ajoute les réactions pour un message de RolesReaction",
     func: addReacRole,
     perm: [-1],
     format: "addReacRole (Répondre au message ciblé)",
     exemple: [
       [
         "addReacRole (Ciblé sur le cadre en réponse)",
-        "Ajoute les réaction nécessaires au message avec l'ID du message répondu",
+        "Ajoute les réactions nécessaires au message répondu",
       ],
     ],
   },
@@ -80,7 +80,7 @@ const commands = {
 
   userinfo: {
     name: "userinfo",
-    desc: "Affiche les infos de l'utilisateur cible",
+    desc: "Affiche les informations de l'utilisateur cible",
     func: Miscellanous.userinfo,
     perm: [0],
     format: "userinfo <@User>",
@@ -161,11 +161,11 @@ const commands = {
 
   Rules: {
     name: "Rules",
-    desc: "Envoie le cadre avec toutes les règles",
+    desc: "Envoie le cadre avec toutes les règles du serveur",
     func: manualLauncherHelp.rules_embed,
     perm: [1],
     format: "Rules",
-    exemple: [["Rules", "Envoyer un cadre avec les règles"]],
+    exemple: [["Rules", "Envoie un cadre avec les règles du serveur"]],
   },
 
   Moodle: {
@@ -174,7 +174,7 @@ const commands = {
     func: AnswerZero.find_moodle,
     perm: [1],
     format: "Moodle <@User>",
-    exemple: [["Moodle", "Envoyer un cadre avec le lien vers Moodle"]],
+    exemple: [["Moodle", "Envoie un cadre avec le lien vers Moodle"]],
   },
 
   Resacril: {
@@ -183,7 +183,7 @@ const commands = {
     func: AnswerZero.find_ResaCril,
     perm: [1],
     format: "Resacril <@User>",
-    exemple: [["Resacril", "Envoyer un cadre avec le lien vers Resacril"]],
+    exemple: [["Resacril", "Envoie un cadre avec le lien vers Resacril"]],
   },
 
   Fiches: {
@@ -193,7 +193,7 @@ const commands = {
     perm: [1],
     format: "Fiches <@User>",
     exemple: [
-      ["Fiches", "Envoyer un cadre avec le lien vers la création de fiche"],
+      ["Fiches", "Envoie un cadre avec le lien vers la création de fiche"],
     ],
   },
 
@@ -204,7 +204,10 @@ const commands = {
     perm: [1],
     format: "Validation <@User>",
     exemple: [
-      ["Validation", "Envoyer un cadre avec le lien vers la création de fiche"],
+      [
+        "Validation",
+        "Envoie un cadre avec le lien vers le récapitulatif de validation d'activité",
+      ],
     ],
   },
 
@@ -215,7 +218,7 @@ const commands = {
     perm: [1],
     format: "Pack <@User>",
     exemple: [
-      ["Pack", "Envoyer un cadre avec le lien vers la création de fiche"],
+      ["Pack", "Envoie un cadre avec le lien vers tous les packs disponibles"],
     ],
   },
 
@@ -235,7 +238,7 @@ const commands = {
 
   DiscordAs: {
     name: "DiscordAs",
-    desc: "Envoie la procédure pour corriger les problèmes de vocaux.",
+    desc: "Envoie la procédure pour corriger les problèmes vocaux.",
     func: manualLauncherHelp.discord_assistance,
     perm: [1],
     format: "DiscordAs <@User>",
@@ -283,14 +286,14 @@ const commands = {
 
   newCreneaux: {
     name: "newCreneaux",
-    desc: "Mentionne les Etudiants puis envoie la template de message de nouveaux crénaux disponibles.",
+    desc: "Mentionne les Etudiants puis envoie la template de message de nouveaux créneaux disponibles.",
     func: aliasTxt.newCreneaux,
     perm: [2],
     format: "newCreneaux",
     exemple: [
       [
         "newCreneaux",
-        "Mentionne les Etudiants puis envoie la template de message de nouveaux crénaux disponibles.",
+        "Mentionne les Etudiants puis envoie la template de message de nouveaux créneaux disponibles.",
       ],
     ],
   },
@@ -305,7 +308,7 @@ const commands = {
       ["embed Salut", "Envoi un embed avec pour description 'Salut'"],
       [
         'embed "t Je suis un Titre t" "img URL img" Salut je suis une description !',
-        "Envoi un embed avec comme titre 'Je suis un titre', avec pour image l'URL' et comme description 'Salut je suis une description'",
+        "Envoie un embed avec comme titre 'Je suis un titre', avec pour image l'URL' et comme description 'Salut je suis une description'",
       ],
     ],
   },
