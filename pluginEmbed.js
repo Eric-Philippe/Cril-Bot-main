@@ -56,11 +56,6 @@ module.exports.reactionRole = async function (reaction, user) {
  * @param {Discord.Message} msg
  */
 module.exports.addReacRole = async function (msg) {
-  let member = msg.member; // Member
-  let isMod = await member.roles.cache.find((r) => r.id === ROLES.MOD_ROLES[0]); // Role finder
-
-  if (!isMod) return; // Perm check
-
   if (!msg.reference) return msg.delete(); // If there is a target msg (Reply)
 
   let id = msg.reference.messageId; // Targeted msg id
@@ -81,11 +76,7 @@ module.exports.addReacRole = async function (msg) {
  * @param {Discord.Message} msg
  */
 module.exports.addTS = async function (msg) {
-  let member = msg.member; // Member
-  let isMod = await member.roles.cache.find((r) => r.id === ROLES.MOD_ROLES[0]); // Role finder
   let channel = msg.channel; // Cache the message
-
-  if (!isMod) return; // Perm check
 
   if (!msg.reference) return msg.delete(); // If there is a target msg (Reply)
 

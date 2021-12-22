@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-const { ROLES, MENTION_TOPIC_CHANNEL } = require("../ressources.json");
+const { MENTION_TOPIC_CHANNEL } = require("../ressources.json");
 
 /**
  * Mention specific roles linked to a channel
@@ -8,14 +8,6 @@ const { ROLES, MENTION_TOPIC_CHANNEL } = require("../ressources.json");
  * @param {Discord.Message} msg
  */
 module.exports.topicChannelMention = async function (msg) {
-  let adminRole = msg.guild.roles.cache.find(
-    (r) => r.id === ROLES.MOD_ROLES[0]
-  ); // Get Admin role
-
-  if (!adminRole) return; // Error handler
-
-  if (!msg.member.roles.cache.some((r) => r.id === adminRole.id)) return; // NoPerm handler
-
   let entries = Object.entries(MENTION_TOPIC_CHANNEL); // Ressources Object to Array
   let entrie = entries.find((e) => e[1][0] === msg.channel.id); // Find the linked one
 

@@ -1,7 +1,7 @@
 const { client } = require("./utils/client"); //Client object
 const { con } = require("./utils/mysql"); // Database Connexion
 
-const { TOKEN } = require("./token.json"); // ¨Private token
+const { TOKEN } = require("./token.json"); // Private token
 const { PREFIX } = require("./config.json"); // Prefix
 
 // ############ Self Independant ##############
@@ -23,7 +23,7 @@ const { reactionRole } = require("./pluginEmbed"); // ReactionRole Message
 client.on("ready", async () => {
   console.log(`Logged into: ${client.user.tag}`);
 
-  statusEdit();
+  statusEdit(); // Status auto update
 
   con.connect(function (err) {
     if (err) console.log(err);
