@@ -71,6 +71,8 @@ module.exports.addReacRole = async function (msg) {
     // Add all the reaction to the message
     await msg_target.react(ArrayReac[element]);
   }
+
+  msg.delete();
 };
 
 /**
@@ -99,7 +101,7 @@ module.exports.addTS = async function (msg) {
   ); // Answer parameters
 
   let answers_info = mySubString.split(","); // [Amount, Solution]
-  if (!answers_info[1]) return; // Error Handler
+  if (!answers_info[1]) return msg.delete(); // Error Handler
 
   let answers_amount = answers_info[0]; // Amount
   let answer_correct = answers_info[1]; // Number of the Solution

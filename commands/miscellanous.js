@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+var XMLHttpRequest = require("xhr2");
 
 const { TENOR_TOKEN } = require("../token.json");
 const Tenor = require("tenorjs").client({
@@ -82,7 +83,7 @@ module.exports = class Miscellanous {
    *
    * @param {Discord.Message} msg
    */
-  static createEmbed(msg) {
+  static async createEmbed(msg) {
     let balised_title = msg.content.match(/"t(.*?)t"/g);
     if (balised_title)
       balised_title = balised_title.map(function (val) {
@@ -115,14 +116,11 @@ module.exports = class Miscellanous {
       .setFooter("Le cril", msg.guild.iconURL());
     if (title) embed.setTitle(title);
     if (img) {
-      try {
-        embed.setImage(img);
-      } catch {
-        console.log(err);
-      }
+      if (Miscellanous.checkURL(img)) embed.setImage(img);
     }
 
-    msg.channel.send({ embeds: [embed] });
+    await msg.channel.send({ embeds: [embed] });
+    await msg.delete();
   }
 
   /**
@@ -182,7 +180,16 @@ module.exports = class Miscellanous {
     return Math.floor(Math.random() * (max - min) + min);
   }
 
-  static checkURL(url) {
-    return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
+  static async checkURL(url) {
+    var request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.send();
+    request.onload = function () {
+      if (request.status == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    };
   }
 };

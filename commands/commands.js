@@ -37,35 +37,6 @@ const commands = {
     exemple: [["test", "Lance la commande de test"]],
   },
 
-  addReacRole: {
-    name: "addReacRole",
-    desc: "Ajoute les réactions pour un message de RolesReaction",
-    func: addReacRole,
-    perm: [-1],
-    format: "addReacRole (Répondre au message ciblé)",
-    exemple: [
-      [
-        "addReacRole (Ciblé sur le cadre en réponse)",
-        "Ajoute les réactions nécessaires au message répondu",
-      ],
-    ],
-  },
-
-  addTS: {
-    name: "addTS",
-    desc: "Créer un nouveau tirage au sort sur un embed",
-    func: addTS,
-    perm: [-1],
-    format:
-      "addTS [[Nombre Réponse, Numéro de la bonne réponse]] [Nombre d'heure]",
-    exemple: [
-      [
-        "addTS [3, 2] 5",
-        "Ajoute un tirage au sort de 3 propositions, avec la réponse 2 comme solution, pendant 5h",
-      ],
-    ],
-  },
-
   help: {
     name: "help",
     desc: "Affiche la commande d'aide aux commandes",
@@ -309,6 +280,35 @@ const commands = {
       [
         'embed "t Je suis un Titre t" "img URL img" Salut je suis une description !',
         "Envoie un embed avec comme titre 'Je suis un titre', avec pour image l'URL' et comme description 'Salut je suis une description'",
+      ],
+    ],
+  },
+
+  addReacRole: {
+    name: "addReacRole",
+    desc: "Ajoute les réactions pour un message de RolesReaction (Requiert de rédiger la commande en réponse à l'embed cible)",
+    func: addReacRole,
+    perm: [2],
+    format: "addReacRole (Répondre au message ciblé)",
+    exemple: [
+      [
+        "addReacRole (Ciblé sur le cadre en réponse)",
+        "Ajoute les réactions nécessaires au message répondu",
+      ],
+    ],
+  },
+
+  addTS: {
+    name: "addTS",
+    desc: "Créer un nouveau tirage au sort sur un embed (Requiert de rédiger la commande en réponse à l'embed cible)",
+    func: addTS,
+    perm: [2],
+    format:
+      "addTS [[Nombre Réponse,Numéro de la bonne réponse]] [Nombre d'heure]",
+    exemple: [
+      [
+        "addTS [3,2] 5",
+        "Ajoute un tirage au sort de 3 propositions, avec la réponse 2 comme solution, pendant 5h",
       ],
     ],
   },

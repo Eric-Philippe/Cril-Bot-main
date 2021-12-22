@@ -30,14 +30,14 @@ module.exports = class aliasTxt {
   }
 
   static async deb(msg) {
-    msg.channel.send(
+    await msg.channel.send(
       "Le but du coaching est de travailler vos objectifs en langue. Pour vous aider à définir cela, je vais vous demander de compléter la fiche début de parcours dans votre dossier Moodle CRIL. Revenez me le dire ici quand vous aurez terminé cela, ça devrait vous prendre environ 5 minutes."
     );
     await msg.delete();
   }
 
   static async debcomm(msg) {
-    msg.channel.send(
+    await msg.channel.send(
       "Revenez sur la fiche début de parcours dans votre dossier de suivi CRIL sur Moodle, dans le champ Conseil coachs nous vous avons donné des conseils de travail pour cette séance. Prenez-en connaissance et commencez à travailler. \n" +
         "__Les ressources mentionnées dans les conseils sont disponibles en cliquant sur le **symbole épingle** en haut de ce chat__. La séance dure 1h. Vous devez remplir la fiche coaching 1 au fur et à mesure de la séance : cela fait partie de votre heure de travail, mais si vous n’avez pas le temps de terminer, vous pouvez enregistrer et la modifier plus tard. Si vous avez des questions, besoin d’aide ou d’identifiants, revenez vers moi, je suis là pour vous répondre"
     );
@@ -45,7 +45,7 @@ module.exports = class aliasTxt {
   }
 
   static async fcomm(msg) {
-    msg.channel.send(
+    await msg.channel.send(
       "Votre dernière fiche de coaching a été commentée avec un conseil, vous pouvez aller en prendre connaissance et continuer votre travail. Si vous avez besoin de plus de précisions, d'identifiants ou toute autre aide, revenez vers moi"
     );
     await msg.delete();

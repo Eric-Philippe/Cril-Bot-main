@@ -27,9 +27,6 @@ module.exports = class Find_Activity {
    * Initiate the array componenents, the embedMessage and the reaction that comes with
    */
   async __init__() {
-    if (!this.msg_embed && this.user === this.msg.author)
-      // If ManualLaunch without a target
-      return this.msg.delete();
     if (!this.msg_embed && this.user != this.msg.author) {
       this.msg.channel.send(`||<@${this.user.id}>||`);
     }

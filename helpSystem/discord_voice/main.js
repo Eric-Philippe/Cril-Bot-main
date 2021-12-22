@@ -28,9 +28,6 @@ module.exports = class DiscordVoiceSupport {
    * Initiate all the variables needed
    */
   async __init__() {
-    if (!this.msg_embed && this.user === this.msg.author)
-      // If ManualLaunch without a target
-      return this.msg.delete();
     if (!this.msg_embed && this.user != this.msg.author) {
       this.msg.channel.send(`||<@${this.user.id}>||`);
     }
@@ -38,7 +35,7 @@ module.exports = class DiscordVoiceSupport {
     this.current_embed = array_components[0]; // First element = Embed
     await array_components.shift(); // Remove the embed of the array => Only remains emote
     this.emote_array = array_components; // Emotes neeeded
-    this.msg_embed.delete(); // Clean the old Embed
+    if (this.msg_embed) this.msg_embed.delete(); // Clean the old Embed
     this.msg_embed = await this.msg.channel.send({
       embeds: [this.current_embed],
     }); // Send the new Embed
