@@ -39,8 +39,8 @@ const statusEdit = function () {
     let x = 0; // Counter of operation
     // Loop while user wasnt finded
     while (!balise) {
-      if (x > 10) {
-        // We don't want to loop more than 10 times
+      if (x > 25) {
+        // We don't want to loop more than 25 times
         // plus Handle infinite loop by no result avaiable
         name_array.push("Le vide"); // Add default name
         balise = true; // Leave the loop
@@ -73,14 +73,17 @@ const statusEdit = function () {
               balise = true; // Leave the loop
             }
           } else {
-            let validPresence = ["online, dnd", "idle"]; // Accepted state of presence
-            if (validPresence.includes(member.presence.status)) {
-              // If user is on Discord
-              if (member.nickname) {
-                // If the user have a nickname (here needed)
-                name_array.push(member.nickname.split(" ")[0]); // Add the surname
-                members_array.push(member); // Add the user "Already Picked"
-                balise = true; // Leave the loop
+            let validPresence = ["online", "dnd", "idle"]; // Accepted state of presence
+            if (member.presence) {
+              // Check if presence exists
+              if (validPresence.includes(member.presence.status)) {
+                // If user is on Discord
+                if (member.nickname) {
+                  // If the user have a nickname (here needed)
+                  name_array.push(member.nickname.split(" ")[0]); // Add the surname
+                  members_array.push(member); // Add the user "Already Picked"
+                  balise = true; // Leave the loop
+                }
               }
             }
           }

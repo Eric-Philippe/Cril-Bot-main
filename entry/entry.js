@@ -10,7 +10,14 @@ const {
   RulesEmbed,
 } = require("./entryTemplate"); // All the embed for the system
 
-const { EMOTE, CATEGORY, CHANNELS, ROLES, IUT } = require("../ressources.json"); // Ressources required for the system
+const {
+  SERVER,
+  EMOTE,
+  CATEGORY,
+  CHANNELS,
+  ROLES,
+  IUT,
+} = require("../ressources.json"); // Ressources required for the system
 
 /**
  * @Class Entry system fir incoming user on the server
@@ -398,7 +405,12 @@ module.exports = class Entry {
     try {
       await this.resetCollector();
       await this.channel.delete();
-      await this.user.send("Message de renvoi passif");
+      let embedKick = new Discord.MessageEmbed()
+        .setTitle("Renvoi après inactivité dans le système d'entrée !")
+        .setDescription(
+          `Bonjour, \n Vous n'avez pas terminé les étapes pour rejoindre le serveur. Merci de recommencer en cliquant sur l'invitation : ${SERVER.INVITE_LINK}. Lisez bien toutes les instructions qui s'affichent. \n Si vous rencontrez un problème lors de l'une des étapes, merci de faire une capture d'écran et de l'envoyer à cril.langues@iut.tlse3.fr pour expliquer le problème.`
+        );
+      await this.user.send({ embeds: [embedKick] });
       await this.member.kick("timeOut");
     } catch (err) {
       console.log(err);

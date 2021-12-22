@@ -20,18 +20,21 @@ module.exports = class Miscellanous {
    * @param {Discord.Message} msg
    */
   static dice(msg) {
-    let args = msg.content.split(" ");
-    let max = 6;
+    let args = msg.content.split(" "); // Split between Space
+    let max = 6; // Default max dice range
     if (args[1]) {
+      // User dice faces input
       if (!isNaN(args[1])) {
+        // Number input
         if (args[1] > 0) {
+          // Valid Number
           max = args[1];
         }
       }
     }
-    let result = Miscellanous.getRandomInt(max, 1);
+    let result = Miscellanous.getRandomInt(max, 1); // Get random number
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.MessageEmbed() // Embed constructor
       .setTitle("🎲 | Rolling dice")
       .setColor(COLOR.MAIN_COLOR)
       .addField("📉 - Résultat : ", "``" + String(result) + "``");
@@ -45,9 +48,9 @@ module.exports = class Miscellanous {
    * @param {Discord.Message} msg
    */
   static userinfo(msg) {
-    const member = msg.mentions.members.first() || msg.member;
-    const user = member.user;
-    let embed = new Discord.MessageEmbed()
+    const member = msg.mentions.members.first() || msg.member; // Member targeted
+    const user = member.user; // Member to User
+    let embed = new Discord.MessageEmbed() // Embed constrcutor
       .setTitle(`Informations à propos de ${user.tag}`)
       .setColor(COLOR.MAIN_COLOR)
       .setThumbnail(user.avatarURL())
@@ -74,53 +77,54 @@ module.exports = class Miscellanous {
       .setFooter(`Demandé par : ${msg.author.tag}`, msg.author.avatarURL())
       .setTimestamp();
 
-    msg.channel.send({ embeds: [embed] });
+    msg.channel.send({ embeds: [embed] }); // Send message
   }
 
   /**
    *  Creator embed from Discord
-   * !embed "t Titre t" "d  d"
+   * !embed "t Titre t" "img valid URL img"
    *
    * @param {Discord.Message} msg
    */
   static async createEmbed(msg) {
-    let balised_title = msg.content.match(/"t(.*?)t"/g);
+    let balised_title = msg.content.match(/"t(.*?)t"/g); // Find match with the Title balise
     if (balised_title)
       balised_title = balised_title.map(function (val) {
-        return val.replace(/t"/g, "").slice(2);
+        return val.replace(/t"/g, "").slice(2); // Clear the balise and extract the argument Title
       });
 
     let title = undefined;
-    if (balised_title) title = balised_title[0];
-    let title_length = title ? title.length + 5 : 0;
+    if (balised_title) title = balised_title[0]; // First element of the map
+    let title_length = title ? title.length + 5 : 0; // Size of the (no) existing title
 
-    let balised_img = msg.content.match(/"img(.*?)img"/g);
+    let balised_img = msg.content.match(/"img(.*?)img"/g); // Find match with Image balise
     if (balised_img)
       balised_img = balised_img.map(function (val) {
-        return val.replace(/img"/g, "").slice(4);
+        return val.replace(/img"/g, "").slice(4); // Clear the balise and extract the argument Image
       });
 
     let img = undefined;
-    if (balised_img) img = balised_img[0];
-    let img_length = img ? img.length + 9 : 0;
+    if (balised_img) img = balised_img[0]; // First element of the map
+    let img_length = img ? img.length + 9 : 0; // URL size
 
-    let cmd = msg.content.split(" ")[0];
+    let cmd = msg.content.split(" ")[0]; // Cmd argument
 
-    let desc = msg.content.slice(cmd.length + img_length + title_length);
+    let desc = msg.content.slice(cmd.length + img_length + title_length); // Embed Description
     if (!desc)
-      return msg.reply("Merci de rédiger du contenu pour votre embed !");
+      return msg.reply("Merci de rédiger du contenu pour votre embed !"); // Error Handler
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.MessageEmbed() // Embed constructor
       .setColor(COLOR.MAIN_COLOR)
       .setDescription(desc)
       .setFooter("Le cril", msg.guild.iconURL());
     if (title) embed.setTitle(title);
     if (img) {
+      // URL vérification
       if (Miscellanous.checkURL(img)) embed.setImage(img);
     }
 
     await msg.channel.send({ embeds: [embed] });
-    await msg.delete();
+    await msg.delete(); // Clear
   }
 
   /**
@@ -129,17 +133,17 @@ module.exports = class Miscellanous {
    * @param {Discord.Message} msg
    */
   static getAvatar(msg) {
-    const member = msg.mentions.members.first() || msg.member;
-    const user = member.user;
+    const member = msg.mentions.members.first() || msg.member; // Member targeted
+    const user = member.user; // Member -> User
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.MessageEmbed() // Embed constructor
       .setTitle(`Avatar de ${user.tag}`)
       .setColor(COLOR.MAIN_COLOR)
       .setImage(user.avatarURL())
       .setFooter(`Demandé par : ${msg.author.tag}`, msg.author.avatarURL())
       .setTimestamp();
 
-    msg.channel.send({ embeds: [embed] });
+    msg.channel.send({ embeds: [embed] }); // Send the embed
   }
 
   /**
@@ -174,14 +178,21 @@ module.exports = class Miscellanous {
    *
    * @param {Number} max
    * @param {Number} min
-   * @returns Number
+   * @returns {Number} Number
    */
   static getRandomInt(max, min) {
     return Math.floor(Math.random() * (max - min) + min);
   }
 
+  /**
+   * Return true if URL is valid
+   *
+   * @param {String} url
+   *
+   * @returns {Boolean} Boolean
+   */
   static async checkURL(url) {
-    var request = new XMLHttpRequest();
+    var request = new XMLHttpRequest(); // Create new request to test the URL
     request.open("GET", url, true);
     request.send();
     request.onload = function () {

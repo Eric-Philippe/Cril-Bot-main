@@ -60,12 +60,6 @@ const permCheck = function (msg, permLevel) {
   let tut_ass = msg.guild.roles.cache.find((r) => r.id === ROLES.MOD_ROLES[2]);
 
   switch (permLevel) {
-    case -1:
-      if (SUPER_ADMIN[0].includes(msg.author.id)) {
-        return true;
-      } else {
-        return false;
-      }
     case 0:
       return true;
     case 1:
