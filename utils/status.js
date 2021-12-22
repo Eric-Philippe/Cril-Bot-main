@@ -39,8 +39,8 @@ const statusEdit = function () {
     let x = 0; // Counter of operation
     // Loop while user wasnt finded
     while (!balise) {
-      if (x > 25) {
-        // We don't want to loop more than 25 times
+      if (x > 2000) {
+        // We don't want to loop more than 2000 times
         // plus Handle infinite loop by no result avaiable
         name_array.push("Le vide"); // Add default name
         balise = true; // Leave the loop
