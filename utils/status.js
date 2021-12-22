@@ -53,6 +53,7 @@ const statusEdit = function () {
       // == ==================== => If admin doesn't have nickname =====
       // == ====================== => Second Choice : User.Username ====
       // == Default for everyone : Member.Nickname (First element) =====
+      // ================== Classic member need to be connected=========
       // ===============================================================
       if (!member.user.bot) {
         // If user isn't a bot
@@ -72,11 +73,15 @@ const statusEdit = function () {
               balise = true; // Leave the loop
             }
           } else {
-            if (member.nickname) {
-              // If the user have a nickname (here needed)
-              name_array.push(member.nickname.split(" ")[0]); // Add the surname
-              members_array.push(member); // Add the user "Already Picked"
-              balise = true; // Leave the loop
+            let validPresence = ["online, dnd", "idle"]; // Accepted state of presence
+            if (validPresence.includes(member.presence.status)) {
+              // If user is on Discord
+              if (member.nickname) {
+                // If the user have a nickname (here needed)
+                name_array.push(member.nickname.split(" ")[0]); // Add the surname
+                members_array.push(member); // Add the user "Already Picked"
+                balise = true; // Leave the loop
+              }
             }
           }
         }
