@@ -7,7 +7,7 @@ const {
   EMOTE,
 } = require("./ressources.json");
 
-const ArrayReac = ["📖", "⚔️", "🎮", "🏉", "📺", "🖥️"]; // Reaction listened
+const ArrayReac = ["📖", "⚔️", "🎮", "🏉", "📺"]; // Reaction listened
 
 /**
  * Plugin Reaction Role Embed
@@ -49,6 +49,7 @@ module.exports.reactionRole = async function (reaction, user) {
   } else {
     member.roles.remove(hasRole); // Remove the past role
   }
+  reaction.users.remove(user.id); // Soft Reset of the board
 };
 
 /**

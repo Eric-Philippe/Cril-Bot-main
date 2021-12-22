@@ -57,7 +57,6 @@ client.on("messageReactionRemove", async (reaction, user) => {
   if (user.bot) return;
   let msg = await reaction.message.channel.messages.fetch(reaction.message.id);
   if (!msg.author.bot) return;
-  await reactionRole(reaction, user);
   await pollRequest(reaction, user, false);
 });
 
