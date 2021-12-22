@@ -185,7 +185,7 @@ const commands = {
   Pack: {
     name: "Pack",
     desc: "Envoie un lien vers les pack spécifiques Moodle",
-    func: manualLauncherHelp.packEmbed,
+    func: AnswerZero.packEmbed,
     perm: [1],
     format: "Pack <@User>",
     exemple: [

@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-const manualLauncherHelp = require("../manualLauncher");
+const { packEmbed } = require("../answerLevelZero");
 const embedFA = require("./embedFA");
 /**
  * Activity Finder Class
@@ -64,7 +64,7 @@ module.exports = class Find_Activity {
         break;
       case 1.5:
         this.array_component = await embedFA.coach_Embed(this.msg);
-        this.complement_embed = await manualLauncherHelp.packEmbed(this.msg);
+        this.complement_embed = await packEmbed(this.msg);
         break;
     }
 
