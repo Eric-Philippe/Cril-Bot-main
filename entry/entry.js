@@ -152,7 +152,7 @@ module.exports = class Entry {
     const collector = msg.createMessageComponentCollector({
       filter,
       max: 1,
-      time: 300000,
+      time: 1000 * 60 * 60 * 3,
       errors: ["time"],
     });
 
@@ -206,7 +206,7 @@ module.exports = class Entry {
 
     const collector = msg.createReactionCollector({
       filter,
-      time: 300000,
+      time: 1000 * 60 * 60 * 3,
       errors: ["time"],
     });
 
@@ -266,7 +266,7 @@ module.exports = class Entry {
     const collector = msg.channel.createMessageCollector({
       filter,
       max: 1,
-      time: 300000,
+      time: 1000 * 60 * 60 * 3,
       errors: ["time"],
     });
 
@@ -451,6 +451,6 @@ module.exports = class Entry {
       });
 
       await this.channel.delete();
-    }, 1000);
+    }, 500);
   }
 };
