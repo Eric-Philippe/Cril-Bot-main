@@ -59,6 +59,8 @@ module.exports = class Entry {
 
     this.channel = await this.createChannel(); // Create the Entry Channel
 
+    this.msg.channel.send(`<@${this.user.id}>`); // Mention
+
     let embed = new Discord.MessageEmbed().setTitle("Initialisation . . ."); // Notify
     this.msg = await this.channel.send({ embeds: [embed] }); // Send embed in the new Channel
 
@@ -141,6 +143,15 @@ module.exports = class Entry {
           allow: ["VIEW_CHANNEL", "SEND_MESSAGES"],
         },
       ],
+    });
+
+    await new_channel.permissionOverwrites.edit(this.guild.roles.everyone, {
+      VIEW_CHANNEL: false,
+    });
+
+    await new_channel.permissionOverwrites.edit(this.user.id, {
+      VIEW_CHANNEL: true,
+      SEND_MESSAGES: true,
     });
 
     new_channel.setParent(category.id);
@@ -342,7 +353,11 @@ module.exports = class Entry {
           )
           .then((m) => {
             setTimeout(() => {
-              m.delete();
+              try {
+                m.delete();
+              } catch (err) {
+                console.log(err);
+              }
             }, 5000);
           });
 
@@ -462,7 +477,11 @@ module.exports = class Entry {
         embeds: [rules_embed, dm_embed],
       });
 
-      await this.channel.delete();
+      try {
+        await this.channel.delete();
+      } catch (err) {
+        console.log(err);
+      }
     }, 500);
   }
 };
