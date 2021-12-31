@@ -59,7 +59,7 @@ module.exports = class Entry {
 
     this.channel = await this.createChannel(); // Create the Entry Channel
 
-    this.msg.channel.send(`<@${this.user.id}>`); // Mention
+    this.channel.send(`<@${this.user.id}>`); // Mention
 
     let embed = new Discord.MessageEmbed().setTitle("Initialisation . . ."); // Notify
     this.msg = await this.channel.send({ embeds: [embed] }); // Send embed in the new Channel
