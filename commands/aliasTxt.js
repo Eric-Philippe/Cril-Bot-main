@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-const { ROLES, IMG } = require("../ressources.json");
+const { ROLES, IMG, CHANNELS } = require("../ressources.json");
 
 module.exports = class aliasTxt {
   /**
@@ -18,8 +18,8 @@ module.exports = class aliasTxt {
           "Toutes les précisions sur le thème, le niveau et le lieu sont affichées sur Résacril au moment de la réservation. \n" +
           "Des créneaux sont susceptibles d’être ajoutés au fil de l’eau. \n\n" +
           "Retrouvez les principaux thèmes et jeux prévus dans l’affiche ci-dessous. \n\n" +
-          "N’oubliez pas que vous pouvez prendre les rôles des thèmes qui vous intéressent pour être avertis de l’ouverture d’activités correspondantes ; channel roles \n\n" +
-          "En cas de question, channel Support ou mail à \n __cril.langues@iut-tlse3.fr__ \n\n" +
+          `N’oubliez pas que vous pouvez prendre les rôles des thèmes qui vous intéressent pour être avertis de l’ouverture d’activités correspondantes ; <#847109554327126066> \n\n` +
+          `En cas de question, <#${CHANNELS.SUPPORT_CHANNEL}> Support ou mail à \n __cril.langues@iut-tlse3.fr__ \n\n` +
           "A bientôt au CRIL!"
       )
       .setThumbnail(IMG.SCHEDULE_LOGO)

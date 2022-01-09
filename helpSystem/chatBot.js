@@ -10,6 +10,8 @@ const DiscordVoiceSupport = require("./discord_voice/main");
 const { questionPicker } = require("./questionPicker");
 const { filter } = require("./filter");
 
+const { ROLES } = require("../ressources.json");
+
 /**
  * chatBot Help System
  */
@@ -140,7 +142,7 @@ module.exports = class chatBot {
           if (this.step === 2) {
             // Case of all the answer unsatisfied
             msg_user.reply(
-              "Je n'ai plus de réponse à vous apporter, merci de contacter un @Responsable !"
+              `Je n'ai plus de réponse à vous apporter, merci de contacter un <@${ROLES.MOD_ROLES[0]}> !`
             );
           } else {
             // Change the current step to give an other solution

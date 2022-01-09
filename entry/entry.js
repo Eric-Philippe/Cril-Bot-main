@@ -277,6 +277,11 @@ module.exports = class Entry {
       } else if (this.underPage === 2) {
         if (!isNaN(Number(m.content))) {
           if (Number(m.content) <= IUT.DEPARTMENT.length + 1) return true;
+        } else {
+          console.log(IUT.DEPARTMENT.includes(m.content.toUpperCase()));
+          if (IUT.DEPARTMENT.includes(m.content.toUpperCase())) {
+            return true;
+          }
         }
       }
     };
@@ -299,7 +304,17 @@ module.exports = class Entry {
           this.userInfo[1] = m.content.toUpperCase(); // UperCase Secondname
           break;
         case 2:
-          this.userInfo[2] = IUT.DEPARTMENT[Number(m.content) - 1]; // Choice
+          console.log(!isNaN(Number(m.content)));
+          if (!isNaN(Number(m.content))) {
+            this.userInfo[2] = IUT.DEPARTMENT[Number(m.content) - 1]; // Choice
+          } else {
+            let index = IUT.DEPARTMENT.findIndex(
+              (d) => d === m.content.toUpperCase()
+            );
+            console.log(index);
+            console.log(IUT.DEPARTMENT[index]);
+            this.userInfo[2] = IUT.DEPARTMENT[index];
+          }
           break;
       }
 

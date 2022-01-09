@@ -228,7 +228,7 @@ module.exports.template3 = function (member, page) {
     )
     .addField(
       " | 7️⃣ : ",
-      `Confirmez la validation des règles en cochant l'émoji ci-dessous avant de confirmer votre lecture et votre approbation de l'application de ces règles.`
+      `Confirmez votre lecture des règles en cliquant sur l'emoji vert puis validez votre approbation de l'application de celles-ci avec le bouton Valider.`
     )
     .addField(
       " | 8️⃣ : ",
