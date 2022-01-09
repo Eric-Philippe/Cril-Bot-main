@@ -304,15 +304,12 @@ module.exports = class Entry {
           this.userInfo[1] = m.content.toUpperCase(); // UperCase Secondname
           break;
         case 2:
-          console.log(!isNaN(Number(m.content)));
           if (!isNaN(Number(m.content))) {
             this.userInfo[2] = IUT.DEPARTMENT[Number(m.content) - 1]; // Choice
           } else {
             let index = IUT.DEPARTMENT.findIndex(
               (d) => d === m.content.toUpperCase()
             );
-            console.log(index);
-            console.log(IUT.DEPARTMENT[index]);
             this.userInfo[2] = IUT.DEPARTMENT[index];
           }
           break;
@@ -472,27 +469,27 @@ module.exports = class Entry {
    */
   __terminate__() {
     setTimeout(async () => {
-      await this.member.setNickname(
-        `${this.userInfo[0]} ${this.userInfo[1]} ${this.userInfo[2]}`
-      );
-      let new_role = await this.guild.roles.cache.find(
-        (r) => r.id === ROLES.ETU
-      );
-      await this.member.roles.add(new_role);
-
-      let new_channel = this.guild.channels.cache.find(
-        (c) => c.id === CHANNELS.WELCOME
-      );
-      if (!new_channel) return;
-      await new_channel.send(`Bienvenue ${this.user} !`);
-
-      let rules_embed = await RulesEmbed(this.member);
-      let dm_embed = await DMEmbed(this.member);
-      await this.user.send({
-        embeds: [rules_embed, dm_embed],
-      });
-
       try {
+        await this.member.setNickname(
+          `${this.userInfo[0]} ${this.userInfo[1]} ${this.userInfo[2]}`
+        );
+        let new_role = await this.guild.roles.cache.find(
+          (r) => r.id === ROLES.ETU
+        );
+        await this.member.roles.add(new_role);
+
+        let new_channel = this.guild.channels.cache.find(
+          (c) => c.id === CHANNELS.WELCOME
+        );
+        if (!new_channel) return;
+        await new_channel.send(`Bienvenue ${this.user} !`);
+
+        let rules_embed = await RulesEmbed(this.member);
+        let dm_embed = await DMEmbed(this.member);
+        await this.user.send({
+          embeds: [rules_embed, dm_embed],
+        });
+
         await this.channel.delete();
       } catch (err) {
         console.log(err);
