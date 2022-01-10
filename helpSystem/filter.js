@@ -25,14 +25,20 @@ const filter = async function (msg, answer) {
   let member_roles = member.roles.cache.toJSON();
   let isMod = member_roles.some((item) => ROLES.MOD_ROLES.includes(item.id));
   // Check if not Admin (No need)
-  if (isMod) return;
+  if (isMod) {
+    msg.channel.send("1");
+    return;
+  }
 
   // Only launch FIND_ACTIVITY HELP in not support channel if the answers are close
   if (
     msg.channel.id != CHANNELS.SUPPORT_CHANNEL &&
     answer[2] != "FIND_ACTIVITY"
   ) {
-    if (answer[1] > 6) return;
+    if (answer[1] > 6) {
+      msg.channel.send("2");
+      return;
+    }
   }
   let user = msg.author;
   // CoolDown Filter

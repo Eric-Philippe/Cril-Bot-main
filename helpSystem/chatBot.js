@@ -59,10 +59,13 @@ module.exports = class chatBot {
    */
   async __init__(msg) {
     this.answer_array = await questionPicker(msg.content); // Pick an array of three element to find the closest answer
-    if (this.answer_array[0][1] > 50) return; // Deny if the answers found are too far from the question
+    if (this.answer_array[0][1] > 70) return; // Deny if the answers found are too far from the question
 
     let user_filter = await filter(msg, this.answer_array[0]);
-    if (!user_filter) return; // Deny if WrongChannel, Admin, talkedRecently,
+    if (!user_filter) {
+      msg.channel.send("4");
+      return;
+    } // Deny if WrongChannel, Admin, talkedRecently,
 
     this.__selector__(this.step);
   }
