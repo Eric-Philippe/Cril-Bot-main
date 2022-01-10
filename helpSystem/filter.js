@@ -26,7 +26,6 @@ const filter = async function (msg, answer) {
   let isMod = member_roles.some((item) => ROLES.MOD_ROLES.includes(item.id));
   // Check if not Admin (No need)
   if (isMod) {
-    msg.channel.send("1");
     return;
   }
 
@@ -36,7 +35,6 @@ const filter = async function (msg, answer) {
     answer[2] != "FIND_ACTIVITY"
   ) {
     if (answer[1] > 6) {
-      msg.channel.send("2");
       return;
     }
   }

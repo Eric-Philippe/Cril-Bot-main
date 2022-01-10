@@ -63,7 +63,6 @@ module.exports = class chatBot {
 
     let user_filter = await filter(msg, this.answer_array[0]);
     if (!user_filter) {
-      msg.channel.send("4");
       return;
     } // Deny if WrongChannel, Admin, talkedRecently,
 
