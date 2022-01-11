@@ -15,29 +15,15 @@ const talkedRecently = new Set(); // CoolDown SET
  */
 const filter = async function (msg, answer) {
   // Check if good channel (Avoid Flood)
-  if (
-    msg.channel.id != CHANNELS.SUPPORT_CHANNEL &&
-    !CHANNELS.ACTIVITIES_CHANNEL.includes(msg.channel.id)
-  )
-    return;
+  if (msg.channel.id != CHANNELS.SUPPORT_CHANNEL) return;
   if (msg.content.length < 10) return;
   let member = msg.member;
   let member_roles = member.roles.cache.toJSON();
   let isMod = member_roles.some((item) => ROLES.MOD_ROLES.includes(item.id));
   // Check if not Admin (No need)
-  if (isMod) {
-    return;
-  }
+  if (isMod) return;
 
   // Only launch FIND_ACTIVITY HELP in not support channel if the answers are close
-  if (
-    msg.channel.id != CHANNELS.SUPPORT_CHANNEL &&
-    answer[2] != "FIND_ACTIVITY"
-  ) {
-    if (answer[1] > 6) {
-      return;
-    }
-  }
   let user = msg.author;
   // CoolDown Filter
   if (talkedRecently.has(user.id)) return;
@@ -45,7 +31,8 @@ const filter = async function (msg, answer) {
   talkedRecently.add(user.id);
   setTimeout(() => {
     talkedRecently.delete(user.id);
-  }, 1000 * 60 * 60 * CoolDown_Hour);
+  }, 1000 * 60 * 3);
+
   return true;
 };
 

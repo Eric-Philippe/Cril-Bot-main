@@ -62,9 +62,8 @@ module.exports = class chatBot {
     if (this.answer_array[0][1] > 70) return; // Deny if the answers found are too far from the question
 
     let user_filter = await filter(msg, this.answer_array[0]);
-    if (!user_filter) {
-      return;
-    } // Deny if WrongChannel, Admin, talkedRecently,
+    if (!user_filter) return;
+    // Deny if WrongChannel, Admin, talkedRecently,
 
     this.__selector__(this.step);
   }
