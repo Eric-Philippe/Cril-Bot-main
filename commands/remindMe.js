@@ -100,7 +100,7 @@ module.exports = class createReminderObject {
     let time_array = time.split("h") || time.split("H");
 
     // Check if minutes input exit
-    if (!time_array[1]) return msg.reply("Merci d'entrer les minutes !");
+    if (!time_array[1]) time_array[1] = "00";
     // Check if all time input are number
     result_test = true;
     for (let i = 0; i < time_array.length; i++) {
