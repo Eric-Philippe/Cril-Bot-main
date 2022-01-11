@@ -255,6 +255,15 @@ const commands = {
     ],
   },
 
+  email: {
+    name: "email",
+    desc: "Envoie la template de mail.",
+    func: aliasTxt.email,
+    perm: [1],
+    format: "email",
+    exemple: [["email", "Envoie la template contenant le mail du Cril."]],
+  },
+
   newCreneaux: {
     name: "newCreneaux",
     desc: "Mentionne les Etudiants puis envoie la template de message de nouveaux créneaux disponibles.",

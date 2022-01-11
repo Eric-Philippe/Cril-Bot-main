@@ -50,4 +50,10 @@ module.exports = class aliasTxt {
     );
     await msg.delete();
   }
+
+  static async email(msg) {
+    await msg.channel.send(
+      "Bonjour, merci d'envoyer un mail à cril.langues@iut-tlse3.fr en expliquant votre problème, il sera traité par les responsables dès que possible. \n Bonne journée."
+    );
+  }
 };
