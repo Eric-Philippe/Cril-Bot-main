@@ -130,7 +130,7 @@ module.exports = class Find_Activity {
       // Auto clear the message if not used
       if (this.page === 0 || this.page === "1") {
         if (reason === "time") {
-          this.msg_embed.delete();
+          if (this.msg_embed) this.msg_embed.delete();
         }
       }
     });
