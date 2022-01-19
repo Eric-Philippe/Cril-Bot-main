@@ -71,7 +71,7 @@ client.on("guildMemberAdd", (member) => {
 client.on("messageCreate", (msg) => {
   console.log(msg.channel.type);
   if (msg.channel.type === "DM") {
-    if (msg.author.id === "387291278670430208") {
+    if (msg.author.id === "649323786612637727") {
       if (msg.content === "!launch") {
         msg.reply(
           "Vous devez trouver un mot. Entrez votre réponse avec !enter MOT. Si besoin, demandez l'indice numéro 1 en faisant !clue1 et, si vous êtes bloquée, un second avec !clue2 !"
