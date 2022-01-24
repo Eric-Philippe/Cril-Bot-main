@@ -68,42 +68,5 @@ client.on("guildMemberAdd", (member) => {
   new Entry(member);
 });
 
-client.on("messageCreate", (msg) => {
-  console.log(msg.channel.type);
-  if (msg.channel.type === "DM") {
-    if (msg.author.id === "649323786612637727") {
-      if (msg.content === "!launch") {
-        msg.reply(
-          "Vous devez trouver un mot. Entrez votre réponse avec !enter MOT. Si besoin, demandez l'indice numéro 1 en faisant !clue1 et, si vous êtes bloquée, un second avec !clue2 !"
-        );
-      } else if (msg.content === "!clue1") {
-        msg.reply("It's hidden in his pants.");
-      } else if (msg.content === "!clue2") {
-        msg.reply("The Adder");
-      } else if (msg.content.startsWith("!enter")) {
-        let args = msg.content.split(" ");
-        if (
-          args[1].toLowerCase() === "serpent" ||
-          args[1].toLowerCase() === "snake"
-        ) {
-          msg.reply("Bravo ! ;D");
-          msg.channel.send(
-            "Tu arrives au bout de cet éprouvant parcours ! Je t'invite à te renseigner sur le QRCode suivant pour clore le tout !"
-          );
-          msg.channel.send(
-            "https://media.discordapp.net/attachments/928431386342350848/933224878901964860/Unitag_QRCode_1642568419849.png"
-          );
-        } else {
-          msg.reply("No. :(");
-        }
-      } else {
-        msg.reply(
-          "Bien joué à toi ! Te voici alors prête pour la prochaine énigme ! \n Entre !launch pour lancer le tout ! ||The following stuff is provided by Laureline !||"
-        );
-      }
-    }
-  }
-});
-
 /** Login on token */
 client.login(TOKEN);
