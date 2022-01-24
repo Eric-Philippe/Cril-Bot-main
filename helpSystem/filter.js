@@ -31,7 +31,7 @@ const filter = async function (msg, answer) {
   talkedRecently.add(user.id);
   setTimeout(function () {
     talkedRecently.delete(user.id);
-  }, 1000 * 60);
+  }, 1000 * 60 * 60);
 
   return true;
 };
