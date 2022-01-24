@@ -29,9 +29,9 @@ const filter = async function (msg, answer) {
   if (talkedRecently.has(user.id)) return;
   // Add CoolDown then delete it after 1h
   talkedRecently.add(user.id);
-  setTimeout(() => {
+  setTimeout(function () {
     talkedRecently.delete(user.id);
-  }, 1000 * 60 * 60 * 1);
+  }, 1000 * 60);
 
   return true;
 };
