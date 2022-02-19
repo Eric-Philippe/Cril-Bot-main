@@ -36,6 +36,7 @@ client.on("ready", async () => {
 /** Wake up on message sent */
 client.on("messageCreate", async (msg) => {
   if (msg.author.bot) return;
+  if (msg.channel.type === "DM") return;
   if (msg.author.id === client.user.id) return;
   if (msg.content.startsWith(PREFIX)) {
     cmdGrabber(msg);
