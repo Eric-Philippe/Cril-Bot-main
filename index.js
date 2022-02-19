@@ -23,7 +23,8 @@ const { reactionRole } = require("./pluginEmbed"); // ReactionRole Message
 client.on("ready", async () => {
   console.log(`Logged into: ${client.user.tag}`);
 
-  statusEdit(); // Status auto update
+  //statusEdit(); // Status auto update
+  client.user.setActivity("Happy Birthday 🎂");
 
   con.connect(function (err) {
     if (err) console.log(err);
