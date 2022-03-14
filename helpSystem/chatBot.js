@@ -143,7 +143,7 @@ module.exports = class chatBot {
           if (this.step === 2) {
             // Case of all the answer unsatisfied
             msg_user.reply(
-              `Je n'ai plus de réponse à vous apporter, merci de contacter un <@${ROLES.MOD_ROLES[0]}> !`
+              `Je n'ai plus de réponse à vous apporter, merci de contacter un <@&${ROLES.MOD_ROLES[0]}> !`
             );
           } else {
             // Change the current step to give an other solution
