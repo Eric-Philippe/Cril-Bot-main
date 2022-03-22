@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 
-const { client } = require("../utils/client");
 const { PREFIX } = require("../config.json");
 const { commands } = require("./commands");
 

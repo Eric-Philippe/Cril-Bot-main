@@ -1,11 +1,9 @@
 const { client } = require("./utils/client"); //Client object
-const { con } = require("./utils/mysql"); // Database Connexion
 
 const { TOKEN } = require("./token.json"); // Private token
 const { PREFIX } = require("./config.json"); // Prefix
 
 // ############ Self Independant ##############
-const Reminder = require("./commands/remindMe"); // RemindMe SelfIncrement
 const { statusEdit } = require("./utils/status");
 
 // ############ All Messages ##################
@@ -24,12 +22,6 @@ client.on("ready", async () => {
   console.log(`Logged into: ${client.user.tag}`);
 
   statusEdit(); // Status auto update
-
-  con.connect(function (err) {
-    if (err) console.log(err);
-    console.log("Connected to database as ID : " + con.threadId);
-    Reminder.remindCheck();
-  });
 });
 
 /** Wake up on message sent */

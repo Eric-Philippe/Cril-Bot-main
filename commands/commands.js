@@ -1,7 +1,5 @@
 const { test } = require("./test");
 const Poll = require("./poll");
-const Reminder = require("./remindMe");
-const { resetSQL } = require("../SQL/RESET/resetSQL");
 const Miscellanous = require("./miscellanous");
 const AnswerZero = require("../helpSystem/answerLevelZero");
 const manualLauncherHelp = require("../helpSystem/manualLauncher");
@@ -85,20 +83,6 @@ const commands = {
     exemple: [
       ["dice", "Lance un dé à 6 faces"],
       ["dice 64", "Lancé un dé de 64 faces"],
-    ],
-  },
-
-  remindme: {
-    name: "remindme",
-    desc: "Rappel",
-    func: Reminder.remindMe,
-    perm: [0],
-    format: "remindme [DD/MM/YYYY] [HHhMM] [Rappel]",
-    exemple: [
-      [
-        "remindme 13/05/2022 10h00 Activité Thématique",
-        "Créer un rappel pour le 13 mai 2022 à 10h00 avec pour sujet : 'Activité Thématique'",
-      ],
     ],
   },
 
@@ -334,15 +318,6 @@ const commands = {
         'Envoie "Vive les livres" avec la mention @bookworm',
       ],
     ],
-  },
-
-  resetDB: {
-    name: "resetDB",
-    desc: "Reset de la base de donnée",
-    func: resetSQL,
-    perm: [3],
-    format: "resetDB",
-    exemple: [["NE PAS UTILISER", "JUST NO"]],
   },
 };
 
