@@ -384,9 +384,17 @@ module.exports = class Entry {
       } else {
         this.try += 1;
         if (this.try == 5) {
-          this.channel.send(
-            "❌ | Vous êtes bloqué ? Merci de lire toutes les règles en entier !"
-          );
+          let embed = new Discord.MessageEmbed()
+            .setColor("RED")
+            .setDescription(
+              EMOTE.CHECK_EMOTE +
+                " | Vous êtes bloqué ? Merci de lire toutes les règles en entier !"
+            )
+            .setImage(
+              "https://cdn.discordapp.com/attachments/910200998339944479/956517736241070120/68bbfbeff7e1861cfa8b1a2b8eeb3d72.gif"
+            )
+            .setTimestamp();
+          this.channel.send({ embeds: [embed] });
         }
         await this.channel
           .send(
