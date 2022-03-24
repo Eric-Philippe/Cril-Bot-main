@@ -385,10 +385,11 @@ module.exports = class Entry {
         this.try += 1;
         if (this.try == 5) {
           let embed = new Discord.MessageEmbed()
+            .setTitle("Vous êtes bloqué.e")
             .setColor("RED")
             .setDescription(
               EMOTE.CHECK_EMOTE +
-                " | Vous êtes bloqué ? Merci de lire toutes les règles en entier !"
+                " | Vous êtes bloqué.e ? Merci de lire toutes les règles en entier !"
             )
             .setImage(
               "https://cdn.discordapp.com/attachments/910200998339944479/956517736241070120/68bbfbeff7e1861cfa8b1a2b8eeb3d72.gif"
