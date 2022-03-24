@@ -45,6 +45,8 @@ module.exports = class Entry {
     this.reactionCollec;
     this.messageCollec;
 
+    this.try = 0;
+
     this.channel; //Channel Entry
     this.msg; //Msg Entry
     this.__init__();
@@ -331,7 +333,7 @@ module.exports = class Entry {
             } catch (err) {
               console.log(err);
             }
-          }, 5 * 1000);
+          }, 10 * 1000);
         });
 
       this.underPage = this.underPage === 2 ? 0 : this.underPage + 1;
@@ -370,7 +372,7 @@ module.exports = class Entry {
               } catch (err) {
                 console.log(err);
               }
-            }, 5000);
+            }, 10 * 1000);
           });
 
         return false;
@@ -380,6 +382,12 @@ module.exports = class Entry {
       if (this.verify) {
         return true;
       } else {
+        this.try += 1;
+        if (this.try == 5) {
+          this.channel.send(
+            "❌ | Vous êtes bloqué ? Merci de lire toutes les règles en entier !"
+          );
+        }
         await this.channel
           .send(
             "``❌ | Merci de cliquer sur la réaction pour pouvoir passer à la suite !``"
@@ -391,7 +399,7 @@ module.exports = class Entry {
               } catch (err) {
                 console.log(err);
               }
-            }, 5000);
+            }, 10 * 1000);
           });
 
         return false;
