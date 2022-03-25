@@ -32,16 +32,6 @@ module.exports.cmdGrabber = async function (msg) {
       msg.reply(
         "⚙️ | Erreur dans le programme, merci de contacter l'administration ! \n Autrement, merci de vous renseigner sur cette commande à l'aide la commande suivante : ``!help 'nom de la commande'``"
       );
-    } else {
-      // Program Error
-      console.log(err);
-      msg
-        .reply(
-          "❌ | Merci d'entrer une commande valide ! : ``La commande n'existe pas !`` \n Autrement, merci de vous renseigner sur cette commande à l'aide la commande suivante : ``!help 'nom de la commande'``"
-        )
-        .then((m) => {
-          setTimeout(() => m.delete(), 10000);
-        });
     }
   }
   //msg.delete();
