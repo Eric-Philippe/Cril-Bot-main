@@ -82,7 +82,7 @@ module.exports = class Unsubscribe {
     console.log(this.user.id);
     new_channel.permissionOverwrites.edit(this.user.id, {
       VIEW_CHANNEL: true,
-      SEND_MEESAGES: true,
+      SEND_MESSAGES: true,
     });
 
     return new_channel;
