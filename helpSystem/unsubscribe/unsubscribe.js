@@ -72,16 +72,18 @@ module.exports = class Unsubscribe {
       type: "text",
     });
 
+    new_channel.setParent(category.id);
+
     // Set the category of the new channel
     new_channel.permissionOverwrites.edit(this.msg.guild.roles.everyone, {
       VIEW_CHANNEL: false,
     });
+
+    console.log(this.user.id);
     new_channel.permissionOverwrites.edit(this.user.id, {
       VIEW_CHANNEL: true,
       SEND_MEESAGES: true,
     });
-
-    new_channel.setParent(category.id);
 
     return new_channel;
   }
