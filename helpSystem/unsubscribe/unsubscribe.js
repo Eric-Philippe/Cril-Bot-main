@@ -1,7 +1,7 @@
 const Discord = require("discord.js"); // Main packet
 const moment = require("moment"); // Time Format
 
-const { CATEGORY, ROLES, EMOTE } = require("../../ressources.json"); // Stuff needed
+const { CATEGORY, ROLES } = require("../../ressources.json"); // Stuff needed
 
 /**
  * Unsubscriber Class
@@ -124,8 +124,8 @@ module.exports = class Unsubscribe {
    * @param {Discord.Message} msg
    */
   async addReac(msg) {
-    await msg.react(EMOTE.CHECK_EMOTE);
-    await msg.react(EMOTE.BATTE_EMOTE);
+    await msg.react("✅");
+    await msg.react("❎");
   }
 
   /**
@@ -133,7 +133,7 @@ module.exports = class Unsubscribe {
    * @param {Discord.Message} msg
    */
   async __reactionCollector(msg) {
-    let emote_array_name = ["check_rainbow", "BouletShooter"];
+    let emote_array_name = ["✅", "❎"];
     let responsable_role = await msg.guild.roles.cache.find(
       (r) => r.id === ROLES.MOD_ROLES[0]
     );
