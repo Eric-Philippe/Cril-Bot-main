@@ -75,16 +75,13 @@ module.exports = class Unsubscribe {
     // Set the category of the new channel
     new_channel.setParent(category.id);
 
-    new_channel.overwritePermissions([
-      {
-        id: this.msg.guild.roles.everyone,
-        deny: ["VIEW_CHANNEL"],
-      },
-      {
-        id: this.user.id,
-        allow: ["VIEW_CHANNEL", "SEND_MESSAGES"],
-      },
-    ]);
+    new_channel.permissionOverwrites.edit(this.msg.guild.roles.everyone, {
+      VIEW_CHANNEL: false,
+    });
+    new_channel.permissionOverwrites.edit(this.user.id, {
+      VIEW_CHANNEL: true,
+      SEND_MEESAGES: true,
+    });
 
     return new_channel;
   }
