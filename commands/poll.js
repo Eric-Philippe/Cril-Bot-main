@@ -17,7 +17,7 @@ module.exports = class Poll {
 
     if (!args[3]) {
       //Close Question
-      choice_array.push("Oui", "Non");
+      choice_array.push("Yes", "No");
     } else {
       max = args.length;
       if (args.length > 22) max = 22;
