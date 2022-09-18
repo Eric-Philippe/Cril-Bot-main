@@ -17,6 +17,7 @@ client.on("ready", async () => {
   console.log("Ready");
   let channel = await client.channels.cache.get(tipsChannel);
   if (!channel) return client.destroy();
+  if (TIPS.length <= 0) return client.destroy();
   let embed = new EmbedBuilder()
     .setTitle("Nouveau Tips !")
     .setColor("Blurple")
