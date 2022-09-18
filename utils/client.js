@@ -1,8 +1,19 @@
-const Discord = require("discord.js");
+const { Client, GatewayIntentBits, Partials } = require("discord.js");
 
-const { ClientOptions } = require("./clientOption");
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.DirectMessages,
+  ],
+  partials: [
+    Partials.Channel, // Required to receive DMs
+  ],
+});
 
-/**
- * Export of the client object, usable everywhere
- */
-module.exports.client = new Discord.Client(ClientOptions);
+exports.client = client;

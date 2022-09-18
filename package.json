@@ -1,29 +1,27 @@
 {
-  "name": "cril-bot",
+  "name": "botcril",
   "version": "1.0.0",
-  "description": "Cril Bot",
+  "description": "<img width=\"150\" height=\"95\" align=\"left\" style=\"float: left; margin: 0 10px 0 0;\" alt=\"Cril\" src=\"https://media.discordapp.net/attachments/579303130886569984/917748391570731118/logo_CRIL.jpg?width=1050&height=655\">",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node rest.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Zaorhion/Cril-Bot.git"
+    "url": "git+https://github.com/Eric-Philippe/Cril-Bot-main.git"
   },
-  "author": "Zaorhion",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Zaorhion/Cril-Bot/issues"
+    "url": "https://github.com/Eric-Philippe/Cril-Bot-main/issues"
   },
-  "homepage": "https://github.com/Zaorhion/Cril-Bot#readme",
+  "homepage": "https://github.com/Eric-Philippe/Cril-Bot-main#readme",
   "dependencies": {
-    "discord.js": "^13.3.1",
-    "moment": "^2.29.1",
-    "node-fetch": "^3.1.0",
-    "tenorjs": "^1.0.8",
-    "xhr2": "^0.2.1"
-  },
-  "devDependencies": {
-    "eslint": "^8.2.0"
+    "@discordjs/rest": "^1.1.0",
+    "discord.js": "^14.3.0",
+    "dotenv": "^16.0.2",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "tenorjs": "^1.0.10"
   }
 }

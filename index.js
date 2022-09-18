@@ -1,63 +1,134 @@
+const fs = require("fs");
+const path = require("path");
+const { Collection } = require("discord.js");
+
 const { client } = require("./utils/client"); //Client object
+const { TOKEN } = require("./config");
 
-const { TOKEN } = require("./token.json"); // Private token
-const { PREFIX } = require("./config.json"); // Prefix
-
-// ############ Self Independant ##############
-const { statusEdit } = require("./utils/status");
-
-// ############ All Messages ##################
-const { cmdGrabber } = require("./commands/commandsGrabber"); // Manager / Launcher for the commands
-const chatBot = require("./helpSystem/chatBot"); // Chat Bot Help Support
-
-// ############ Member Add Update #############
-const Entry = require("./entry/entry"); // Manager for the entry system
+// ############ Cliebt Status Self Edit ##############
 
 // ############ Reaction Update ###############
-const { pollRequest } = require("./commands/poll"); // Poll Update
-const { reactionRole } = require("./pluginEmbed"); // ReactionRole Message
+const { pollRequest } = require("./commandsPlugin/pollPlugin");
+const {
+  processHelpAssistance,
+  treatModal,
+  treatValidation,
+  validationButton,
+} = require("./Assistance");
+
+const {
+  rolesButtonsDisplay,
+  roleRequest,
+} = require("./commandsPlugin/rolesPlugin"); // ReactionRole Message
+const { tossButtonInteraction } = require("./commandsPlugin/tossPlugin");
 
 /** Wake up on ready state */
 client.on("ready", async () => {
-  console.log(`Logged into: ${client.user.tag}`);
-
-  statusEdit(); // Status auto update
+  console.log(
+    `%c✅ | Logged into: ${client.user.tag}`,
+    "color: orange; font-weught: bold;"
+  );
+  const { statusEdit } = require("./utils/status");
+  statusEdit();
 });
 
-/** Wake up on message sent */
-client.on("messageCreate", async (msg) => {
-  if (msg.author.bot) return;
-  if (msg.channel.type === "DM") return;
-  if (msg.author.id === client.user.id) return;
-  if (msg.content.startsWith(PREFIX)) {
-    cmdGrabber(msg);
-  } else {
-    new chatBot(msg);
+client.commands = new Collection();
+const commandsPath = path.join(__dirname, "commands");
+const commandFiles = fs
+  .readdirSync(commandsPath)
+  .filter((file) => file.endsWith(".js"));
+
+for (const file of commandFiles) {
+  const filePath = path.join(commandsPath, file);
+  const command = require(filePath);
+  client.commands.set(command.data.name, command);
+}
+
+client.on("interactionCreate", async (interaction) => {
+  // Buttons Interaction Type
+  if (interaction.isButton()) {
+    // If the message is an embed [Poll Buttons clicked | Assistance Desk button clicked | End Assistance Desk button clicked]
+    if (interaction.message.embeds[0]) {
+      //
+      // If the embed is recognized with the author name
+      if (interaction.message.embeds[0].author) {
+        // Name SONDAGE
+        if (interaction.message.embeds[0].author.name == "SONDAGE") {
+          pollRequest(interaction);
+          interaction.deferUpdate();
+          // Name Help Desk
+        } else if (interaction.message.embeds[0].author.name == "Help Desk") {
+          processHelpAssistance(interaction);
+        }
+      }
+      //
+      // If the embed is recognized as a toss
+      if (interaction.message.embeds[0].footer) {
+        if (interaction.message.embeds[0].footer.text == "Tirage au Sort") {
+          tossButtonInteraction(interaction);
+        }
+      }
+
+      // If the embed is recognized with a field value
+      if (interaction.message.embeds[0].fields[0]) {
+        // End Assistance Desk is stored with a field value of an discord user ID
+        if (interaction.message.embeds[0].fields[0].value.length == 18) {
+          validationButton(interaction);
+        }
+      }
+
+      if (interaction.customId.length == 18) {
+        roleRequest(interaction);
+      }
+    }
+  }
+  // Modal Interaction Type
+  if (interaction.isModalSubmit()) {
+    // Modal object is stored with a field value of an discord user ID
+    if (interaction.customId.length == 18) {
+      treatValidation(interaction);
+    } else if (interaction.customId === "help_modal") {
+      treatModal(interaction);
+    }
+  }
+
+  if (interaction.isContextMenuCommand()) {
+    new Toss(interaction);
+  }
+
+  if (!interaction.isChatInputCommand()) return;
+  // Commmand Interaction Type
+  const command = client.commands.get(interaction.commandName);
+  if (!command) return;
+
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.error(error);
+    await interaction.reply({
+      content: "There was an error while executing this command!",
+      ephemeral: true,
+    });
   }
 });
 
+client.on("messageCreate", (m) => {});
+
 /** Wake up on reaction added */
 client.on("messageReactionAdd", async (reaction, user) => {
-  if (user.bot) return;
+  /**if (user.bot) return;
   let msg = await reaction.message.channel.messages.fetch(reaction.message.id);
   if (!msg.author.bot) return;
   await reactionRole(reaction, user);
-  await pollRequest(reaction, user, true);
+  await pollRequest(reaction, user, true);*/
 });
 
 /** Wake up on reaction removed */
 client.on("messageReactionRemove", async (reaction, user) => {
-  if (user.bot) return;
+  /**if (user.bot) return;
   let msg = await reaction.message.channel.messages.fetch(reaction.message.id);
   if (!msg.author.bot) return;
-  await pollRequest(reaction, user, false);
-});
-
-/** Wake up on new member income */
-client.on("guildMemberAdd", (member) => {
-  if (member.user.bot) return;
-  if (member.user.id === client.user.id) return;
-  new Entry(member);
+  await pollRequest(reaction, user, false);*/
 });
 
 /** Login on token */
