@@ -44,14 +44,8 @@ Cril-bot offers (non-exhaustive list):
 
 > Thank to Meli's work for the two logos of the bot and the server (see below)
 
-<img width="35" height="35" align="left" style="float: left; margin: 0 10px 0 0;" alt="Cril" src="https://media.discordapp.net/attachments/814908646138970122/1021091357873410129/logo_final_CRIL_Plan_de_travail_1.jpg">
-<img width="35" height="35" align="left" style="float: left; margin: 0 10px 0 0;" alt="Cril" src="https://cdn.discordapp.com/attachments/814908646138970122/1021091343071727617/logo_final_CRIL-02.jpg">
-
----
-
----
-
----
+<img width="75" height="75" align="left" style="float: left; margin: 0 10px 0 0;" alt="Cril" src="https://media.discordapp.net/attachments/814908646138970122/1021091357873410129/logo_final_CRIL_Plan_de_travail_1.jpg">
+<img width="75" height="75" align="left" style="float: left; margin: 0 10px 0 0;" alt="Cril" src="https://cdn.discordapp.com/attachments/814908646138970122/1021091343071727617/logo_final_CRIL-02.jpg">
 
 ---
 
