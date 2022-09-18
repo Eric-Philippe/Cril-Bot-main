@@ -91,6 +91,10 @@ module.exports = {
         }
         break;
       case "list":
+        if (TIPS.length <= 0)
+          interaction.reply(
+            "La liste est vide ! Merci d'en rajouter avec la commande /tip add"
+          );
         let list = "";
         let tip_text;
         for (let i = 0; i < TIPS.length; i++) {
