@@ -5,7 +5,7 @@ const {
 } = require("discord.js");
 const fs = require("fs");
 
-const TIPS_FILE = require("../crilTips/crilTips.json");
+const TIPS_FILE = require("../crilTips.json");
 const TIPS = TIPS_FILE.TIPS;
 
 module.exports = {
