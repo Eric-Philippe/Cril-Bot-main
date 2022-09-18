@@ -8,6 +8,7 @@ const {
   TextChannel,
 } = require("discord.js");
 /**
+ * Processing the toss request
  * @param {ButtonInteraction} interaction
  */
 const tossButtonInteraction = async (interaction) => {
@@ -96,6 +97,12 @@ const startToss = async (time, channel, message, validIndex) => {
     channel.send({ embeds: [embed] });
   }, 1000 * 60 * 60 * time);
 };
+/**
+ * Return the index of the value if is included in a given array of array
+ * @param {Array.<Array>} array
+ * @param {String} value
+ * @returns
+ */
 const isIncluded = (array, value) => {
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array[i].length; j++) {

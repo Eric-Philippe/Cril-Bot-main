@@ -5,13 +5,12 @@ const {
   ButtonBuilder,
   ButtonStyle,
   ActionRowBuilder,
-} = require("discord.js");
+} = require("discord.js"); // Importing basics discord modules
 
-const { themedRoles } = require("../config");
-
+const { themedRoles } = require("../config"); // ThemedRoles properties
 const MAIN_COLOR = "#048B9A"; // Main color for the embeds System
 /**
- *
+ * Display the roles embed
  * @param {Message} m
  */
 const rolesButtonsDisplay = (m) => {
@@ -60,6 +59,7 @@ const roleRequest = (i) => {
   let member = i.member;
   let role = i.guild.roles.cache.get(i.customId);
   if (!role) return;
+  // If the member has the role
   if (member.roles.cache.has(role.id)) {
     member.roles.remove(role);
     i.reply({ content: "✅ | Role retiré avec succès !", ephemeral: true });

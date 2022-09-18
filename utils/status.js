@@ -1,4 +1,4 @@
-const { PermissionsBitField, GuildMember } = require("discord.js");
+const { PermissionsBitField } = require("discord.js");
 
 const { client } = require("./client"); //Client object
 
@@ -14,21 +14,21 @@ const statusEdit = function () {
 
   let sentence = ELEMENT[getRandomInt(ELEMENT.length)]; // Pick a random sentence
   let usersAmount = sentence[1];
-  /** @type {GuildMember[]} */
   let usersPicked = [];
   let tempUser;
 
   for (let i = 0; i < usersAmount; i++) {
+    // Pick a permed user with 75% chance
     if (getRandomInt(101) <= 75) {
-      tempUser = guild.members.cache.filter((m) =>
-        m.permissions.has(PermissionsBitField.Flags.CreateInstantInvite)
+      tempUser = guild.members.cache.filter(
+        (m) => m.permissions.has(PermissionsBitField.Flags.CreateInstantInvite) // Permed user array
       );
     } else {
-      tempUser = guild.members.cache.filter((m) => m.presence != "offline");
+      tempUser = guild.members.cache.filter((m) => m.presence != "offline"); // Online user array
     }
 
-    tempUser = tempUser.random();
-    usersPicked.push(tempUser);
+    tempUser = tempUser.random(); // Pick a random user
+    usersPicked.push(tempUser); // push the user in the array
   }
 
   // Replace all the "?" in the given sentence replacing them with the users picked
@@ -39,9 +39,9 @@ const statusEdit = function () {
     sentence[0] = sentence[0].replace("$", userName);
   }
 
-  client.user.setActivity(sentence[0]);
+  client.user.setActivity(sentence[0]); // Set the activity
 
-  // Loop all the 5 minutes
+  // Loop all the 50 seconds
   setTimeout(() => {
     statusEdit();
   }, 1000 * 50);

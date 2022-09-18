@@ -2,3 +2,4 @@ node_modules/
 payloads.json
 .DS_Store
 .env
+crilTips.json

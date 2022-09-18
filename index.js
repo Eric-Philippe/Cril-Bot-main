@@ -5,8 +5,6 @@ const { Collection } = require("discord.js");
 const { client } = require("./utils/client"); //Client object
 const { TOKEN } = require("./config");
 
-// ############ Cliebt Status Self Edit ##############
-
 // ############ Reaction Update ###############
 const { pollRequest } = require("./commandsPlugin/pollPlugin");
 const {
@@ -16,10 +14,7 @@ const {
   validationButton,
 } = require("./Assistance");
 
-const {
-  rolesButtonsDisplay,
-  roleRequest,
-} = require("./commandsPlugin/rolesPlugin"); // ReactionRole Message
+const { roleRequest } = require("./commandsPlugin/rolesPlugin"); // ReactionRole Message
 const { tossButtonInteraction } = require("./commandsPlugin/tossPlugin");
 
 /** Wake up on ready state */
@@ -31,7 +26,7 @@ client.on("ready", async () => {
   const { statusEdit } = require("./utils/status");
   statusEdit();
 });
-
+/** =========== @Discord_Bot_Commands_Setup =========== */
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs
@@ -43,9 +38,9 @@ for (const file of commandFiles) {
   const command = require(filePath);
   client.commands.set(command.data.name, command);
 }
-
+// When the bot receive an interaction
 client.on("interactionCreate", async (interaction) => {
-  // Buttons Interaction Type
+  /** ========== @Buttons_Interaction_Type ========== */
   if (interaction.isButton()) {
     // If the message is an embed [Poll Buttons clicked | Assistance Desk button clicked | End Assistance Desk button clicked]
     if (interaction.message.embeds[0]) {
@@ -77,12 +72,14 @@ client.on("interactionCreate", async (interaction) => {
         }
       }
 
+      // If the interaction is a rollRequest
       if (interaction.customId.length == 18) {
         roleRequest(interaction);
       }
     }
   }
-  // Modal Interaction Type
+
+  /** ========== @Modal_Interaction_Type ========== */
   if (interaction.isModalSubmit()) {
     // Modal object is stored with a field value of an discord user ID
     if (interaction.customId.length == 18) {
@@ -92,10 +89,7 @@ client.on("interactionCreate", async (interaction) => {
     }
   }
 
-  if (interaction.isContextMenuCommand()) {
-    new Toss(interaction);
-  }
-
+  /** ========== @Slash_Command_Interaction_Type ========== */
   if (!interaction.isChatInputCommand()) return;
   // Commmand Interaction Type
   const command = client.commands.get(interaction.commandName);
@@ -106,30 +100,10 @@ client.on("interactionCreate", async (interaction) => {
   } catch (error) {
     console.error(error);
     await interaction.reply({
-      content: "There was an error while executing this command!",
+      content: "Une erreur s'est produite durant la commande !",
       ephemeral: true,
     });
   }
 });
-
-client.on("messageCreate", (m) => {});
-
-/** Wake up on reaction added */
-client.on("messageReactionAdd", async (reaction, user) => {
-  /**if (user.bot) return;
-  let msg = await reaction.message.channel.messages.fetch(reaction.message.id);
-  if (!msg.author.bot) return;
-  await reactionRole(reaction, user);
-  await pollRequest(reaction, user, true);*/
-});
-
-/** Wake up on reaction removed */
-client.on("messageReactionRemove", async (reaction, user) => {
-  /**if (user.bot) return;
-  let msg = await reaction.message.channel.messages.fetch(reaction.message.id);
-  if (!msg.author.bot) return;
-  await pollRequest(reaction, user, false);*/
-});
-
 /** Login on token */
 client.login(TOKEN);

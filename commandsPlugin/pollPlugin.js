@@ -6,17 +6,21 @@ const { ButtonInteraction } = require("discord.js");
  */
 const pollRequest = (i) => {
   let parentEmbed = i.message.embeds[0];
+  // Poll Embed are added with a answers plug in in the object
   if (!i.message.answers) return;
-
+  // If the user already clicked on tge target button
   let index = alreadyClicked(i.user.id, i.message.answers);
   if (index == -1) {
+    // Add the user id to the array
     index = i.customId - 1;
     i.message.answers[index].push(i.user.id);
   } else {
+    // Remove the user id from the array
     i.message.answers[index].splice(
       i.message.answers[index].indexOf(i.user.id),
       1
     );
+    // If it's not the same button clicked, remove the past one and add to the new one
     if (i.customId != index + 1) {
       i.message.answers[i.customId - 1].push(i.user.id);
     }
@@ -24,7 +28,9 @@ const pollRequest = (i) => {
   let totalAnswer = sumArray(i.message.answers);
   let percentage = arrayToPercentage(totalAnswer, i.message.answers);
 
+  // Loop arround the different answers
   for (let y = 0; y < parentEmbed.fields.length; y++) {
+    // Generate the emoji display for each answers vote amount (square with black and white)
     parentEmbed.fields[y] = {
       name: parentEmbed.fields[y].name,
       value:
@@ -37,11 +43,12 @@ const pollRequest = (i) => {
         ")",
     };
   }
-
+  // Update dynamically the embed
   i.message.edit({ embeds: [parentEmbed] });
 };
 
 /**
+ * Sum all the array
  * @param {Array.<Array.<String>>} arr
  */
 const sumArray = (arr) => {
@@ -52,7 +59,7 @@ const sumArray = (arr) => {
   return total;
 };
 /**
- *
+ * Transform an array of number into an array of percentage
  * @param {Number} total
  * @param {Array} arr
  */
@@ -85,7 +92,7 @@ const generatoSquaro = (percentage) => {
 };
 
 /**
- *
+ * Check if the user already clicked on a button
  * @param {String} userId
  * @param {Array.<Array.<String>>} arr
  */
