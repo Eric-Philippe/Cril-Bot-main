@@ -73,7 +73,7 @@ module.exports = {
         break;
       case "remove":
         let index = interaction.options.getInteger("index-tip");
-        if (index > TIPS.length) {
+        if (index > TIPS.length || TIPS.length <= 0) {
           interaction.reply({
             content: `Le numéro de tip est trop grand !`,
             ephemeral: true,
