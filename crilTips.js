@@ -1,11 +1,7 @@
 console.log("Start of the snippet");
 
-const {
-  Client,
-  GatewayIntentBits,
-  EmbedBuilder,
-} = require("../node_modules/discord.js");
-const { TOKEN, tipsChannel } = require("../config");
+const { Client, GatewayIntentBits, EmbedBuilder } = require("discord.js");
+const { TOKEN, tipsChannel } = require("./config");
 const TIPS = require("./crilTips.json").TIPS;
 
 const client = new Client({

@@ -111,8 +111,5 @@ module.exports = {
 };
 
 updateJsonFile = () => {
-  fs.writeFileSync(
-    "./crilTips/crilTips.json",
-    JSON.stringify(TIPS_FILE, null, 2)
-  );
+  fs.writeFileSync("crilTips.json", JSON.stringify(TIPS_FILE, null, 2));
 };
