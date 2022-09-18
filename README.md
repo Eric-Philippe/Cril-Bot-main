@@ -51,6 +51,8 @@ Cril-bot offers (non-exhaustive list):
 
 ---
 
+---
+
 - Her work is available on []() !
 
 ## Contributing
