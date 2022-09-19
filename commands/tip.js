@@ -2,6 +2,7 @@ const {
   SlashCommandBuilder,
   ChatInputCommandInteraction,
   EmbedBuilder,
+  PermissionsBitField,
 } = require("discord.js");
 const fs = require("fs");
 
@@ -25,6 +26,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("tip")
     .setDescription("Tip manager for the tips displayed in the tips channel.")
+    .setDefaultMemberPermissions(PermissionsBitField.Flags.BanMembers)
     .addSubcommand((subcommand) =>
       subcommand
         .setName("add")
