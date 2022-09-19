@@ -53,7 +53,9 @@ Cril-bot offers (non-exhaustive list):
 
 ---
 
-- Her work is available on []() !
+- Her work is available on
+  [Instagram](https://www.instagram.com/wavy_square_/)
+  [Behance](https://www.behance.net/melindalamend)
 
 ## Contributing
 
