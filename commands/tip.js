@@ -5,6 +5,7 @@ const {
   PermissionsBitField,
 } = require("discord.js");
 const fs = require("fs");
+const fetch = require("node-fetch");
 
 const TIPS_FILE = require("../crilTips.json");
 const TIPS = TIPS_FILE.TIPS;
@@ -37,6 +38,21 @@ module.exports = {
             .setDescription("The tip to add")
             .setRequired(true)
         )
+        .addAttachmentOption((option) =>
+          option
+            .setName("fichier-1")
+            .setDescription("Ajouter un premier fichier au tip !")
+        )
+        .addAttachmentOption((option) =>
+          option
+            .setName("fichier-2")
+            .setDescription("Ajouter un deuxième fichier au tip")
+        )
+        .addAttachmentOption((option) =>
+          option
+            .setName("fichier-3")
+            .setDescription("Ajouter un troisième fichier au tip")
+        )
     )
     .addSubcommand((subcommand) =>
       subcommand
@@ -63,7 +79,15 @@ module.exports = {
     switch (subCommand) {
       case "add":
         let tip = interaction.options.getString("tip");
-        TIPS.push(tip);
+        let fileArray = [];
+        for (let i = 0; i < 3; i++) {
+          let file = interaction.options.getAttachment(`fichier-${i + 1}`);
+          if (!file) break;
+          fileArray.push("./res/" + file.name);
+          saveFile(file);
+        }
+
+        TIPS.push({ name: tip, files: fileArray });
         updateJsonFile();
         embed
           .setTitle("Tip ajouté !")
@@ -81,6 +105,16 @@ module.exports = {
             ephemeral: true,
           });
         } else {
+          let filesToDelete = TIPS[index - 1].files;
+          if (filesToDelete.length != 0) {
+            for (let file of filesToDelete) {
+              try {
+                fs.unlinkSync(file);
+              } catch (err) {
+                console.warn(err);
+              }
+            }
+          }
           TIPS.splice(index - 1, 1);
           updateJsonFile();
           embed
@@ -98,12 +132,18 @@ module.exports = {
             "La liste est vide ! Merci d'en rajouter avec la commande /tip add"
           );
         let list = "";
-        let tip_text;
+        let tip_text, file_text;
         for (let i = 0; i < TIPS.length; i++) {
           // Display the 20 first characters of the tip if the tip is longer than 20 characters
           tip_text =
-            TIPS[i].length > 35 ? TIPS[i].substring(0, 35) + "..." : TIPS[i];
-          list += `#${i + 1} - ${tip_text}\n`;
+            TIPS[i].name.length > 35
+              ? TIPS[i].name.substring(0, 35) + "..."
+              : TIPS[i].name;
+          file_text =
+            TIPS[i].files.length > 0
+              ? ` | *[${TIPS[i].files.length} fichiers associés]*`
+              : "";
+          list += `#${i + 1} - ${tip_text} ${file_text} \n`;
         }
 
         embed.setTitle("Liste des tips").setDescription(list);
@@ -116,6 +156,12 @@ module.exports = {
   },
 };
 
-updateJsonFile = () => {
+const updateJsonFile = () => {
   fs.writeFileSync("crilTips.json", JSON.stringify(TIPS_FILE, null, 2));
+};
+
+const saveFile = (file) => {
+  fetch(file.url).then((res) =>
+    res.body.pipe(fs.createWriteStream("./res/" + file.name))
+  );
 };

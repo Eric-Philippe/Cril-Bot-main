@@ -1,9 +1,13 @@
-const { Client, GatewayIntentBits, EmbedBuilder } = require("discord.js"); // Discord.js basic import
+const {
+  Client,
+  GatewayIntentBits,
+  EmbedBuilder,
+  AttachmentBuilder,
+} = require("discord.js"); // Discord.js basic import
 const { TOKEN, tipsChannel } = require("./config"); // Token import
 const TIPS = require("./crilTips.json").TIPS; // Array of tips import
 
 console.log("Start of the snippet"); // Start of the snippet
-client.login(TOKEN); // Login to the bot
 
 // Client Builder
 const client = new Client({
@@ -23,6 +27,8 @@ client.on("ready", async () => {
   if (!channel) return client.destroy();
   // If the array of tips is empty
   if (TIPS.length <= 0) return client.destroy();
+
+  let determinedTip = TIPS[Math.floor(Math.random() * TIPS.length)];
   // New Embed
   let embed = new EmbedBuilder()
     .setTitle("Nouveau Tips !")
@@ -32,9 +38,19 @@ client.on("ready", async () => {
     )
     .setFooter({ text: "cril.langues@iut-tlse.fr" })
     // Get a random tip
-    .setDescription(TIPS[Math.floor(Math.random() * TIPS.length)]);
+    .setDescription(determinedTip.name);
   // Send the embed tip
-  await channel.send({ embeds: [embed] });
+  if (determinedTip.files.length <= 0) {
+    await channel.send({ embeds: [embed] });
+  } else {
+    let filesArray = [];
+    for (let file of determinedTip.files) {
+      console.log(file);
+      filesArray.push(new AttachmentBuilder(file));
+    }
+
+    await channel.send({ embeds: [embed], files: filesArray });
+  }
   // Destroy the client
   await client.destroy();
 
@@ -42,3 +58,5 @@ client.on("ready", async () => {
   // Leave the process
   process.exit();
 });
+
+client.login(TOKEN); // Login to the bot
