@@ -102,6 +102,7 @@ client.on("interactionCreate", async (interaction) => {
     await interaction.reply({
       content: "Une erreur s'est produite durant la commande !",
       ephemeral: true,
+      é,
     });
   }
 });
