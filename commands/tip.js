@@ -83,7 +83,7 @@ module.exports = {
         for (let i = 0; i < 3; i++) {
           let file = interaction.options.getAttachment(`fichier-${i + 1}`);
           if (!file) break;
-          fileArray.push("./res/" + file.name);
+          fileArray.push("./BotCril/res/" + file.name);
           saveFile(file);
         }
 

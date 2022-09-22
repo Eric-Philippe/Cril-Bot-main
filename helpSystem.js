@@ -144,7 +144,7 @@ module.exports = class HelpSystem {
     }
     // Instruction for the button's utilisation added at the end of the embed's description
     desc +=
-      "\n\n📁 | Cliquez sur les boutons en gris afin de changer de catergorie de commande si vous en avez les permissions ! \n📄 | Cliquez sur les boutons bleus correspondant à l'emote de commande pour avoir des informations plus précises sur cette dernière !";
+      "\n\n📁 | Cliquez sur les boutons en gris afin de changer de catégorie de commande si vous en avez les permissions ! \n📄 | Cliquez sur les boutons bleus correspondant à l'emote de commande pour avoir des informations plus précises sur cette dernière !";
     embed.setDescription(desc);
 
     // Set the current page on the footer depending on the pointer

@@ -212,7 +212,7 @@ const treatModal = async (i) => {
   );
   // Notify the user and the admins in the channel and send the recap' embed
   await support_channel.send({
-    content: `||<@${i.member.user.id}><@${adminRole}>||`,
+    content: `||<@${i.member.user.id}><@&${adminRole}>||`,
     embeds: [embed],
     components: [row],
   });
