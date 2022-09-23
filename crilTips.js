@@ -25,6 +25,11 @@ client.on("ready", async () => {
   let channel = await client.channels.cache.get(tipsChannel);
   // If the channel is not found
   if (!channel) return client.destroy();
+  // Delete all the top message from the channel
+  let messages = await channel.messages.fetch({ limit: 100 });
+  messages.forEach((message) => {
+    message.delete();
+  });
   // If the array of tips is empty
   if (TIPS.length <= 0) return client.destroy();
 
