@@ -14,7 +14,7 @@ module.exports = {
     desc:
       "Message automatique réduit en une commande pour répondre à plusieurs cas de figure en vous offrant la possibilité de cibler, ou non, un utilisateur !" +
       "\n\n───── Liste des commandes ──────\n➣ late | participation | rules | validation | check-activity | support" +
-      "\n\n───── Liste des sous commandes ────\n➣ Coaching ➪ deb-a-faire | deb-faite | fiche-comm \n\n➣ Sound ➪ initial | escalate \n\n➣ JoinChat ➪ tel | ordi \n\n➣ Link ➪ moodle | resacril | ressources",
+      "\n\n───── Liste des sous commandes ────\n➣ Coaching ➪ deb-a-faire | deb-faite | fiche-comm \n\n➣ Sound ➪ initial | escalate \n\n➣ PDF ➪ moodle | resacril \n\n➣ JoinChat ➪ tel | ordi \n\n➣ Link ➪ moodle | resacril | ressources",
     emote: "📨",
     exemple: [
       {
@@ -132,6 +132,30 @@ module.exports = {
             )
         )
     )
+    //  ####################################################################################
+    /** ###################################### @PDF ###################################### */
+    //  ####################################################################################
+    .addSubcommandGroup((group) =>
+      group
+        .setName("pdf")
+        .setDescription("Envoie un PDF")
+        .addSubcommand((subCommand) =>
+          subCommand
+            .setName("moodle")
+            .setDescription("Envoie un PDF de la page Moodle")
+            .addUserOption((option) =>
+              option.setName("utilisateur").setDescription("Utilisateur cible.")
+            )
+        )
+        .addSubcommand((subCommand) =>
+          subCommand
+            .setName("resacril")
+            .setDescription("Envoie un PDF de la page RésaCRIL")
+            .addUserOption((option) =>
+              option.setName("utilisateur").setDescription("Utilisateur cible.")
+            )
+        )
+    )
 
     //  ####################################################################################
     /** ###################################### @SOUND ###################################### */
@@ -244,6 +268,9 @@ module.exports = {
         case "link":
           linkInteraction(interaction, subCommand, user);
           break;
+        case "pdf":
+          pdfInteraction(interaction, subCommand, user);
+          break;
         case "sound":
           soundInteraction(interaction, subCommand, user);
           break;
@@ -336,6 +363,32 @@ const linkInteraction = (i, subCommand, user) => {
 
   if (!user) return i.reply({ embeds: [embed] });
   i.reply({ content: `<@${user.id}>`, embeds: [embed] });
+};
+/**
+ *
+ * @param {ChatInputCommandInteraction} i
+ * @param {String} subCommand
+ * @param {User | undefined} user
+ */
+const pdfInteraction = (i, subCommand, user) => {
+  let f;
+  let embed = new EmbedBuilder().setColor("#FF8700").setTitle("PDF");
+  switch (subCommand) {
+    case "moodle":
+      f = new AttachmentBuilder("./docs/Tuto_Moodle.pdf");
+      embed.setDescription(
+        "Vous trouverez réponse sur Moodle à toutes vos questions dans ce PDF. Merci de le consulter complètement avant de poser vos questions !"
+      );
+      break;
+    case "resacril":
+      f = new AttachmentBuilder("./docs/Tuto_ResaCRIL.pdf");
+      embed.setDescription(
+        "Vous trouverez réponse sur RésaCRIL à toutes vos questions dans ce PDF. Merci de le consulter complètement avant de poser vos questions !"
+      );
+      break;
+  }
+  if (!user) return i.reply({ embeds: [embed], files: [f] });
+  i.reply({ content: `<@${user.id}>`, embeds: [embed], files: [f] });
 };
 /**
  *
