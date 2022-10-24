@@ -65,18 +65,21 @@ module.exports = {
       if (!UsedCode.has(id)) {
         let code = Object.values(element)[0][current_day - 1];
         let embed = new EmbedBuilder()
-          .setTitle("Code Yabla")
+          .setTitle("🎧 - Code Yabla - ")
           .addFields(
             {
-              name: "Identifiant : ",
+              name: "🔒 | Identifiant : ",
               value: id,
             },
             {
-              name: "Mot de Passe : ",
+              name: "🔑 | Mot de Passe : ",
               value: code,
             }
           )
           .setColor("#0061fc")
+          .setThumbnail(
+            "https://media.discordapp.net/attachments/910200998339944479/1034155605537071124/learn-french-with-yabla.jpg"
+          )
           .setFooter({ text: "Ce code est valide pendant 1h." });
         if (user)
           interaction.reply({ embeds: [embed], content: `<@${user.id}>` });
