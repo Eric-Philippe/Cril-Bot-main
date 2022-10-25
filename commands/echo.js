@@ -52,14 +52,14 @@ const morseCode = {
 
 module.exports = {
   desc: {
-    desc: "Envoie des messages en binaire !",
+    desc: "Envoie des messages convertis !",
     emote: "🖥️",
     exemple: [{ cmd: "/echo", desc: "00101110101011" }],
     usage: "/echo",
   },
   data: new SlashCommandBuilder()
     .setName("echo")
-    .setDescription("Envoie des messages en binaire !.")
+    .setDescription("Envoie des messages convertis !.")
     .addStringOption((option) =>
       option
         .setName("text")
