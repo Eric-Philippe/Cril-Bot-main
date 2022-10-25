@@ -62,6 +62,13 @@ module.exports = {
     .setDescription("Envoie des messages en binaire !.")
     .addStringOption((option) =>
       option
+        .setName("text")
+        .setDescription("Texte à convertir")
+        .setRequired(true)
+        .setMinLength(1)
+    )
+    .addStringOption((option) =>
+      option
         .setName("conversion")
         .setDescription("conversion choisie")
         .addChoices(
@@ -70,13 +77,6 @@ module.exports = {
           { name: "morse", value: "MOR" },
           { name: "louise_langue", value: "LOU" }
         )
-    )
-    .addStringOption((option) =>
-      option
-        .setName("text")
-        .setDescription("Texte à convertir")
-        .setRequired(true)
-        .setMinLength(1)
     ),
   /**
    * @param {ChatInputCommandInteraction} interaction
