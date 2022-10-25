@@ -6,7 +6,7 @@ const {
 module.exports = {
   desc: {
     desc: "Envoie des messages en binaire !",
-    emote: "🏓",
+    emote: "🖥️",
     exemple: [{ cmd: "/echo", desc: "00101110101011" }],
     usage: "/echo",
   },
