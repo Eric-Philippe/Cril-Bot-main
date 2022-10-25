@@ -54,32 +54,32 @@
   "YABLA_SPA": [
     {
       "yabla.cril.espagnol1": [
-        "LyablaEspa1",
-        "MyablaEspa1",
-        "MEyablaEspa1",
-        "JyablaEspa1",
-        "VyablaEspa1",
-        "JOyablaEspa1"
+        "LyablaEsp1",
+        "MyablaEsp1",
+        "MEyablaEsp1",
+        "JyablaEsp1",
+        "VyablaEsp1",
+        "JOyablaEsp1"
       ]
     },
     {
       "yabla.cril.espagnol2": [
-        "LyablaEspa2",
-        "MyablaEspa2",
-        "MEyablaEspa2",
-        "JyablaEspa2",
-        "VyablaEspa2",
-        "JOyablaEspa2"
+        "LyablaEsp2",
+        "MyablaEsp2",
+        "MEyablaEsp2",
+        "JyablaEsp2",
+        "VyablaEsp2",
+        "JOyablaEsp2"
       ]
     },
     {
       "yabla.cril.espagnol3": [
-        "LyablaEspa3",
-        "MyablaEspa3",
-        "MEyablaEspa3",
-        "JyablaEspa3",
-        "VyablaEspa3",
-        "JOyablaEspa3"
+        "LyablaEsp3",
+        "MyablaEsp3",
+        "MEyablaEsp3",
+        "JyablaEsp3",
+        "VyablaEsp3",
+        "JOyablaEsp3"
       ]
     }
   ]
