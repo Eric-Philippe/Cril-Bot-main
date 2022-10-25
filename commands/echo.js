@@ -65,10 +65,10 @@ module.exports = {
         .setName("conversion")
         .setDescription("conversion choisie")
         .addChoices(
-          { name: "Binaire", value: "BIN" },
-          { name: "Zorglang", value: "ZOR" },
-          { name: "Morse", value: "MOR" },
-          { name: "Louise Langue", value: "LOU" }
+          { name: "binaire", value: "BIN" },
+          { name: "zorglang", value: "ZOR" },
+          { name: "morse", value: "MOR" },
+          { name: "louise_langue", value: "LOU" }
         )
     )
     .addStringOption((option) =>
