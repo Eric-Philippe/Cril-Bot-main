@@ -3,6 +3,53 @@ const {
   ChatInputCommandInteraction,
 } = require("discord.js");
 
+const morseCode = {
+  a: ".-",
+  b: "-...",
+  c: "-.-.",
+  d: "-..",
+  e: ".",
+  f: "..-.",
+  g: "--.",
+  h: "....",
+  i: "..",
+  j: ".---",
+  k: "-.-",
+  l: ".-..",
+  m: "--",
+  n: "-.",
+  o: "---",
+  p: ".--.",
+  q: "--.-",
+  r: ".-.",
+  s: "...",
+  t: "-",
+  u: "..-",
+  v: "...-",
+  w: ".--",
+  x: "-..-",
+  y: "-.--",
+  z: "--..",
+  1: ".----",
+  2: "..---",
+  3: "...--",
+  4: "....-",
+  5: ".....",
+  6: "-....",
+  7: "--...",
+  8: "---..",
+  9: "----.",
+  0: "-----",
+  ", ": "--..--",
+  ".": ".-.-.-",
+  "?": "..--..",
+  "/": "-..-.",
+  "-": "-....-",
+  "(": "-.--.",
+  ")": "-.--.-",
+  " ": " ",
+};
+
 module.exports = {
   desc: {
     desc: "Envoie des messages en binaire !",
@@ -15,6 +62,17 @@ module.exports = {
     .setDescription("Envoie des messages en binaire !.")
     .addStringOption((option) =>
       option
+        .setName("conversion")
+        .setDescription("conversion choisie")
+        .addChoices(
+          { name: "Binaire", value: "BIN" },
+          { name: "Zorglang", value: "ZOR" },
+          { name: "Morse", value: "MOR" },
+          { name: "Louise Langue", value: "LOU" }
+        )
+    )
+    .addStringOption((option) =>
+      option
         .setName("text")
         .setDescription("Texte à convertir")
         .setRequired(true)
@@ -25,7 +83,39 @@ module.exports = {
    */
   async execute(interaction) {
     const text = interaction.options.getString("text");
-    const binary = text.split("").map((char) => char.charCodeAt(0).toString(2));
-    await interaction.reply(binary.join(" "));
+    const conversion = interaction.options.getString("conversion");
+    let res;
+    switch (conversion) {
+      case "BIN":
+        res = text
+          .split("")
+          .map((char) => char.charCodeAt(0).toString(2))
+          .join(" ");
+        break;
+      case "ZOR":
+        res = text
+          .split(" ")
+          .map((word) => word.split("").reverse().join(""))
+          .join(" ");
+        break;
+      case "MOR":
+        res = text
+          .split("")
+          .map((char) => morseCode[char])
+          .join(" ");
+
+        break;
+      case "LOU":
+        // Each letter is the real one + 2
+        res = text
+          .split("")
+          .map((char) => String.fromCharCode(char.charCodeAt(0) + 2))
+          .join("");
+        break;
+      default:
+        res = text;
+    }
+
+    await interaction.reply(res);
   },
 };
