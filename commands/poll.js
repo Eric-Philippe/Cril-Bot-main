@@ -40,7 +40,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("poll")
     .setDescription("Start a new interactive poll !")
-    .setDefaultMemberPermissions(PermissionsBitField.Flags.KickMembers)
+    .setDefaultMemberPermissions(PermissionsBitField.Flags.MentionEveryone)
     .setDMPermission(false)
     .addStringOption((option) =>
       option

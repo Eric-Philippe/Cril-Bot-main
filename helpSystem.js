@@ -19,7 +19,7 @@ const helpCategoriesProperty = [
     name: "tuteurs",
     color: "#c27100",
     emote: "🐦",
-    permissions: PermissionFlagsBits.KickMembers,
+    permissions: PermissionFlagsBits.MentionEveryone,
   },
   {
     name: "administrateurs",
@@ -88,9 +88,15 @@ module.exports = class HelpSystem {
     for (let command of client.commands) {
       if (!command[1].data.default_member_permissions) {
         arrPerm0.push({ name: command[0], cmdObj: command[1] });
-      } else if (command[1].data.default_member_permissions == 2) {
+      } else if (
+        command[1].data.default_member_permissions ==
+        PermissionFlagsBits.MentionEveryone
+      ) {
         arrPerm1.push({ name: command[0], cmdObj: command[1] });
-      } else if (command[1].data.default_member_permissions == 4) {
+      } else if (
+        command[1].data.default_member_permissions ==
+        PermissionFlagsBits.BanMembers
+      ) {
         arrPerm2.push({ name: command[0], cmdObj: command[1] });
       }
     }

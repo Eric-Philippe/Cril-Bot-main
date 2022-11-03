@@ -31,7 +31,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("send")
     .setDescription("Envoie un message préformaté selon les valeurs choisies.")
-    .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+    .setDefaultMemberPermissions(PermissionFlagsBits.MentionEveryone)
     .setDMPermission(false)
 
     //  ####################################################################################

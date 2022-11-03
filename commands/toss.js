@@ -38,7 +38,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("tirage-au-sort")
     .setDescription("Lance un tirage au Sort !")
-    .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+    .setDefaultMemberPermissions(PermissionFlagsBits.MentionEveryone)
     .addStringOption((option) =>
       option
         .setName("enonce")

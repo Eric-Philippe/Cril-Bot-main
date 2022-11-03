@@ -20,7 +20,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("embed")
     .setDescription("Créer un embed avec les paramètres de votre choix !")
-    .setDefaultMemberPermissions(PermissionsBitField.Flags.KickMembers)
+    .setDefaultMemberPermissions(PermissionsBitField.Flags.MentionEveryone)
     .addStringOption((option) =>
       option
         .setName("description")

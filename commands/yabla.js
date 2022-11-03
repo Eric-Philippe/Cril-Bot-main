@@ -28,7 +28,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("yabla")
     .setDescription("Envoie les codes Yabla lié au jour.")
-    .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+    .setDefaultMemberPermissions(PermissionFlagsBits.MentionEveryone)
     .addStringOption((option) =>
       option
         .setName("codes_espagnol")
