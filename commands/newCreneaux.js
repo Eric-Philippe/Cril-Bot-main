@@ -2,6 +2,7 @@ const {
   SlashCommandBuilder,
   PermissionFlagsBits,
   EmbedBuilder,
+  ChatInputCommandInteraction,
 } = require("discord.js");
 
 const { etuRole, supportChannel } = require("../config");
@@ -44,7 +45,10 @@ module.exports = {
         "https://media.discordapp.net/attachments/739553949199106158/922311422166306826/calendardatemonthplannerreminderscheduleicon-1320196664736011804.png"
       )
       .setTimestamp();
-
+    interaction.reply({
+      content: "Message correctement envoyé !",
+      ephemeral: true,
+    });
     interaction.channel.send({
       content: `||<@&${etuRole}>||`,
       embeds: [embed],
