@@ -46,7 +46,7 @@ module.exports = {
       .setTimestamp();
 
     interaction.channel.send({
-      scontent: `||<@&${etuRole}>||`,
+      content: `||<@&${etuRole}>||`,
       embeds: [embed],
     });
   },
