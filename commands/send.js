@@ -356,7 +356,7 @@ const linkInteraction = (i, subCommand, user) => {
       embed
         .setColor("#55FF00")
         .setDescription(
-          "Le lien vers les ressources pour le coaching est épinglé en haut de ce channel. Vous pouvez aussi [cliquer ici]() pour y accéder "
+          "Le lien vers les ressources pour le coaching est épinglé en haut de ce channel. Vous pouvez aussi [cliquer ici](https://view.genial.ly/62d6907e2a974b001115bf35/guide-ressources-coaching-cril) pour y accéder "
         );
       break;
   }
