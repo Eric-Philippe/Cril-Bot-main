@@ -33,7 +33,7 @@ module.exports = {
    */
   async execute(interaction) {
     // Check if the user is in the OXY obj
-    if (!OXY.OXY[interaction.user.id]) {
+    if (OXY.OXY[interaction.user.id]) {
       return interaction.reply({
         content: "Vous ne pouvez pas lancer deux oxy counter à la fois !",
         ephemeral: true,
