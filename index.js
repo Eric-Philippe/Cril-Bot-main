@@ -45,8 +45,7 @@ client.on("interactionCreate", async (interaction) => {
   /** ========== @Buttons_Interaction_Type ========== */
   if (interaction.isButton()) {
     // Check if the interaction has happened in a DM
-
-    if (!interaction.channel) {
+    if (!interaction.channel || interaction.channel.type === 1) {
       if (interaction.customId === "add" && OXY.OXY[interaction.user.id]) {
         OXY.OXY[interaction.user.id].push(new Date());
         fs.writeFileSync("./oxy.json", JSON.stringify(OXY, null, 2));
