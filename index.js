@@ -17,6 +17,8 @@ const {
 const { roleRequest } = require("./commandsPlugin/rolesPlugin"); // ReactionRole Message
 const { tossButtonInteraction } = require("./commandsPlugin/tossPlugin");
 
+const OXY = require("./oxy.json");
+
 /** Wake up on ready state */
 client.on("ready", async () => {
   console.log(
@@ -45,10 +47,9 @@ client.on("interactionCreate", async (interaction) => {
     // Check if the interaction has happened in a DM
 
     if (!interaction.channel) {
-      const OXY = require("./oxy.json").OXY;
-      if (interaction.customId === "add" && OXY[interaction.user.id]) {
-        OXY[interaction.user.id].push(new Date());
-        fs.writeFileSync("./oxy.json", JSON.stringify({ OXY }, null, 2));
+      if (interaction.customId === "add" && OXY.OXY[interaction.user.id]) {
+        OXY.OXY[interaction.user.id].push(new Date());
+        fs.writeFileSync("./oxy.json", JSON.stringify(OXY, null, 2));
         interaction.reply({
           content: "Vous avez compté un item !",
           ephemeral: true,
