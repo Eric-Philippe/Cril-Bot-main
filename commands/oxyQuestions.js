@@ -1,5 +1,6 @@
 const {
   SlashCommandBuilder,
+  PermissionsBitField,
   ChatInputCommandInteraction,
   EmbedBuilder,
   ActionRowBuilder,
@@ -27,7 +28,8 @@ module.exports = {
     .setName("oxy-questions")
     .setDescription(
       "Envoie un DM avec un bouton un message pour pouvoir cliquer et compter un item de votre choix."
-    ),
+    )
+    .setDefaultMemberPermissions(PermissionsBitField.Flags.MentionEveryone),
   /**
    * @param {ChatInputCommandInteraction} interaction
    */
