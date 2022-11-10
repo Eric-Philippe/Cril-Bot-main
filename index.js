@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { Collection, ChannelType } = require("discord.js");
+const { Collection } = require("discord.js");
 
 const { client } = require("./utils/client"); //Client object
 const { TOKEN } = require("./config");
@@ -16,8 +16,6 @@ const {
 
 const { roleRequest } = require("./commandsPlugin/rolesPlugin"); // ReactionRole Message
 const { tossButtonInteraction } = require("./commandsPlugin/tossPlugin");
-
-const OXY = require("./oxy.json").OXY;
 
 /** Wake up on ready state */
 client.on("ready", async () => {
@@ -47,6 +45,7 @@ client.on("interactionCreate", async (interaction) => {
     // Check if the interaction has happened in a DM
 
     if (!interaction.channel) {
+      const OXY = require("./oxy.json").OXY;
       if (interaction.customId === "add" && OXY[interaction.user.id]) {
         OXY[interaction.user.id].push(new Date());
         fs.writeFileSync("./oxy.json", JSON.stringify({ OXY }, null, 2));
