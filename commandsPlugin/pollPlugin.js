@@ -12,7 +12,7 @@ const pollRequest = (i) => {
   let index = alreadyClicked(i.user.id, i.message.answers);
   if (index == -1) {
     // Add the user id to the array
-    index = i.customId - 1;
+    index = i.customId.split("-")[0] - 1;
     i.message.answers[index].push(i.user.id);
   } else {
     // Remove the user id from the array
@@ -21,8 +21,8 @@ const pollRequest = (i) => {
       1
     );
     // If it's not the same button clicked, remove the past one and add to the new one
-    if (i.customId != index + 1) {
-      i.message.answers[i.customId - 1].push(i.user.id);
+    if (i.customId.split("-")[0] != index + 1) {
+      i.message.answers[i.customId.split("-")[0] - 1].push(i.user.id);
     }
   }
   let totalAnswer = sumArray(i.message.answers);

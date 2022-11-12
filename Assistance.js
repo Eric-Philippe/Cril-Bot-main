@@ -61,7 +61,7 @@ const displayAssistance = (msg) => {
             ? Discord.ButtonStyle.Primary
             : Discord.ButtonStyle.Secondary
         )
-        .setCustomId(String(i + 1))
+        .setCustomId(String(i + 1) + "-help-desk")
     );
     // Add the text for the description embed
     description += `${MyNumberEmotes[i]} ${helpsText[i]}\n\n`;
@@ -79,7 +79,7 @@ const displayAssistance = (msg) => {
  * @param {Discord.ButtonInteraction} i
  */
 const processHelpAssistance = (i) => {
-  switch (i.customId) {
+  switch (i.customId.split("-")[0]) {
     case "1":
       i.reply({
         content:

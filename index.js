@@ -1,9 +1,9 @@
 const fs = require("fs");
 const path = require("path");
-const { Collection } = require("discord.js");
+const { Collection, PermissionFlagsBits } = require("discord.js");
 
 const { client } = require("./utils/client"); //Client object
-const { TOKEN } = require("./config");
+const { TOKEN, themeChannel } = require("./config");
 
 // ############ Reaction Update ###############
 const { pollRequest } = require("./commandsPlugin/pollPlugin");
@@ -18,6 +18,10 @@ const { roleRequest } = require("./commandsPlugin/rolesPlugin"); // ReactionRole
 const { tossButtonInteraction } = require("./commandsPlugin/tossPlugin");
 
 const OXY = require("./oxy.json");
+const {
+  cancelTheme,
+  createTheme,
+} = require("./commandsPlugin/thematiquePlugin");
 
 /** Wake up on ready state */
 client.on("ready", async () => {
@@ -42,6 +46,7 @@ for (const file of commandFiles) {
 }
 // When the bot receive an interaction
 client.on("interactionCreate", async (interaction) => {
+  let cid = interaction.customId;
   /** ========== @Buttons_Interaction_Type ========== */
   if (interaction.isButton()) {
     // Check if the interaction has happened in a DM
@@ -55,50 +60,42 @@ client.on("interactionCreate", async (interaction) => {
         });
       }
     }
-    // If the message is an embed [Poll Buttons clicked | Assistance Desk button clicked | End Assistance Desk button clicked]
-    if (interaction.message.embeds[0]) {
-      //
-      // If the embed is recognized with the author name
-      if (interaction.message.embeds[0].author) {
-        // Name SONDAGE
-        if (interaction.message.embeds[0].author.name == "SONDAGE") {
-          pollRequest(interaction);
-          interaction.deferUpdate();
-          // Name Help Desk
-        } else if (interaction.message.embeds[0].author.name == "Help Desk") {
-          processHelpAssistance(interaction);
-        }
-      }
-      //
-      // If the embed is recognized as a toss
-      if (interaction.message.embeds[0].footer) {
-        if (interaction.message.embeds[0].footer.text == "Tirage au Sort") {
-          tossButtonInteraction(interaction);
-        }
-      }
 
-      // If the embed is recognized with a field value
-      if (interaction.message.embeds[0].fields[0]) {
-        // End Assistance Desk is stored with a field value of an discord user ID
-        if (interaction.message.embeds[0].fields[0].value.length == 18) {
-          validationButton(interaction);
-        }
-      }
-
-      // If the interaction is a rollRequest
-      if (interaction.customId.length == 18) {
+    switch (true) {
+      case cid.match(/^\d(?:-poll-answer)/gm) !== null:
+        pollRequest(interaction);
+        interaction.deferUpdate();
+        break;
+      case cid.match(/^\d(?:-toss-answer)/gm) !== null:
+        tossButtonInteraction(interaction);
+        break;
+      case cid.match(/^\d|10(?:-help-desk)/gm) !== null:
+        processHelpAssistance(interaction);
+        break;
+      case cid === "valid_help":
+        validationButton(interaction);
+        break;
+      case cid === "create-theme":
+        createTheme(interaction);
+        break;
+      case cid === "cancel-theme":
+        cancelTheme(interaction);
+        break;
+      case cid.length === 18:
         roleRequest(interaction);
-      }
+        break;
     }
   }
 
   /** ========== @Modal_Interaction_Type ========== */
   if (interaction.isModalSubmit()) {
-    // Modal object is stored with a field value of an discord user ID
-    if (interaction.customId.length == 18) {
-      treatValidation(interaction);
-    } else if (interaction.customId === "help_modal") {
-      treatModal(interaction);
+    switch (true) {
+      case cid.length === 18:
+        treatValidation(interaction);
+        break;
+      case cid === "help_modal":
+        treatModal(interaction);
+        break;
     }
   }
 
@@ -116,6 +113,24 @@ client.on("interactionCreate", async (interaction) => {
       content: "Une erreur s'est produite durant la commande !",
       ephemeral: true,
     });
+  }
+});
+
+client.on("messageCreate", (msg) => {
+  if (
+    msg.channel.id === themeChannel &&
+    !msg.member.permissions.has(PermissionFlagsBits.Administrator)
+  ) {
+    msg.delete();
+    msg.channel
+      .send(
+        'Désirez-vous proposer un thème ? Utilisez ici même la commande /thematique "Titre de votre thème" !'
+      )
+      .then((m) => {
+        setTimeout(() => {
+          m.delete();
+        }, 5000);
+      });
   }
 });
 /** Login on token */

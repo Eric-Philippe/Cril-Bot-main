@@ -109,7 +109,7 @@ module.exports = {
       row.addComponents(
         new ButtonBuilder()
           .setEmoji(Emote_Numbers_Array[i])
-          .setCustomId(String(i))
+          .setCustomId(String(i + "-toss-answer"))
           .setStyle(ButtonStyle.Secondary)
       );
 

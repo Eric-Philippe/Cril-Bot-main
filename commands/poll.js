@@ -96,7 +96,7 @@ module.exports = {
         new ButtonBuilder()
           .setEmoji(Emote_Numbers_Array[i])
           .setStyle(ButtonStyle.Primary)
-          .setCustomId(String(i + 1))
+          .setCustomId(String(i + 1) + "-poll-answer")
       );
     }
 

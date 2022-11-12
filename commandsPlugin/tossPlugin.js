@@ -12,7 +12,8 @@ const {
  * @param {ButtonInteraction} interaction
  */
 const tossButtonInteraction = async (interaction) => {
-  let indexPicked = interaction.customId;
+  let indexPicked = interaction.customId.split("-")[0];
+  console.log(indexPicked);
   let usersVote = interaction.message.votedUsers;
   if (!usersVote) return;
 
