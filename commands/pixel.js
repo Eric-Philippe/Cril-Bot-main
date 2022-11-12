@@ -93,5 +93,9 @@ module.exports = {
       content: `Le pixel en ${x} ${y} a été ajouté avec la couleur ${color}.`,
       ephemeral: true,
     });
+
+    console.log(
+      `L'utilisateur ${interaction.user.username} avec l'identifiant ${interaction.user.id} a ajouté un pixel ${color} en ${x}, ${y}.`
+    );
   },
 };
