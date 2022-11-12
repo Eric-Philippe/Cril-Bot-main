@@ -1,9 +1,10 @@
 const fs = require("fs");
 const path = require("path");
+const { createCanvas } = require("canvas");
 const { Collection, PermissionFlagsBits } = require("discord.js");
 
 const { client } = require("./utils/client"); //Client object
-const { TOKEN, themeChannel } = require("./config");
+const { TOKEN, themeChannel, placeChannel } = require("./config");
 
 // ############ Reaction Update ###############
 const { pollRequest } = require("./commandsPlugin/pollPlugin");
@@ -22,6 +23,7 @@ const {
   cancelTheme,
   createTheme,
 } = require("./commandsPlugin/thematiquePlugin");
+const CrilPlace = require("./CrilPlace/CrilPlace");
 
 /** Wake up on ready state */
 client.on("ready", async () => {
@@ -117,6 +119,12 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 client.on("messageCreate", (msg) => {
+  if (
+    msg.channel.id === placeChannel &&
+    !msg.member.permissions.has(PermissionFlagsBits.Administrator)
+  ) {
+    msg.delete();
+  }
   if (
     msg.channel.id === themeChannel &&
     !msg.member.permissions.has(PermissionFlagsBits.Administrator)

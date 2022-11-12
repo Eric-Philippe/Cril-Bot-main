@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Eric-Philippe/Cril-Bot-main#readme",
   "dependencies": {
     "@discordjs/rest": "^1.1.0",
+    "canvas": "^2.10.2",
     "discord.js": "^14.3.0",
     "dotenv": "^16.0.2",
     "file-system": "^2.2.2",

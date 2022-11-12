@@ -1,0 +1,18 @@
+const COLOR = {
+  RED: "#FF0000",
+  GREEN: "#00FF00",
+  BLUE: "#0000FF",
+  PURPLE: "#FF00FF",
+  PINK: "#FFC0CB",
+  BLACK: "#000000",
+  WHITE: "#FFFFFF",
+  ORANGE: "#FFA500",
+  GREY: "#808080",
+  DARK_BLUE: "#00008B",
+  DARK_GREEN: "#006400",
+  YELLOW: "#FFFF00",
+  BROWN: "#A52A2A",
+  LILA: "#800080",
+};
+
+exports.COLOR = COLOR;

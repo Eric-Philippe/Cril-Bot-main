@@ -10,6 +10,7 @@ module.exports = {
   supportChannel: process.env.SUPPORT_CHANNEL,
   tipsChannel: process.env.TIPS_CHANNEL,
   themeChannel: process.env.THEME_CHANNEL,
+  placeChannel: process.env.PLACE_CHANNEL,
   // Guild ID Export
   guildID: process.env.GUILD_ID,
   // Role ID Export
