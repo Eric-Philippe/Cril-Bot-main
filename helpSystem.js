@@ -156,7 +156,9 @@ module.exports = class HelpSystem {
     // Set the current page on the footer depending on the pointer
     embed.setFooter({
       text: `Page ${Math.floor(this.pointer / 5) + 1} / ${
-        Math.floor(this.commandsArray[this.category].length / 5) + 1
+        this.commandsArray[this.category].length % 5 == 0
+          ? this.commandsArray[this.category].length / 5
+          : Math.floor(this.commandsArray[this.category].length / 5) + 1
       }`,
     });
     // Return the completed embed
@@ -225,19 +227,21 @@ module.exports = class HelpSystem {
         // If we're not on the last page, we add 5 to the pointer
         // Else we set the pointer to 0
         this.pointer =
-          this.pointer + 5 > this.commandsArray[this.category].length
+          this.pointer + 5 >= this.commandsArray[this.category].length
             ? 0
             : this.pointer + 5;
         break;
       case "previous":
-        // If we're not on the first page, we remove 5 to the pointer
-        // Else we set the pointer to the last pointer modulated by 5
-        if (this.pointer - 5 < 0) {
-          let rest = this.commandsArray[this.category].length % 5;
-          this.pointer = this.commandsArray[this.category].length - rest;
-        } else {
-          this.pointer -= 5;
-        }
+        // If we're on the first page, we set the pointer to the last page
+        // Else we remove 5 to the pointer
+        this.pointer =
+          this.pointer - 5 < 0
+            ? this.commandsArray[this.category].length -
+              (this.commandsArray[this.category].length % 5 == 0
+                ? 5
+                : this.commandsArray[this.category].length % 5)
+            : this.pointer - 5;
+
         break;
     }
   }
