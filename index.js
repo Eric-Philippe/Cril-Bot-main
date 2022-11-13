@@ -23,7 +23,6 @@ const {
   cancelTheme,
   createTheme,
 } = require("./commandsPlugin/thematiquePlugin");
-const CrilPlace = require("./CrilPlace/CrilPlace");
 
 /** Wake up on ready state */
 client.on("ready", async () => {
@@ -62,7 +61,7 @@ client.on("interactionCreate", async (interaction) => {
         });
       }
     }
-
+    console.log(cid.length === 18);
     switch (true) {
       case cid.match(/^\d(?:-poll-answer)/gm) !== null:
         pollRequest(interaction);
@@ -71,7 +70,7 @@ client.on("interactionCreate", async (interaction) => {
       case cid.match(/^\d(?:-toss-answer)/gm) !== null:
         tossButtonInteraction(interaction);
         break;
-      case cid.match(/^\d|10(?:-help-desk)/gm) !== null:
+      case cid.match(/^\d|10(?:-help-desk)/gm) !== null && cid.length != 18:
         processHelpAssistance(interaction);
         break;
       case cid === "valid_help":
