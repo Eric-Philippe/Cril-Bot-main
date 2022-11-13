@@ -84,10 +84,18 @@ module.exports = {
     );
 
     let channelCrilPlace = interaction.client.channels.cache.get(placeChannel);
-    channelCrilPlace.messages.fetch({ limit: 2 }).then((messages) => {
-      const lastMessage = messages.last();
-      CrilPlace.updateCanvas(lastMessage, x, y, COLORS[color]);
-    });
+    // Get the second message sent in the channel
+    let messages = await channelCrilPlace.messages.fetch({ limit: 100 });
+    // Get the before last message
+    let msgSortedCollection = messages.sort(
+      (a, b) => b.createdTimestamp - a.createdTimestamp
+    );
+
+    let msgSortedArray = [...msgSortedCollection.values()];
+    // Take the second message sent in the channel
+    let message = msgSortedArray[1];
+
+    CrilPlace.updateCanvas(message, x, y, COLORS[color]);
 
     interaction.reply({
       content: `Le pixel en ${x} ${y} a été ajouté avec la couleur ${color}.`,

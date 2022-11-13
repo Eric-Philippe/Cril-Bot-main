@@ -133,4 +133,26 @@ module.exports = class CrilPlace {
 
     await msg.edit({ files: [attachment] });
   }
+  /**
+   *
+   * @param {Message} msg
+   */
+  static async generatePlaceExisting(msg) {
+    let embedCanvaHeader = new EmbedBuilder()
+      .setTitle("CrilPlace")
+      .setColor(COLOR.RED);
+
+    let embedCanvaFooter = new EmbedBuilder()
+      .setFooter({ text: "Placez vos pixels avec /pixel <x> <y> <couleur>" })
+      .setColor(COLOR.RED);
+
+    // Send a blank attachment
+    let attachment = new AttachmentBuilder(createCanvas(1, 1).toBuffer(), {
+      name: "canva.png",
+    });
+
+    await msg.channel.send({ embeds: [embedCanvaHeader] });
+    await msg.channel.send({ files: [attachment] });
+    await msg.channel.send({ embeds: [embedCanvaFooter] });
+  }
 };
