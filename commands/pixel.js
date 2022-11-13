@@ -85,15 +85,16 @@ module.exports = {
 
     let channelCrilPlace = interaction.client.channels.cache.get(placeChannel);
     // Get the second message sent in the channel
-    let messages = await channelCrilPlace.messages.fetch({ limit: 100 });
-    // Get the before last message
-    let msgSortedCollection = messages.sort(
-      (a, b) => b.createdTimestamp - a.createdTimestamp
-    );
+    let messagesCollection = await channelCrilPlace.messages.fetch({
+      limit: 100,
+    });
 
-    let msgSortedArray = [...msgSortedCollection.values()];
+    let messages = [...messagesCollection.values()];
+    // Sort the messages by their creation date
+    messages.sort((a, b) => a.createdTimestamp - b.createdTimestamp);
+
     // Take the second message sent in the channel
-    let message = msgSortedArray[1];
+    let message = messages[1];
 
     CrilPlace.updateCanvas(message, x, y, COLORS[color]);
 
