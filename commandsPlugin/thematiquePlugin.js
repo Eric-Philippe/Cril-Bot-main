@@ -141,32 +141,32 @@ const createTheme = async (interaction) => {
     .addFields(
       {
         name: "Titre : ",
-        value: themeTitle,
+        value: themeTitle || "Oublié",
         inline: true,
       },
       {
         name: "Niveau : ",
-        value: themeLevel,
+        value: themeLevel || "Oublié",
         inline: true,
       },
       {
         name: "Langue : ",
-        value: themeLangue,
+        value: themeLangue || "Oublié",
         inline: true,
       },
       {
         name: "Lieu : ",
-        value: themePlace,
+        value: themePlace || "Oublié",
         inline: true,
       },
       {
         name: "Durée : ",
-        value: themeLength + " minutes",
+        value: themeLength + " minutes" || "Oublié",
         inline: true,
       },
       {
         name: "Nombre de participants : ",
-        value: themeNbParticipant,
+        value: themeNbParticipant || "Oublié",
         inline: true,
       }
     );
