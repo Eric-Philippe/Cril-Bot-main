@@ -64,7 +64,7 @@ const leetCode = {
   k: "|<",
   l: "1",
   m: "|v|",
-  n: "|\\|",
+  n: String.raw`|\\|`,
   o: "0",
   p: "|•",
   q: "(_,)",
@@ -72,8 +72,8 @@ const leetCode = {
   s: "5",
   t: "7",
   u: "|_|",
-  v: "\\/",
-  w: "\\/\\/",
+  v: String.raw`\\/`,
+  w: String.raw`\\/\\/`,
   x: "><",
   y: "`/",
   z: "2",
@@ -146,9 +146,10 @@ module.exports = {
         res = text.split("");
         for (let i = 0; i < res.length; i++) {
           if (res[i].toLowerCase() in leetCode) {
-            res[i] = leetCode[res[i]];
+            res[i] = leetCode[res[i].toLowerCase()];
           }
         }
+        res = res.join("");
         break;
       default:
         res = text;
