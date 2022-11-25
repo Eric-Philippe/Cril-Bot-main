@@ -145,7 +145,8 @@ module.exports = {
       case "1337":
         res = text;
         for (const [key, value] of Object.entries(leetCode)) {
-          res = res.replaceAll(key, value);
+          // Also replace the uppercase by the lowercase
+          res = res.replaceAll(key, value).replaceAll(key.toUpperCase(), value);
         }
         break;
       default:
