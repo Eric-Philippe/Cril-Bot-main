@@ -66,7 +66,7 @@ const leetCode = {
   m: "|v|",
   n: "|\\|",
   o: "0",
-  p: "|*",
+  p: "|•",
   q: "(_,)",
   r: "|2",
   s: "5",
@@ -143,10 +143,11 @@ module.exports = {
           .join("");
         break;
       case "1337":
-        res = text;
-        for (const [key, value] of Object.entries(leetCode)) {
-          // Also replace the uppercase by the lowercase
-          res = res.replaceAll(key, value).replaceAll(key.toUpperCase(), value);
+        res = text.split("");
+        for (let i = 0; i < res.length; i++) {
+          if (res[i].toLowerCase() in leetCode) {
+            res[i] = leetCode[res[i]];
+          }
         }
         break;
       default:
