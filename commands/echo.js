@@ -50,6 +50,35 @@ const morseCode = {
   " ": " ",
 };
 
+const leetCode = {
+  a: "4",
+  b: "8",
+  c: "(",
+  d: "|)",
+  e: "3",
+  f: "|=",
+  g: "6",
+  h: "#",
+  i: "!",
+  j: "_|",
+  k: "|<",
+  l: "1",
+  m: "|v|",
+  n: "|\\|",
+  o: "0",
+  p: "|*",
+  q: "(_,)",
+  r: "|2",
+  s: "5",
+  t: "7",
+  u: "|_|",
+  v: "\\/",
+  w: "\\/\\/",
+  x: "><",
+  y: "`/",
+  z: "2",
+};
+
 module.exports = {
   desc: {
     desc: "Envoie des messages convertis !",
@@ -75,7 +104,8 @@ module.exports = {
           { name: "binaire", value: "BIN" },
           { name: "zorglang", value: "ZOR" },
           { name: "morse", value: "MOR" },
-          { name: "louise_langue", value: "LOU" }
+          { name: "louise_langue", value: "LOU" },
+          { name: "l33t", value: "1337" }
         )
     ),
   /**
@@ -111,6 +141,12 @@ module.exports = {
           .split("")
           .map((char) => String.fromCharCode(char.charCodeAt(0) + 2))
           .join("");
+        break;
+      case "1337":
+        res = text;
+        for (const [key, value] of Object.entries(leetCode)) {
+          res = res.replaceAll(key, value);
+        }
         break;
       default:
         res = text;
