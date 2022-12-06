@@ -61,7 +61,6 @@ client.on("interactionCreate", async (interaction) => {
         });
       }
     }
-    console.log(cid.length === 18);
     switch (true) {
       case cid.match(/^\d(?:-poll-answer)/gm) !== null:
         pollRequest(interaction);
@@ -91,7 +90,7 @@ client.on("interactionCreate", async (interaction) => {
   /** ========== @Modal_Interaction_Type ========== */
   if (interaction.isModalSubmit()) {
     switch (true) {
-      case cid.length === 18:
+      case cid.length >= 18:
         treatValidation(interaction);
         break;
       case cid === "help_modal":
