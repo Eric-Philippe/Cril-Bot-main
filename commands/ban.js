@@ -8,7 +8,7 @@ const {
 module.exports = {
   desc: {
     desc: "Vire un utilisateur du serveur.",
-    emote: "💥",
+    emote: "🔨",
     exemple: [
       {
         cmd: "/ban @Boulet",
