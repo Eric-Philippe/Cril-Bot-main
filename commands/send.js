@@ -293,7 +293,7 @@ const coachingInteraction = (i, subCommand, user) => {
   let desc = "";
   switch (subCommand) {
     case "deb-a-faire":
-      desc = `🎓 | Le but du coaching est de travailler vos objectifs en langue sur toute autre compétence que l’expression orale. \nPour vous aider à définir cela, commencez par compléter la fiche début de parcours dans votre dossier Moodle CRIL. \nRevenez nous le dire ici quand vous avez terminé, ça devrait vous prendre environ 5 minutes. Lien vers moodle.`;
+      desc = `🎓 | Le but du coaching est de travailler vos objectifs en langue sur toute autre compétence que l’expression orale. \nPour vous aider à définir cela, commencez par compléter la fiche début de parcours dans votre dossier Moodle CRIL. \nRevenez nous le dire ici quand vous avez terminé, ça devrait vous prendre environ 5 minutes. [Lien vers moodle](https://moodle.iut-tlse3.fr/).`;
       break;
     case "deb-faite":
       desc = `🎓 | Vous pouvez ouvrir la fiche début de parcours que vous avez remplie. Dans le champ Conseil coachs nous vous avons donné des conseils de travail pour cette séance. Prenez-en connaissance et commencez à travailler.\n\n
