@@ -81,7 +81,7 @@ client.on("interactionCreate", async (interaction) => {
       case cid === "cancel-theme":
         cancelTheme(interaction);
         break;
-      case cid.length === 18:
+      case cid.length >= 18:
         roleRequest(interaction);
         break;
     }
