@@ -11,8 +11,8 @@ module.exports = {
     emote: "💥",
     exemple: [
       {
-        cmd: "/kick @Boulet",
-        desc: "Vire Boulet du serveur.",
+        cmd: "/kick @Boulet [Raison]",
+        desc: "Vire Boulet du serveur. Envoyez une raison si vous le souhaitez.",
       },
     ],
     usage: "/kick <@User>",
@@ -26,6 +26,9 @@ module.exports = {
         .setName("user")
         .setDescription("Utilisateur à virer")
         .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option.setName("raison").setDescription("Raison du kick")
     ),
   /**
    *
@@ -33,6 +36,7 @@ module.exports = {
    */
   async execute(interaction) {
     const user = interaction.options.getUser("user");
+    const raison = interaction.options.getString("raison");
     const member = interaction.guild.members.cache.get(user.id);
 
     // If the user is kickable
@@ -40,6 +44,20 @@ module.exports = {
       // Kick the user
       await member.kick();
       // Send a message to the channel
+      if (raison) {
+        let embed = new EmbedBuilder()
+          .setTitle("Kick")
+          .setDescription(raison)
+          .setColor("Red");
+
+        try {
+          await user.send({ embeds: [embed] });
+        } catch (err) {}
+      }
+      if (raison)
+        return await interaction.reply(
+          `L'utilisateur ${user.tag} a été kick pour ${raison} !`
+        );
       await interaction.reply(`L'utilisateur ${user.tag} a été kick !`);
     } else {
       // If the user is not kickable
