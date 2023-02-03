@@ -52,14 +52,17 @@ module.exports = {
           await user.send({ embeds: [embed] });
         } catch (err) {}
       }
-      if (raison)
-        return await interaction.reply(
+      if (raison) {
+        await interaction.reply(
           `L'utilisateur ${user.tag} a été kick pour ${raison} !`
         );
-      await interaction.reply(`L'utilisateur ${user.tag} a été kick !`);
+        await member.kick();
+      } else {
+        await interaction.reply(`L'utilisateur ${user.tag} a été kick !`);
+        await member.kick();
+      }
 
       // Kick the user
-      await member.kick();
     } else {
       // If the user is not kickable
       await interaction.reply("Je ne peux pas kick cet utilisateur !");
