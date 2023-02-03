@@ -41,8 +41,6 @@ module.exports = {
 
     // If the user is kickable
     if (member.kickable) {
-      // Kick the user
-      await member.kick();
       // Send a message to the channel
       if (raison) {
         let embed = new EmbedBuilder()
@@ -59,6 +57,9 @@ module.exports = {
           `L'utilisateur ${user.tag} a été kick pour ${raison} !`
         );
       await interaction.reply(`L'utilisateur ${user.tag} a été kick !`);
+
+      // Kick the user
+      await member.kick();
     } else {
       // If the user is not kickable
       await interaction.reply("Je ne peux pas kick cet utilisateur !");
