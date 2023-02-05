@@ -211,6 +211,7 @@ const treatModal = async (i) => {
       .setCustomId("valid_help")
   );
   // Notify the user and the admins in the channel and send the recap' embed
+  let role = i.guild.roles.cache.find((role) => role.id === adminRole);
   await support_channel.send({
     content: `||<@${i.member.user.id}><@&${adminRole}>||`,
     embeds: [embed],

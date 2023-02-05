@@ -176,6 +176,7 @@ const createTheme = async (interaction) => {
 
   await themeChan.send({
     embeds: [embed],
+    allowedMentions: { roles: [adminRole] },
     content: `<@${interaction.user.id}> | <@&${adminRole}>`,
   });
 

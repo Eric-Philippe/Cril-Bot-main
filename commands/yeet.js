@@ -85,6 +85,7 @@ module.exports = {
     await interaction.reply({
       embeds: [embed],
       content: `<@&${ADMIN_ROLE_ID}>`,
+      allowedMentions: { roles: [ADMIN_ROLE_ID] },
     });
 
     // Unmute the user after 20 minutes

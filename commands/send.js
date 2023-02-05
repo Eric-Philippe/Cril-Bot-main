@@ -415,6 +415,7 @@ const soundInteraction = (i, subCommand, user) => {
         embeds: [embed],
         files: [file],
         content: `<@${user.id}> | <@&${adminRole}>`,
+        allowedMentions: { roles: [adminRole] },
       });
       break;
     case "escalate":
@@ -532,6 +533,7 @@ const treatOtherSubcommand = (i, subCommand, user) => {
 
   if (content) myObj.content = content;
   myObj.embeds = [embed];
+  myObj.allowedMentions = { roles: [adminRole] };
 
   i.reply(myObj);
 };
