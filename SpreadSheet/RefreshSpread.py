@@ -1,10 +1,11 @@
-from collections import namedtuple
+import datetime
 import json
 from google.oauth2.credentials import Credentials
 from google.oauth2 import service_account
-from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 import os
+import requests
+import urllib
 
 # Constants
 CLIENT_SECRET_FILE = 'credentials.json'
@@ -20,8 +21,6 @@ def get_sheets_service():
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES_SHEETS)
     if not creds or not creds.valid:
-        flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES_SHEETS)
-        creds = flow.run_local_server(port=0)
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
 
@@ -96,8 +95,8 @@ def read_spreadsheet_values(spreadsheet_id, range_name, save_to_file=True):
             # Read the file
             with open('activities.json', 'r') as f:
                 data = json.load(f)
-            # Add the new objects
-            data.extend(objects)
+            # Add the new objects to the file "currently = {}"
+            data[get_title(spreadsheet_id)] = objects
             # Write the file
             with open('activities.json', 'w') as f:
                 json.dump(data, f)
@@ -106,6 +105,27 @@ def read_spreadsheet_values(spreadsheet_id, range_name, save_to_file=True):
             # Write the file
             with open('activities.json', 'w') as f:
                 json.dump(objects, f)
+
+def is_today_id(spreadsheet_id):
+    # Call the Sheets API
+    sheets_service = get_sheets_service()
+    result = sheets_service.spreadsheets().get(spreadsheetId=spreadsheet_id).execute()
+    properties = result.get('properties', [])
+    title = properties.get('title', [])
+    # Title = DDMMYYYY
+    todayDay = datetime.datetime.today().strftime('%d')
+    todayMonth = datetime.datetime.today().strftime('%m')
+    todayYear = datetime.datetime.today().strftime('%Y')
+    today = todayDay + todayMonth + todayYear
+    return title == today
+
+def get_title(spreadsheet_id):
+    # Call the Sheets API
+    sheets_service = get_sheets_service()
+    result = sheets_service.spreadsheets().get(spreadsheetId=spreadsheet_id).execute()
+    properties = result.get('properties', [])
+    title = properties.get('title', [])
+    return title
 
 # Main function
 if __name__ == '__main__':
