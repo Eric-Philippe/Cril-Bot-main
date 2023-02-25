@@ -1,11 +1,11 @@
 import datetime
 import json
+import os
+
 from google.oauth2.credentials import Credentials
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
-import os
-import requests
-import urllib
+from google.auth.transport.requests import Request
 
 # Constants
 CLIENT_SECRET_FILE = 'credentials.json'
@@ -20,7 +20,8 @@ def get_sheets_service():
     creds = None
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES_SHEETS)
-    if not creds or not creds.valid:
+    if creds and creds.expired and creds.refresh_token:
+        creds.refresh(Request())
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
 
