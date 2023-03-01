@@ -7,9 +7,14 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}\\index.js"
+      "name": "Launch Bot",
+      "program": "${workspaceFolder}/index.js"
+    },
+    {
+      "type": "python",
+      "request": "launch",
+      "name": "Launch Server",
+      "program": "${workspaceFolder}/SpreadSheet/server.py"
     }
   ]
 }
