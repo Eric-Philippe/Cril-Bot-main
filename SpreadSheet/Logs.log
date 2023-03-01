@@ -5,3 +5,28 @@
 [Tue. 28 Feb. 2023 23:19:12 ] - Json file has been saved.
 [Tue. 28 Feb. 2023 23:19:12 ] - Json file has been emptied.
 [Tue. 28 Feb. 2023 23:21:35 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 09:49:22 ] - An error occured while executing the command.
+[Wed. 01 Mar. 2023 09:50:49 ] - [Errno -100] No file found with the name 01032023
+[Wed. 01 Mar. 2023 09:50:55 ] - [Errno -100] No file found with the name 01032023
+[Wed. 01 Mar. 2023 09:53:48 ] - [Errno -100] No file found with the name 01032023
+[Wed. 01 Mar. 2023 09:54:16 ] - [Errno -100] No file found with the name 01032023
+[Wed. 01 Mar. 2023 09:55:34 ] - ColonFormatError.__init__() missing 1 required positional argument: 'message'
+[Wed. 01 Mar. 2023 09:57:18 ] - TitleAlreadyExistsError: [Errno -102] The title Lieu already exists in the sheet
+[Wed. 01 Mar. 2023 09:58:11 ] - TitleAlreadyExistsError: [Errno -102] The title Lieu already exists in the sheet
+[Wed. 01 Mar. 2023 09:58:58 ] - TitleAlreadyExistsError: [Errno -102] The title Lieu already exists in the sheet
+[Wed. 01 Mar. 2023 10:00:52 ] - TitleAlreadyExistsError: [Errno -102] The title Lieu already exists in the sheet
+[Wed. 01 Mar. 2023 10:01:23 ] - Deleted outdated json property: 28022023
+[Wed. 01 Mar. 2023 10:01:26 ] - TitleAlreadyExistsError: [Errno -102] The title Lieu already exists in the sheet
+[Wed. 01 Mar. 2023 10:02:33 ] - Deleted outdated json property: 28022023
+[Wed. 01 Mar. 2023 10:06:55 ] - Deleted outdated json property: 28022023
+[Wed. 01 Mar. 2023 10:08:48 ] - Deleted outdated json property: 28022023
+[Wed. 01 Mar. 2023 10:11:42 ] - Deleted outdated json property: 28022023
+[Wed. 01 Mar. 2023 10:13:16 ] - Deleted outdated json property: 28022023
+[Wed. 01 Mar. 2023 10:14:25 ] - Deleted outdated json property: 28022023
+[Wed. 01 Mar. 2023 10:14:28 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 10:16:21 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 10:17:42 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 10:19:38 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 10:21:58 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 10:34:19 ] - Deleted outdated json property: 28022023
+[Wed. 01 Mar. 2023 10:34:22 ] - Json file has been saved.

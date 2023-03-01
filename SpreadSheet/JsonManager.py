@@ -1,6 +1,7 @@
 from datetime import datetime
-from ErrorManager import ErrorManager as err
+from ErrorManager import *
 from Logger import log
+
 import json
 
 FILE_NAME = 'Activities.json'
@@ -22,7 +23,7 @@ class JsonManager:
                 json.dump({}, file)
             self.load_json(json_path)
         except json.decoder.JSONDecodeError:
-            return err.JSON_FORMAT_ERROR
+            raise JsonInternalError(-201, "Json file is corrupted.")
         return 0
 
     def empty_json(self):
@@ -54,12 +55,15 @@ class JsonManager:
                 log (f"Json file has been saved.")
                 return 0
         except FileNotFoundError:
-            return err.JSON_NOT_FOUND
+            raise JsonNotFoundError(-200, "No json file found at " + self.json_path)
 
     def get_json(self):
         return self.json
     
     def load_activities(self, activities):
         today = datetime.now().strftime('%d%m%Y')
+        # If today's date is not in the json file, create it
+        if today not in self.json:
+            self.json[today] = []
         for activity in activities:
             self.json[today].append(activity.to_json())

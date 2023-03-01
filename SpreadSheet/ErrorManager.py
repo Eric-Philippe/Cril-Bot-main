@@ -1,48 +1,49 @@
-from enum import Enum
+class InternalSheetError(Exception):
+    """
+    Internal Sheet Error Class. Generic error for the sheet.
+    """
+    def __init__(self):
+        self.errno = -400
+        self.message = "Internal Sheet Error. Please contact the administrator."
+    def __str__(self):
+        return "InternalError: " + "[Errno " + str(self.errno) + "] " + self.message
 
-class ErrorManager(Enum):
+class ColonFormatError(Exception):
     """
-    SHEET ERROR CODES
+    Colon Format Error Class. Error for the colon format.
     """
-    """ Error code when the Credentials file is not found """
-    CREDENTIALS_NOT_FOUND = -1
-    CREDENTIALS_NOT_FOUND_MSG = "Credentials file not found. Please create it."
-    """ Error code when the Today Sheet is not found """
-    TODAY_NOT_FOUND = -100
-    TODAY_NOT_FOUND_MSG = "Today Sheet not found. Please create it."
-    """ Error code when a sheet with a given name is not found """
-    SHEET_NOT_FOUND = -101
-    SHEET_NOT_FOUND_MSG = "Sheet not found. Please create it."
-    """ Error code when the column has not been formatted correctly """
-    COLUMN_FORMAT_ERROR = -102
-    COLUMN_FORMAT_ERROR_MSG = "Column format error. Please format them correctly before."
-    """ Error code when no data has been found in the sheet """
-    NO_DATA_FOUND = -103
-    NO_DATA_FOUND_MSG = "No data found. Please fill the sheet before."
-    """ Error code when a column has been asked to be added but the column already exists """
-    COLUMN_ALREADY_EXISTS = -104
-    COLUMN_ALREADY_EXISTS_MSG = "Column already exists."
-    """ Error code when an auto-resize has been asked following an error """
-    AUTO_RESIZE_ERROR = -105
-    AUTO_RESIZE_ERROR_MSG = "Auto-resize error. Please resize the columns manually."
+    def __init__(self, errno , message):
+        self.errno = errno
+        self.message = message
+    def __str__(self):
+        return "ColonFormatError: " + "[Errno " + str(self.errno) + "] " + self.message
+    
+class TitleAlreadyExistsError(Exception):
     """
-    JSON ERROR CODES
+    Title Already Exists Error Class. Error for the title already exists.
     """
-    """ Error code when the json file is empty """
-    EMPTY_JSON = -200
-    EMPTY_JSON_MSG = "Json file is empty. Please fill it before."
-    """ Error code when the json file is not found """
-    JSON_NOT_FOUND = -201
-    JSON_NOT_FOUND_MSG = "Json file not found. Please create it."
-    """ Error code when the json file is not formatted correctly """
-    JSON_FORMAT_ERROR = -202
-    JSON_FORMAT_ERROR_MSG = "Json file format error. Please format it correctly before."
-    """ Generic error code for a json error """
-    JSON_ERROR = -203
-    JSON_ERROR_MSG = "Json error. Please contact the administrator."
+    def __init__(self, errno , message):
+        self.errno = errno
+        self.message = message
+    def __str__(self):
+        return "TitleAlreadyExistsError: " + "[Errno " + str(self.errno) + "] " + self.message
+
+class JsonNotFoundError(Exception):
     """
-    INTERNAL ERROR CODES
+    Json Not Found Error Class. Error for the json not found.
     """
-    """ Error code for an internal error """
-    INTERNAL_ERROR = -400
-    INTERNAL_ERROR_MSG = "Internal error. Please contact the administrator."
+    def __init__(self, errno , message):
+        self.errno = errno
+        self.message = message
+    def __str__(self):
+        return "JsonNotFoundError: " + "[Errno " + str(self.errno) + "] " + self.message
+
+class JsonInternalError(Exception):
+    """
+    Json Internal Error Class. Error for the json internal error.
+    """
+    def __init__(self, errno , message):
+        self.errno = errno
+        self.message = message
+    def __str__(self):
+        return "JsonInternalError: " + "[Errno " + str(self.errno) + "] " + self.message

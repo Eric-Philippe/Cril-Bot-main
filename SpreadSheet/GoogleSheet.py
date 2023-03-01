@@ -1,8 +1,8 @@
-import Activity
-
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
+from ErrorManager import *
 
+import Activity
 
 class GoogleSheet:
     def __init__(self, credentials_path, spreadsheet_name, sheet_range):
@@ -16,19 +16,17 @@ class GoogleSheet:
             credentials = Credentials.from_service_account_file(self.credentials_path)
             return build("sheets", "v4", credentials=credentials)
         except FileNotFoundError:
-            return None
+            raise FileNotFoundError(-101, "No credentials file found at " + self.credentials_path)
     
     def is_valid_instance(self):
         # Check if we have a file to work with, and that we have a total of 15 columns
         sheet_id = self.get_spreadsheet_id()
-        if isinstance(sheet_id, int): return sheet_id.value
         
         sheet_service = self.authenticate()
-        if isinstance(sheet_service, int): return sheet_service
         result = sheet_service.spreadsheets().get(spreadsheetId=sheet_id).execute()
         sheet = result.get("sheets", [])[0]
-        if sheet['properties']['gridProperties']['columnCount'] != 13:
-            return -1
+        if sheet['properties']['gridProperties']['columnCount'] < 13:
+            raise ColonFormatError(-102, "The number of columns in the sheet is not 13")
         return True
 
     def get_spreadsheet_id(self):
@@ -40,7 +38,7 @@ class GoogleSheet:
         results = drive_service.files().list(q=query, orderBy="modifiedTime desc", fields="files(id, name)").execute()
 
         if not results['files']:
-            return None
+            raise FileNotFoundError(-100, "No file found with the name " + self.spreadsheet_name)
         else:
             sheet_id = results['files'][0]['id']
             return sheet_id
@@ -48,25 +46,26 @@ class GoogleSheet:
     def get_total_columns(self):
         """Fetch the number of columns in the Google Sheet."""
         sheet_id = self.get_spreadsheet_id()
-        if sheet_id is None:
-            return None
         
         sheet_service = self.authenticate()
-        if sheet_service == None: return -1
-        result = sheet_service.spreadsheets().get(spreadsheetId=sheet_id).execute()
-        sheet = result.get("sheets", [])[0]
+
+        try:
+            result = sheet_service.spreadsheets().get(spreadsheetId=sheet_id).execute()
+            sheet = result.get("sheets", [])[0]
+        except:
+            raise InternalSheetError()
         return sheet['properties']['gridProperties']['columnCount']
     
     def title_exists(self, title):
         # Return the content of the first row of the sheet at the given column index
         sheet_id = self.get_spreadsheet_id()
-        if sheet_id is None:
-            return None
         
         sheet_service = self.authenticate()
-        if sheet_service == None: return -1
-        result = sheet_service.spreadsheets().values().get(spreadsheetId=sheet_id, range="A1:S1").execute()
-        values = result.get("values", [])
+        try:
+            result = sheet_service.spreadsheets().values().get(spreadsheetId=sheet_id, range="A1:S1").execute()
+            values = result.get("values", [])
+        except:
+            raise InternalSheetError()
         if not values:
             return False
         else:
@@ -81,13 +80,14 @@ class GoogleSheet:
         if not isValid: return isValid
 
         sheet_id = self.get_spreadsheet_id()
-        if sheet_id is None:
-            return None
 
         sheet_service = self.authenticate()
-        if sheet_service == None: return -1
-        result = sheet_service.spreadsheets().values().get(spreadsheetId=sheet_id, range=self.sheet_range).execute()
-        values = result.get("values", [])
+
+        try:
+            result = sheet_service.spreadsheets().values().get(spreadsheetId=sheet_id, range=self.sheet_range).execute()
+            values = result.get("values", [])
+        except:
+            raise InternalSheetError()
 
         if not values:
             if debug : print("No data found.")
@@ -106,14 +106,12 @@ class GoogleSheet:
         # Check if there is not a column with the same title
         # If there is, we don't want to add it
         if self.title_exists(title):
-            return None
+            raise TitleAlreadyExistsError(-102, "The title " + title + " already exists in the sheet")
 
         sheet_id = self.get_spreadsheet_id()
-        if sheet_id is None:
-            return None
         
         sheet_service = self.authenticate()
-        if sheet_service == None: return -1
+
         if insert:
             # Also put the title in the first row
             requests = [
@@ -173,7 +171,7 @@ class GoogleSheet:
         try :
             result = sheet_service.spreadsheets().batchUpdate(spreadsheetId=sheet_id, body=body).execute()
         except Exception as e:
-            return None
+            raise InternalSheetError()
         
 
     def auto_resize(self):
@@ -201,6 +199,6 @@ class GoogleSheet:
         try:
             result = sheet_service.spreadsheets().batchUpdate(spreadsheetId=sheet_id, body=body).execute()
         except Exception as e:
-            return -1
+            raise InternalSheetError()
 
             
