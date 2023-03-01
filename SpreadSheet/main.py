@@ -16,7 +16,7 @@ class App:
     Main class of the application.
     """
     def __init__(self, env, debug=False):
-        self.depth = len(sys.argv)
+        self.depth = 0
         self.range = self.build_range()
         self.credentials_path = "credentials.json"
         self.today = datetime.now().strftime('%d%m%Y')
@@ -53,23 +53,22 @@ class App:
         else:
             log(msg)
     
-    def cmdHandler(self, cmds = sys.argv)-> dict:
+    def cmdHandler(self, cmds: list[str] = sys.argv.pop(0))-> dict:
         """
         Handle the command line arguments.
         """
-        if self.cmdDone : return
         method = None
-        self.depth = len(cmds)
-        if self.depth > 1:
-            if cmds[1] == "load":
+        depth = len(cmds[0])
+        if depth > 1:
+            if cmds[0] == "load":
                 method = self.sheet_load
-            if cmds[1] == "refresh":
+            if cmds[0] == "refresh":
                 method = self.refresh
-            if cmds[1] == "clear":
+            if cmds[0] == "clear":
                 method = self.clear
-            if cmds[1] == "add":
+            if cmds[0] == "add":
                 method = self.add
-            if cmds[1] == "resize":
+            if cmds[0] == "resize":
                 method = self.resize
         else:
             method = self.help
