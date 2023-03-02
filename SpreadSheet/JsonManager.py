@@ -1,10 +1,12 @@
 from datetime import datetime
 from ErrorManager import *
 from Logger import log
+import sys
 
 import json
 
-FILE_NAME = 'Activities.json'
+CURRNENT_PATH = sys.path[0]
+FILE_NAME = CURRNENT_PATH + "/Activities.json"
 
 class JsonManager:
     def __init__(self):
@@ -36,6 +38,11 @@ class JsonManager:
 
     def refresh_json(self):
         self.clear_outdated()
+        self.save_json()
+
+    def clear_today(self):
+        today = datetime.now().strftime('%d%m%Y')
+        self.json[today] = []
         self.save_json()
 
     def clear_outdated(self):

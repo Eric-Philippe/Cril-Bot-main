@@ -4,6 +4,7 @@ module.exports = {
   // Token exports
   TOKEN: process.env.TOKEN,
   TOKEN_TENOR: process.env.TOKEN_TENOR,
+  SHEET_API_URL: process.env.SHEET_API_URL,
   // Client Id Export
   clientID: process.env.CLIENT_ID,
   // Channel ID Export

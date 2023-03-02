@@ -84,4 +84,19 @@ class Activity:
         """
         Return a string representing the activity.
         """
-        return f"{self.type} {self.activity} {self.time} {self.language} {self.level} {self.lastname} {self.firstname} {self.group} {self.observation} {self.coach}"
+        return f"""
+        Type: {self.type}
+        Activity: {self.activity}
+        Time: {self.time}
+        Place: {self.place}
+        Language: {self.language}
+        Level: {self.level}
+        Lastname: {self.lastname}
+        Firstname: {self.firstname}
+        Group: {self.group}
+        Observation: {self.observation}
+        Eng_level: {self.eng_level}
+        Esp_level: {self.esp_level}
+        Presence: {self.presence}
+        Coach: {self.coach}
+        """

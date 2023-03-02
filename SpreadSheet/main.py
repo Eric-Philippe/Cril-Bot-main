@@ -18,7 +18,8 @@ class App:
     def __init__(self, env, debug=False):
         self.depth = 0
         self.range = self.build_range()
-        self.credentials_path = "credentials.json"
+        current_path = sys.path[0]
+        self.credentials_path = current_path + "/credentials.json"
         self.today = datetime.now().strftime('%d%m%Y')
         self.jsonManager = JsonManager()
         self.sheet = GoogleSheet.GoogleSheet(self.credentials_path, self.today, self.range)
@@ -26,10 +27,11 @@ class App:
         self.env = env
         self.cmdDone = False
 
-    def callback_builder(self, index = 0, msg = "OK"):
+    def callback_builder(self, index = 0, msg = True):
         """
         Build a callback object.
         """
+        if msg == True : msg = self.sheet.get_spreadsheet_id()
         return {
             "index": index,
             "msg": msg
@@ -53,7 +55,7 @@ class App:
         else:
             log(msg)
     
-    def cmdHandler(self, cmds: list[str] = sys.argv.pop(0))-> dict:
+    def cmdHandler(self, cmds: list[str] = [sys.argv.pop(-1)])-> dict:
         """
         Handle the command line arguments.
         """
@@ -70,24 +72,29 @@ class App:
                 method = self.add
             if cmds[0] == "resize":
                 method = self.resize
+            if cmds[0] == "id":
+                method = self.id
         else:
             method = self.help
         
         if method is not None:
             try:
-                method()
+                callback_value = method()
             except Exception as e:
                 index_error = -1
                 msg_error = "An error occured while executing the command."
                 # If e.errno exists, it's a custom error
                 if hasattr(e, "errno"): index_error = e.errno
                 if hasattr(e, "message"): msg_error = e.message
+                print(e)
                 if self.env == ENV_ENUM["BOT"]:
-                    self.msg("An error occured while executing the command.")
+                    self.msg(e)
                 else:
                     self.msg(e)
                 return self.callback_builder(index_error, msg_error)
         self.cmdDone = True
+        if callback_value is not None:
+            return self.callback_builder(0, callback_value)
         return self.callback_builder()
 
     def sheet_load(self):
@@ -108,6 +115,7 @@ class App:
         """
         Refresh the json file with the data from the Google Sheet.
         """
+        self.jsonManager.clear_today()
         activities = self.sheet.get_data()
         self.jsonManager.load_activities(activities)
         self.jsonManager.refresh_json()
@@ -145,6 +153,12 @@ class App:
         """
         self.sheet.auto_resize()
 
+    def id(self):
+        """
+        Return the id of the Google Sheet.
+        """
+        return self.sheet.get_spreadsheet_id()
+
     def help(self):
         """
         Display the help message.
@@ -169,7 +183,7 @@ class App:
 #     else:
 #         app = App(ENV_ENUM["USER"])
 
-#     callback = app.cmdHander()
+#     callback = app.cmdHandler()
 #     print(callback)
 
 

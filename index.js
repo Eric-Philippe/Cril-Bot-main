@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { createCanvas } = require("canvas");
 const { Collection, PermissionFlagsBits } = require("discord.js");
 
 const { client } = require("./utils/client"); //Client object
@@ -14,6 +13,8 @@ const {
   treatValidation,
   validationButton,
 } = require("./Assistance");
+
+const CoachingProcess = require("./Coaching/coaching.process");
 
 const { roleRequest } = require("./commandsPlugin/rolesPlugin"); // ReactionRole Message
 const { tossButtonInteraction } = require("./commandsPlugin/tossPlugin");
@@ -84,6 +85,9 @@ client.on("interactionCreate", async (interaction) => {
       case cid.length >= 18:
         roleRequest(interaction);
         break;
+      case cid === "coaching:start":
+        new CoachingProcess(interaction, interaction.member);
+        break;
     }
   }
 
@@ -117,6 +121,12 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 client.on("messageCreate", (msg) => {
+  if (msg.content === "generate-coaching") {
+    if (msg.member.permissions.has(PermissionFlagsBits.Administrator)) {
+      const generateCoaching = require("./Coaching/generateEmbed");
+      generateCoaching(msg.channel);
+    }
+  }
   if (
     msg.channel.id === placeChannel &&
     !msg.member.permissions.has(PermissionFlagsBits.Administrator)

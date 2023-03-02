@@ -15,6 +15,12 @@
       "request": "launch",
       "name": "Launch Server",
       "program": "${workspaceFolder}/SpreadSheet/server.py"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Refresh Commands",
+      "program": "${workspaceFolder}/rest.js"
     }
   ]
 }

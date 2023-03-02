@@ -19,7 +19,7 @@ def refresh():
     callbackJson = App.cmdHandler(myApp, ["refresh"])
     return jsonify(callbackJson)
 
-@app.route('/load', methods=['POST'])
+@app.route('/format', methods=['POST'])
 def load():
     callbackJson = App.cmdHandler(myApp, ["load"])
     return jsonify(callbackJson)
@@ -32,6 +32,11 @@ def clear():
 @app.route('/resize', methods=['POST'])
 def resize():
     callbackJson = App.cmdHandler(myApp, ["resize"])
+    return jsonify(callbackJson)
+
+@app.route('/id', methods=['GET'])
+def id():
+    callbackJson = App.cmdHandler(myApp, ["id"])
     return jsonify(callbackJson)
 
 @app.route('/get', methods=['POST'])

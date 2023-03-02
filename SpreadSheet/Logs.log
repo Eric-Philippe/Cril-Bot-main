@@ -35,3 +35,47 @@
 [Wed. 01 Mar. 2023 11:18:13 ] - Json file has been saved.
 [Wed. 01 Mar. 2023 11:18:28 ] - Json file has been saved.
 [Wed. 01 Mar. 2023 11:18:28 ] - Json file has been emptied.
+[Wed. 01 Mar. 2023 13:22:39 ] -  
+[Wed. 01 Mar. 2023 13:22:39 ] - Shell for Sheet Manager
+[Wed. 01 Mar. 2023 13:22:39 ] - Usage: python main.py [command]
+[Wed. 01 Mar. 2023 13:22:39 ] - Commands:
+[Wed. 01 Mar. 2023 13:22:39 ] -   - load: Load and format the Google Sheet and create the json file.
+[Wed. 01 Mar. 2023 13:22:39 ] -   - refresh: Refresh the json file with the data from the Google Sheet.
+[Wed. 01 Mar. 2023 13:22:39 ] -   - clear: Clear the json file.
+[Wed. 01 Mar. 2023 13:22:39 ] -   - add [column_name] [column_index] : Add a column to the Google Sheet.
+[Wed. 01 Mar. 2023 13:22:39 ] -   - resize: Resize the columns of the Google Sheet.
+[Wed. 01 Mar. 2023 13:22:39 ] -   - help: Display this message.
+[Wed. 01 Mar. 2023 13:22:39 ] -  
+[Wed. 01 Mar. 2023 13:23:39 ] -  
+[Wed. 01 Mar. 2023 13:23:39 ] - Shell for Sheet Manager
+[Wed. 01 Mar. 2023 13:23:39 ] - Usage: python main.py [command]
+[Wed. 01 Mar. 2023 13:23:39 ] - Commands:
+[Wed. 01 Mar. 2023 13:23:39 ] -   - load: Load and format the Google Sheet and create the json file.
+[Wed. 01 Mar. 2023 13:23:39 ] -   - refresh: Refresh the json file with the data from the Google Sheet.
+[Wed. 01 Mar. 2023 13:23:39 ] -   - clear: Clear the json file.
+[Wed. 01 Mar. 2023 13:23:39 ] -   - add [column_name] [column_index] : Add a column to the Google Sheet.
+[Wed. 01 Mar. 2023 13:23:39 ] -   - resize: Resize the columns of the Google Sheet.
+[Wed. 01 Mar. 2023 13:23:39 ] -   - help: Display this message.
+[Wed. 01 Mar. 2023 13:23:39 ] -  
+[Wed. 01 Mar. 2023 13:24:18 ] -  
+[Wed. 01 Mar. 2023 13:24:18 ] - Shell for Sheet Manager
+[Wed. 01 Mar. 2023 13:24:18 ] - Usage: python main.py [command]
+[Wed. 01 Mar. 2023 13:24:18 ] - Commands:
+[Wed. 01 Mar. 2023 13:24:18 ] -   - load: Load and format the Google Sheet and create the json file.
+[Wed. 01 Mar. 2023 13:24:18 ] -   - refresh: Refresh the json file with the data from the Google Sheet.
+[Wed. 01 Mar. 2023 13:24:18 ] -   - clear: Clear the json file.
+[Wed. 01 Mar. 2023 13:24:18 ] -   - add [column_name] [column_index] : Add a column to the Google Sheet.
+[Wed. 01 Mar. 2023 13:24:18 ] -   - resize: Resize the columns of the Google Sheet.
+[Wed. 01 Mar. 2023 13:24:18 ] -   - help: Display this message.
+[Wed. 01 Mar. 2023 13:24:18 ] -  
+[Wed. 01 Mar. 2023 13:24:44 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 13:25:20 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 13:25:35 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 13:26:49 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 13:27:51 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 13:28:52 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 13:28:54 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 13:29:04 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 13:29:06 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 13:29:26 ] - Json file has been saved.
+[Wed. 01 Mar. 2023 13:29:28 ] - Json file has been saved.
