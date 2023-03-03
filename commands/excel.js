@@ -6,7 +6,10 @@ const {
   ButtonBuilder,
   ButtonStyle,
   ActionRowBuilder,
+  AttachmentBuilder,
 } = require("discord.js");
+
+const Discord = require("discord.js");
 
 const axios = require("axios");
 
@@ -258,7 +261,17 @@ module.exports = {
         }
         break;
       case "help":
-        await interaction.reply("J'arrive");
+        await interaction.deferReply();
+        // Send a pdf file
+        const file = new Discord.AttachmentBuilder(
+          "./docs/Tuto_Spreadsheet.pdf"
+        );
+        interaction.editReply({
+          files: [file],
+          content:
+            "📎 | Voici le tutoriel d'utilisation du système Coaching/Spreadsheet !",
+        });
+
         break;
     }
   },
