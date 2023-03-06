@@ -47,7 +47,7 @@ module.exports = {
         "Hey Slow Down !\n Vous avez déjà cliqué sur ce bouton il y a peu.\n Si vous avez besoin d'aide rendez-vous dans le salon **📞 Support**"
       )
       .setImage(
-        "https://tenor.com/view/proceed-with-caution-stop-sign-slow-resume-flagger-gif-25547481"
+        "https://media.tenor.com/Koztj63MPVsAAAAC/proceed-with-caution-stop-sign.gif"
       );
 
     const row = new ActionRowBuilder();
