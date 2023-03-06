@@ -40,6 +40,22 @@ module.exports = {
     return { embeds: [embed], components: [row], ephemeral: true };
   },
 
+  coolDownEmbed: () => {
+    const embed = new EmbedBuilder()
+      .setTitle("🕒 | Veuillez patienter")
+      .setDescription(
+        "Hey Slow Down !\n Vous avez déjà cliqué sur ce bouton il y a peu.\n Si vous avez besoin d'aide rendez-vous dans le salon **📞 Support**"
+      )
+      .setImage(
+        "https://tenor.com/view/proceed-with-caution-stop-sign-slow-resume-flagger-gif-25547481"
+      );
+
+    const row = new ActionRowBuilder();
+    row.addComponents(SUPPORT_BUTTON);
+
+    return { embeds: [embed], components: [row], ephemeral: true };
+  },
+
   coachingChoice: () => {
     const embed = new EmbedBuilder()
       .setTitle("🪶 | De quelle séance de coaching s'agit-il ?")

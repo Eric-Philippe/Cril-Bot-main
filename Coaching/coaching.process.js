@@ -1,5 +1,11 @@
 const { ComponentType, ButtonInteraction, GuildMember } = require("discord.js");
 
+// Set of userid
+const coolDownUser = new Set();
+
+// Time for cooldown
+const COOLDOWN = 2 * 60 * 1000;
+
 const {
   coachingChoice,
   verificationCoaching,
@@ -11,6 +17,7 @@ const {
   sorryEmbed,
   channelUnlockedEmbedIn,
   channelUnlockedEmbedOut,
+  coolDownEmbed,
 } = require("./coaching.embeds");
 
 const JsonService = require("./json.service");
@@ -94,6 +101,7 @@ module.exports = class CoachingProcess {
    * @description Init the process and tells the caller
    */
   init() {
+    if (coolDownUser.has(this.id)) return this.AlreadyClicked();
     // Check if the JsonService is able to work
     const jsonService = new JsonService();
     // If not, just supress the process and skip the verification
@@ -117,6 +125,20 @@ module.exports = class CoachingProcess {
 
     // If the user is not late, we ask the process to determine Which coaching the user has following the activity saved
     this.DetermineWhichCoaching(this.activity);
+  }
+
+  /**
+   * @function AlreadyClicked
+   * @description The user has already clicked on the button
+   */
+  async AlreadyClicked() {
+    await this.interaction.reply({
+      embeds: [coolDownEmbed()],
+      ephemeral: true,
+    });
+    setTimeout(() => {
+      coolDownUser.delete(this.id);
+    }, COOLDOWN);
   }
 
   /**
