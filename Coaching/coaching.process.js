@@ -133,7 +133,7 @@ module.exports = class CoachingProcess {
    * @description The user has already clicked on the button
    */
   async AlreadyClicked() {
-    await this.interaction.reply(coolDownEmbed);
+    await this.interaction.reply(coolDownEmbed());
     setTimeout(() => {
       coolDownUser.delete(this.id);
     }, COOLDOWN);
