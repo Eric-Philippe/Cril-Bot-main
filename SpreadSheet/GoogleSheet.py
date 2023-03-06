@@ -1,3 +1,4 @@
+import datetime
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from ErrorManager import *
@@ -37,11 +38,16 @@ class GoogleSheet:
         query = "mimeType='application/vnd.google-apps.spreadsheet' and name='" + self.spreadsheet_name + "'"
         results = drive_service.files().list(q=query, orderBy="modifiedTime desc", fields="files(id, name)").execute()
 
+        # Get the today format date DDMMYYYY
+        today = datetime.today().strftime('%d%m%Y')
+
         if not results['files']:
             raise FileNotFoundError(-100, "No file found with the name " + self.spreadsheet_name)
         else:
-            sheet_id = results['files'][0]['id']
-            return sheet_id
+            for file in results['files']:
+                if file['name'] == self.spreadsheet_name:
+                    return file['id']
+            raise FileNotFoundError(-100, "No file found with the name " + self.spreadsheet_name)
         
     def get_total_columns(self):
         """Fetch the number of columns in the Google Sheet."""
