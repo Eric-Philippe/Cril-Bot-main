@@ -9,33 +9,35 @@ ENV_ENUM = {
     "BOT": 1
 }
 
-
-myApp = App(ENV_ENUM["BOT"])
-
 app = Flask(__name__)
 
 @app.route('/refresh', methods=['POST'])
 def refresh():
+    myApp = App(ENV_ENUM["BOT"])
     callbackJson = App.cmdHandler(myApp, ["refresh"])
     return jsonify(callbackJson)
 
 @app.route('/format', methods=['POST'])
 def load():
+    myApp = App(ENV_ENUM["BOT"])
     callbackJson = App.cmdHandler(myApp, ["load"])
     return jsonify(callbackJson)
 
 @app.route('/clear', methods=['POST'])
 def clear():
+    myApp = App(ENV_ENUM["BOT"])
     callbackJson = App.cmdHandler(myApp, ["clear"])
     return jsonify(callbackJson)
 
 @app.route('/resize', methods=['POST'])
 def resize():
+    myApp = App(ENV_ENUM["BOT"])
     callbackJson = App.cmdHandler(myApp, ["resize"])
     return jsonify(callbackJson)
 
 @app.route('/id', methods=['GET'])
 def id():
+    myApp = App(ENV_ENUM["BOT"])
     callbackJson = App.cmdHandler(myApp, ["id"])
     return jsonify(callbackJson)
 
