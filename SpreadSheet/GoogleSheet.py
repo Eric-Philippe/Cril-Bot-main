@@ -39,7 +39,7 @@ class GoogleSheet:
         results = drive_service.files().list(q=query, orderBy="modifiedTime desc", fields="files(id, name)").execute()
 
         # Get the today format date DDMMYYYY
-        today = datetime.today().strftime('%d%m%Y')
+        today = datetime.now().strftime('%d%m%Y')
 
         if not results['files']:
             raise FileNotFoundError(-100, "No file found with the name " + self.spreadsheet_name)
