@@ -102,6 +102,7 @@ module.exports = class CoachingProcess {
    */
   init() {
     if (coolDownUser.has(this.id)) return this.AlreadyClicked();
+    coolDownUser.add(this.id);
     // Check if the JsonService is able to work
     const jsonService = new JsonService();
     // If not, just supress the process and skip the verification
