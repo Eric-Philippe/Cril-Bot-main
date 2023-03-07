@@ -151,7 +151,7 @@ module.exports = {
       .setTitle("⁉️ | Fiche Début de parcours introuvable")
       .setThumbnail(GRADUATION_CAP_THUMBNAIL)
       .setDescription(
-        "Nous n'avons pas trouvé votre fiche début de parcours remplie.\n Il est demandé dans le mail de confirmation et de rappel de remplir cette fiche la veille de votre coaching.\n Aviez-vous rempli cette fiche? Si oui cliquez sur **OUI**. Si non, cliquez sur **NON**."
+        "Nous n'avons pas trouvé votre fiche début de parcours remplie.\n Il est demandé dans le mail de confirmation et de rappel de remplir cette fiche la veille de votre coaching.\n Aviez-vous rempli cette fiche? Si oui cliquez sur **OUI**. Si non, cliquez sur **NON**.\n Attention, si vous cliquez sur oui alors que vous n'avez pas rempli cette fiche en avance (quelle qu'en soit la raison), les coachs __**ne vous accepteront pas**__ aujourd'hui et se réservent le droit de **__ne plus vous accepter__** en coaching à l'avenir.\n Pour parler a une responsable et expliquer un éventuel problème avec la fiche, merci de cliquer sur le bouton **SUPPORT**"
       )
       .setColor("DarkRed");
 
@@ -194,7 +194,7 @@ module.exports = {
       .setTitle("⁉️ | Dernière fiche coaching introuvable")
       .setThumbnail(GRADUATION_CAP_THUMBNAIL)
       .setDescription(
-        "Nous n'avons pas trouvé votre dernière fiche de coaching.\n Vous deviez remplir cette fiche au fur et à mesure de votre séance.\n Aviez-vous rempli cette fiche?\n Si oui cliquez sur **OUI**. Si non, cliquez sur **NON**."
+        "Nous n'avons pas trouvé votre dernière fiche de coaching.\n Vous deviez remplir cette fiche au fur et à mesure de votre séance.\n Aviez-vous rempli cette fiche?\n Si oui cliquez sur **OUI**. Si non, cliquez sur **NON**.\n Attention, si vous cliquez sur oui alors que vous n'avez pas rempli cette fiche en avance (quelle qu'en soit la raison), les coachs __**ne vous accepteront pas**__ aujourd'hui et se réservent le droit de **__ne plus vous accepter__** en coaching à l'avenir.\n Pour parler a une responsable et expliquer un éventuel problème avec la fiche, merci de cliquer sur le bouton **SUPPORT**"
       )
       .setColor("DarkRed");
 
@@ -260,6 +260,20 @@ module.exports = {
 
     const row = new ActionRowBuilder();
 
+    row.addComponents(SUPPORT_BUTTON);
+
+    return { embeds: [embed], components: [row], ephemeral: true };
+  },
+
+  earlyEmbed: () => {
+    const embed = new EmbedBuilder()
+      .setTitle("🚫 | Désolé ...")
+      .setColor("Red")
+      .setDescription(
+        "Bonjour, vous êtes très en avance pour votre coaching !\n Merci de vous présenter à nouveau à l'heure de votre réservation.\n Pour parler directement à une responsable, cliquez sur support."
+      );
+
+    const row = new ActionRowBuilder();
     row.addComponents(SUPPORT_BUTTON);
 
     return { embeds: [embed], components: [row], ephemeral: true };

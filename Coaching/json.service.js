@@ -133,4 +133,24 @@ module.exports = class JsonService {
 
     return now > activityTime;
   }
+
+  /**
+   * Check if the given time is too early, allowing a 1h advance
+   * @param {String} time hh:mm
+   * @returns {Boolean}
+   */
+  isEarly(time) {
+    const [hour, minute] = time.split(":");
+    const now = new Date();
+    const activityTime = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      hour,
+      minute
+    );
+    activityTime.setMinutes(activityTime.getMinutes() - 60);
+
+    return now < activityTime;
+  }
 };

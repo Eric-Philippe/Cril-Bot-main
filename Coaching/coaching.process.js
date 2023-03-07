@@ -18,6 +18,7 @@ const {
   channelUnlockedEmbedIn,
   channelUnlockedEmbedOut,
   coolDownEmbed,
+  earlyEmbed,
 } = require("./coaching.embeds");
 
 const JsonService = require("./json.service");
@@ -123,6 +124,9 @@ module.exports = class CoachingProcess {
     // Check if the user is late
     if (jsonService.isLate(this.activity.time))
       return this.interaction.reply(lateEmbed());
+
+    if (jsonService.isEarly(this.activity.time))
+      return this.interaction.reply(earlyEmbed());
 
     // If the user is not late, we ask the process to determine Which coaching the user has following the activity saved
     this.DetermineWhichCoaching(this.activity);

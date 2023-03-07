@@ -41,6 +41,7 @@ module.exports = {
     try {
       await channel.permissionOverwrites.edit(member.id, {
         ViewChannel: false,
+        SendMessages: true,
       });
       interaction.reply(
         `L'utilisateur ${user.username} ne peut plus accéder au channel ${channel.name}`
