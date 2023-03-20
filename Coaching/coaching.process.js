@@ -1,5 +1,7 @@
 const { ComponentType, ButtonInteraction, GuildMember } = require("discord.js");
 
+const CoachingLog = require("./coaching.logs");
+
 // Set of userid
 const coolDownUser = new Set();
 
@@ -91,10 +93,12 @@ module.exports = class CoachingProcess {
     this.interaction = interaction;
     /** @type {GuildMember} */
     this.member = member;
-    /** @type {String } */
+    /** @type {String} */
     this.id = member.user.id;
     /** @type {import("./json.service").Activity} */
     this.activity = null;
+    /** @type {CoachingLog} */
+    this.logger = new CoachingLog();
     this.init();
   }
   /**
@@ -122,11 +126,15 @@ module.exports = class CoachingProcess {
     this.activity = callback;
 
     // Check if the user is late
-    if (jsonService.isLate(this.activity.time))
+    if (jsonService.isLate(this.activity.time)) {
+      this.logger.log("Late", this.member.user);
       return this.interaction.reply(lateEmbed());
+    }
 
-    if (jsonService.isEarly(this.activity.time))
+    if (jsonService.isEarly(this.activity.time)) {
+      this.logger.log("Early", this.member.user);
       return this.interaction.reply(earlyEmbed());
+    }
 
     // If the user is not late, we ask the process to determine Which coaching the user has following the activity saved
     this.DetermineWhichCoaching(this.activity);
@@ -137,6 +145,7 @@ module.exports = class CoachingProcess {
    * @description The user has already clicked on the button
    */
   async AlreadyClicked() {
+    this.logger.log("AlreadyClicked", this.member.user);
     await this.interaction.reply(coolDownEmbed());
     setTimeout(() => {
       coolDownUser.delete(this.id);
@@ -371,6 +380,7 @@ module.exports = class CoachingProcess {
    * @description In the case of a user not found in the coaching, we ask him if anyway he has a coaching
    */
   async UserNotFoundInCoaching() {
+    this.logger.log("User not found in coaching", this.member.user);
     // Display the embed
     await this.interaction.reply(verificationCoaching());
 

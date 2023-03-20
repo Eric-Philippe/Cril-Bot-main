@@ -44,7 +44,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setTitle("🕒 | Veuillez patienter")
       .setDescription(
-        "Hey Slow Down !\n Vous avez déjà cliqué sur ce bouton il y a peu.\n Si vous avez besoin d'aide rendez-vous dans le salon **📞 Support**"
+        "Hey Slow Down !\n Vous avez déjà cliqué sur ce bouton il y a peu.\n Merci de **patienter** __deux minutes__ et recommencer !\n Si vous avez besoin d'aide rendez-vous dans le salon **📞 Support**"
       )
       .setImage(
         "https://media.tenor.com/Koztj63MPVsAAAAC/proceed-with-caution-stop-sign.gif"

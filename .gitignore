@@ -8,3 +8,9 @@ CrilPlace/Memory.json
 token.json
 credentials.json
 drive.json
+__pycache__/
+Logs.log
+coaching.log
+ServerLog.log
+Activities.json
+Memory.json

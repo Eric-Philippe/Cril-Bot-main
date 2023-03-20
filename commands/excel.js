@@ -44,8 +44,12 @@ module.exports = {
         cmd: "/excel help",
         desc: "Affiche l'aide pour la gestion du GoogleSheet.",
       },
+      {
+        cmd: "/excel logger",
+        desc: "Affiche l'historique des logs du coaching excel",
+      },
     ],
-    usage: "/excel <refresh|clear|resize|link|help>",
+    usage: "/excel <refresh|clear|resize|link|help|logger>",
   },
   data: new SlashCommandBuilder()
     .setName("excel")
@@ -80,6 +84,11 @@ module.exports = {
       subcommand
         .setName("help")
         .setDescription("Affiche l'aide pour la gestion du GoogleSheet.")
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("logger")
+        .setDescription("Affiche l'historique des logs du coaching excel")
     ),
   /**
    *
@@ -272,6 +281,16 @@ module.exports = {
             "📎 | Voici le tutoriel d'utilisation du système Coaching/Spreadsheet !",
         });
 
+        break;
+      case "logger":
+        // Return the file located from this file in ../Coaching/coaching.log
+        await interaction.deferReply();
+        const file2 = new Discord.AttachmentBuilder("./Coaching/coaching.log");
+        interaction.editReply({
+          files: [file2],
+          content:
+            "📎 | Voici le fichier de log du système Coaching/Spreadsheet !",
+        });
         break;
     }
   },
