@@ -73,6 +73,27 @@ class GoogleSheet:
                 if row == title:
                     return True
             return False
+        
+    """
+    Put the current sheet in the folder called "Liste Présence Coaching"
+    """
+    def put_in_folder(self):
+        sheet_id = self.get_spreadsheet_id()
+        
+        sheet_service = self.authenticate()
+        
+        folder_id = "1W1mZDHD5WgJaoC6nNZQxJ-gxzaa5VZt0"
+        
+        file_metadata = {
+            'name': self.spreadsheet_name,
+            'mimeType': 'application/vnd.google-apps.spreadsheet',
+            'parents': [folder_id]
+        }
+        try:
+            result = sheet_service.files().update(fileId=sheet_id, body=file_metadata).execute()
+        except:
+            raise InternalSheetError()
+        return result
 
     def get_data(self, debug = False)-> Activity:
         """Fetch data from the specified range of cells in the Google Sheet."""
