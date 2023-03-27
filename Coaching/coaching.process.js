@@ -380,7 +380,21 @@ module.exports = class CoachingProcess {
    * @description In the case of a user not found in the coaching, we ask him if anyway he has a coaching
    */
   async UserNotFoundInCoaching() {
-    this.logger.log("User not found in coaching", this.member.user);
+    let name = this.member.user.username;
+    if (this.interaction.member.nickname) {
+      if (this.interaction.user.username.split(" ").length < 3) return false;
+      const group = username.split(" ").pop();
+      username = username.replace(group, "").trim();
+      const lastname = username
+        .split(" ")
+        .filter((word) => this.isWordFullyUppercase(word))
+        .join(" ");
+
+      // The firstname is the part before the lastname
+      const firstname = username.replace(lastname, "").trim();
+      name = firstname + " " + lastname;
+    }
+    this.logger.log(`User {${name}} not found in coaching`, this.member.user);
     // Display the embed
     await this.interaction.reply(verificationCoaching());
 
