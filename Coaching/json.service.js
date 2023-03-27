@@ -73,7 +73,7 @@ module.exports = class JsonService {
     // So the only way to recognize the lastname is to take the part that is compltely uppercase
     const lastname = username
       .split(" ")
-      .filter((word) => this.isWordFullyUppercase(word))
+      .filter((word) => JsonService.isWordFullyUppercase(word))
       .join(" ");
     // The firstname is the part before the lastname
     const firstname = username.replace(lastname, "").trim();
