@@ -15,6 +15,20 @@
  * @property {String} presence
  * @property {String} coach
  */
+
+const DEPARTMENTS = [
+  "GEAR",
+  "GMP",
+  "GEAP",
+  "GCCD",
+  "INFOCOM",
+  "MEPH",
+  "GCGP",
+  "INFO",
+  "GEII",
+  "TECH DE CO",
+  "CASTRES CHIMIE",
+];
 module.exports = class JsonService {
   constructor() {
     this.refreshActivities();
@@ -89,6 +103,16 @@ module.exports = class JsonService {
     return false;
   }
   /**
+   *
+   */
+  static getDepartment(username) {
+    // If we find one of the department at the end of the username, we return it
+    for (const department of DEPARTMENTS) {
+      if (username.endsWith(department)) return department;
+    }
+    return false;
+  }
+  /**
    * Give the found firstname and lastname for a given username
    * @param {String} username
    * @returns {{firstname: String, lastname: String}}
@@ -96,17 +120,18 @@ module.exports = class JsonService {
   static getFirstnameAndLastname(username) {
     // If the username can't be cut in at least 3 parts, it's not a valid username
     if (username.split(" ").length < 3) return false;
-    // The last part of the username is the group
-    const group = username.split(" ").pop();
-    username = username.replace(group, "").trim();
-    // The name can be composed of multiple words also as the lastname
-    // So the only way to recognize the lastname is to take the part that is compltely uppercase
-    const lastname = username
+    const department = JsonService.getDepartment(username);
+    // Remopve the department from the username
+    let usernameWithoutDepartment = username;
+    if (department)
+      usernameWithoutDepartment = username.replace(department, "").trim();
+    // Now it starts like "John DOE", so the UpperCase part is the lastname
+    const lastname = usernameWithoutDepartment
       .split(" ")
       .filter((word) => JsonService.isWordFullyUppercase(word))
       .join(" ");
     // The firstname is the part before the lastname
-    const firstname = username.replace(lastname, "").trim();
+    const firstname = usernameWithoutDepartment.replace(lastname, "").trim();
     return { firstname, lastname };
   }
   /**
