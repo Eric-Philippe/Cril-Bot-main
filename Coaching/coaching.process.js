@@ -384,14 +384,14 @@ module.exports = class CoachingProcess {
     if (this.member.nickname) {
       if (this.member.nickname.split(" ").length < 3) return false;
       const group = this.member.nickname.split(" ").pop();
-      username = this.member.nickname.replace(group, "").trim();
-      const lastname = this.member.nickname
+      let username = this.member.nickname.replace(group, "").trim();
+      const lastname = username
         .split(" ")
         .filter((word) => this.isWordFullyUppercase(word))
         .join(" ");
 
       // The firstname is the part before the lastname
-      const firstname = this.member.nickname.replace(lastname, "").trim();
+      const firstname = username.replace(lastname, "").trim();
       name = firstname + " " + lastname;
     }
     this.logger.log(`User {${name}} not found in coaching`, this.member.user);
