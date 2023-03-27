@@ -34,7 +34,6 @@ module.exports = {
    * @param {ChatInputCommandInteraction} interaction
    */
   async execute(interaction) {
-    interaction.deferReply();
     const user = interaction.options.getUser("user");
     const embed = new EmbedBuilder()
       .setTitle("Fiche début de parcours pas faite !")
@@ -44,7 +43,7 @@ module.exports = {
       )
       .setFooter({ text: "Vous perdrez vos permissions dans 5 minutes." });
 
-    interaction.channel.send({
+    interaction.reply({
       content: `<@${user.id}>`,
       embeds: [embed],
       allowedMentions: { users: [user.id] },
