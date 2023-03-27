@@ -114,7 +114,7 @@ module.exports = class JsonService {
    * @param {String} word
    * @returns
    */
-  isWordFullyUppercase(word) {
+  static isWordFullyUppercase(word) {
     return word === word.toUpperCase();
   }
   /**
