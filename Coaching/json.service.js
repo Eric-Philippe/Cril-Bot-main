@@ -89,6 +89,27 @@ module.exports = class JsonService {
     return false;
   }
   /**
+   * Give the found firstname and lastname for a given username
+   * @param {String} username
+   * @returns {{firstname: String, lastname: String}}
+   */
+  static getFirstnameAndLastname(username) {
+    // If the username can't be cut in at least 3 parts, it's not a valid username
+    if (username.split(" ").length < 3) return false;
+    // The last part of the username is the group
+    const group = username.split(" ").pop();
+    username = username.replace(group, "").trim();
+    // The name can be composed of multiple words also as the lastname
+    // So the only way to recognize the lastname is to take the part that is compltely uppercase
+    const lastname = username
+      .split(" ")
+      .filter((word) => this.isWordFullyUppercase(word))
+      .join(" ");
+    // The firstname is the part before the lastname
+    const firstname = username.replace(lastname, "").trim();
+    return { firstname, lastname };
+  }
+  /**
    * Check if a word is fully uppercase
    * @param {String} word
    * @returns

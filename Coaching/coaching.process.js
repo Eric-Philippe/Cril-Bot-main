@@ -382,17 +382,8 @@ module.exports = class CoachingProcess {
   async UserNotFoundInCoaching() {
     let name = this.member.user.username;
     if (this.member.nickname) {
-      if (this.member.nickname.split(" ").length < 3) return false;
-      const group = this.member.nickname.split(" ").pop();
-      let username = this.member.nickname.replace(group, "").trim();
-      const lastname = username
-        .split(" ")
-        .filter((word) => this.isWordFullyUppercase(word))
-        .join(" ");
-
-      // The firstname is the part before the lastname
-      const firstname = username.replace(lastname, "").trim();
-      name = firstname + " " + lastname;
+      let names = JsonService.getFirstnameAndLastname(this.member.nickname);
+      name = names.firstname + " " + names.lastname;
     }
     this.logger.log(`User {${name}} not found in coaching`, this.member.user);
     // Display the embed
