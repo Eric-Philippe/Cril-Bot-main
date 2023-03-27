@@ -40,7 +40,7 @@ module.exports = {
       .setTitle("Fiche début de parcours pas faite !")
       .setColor("Red")
       .setDescription(
-        `Bonjour, vous n'aviez pas rempli la fiche début de parcours la veille comme demandé dans le mail de confirmation et de rappel. \nJe ne peux pas vous accepter en coaching aujourd'hui, vous serez noté en excusé pour cette fois. \nSi vous avez rencontré un souci avec la fiche, merci de vous diriger vers le <#$1018802206536896532>`
+        `🛑 | Bonjour, vous n'aviez pas rempli la fiche début de parcours la veille comme demandé dans le mail de confirmation et de rappel. \n\nJe ne peux pas vous accepter en coaching aujourd'hui, vous serez noté en excusé pour cette fois. \nSi vous avez rencontré un souci avec la fiche, merci de vous diriger vers le <#1018802206536896532>`
       )
       .setFooter({ text: "Vous perdrez vos permissions dans 5 minutes." });
 
