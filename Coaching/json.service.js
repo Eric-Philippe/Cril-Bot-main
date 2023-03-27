@@ -103,12 +103,13 @@ module.exports = class JsonService {
     return false;
   }
   /**
-   *
+   *@param {String} username
    */
   static getDepartment(username) {
     // If we find one of the department at the end of the username, we return it
     for (const department of DEPARTMENTS) {
-      if (username.endsWith(department)) return department;
+      if (username.toLowerCase().endsWith(department.toLowerCase()))
+        return department;
     }
     return false;
   }
