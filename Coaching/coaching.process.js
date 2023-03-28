@@ -77,7 +77,7 @@ const KEYWORDS_COACHING = [
 ];
 
 const TWO_HOUR = 2 * 60 * 60 * 1000;
-const FIVE_MINUTE = 5 * 60 * 1000;
+const TEN_MINUTES = 10 * 60 * 1000;
 /**
  * @class CoachingProcess
  * @description This class is used to manage the coaching process
@@ -190,7 +190,7 @@ module.exports = class CoachingProcess {
       const collector = response.createMessageComponentCollector({
         componentType: ComponentType.Button,
         filter,
-        time: FIVE_MINUTE,
+        time: TEN_MINUTES,
       });
 
       // Listen to the user's response
@@ -244,7 +244,10 @@ module.exports = class CoachingProcess {
     if (!channel) return this.interaction.reply(errorEmbed());
 
     // Give the View permission to the user and remove the SendMessages permission after 2 hours
-    channel.permissionOverwrites.edit(this.id, { ViewChannel: true });
+    channel.permissionOverwrites.edit(this.id, {
+      ViewChannel: true,
+      SendMessages: true,
+    });
 
     // Send the embed to the user
     this.interaction.reply(channelUnlockedEmbedIn(channel.id));
@@ -252,7 +255,10 @@ module.exports = class CoachingProcess {
 
     // Remove the SendMessages permission after 2 hours
     setTimeout(() => {
-      channel.permissionOverwrites.edit(this.id, { SendMessages: false });
+      channel.permissionOverwrites.edit(this.id, {
+        SendMessages: false,
+        ViewChannel: false,
+      });
     }, TWO_HOUR);
   }
 
@@ -321,7 +327,7 @@ module.exports = class CoachingProcess {
     // Create a collector to listen to the user's response
     const collectorYesNo = response.createMessageComponentCollector({
       componentType: ComponentType.Button,
-      time: FIVE_MINUTE,
+      time: TEN_MINUTES,
     });
 
     // Listen to the user's response
@@ -355,7 +361,7 @@ module.exports = class CoachingProcess {
     // Create a collector to listen to the user's response
     const collectorYesNo = response.createMessageComponentCollector({
       componentType: ComponentType.Button,
-      time: FIVE_MINUTE,
+      time: TEN_MINUTES,
     });
 
     // Listen to the user's response
@@ -395,7 +401,7 @@ module.exports = class CoachingProcess {
     // Create a collector to listen to the user's response
     const collectorYesNo = response.createMessageComponentCollector({
       componentType: ComponentType.Button,
-      time: FIVE_MINUTE,
+      time: TEN_MINUTES,
     });
 
     // Listen to the user's response

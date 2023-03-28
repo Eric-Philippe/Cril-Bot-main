@@ -105,7 +105,6 @@ class App:
         self.sheet.add_column("Lieu", 3, True)
         self.sheet.add_column("Presence", 12, True)
         self.sheet.add_column("Coaching Commentaire", 13, True)
-        self.sheet.put_in_folder()
         self.sheet.auto_resize()
         self.jsonManager.clear_outdated()
         activities = self.sheet.get_data()

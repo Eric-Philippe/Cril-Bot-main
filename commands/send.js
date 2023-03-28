@@ -303,7 +303,7 @@ const coachingInteraction = (i, subCommand, user) => {
       break;
     case "fiche-comm":
       desc =
-        "🎓 | Votre dernière fiche de coaching a été commentée avec un conseil, vous pouvez aller en prendre connaissance et continuer votre travail. Si vous avez besoin de plus de précisions, d'identifiants ou toute autre aide, revenez vers nous ! ";
+        "🎓 | Votre dernière fiche de coaching a été commentée avec un conseil, vous pouvez aller en prendre connaissance et continuer votre travail. \nPour rappel, vous trouverez le lien vers le catalogue des ressources épinglé en haut de ce chat. \nSi vous avez besoin de plus de précisions, d'identifiants ou toute autre aide, revenez vers nous ! ";
       break;
   }
 
