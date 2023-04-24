@@ -154,13 +154,14 @@ module.exports = class JsonService {
       word1
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "") ===
+        .replace(/\p{Diacritic}/gu, "") ==
       word2
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\p{Diacritic}/gu, "")
     );
   }
+
   /**
    * Check if the given time is in the past, allowing a 15 minutes delay
    * @param {String} time hh:mm
