@@ -5,7 +5,7 @@ const {
   AttachmentBuilder,
 } = require("discord.js"); // Discord.js basic import
 const { TOKEN, tipsChannel } = require("./config"); // Token import
-const TIPS = require("./crilTips.json").TIPS; // Array of tips import
+const TIPS = require("../crilTips.json").TIPS; // Array of tips import
 
 console.log("Start of the snippet"); // Start of the snippet
 

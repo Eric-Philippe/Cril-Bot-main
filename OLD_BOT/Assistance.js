@@ -3,7 +3,7 @@ const Discord = require("discord.js"); // Main discordjs import
 const { client } = require("./utils/client"); // Get the client
 
 const { supportRole, supportChannel, adminRole } = require("./config"); // Import the miscellaneous constantes
-const { MyNumberEmotes } = require("./emotes.json"); // Self made number emotes
+const { MyNumberEmotes } = require("../emotes.json"); // Self made number emotes
 const helpsText = [
   "Je ne peux pas venir à mon activité / coaching, comment faire ?",
   "J'ai eu une absence injustifiée.",

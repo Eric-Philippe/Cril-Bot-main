@@ -32,7 +32,7 @@ const DEPARTMENTS = [
 module.exports = class JsonService {
   constructor() {
     this.refreshActivities();
-    this.JSONActivities = require("../SpreadSheet/Activities.json");
+    this.JSONActivities = require("../../SpreadSheet/Activities.json");
     /** @type {String} */
     this.today = null;
     /** @type {Activity[]} */
@@ -47,7 +47,7 @@ module.exports = class JsonService {
    */
   refreshActivities() {
     delete require.cache[require.resolve("../SpreadSheet/Activities.json")];
-    this.JSONActivities = require("../SpreadSheet/Activities.json");
+    this.JSONActivities = require("../../SpreadSheet/Activities.json");
   }
 
   /**

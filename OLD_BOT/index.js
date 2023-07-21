@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { Collection, PermissionFlagsBits } = require("discord.js");
+const { Collection, PermissionFlagsBits, Events } = require("discord.js");
 
 const { client } = require("./utils/client"); //Client object
 const { TOKEN, themeChannel, placeChannel } = require("./config");
@@ -19,7 +19,14 @@ const CoachingProcess = require("./Coaching/coaching.process");
 const { roleRequest } = require("./commandsPlugin/rolesPlugin"); // ReactionRole Message
 const { tossButtonInteraction } = require("./commandsPlugin/tossPlugin");
 
-const OXY = require("./oxy.json");
+const OXY = require("../oxy.json");
+/**
+ * @typedef japChannels
+ * @property {string} from - The channel where the message is from
+ * @property {string} to - The channel where the user will unlock access
+ */
+/** @type {japChannels[]} */
+const japChannels = require("../japChannels.json").CHANNELS;
 const {
   cancelTheme,
   createTheme,
@@ -149,5 +156,23 @@ client.on("messageCreate", (msg) => {
       });
   }
 });
+
+client.on(Events.MessageReactionAdd, (reaction, user) => {
+  if (!reaction.message.channel.isThread()) return;
+
+  let fromChannel = reaction.message.channel;
+  let japChan = japChannels.find((c) => c.from === fromChannel.id);
+  if (!japChan) return;
+
+  let toChannel = client.channels.cache.get(japChan.to);
+  if (!toChannel) return;
+
+  let member = reaction.message.guild.members.cache.get(user.id);
+  if (!member) return;
+
+  // Give the user the permission to see the channel
+  toChannel.permissionOverwrites.create(user.id, { ViewChannel: true });
+});
+
 /** Login on token */
 client.login(TOKEN);
