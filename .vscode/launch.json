@@ -31,14 +31,15 @@
       "program": "${workspaceFolder}/Bot/dist/index.js",
       "preLaunchTask": "Compile Program"
     },
-    // compile then launch index.js
+    // Lauch Bot dev
     {
+      "name": "Launch Bot Dev",
       "type": "node",
       "request": "launch",
-      "name": "Compile and Launch Program",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/Bot/dist/index.js",
-      "preLaunchTask": "Compile Program"
+      "cwd": "${workspaceFolder}/Bot"
     }
   ]
 }

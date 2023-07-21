@@ -1,6 +1,4 @@
-import dotenv from "dotenv";
-
-dotenv.config();
+require("dotenv").config();
 
 const { BOT_TOKEN, BOT_ID } = process.env;
 

@@ -1,6 +1,4 @@
-import dotenv from "dotenv";
-
-dotenv.config();
+require("dotenv").config();
 
 const { DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME } = process.env;
 
@@ -10,4 +8,4 @@ if (!DB_HOST || !DB_PORT || !DB_USER || !DB_PASS || !DB_NAME) {
 
 const DB_URL = `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
 
-export { DB_URL };
+export { DB_URL, DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME };

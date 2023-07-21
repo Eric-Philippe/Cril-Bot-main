@@ -16,9 +16,9 @@ const commandFiles: string[] = [];
 
 for (const folder of readdirSync(commandsPath)) {
   const folderPath = path.join(commandsPath, folder);
-  if (!folder.endsWith(".js")) {
+  if (!folder.endsWith(".js") && !folder.endsWith(".ts")) {
     for (const file of readdirSync(folderPath)) {
-      if (file.endsWith(".js")) {
+      if (file.endsWith(".js") || file.endsWith(".ts")) {
         commandFiles.push(path.join(folder, file));
       }
     }
