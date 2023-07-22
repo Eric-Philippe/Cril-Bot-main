@@ -8,7 +8,7 @@ export class LogsEntry {
 
   @Column("timestamp without time zone", {
     name: "entry_date",
-    default: () => "CURRENT_TIMESTAMP",
+    default: () => "now()",
   })
   entryDate: Date;
 

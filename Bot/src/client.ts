@@ -1,6 +1,6 @@
 import { Client, GatewayIntentBits } from "discord.js";
 
-import { BOT_TOKEN } from "./config.bot";
+import { BOT_TOKEN } from "./config/config.bot";
 
 /**
  * Main Discord Client Instance

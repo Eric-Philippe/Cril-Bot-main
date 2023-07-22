@@ -9,7 +9,6 @@ import { LogsLevels } from "./logger/Logs.levels";
 
 LogsRuntime.getInstance().log(LogsLevels.INFO, "Starting the bot");
 databaseReady(client, AppDataSource);
-
 /**
  * @description
  * Database Ready Event will trigger the Discord Bot Ready event

@@ -2,12 +2,19 @@ import "reflect-metadata";
 import client from "./client";
 import { Events } from "./events/Events.types";
 import { DataSource } from "typeorm";
-import { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS } from "./config.database";
+import {
+  DB_HOST,
+  DB_PORT,
+  DB_NAME,
+  DB_USER,
+  DB_PASS,
+} from "./config/config.database";
 import { LogsCoaching } from "./entities/LogsCoaching";
 import { LogsCoachingI } from "./entities/LogsCoachingI";
 import { LogsEntry } from "./entities/LogsEntry";
 import { LogsError } from "./entities/LogsError";
 import { LogsGeneral } from "./entities/LogsGeneral";
+import { CurrentSpreadsheets } from "./entities/CurrentSpreadsheets";
 
 /** ORM DataSource Main Access / Setup */
 export const AppDataSource = new DataSource({
@@ -19,7 +26,14 @@ export const AppDataSource = new DataSource({
   database: DB_NAME,
   synchronize: true,
   logging: false,
-  entities: [LogsCoaching, LogsCoachingI, LogsEntry, LogsError, LogsGeneral],
+  entities: [
+    LogsCoaching,
+    LogsCoachingI,
+    LogsEntry,
+    LogsError,
+    LogsGeneral,
+    CurrentSpreadsheets,
+  ],
   migrations: [],
   subscribers: [],
 });
