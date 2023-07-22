@@ -1,4 +1,6 @@
 import "reflect-metadata";
+import client from "./client";
+import { Events } from "./events/Events.types";
 import { DataSource } from "typeorm";
 import { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS } from "./config.database";
 import { LogsCoaching } from "./entities/LogsCoaching";
@@ -20,3 +22,9 @@ export const AppDataSource = new DataSource({
   migrations: [],
   subscribers: [],
 });
+
+AppDataSource.initialize()
+  .then(() => {
+    client.emit(Events.DatabaseReady, DB_HOST, DB_NAME);
+  })
+  .catch((error) => console.log(error));
