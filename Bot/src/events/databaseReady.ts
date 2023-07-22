@@ -2,6 +2,8 @@ import { Client } from "discord.js";
 import { Events } from "./Events.types";
 import ready from "./ready";
 import { DataSource } from "typeorm";
+import LogsRuntime from "../logger/LogsRuntime";
+import { LogsLevels } from "../logger/Logs.levels";
 
 let activity = false;
 
@@ -11,6 +13,10 @@ export default (client: Client, appDataSource: DataSource) => {
     console.log(
       `%c 💾 Database connected on ${host}/${dbName}`,
       "color: #00ff00"
+    );
+    LogsRuntime.getInstance().log(
+      LogsLevels.INFO,
+      `Database connected on ${dbName}`
     );
     ready(client);
   });

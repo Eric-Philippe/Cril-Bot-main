@@ -3,15 +3,13 @@ import * as path from "path";
 
 import { Command } from "./Command";
 
+/**
+ * @description This file is used to load dynamically all commands from the commands folder
+ */
+
 const Commands: Command[] = [];
 
 const commandsPath = path.join(__dirname, "commands");
-// const commandFiles = readdirSync(commandsPath).filter((file) =>
-//   file.endsWith(".js")
-// );
-// commands/fun/ping.js
-// commands/moderation/kick.js
-
 const commandFiles: string[] = [];
 
 for (const folder of readdirSync(commandsPath)) {

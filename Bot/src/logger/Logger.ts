@@ -9,9 +9,19 @@ import { LogsCoachingI } from "../entities/LogsCoachingI";
 import { LogsEntry } from "../entities/LogsEntry";
 import LogsRuntime from "./LogsRuntime";
 
+/**
+ * @class Logger
+ * @description This class is used to log messages in the database and in the runtime file
+ * @property {Logger} LoggerRuntime The instance of the runtime logger
+ */
 export default class Logger {
   private static LoggerRuntime = LogsRuntime.getInstance();
 
+  /**
+   * Log a General message in the database and in the runtime file
+   * @param level LogsGeneralLevels enum
+   * @param msg The message to log
+   */
   public static logGeneral(level: LogsGeneralLevels, msg: string) {
     let entity = new LogsGeneral();
     entity.entryDate = new Date();
@@ -22,6 +32,10 @@ export default class Logger {
     AppDataSource.getRepository(LogsGeneral).save(entity);
   }
 
+  /**
+   * Log an Error message in the database and in the runtime file
+   * @param error The error to log
+   */
   public static logError(error: Error) {
     let entity = new LogsError();
     entity.entryDate = new Date();
@@ -33,6 +47,11 @@ export default class Logger {
     AppDataSource.getRepository(LogsError).save(entity);
   }
 
+  /**
+   * Log a Coaching message in the database and in the runtime file
+   * @param userId User id
+   * @param msg The message to log
+   */
   public static logCoaching(userId: string, msg: string) {
     let entity = new LogsCoaching();
     entity.entryDate = new Date();
@@ -43,6 +62,12 @@ export default class Logger {
     AppDataSource.getRepository(LogsCoaching).save(entity);
   }
 
+  /**
+   * Log a CoachingI message in the database and in the runtime file
+   * @param userId User id
+   * @param type LogsCoachingITypes enum
+   * @param msg The message to log
+   */
   public static logCoachingI(
     userId: string,
     type: LogsCoachingITypes,
@@ -58,6 +83,11 @@ export default class Logger {
     AppDataSource.getRepository(LogsCoachingI).save(entity);
   }
 
+  /**
+   * Log an Entry message in the database and in the runtime file
+   * @param userid User id
+   * @param msg The message to log
+   */
   public static logEntry(userid: string, msg: string) {
     let entity = new LogsEntry();
     entity.entryDate = new Date();
@@ -68,6 +98,12 @@ export default class Logger {
     AppDataSource.getRepository(LogsEntry).save(entity);
   }
 
+  /**
+   * Get the stack trace of an error
+   * @param error The error
+   * @returns {string} The stack trace
+   * @private
+   */
   private static getStackTrace(error: Error) {
     return error.stack
       ?.split("\n")

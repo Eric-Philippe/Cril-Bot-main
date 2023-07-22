@@ -9,6 +9,7 @@ import { LogsEntry } from "./entities/LogsEntry";
 import { LogsError } from "./entities/LogsError";
 import { LogsGeneral } from "./entities/LogsGeneral";
 
+/** ORM DataSource Main Access / Setup */
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: DB_HOST,
@@ -23,8 +24,10 @@ export const AppDataSource = new DataSource({
   subscribers: [],
 });
 
+/** Initialize the ORM DataSource */
 AppDataSource.initialize()
   .then(() => {
+    // Database is ready
     client.emit(Events.DatabaseReady, DB_HOST, DB_NAME);
   })
   .catch((error) => console.log(error));

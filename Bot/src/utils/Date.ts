@@ -1,3 +1,6 @@
+/**
+ * @returns {string} The current date in the format DD/MM/YYYY HH:MM:SS:MS
+ */
 export const getDayToMs = () => {
   // Return DD/MM/YYYY HH:MM:SS:MS
   const date = new Date();
