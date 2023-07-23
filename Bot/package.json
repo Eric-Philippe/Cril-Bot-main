@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "start": "ts-node src/index.ts",
     "start-prod": "node build/index.js",
     "build": "tsc -p tsconfig.json --skipLibCheck",

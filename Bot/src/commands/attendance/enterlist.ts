@@ -20,18 +20,28 @@ const ping: Command = {
     const file = interaction.options.get("file");
     const text = interaction.options.get("text");
 
+    if (!file && !text) {
+      await interaction.reply("Merci de pas être con");
+      return;
+    }
+
     let content;
 
     if (file) {
-      content = file.value;
+      let response = await fetch(file.attachment.url);
+      content = await response.text();
     } else if (text) {
       content = text.value;
     }
-    console.log(content);
 
-    console.log(textToArray(content));
-
-    await interaction.reply("TODO: Add reply");
+    let result = textToArray(content);
+    if (result.returnCode == 0) {
+      await interaction.reply(
+        `J'ai trouvé ${result.result.length} inscriptions`
+      );
+    } else {
+      await interaction.reply("Il y a eu une erreur");
+    }
   },
 };
 

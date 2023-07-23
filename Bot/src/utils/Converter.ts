@@ -1,1 +1,0 @@
-const tableToJson = (text: string) => {};

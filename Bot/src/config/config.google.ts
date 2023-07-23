@@ -6,6 +6,7 @@ const {
   GOOGLE_PRIVATE_KEY,
   GOOGLE_EMAIL,
   GOOGLE_CLIENT_ID,
+  EMAIL,
 } = process.env;
 
 if (
@@ -13,7 +14,8 @@ if (
   !GOOGLE_PRIVATE_KEY_ID ||
   !GOOGLE_PRIVATE_KEY ||
   !GOOGLE_EMAIL ||
-  !GOOGLE_CLIENT_ID
+  !GOOGLE_CLIENT_ID ||
+  !EMAIL
 ) {
   throw new Error("Missing environment variables");
 }
@@ -32,4 +34,4 @@ const credentials = {
     "https://www.googleapis.com/robot/v1/metadata/x509/bot-discord-cril%40cril-spreadsheet-api.iam.gserviceaccount.com",
 };
 
-export { credentials };
+export { credentials, EMAIL };

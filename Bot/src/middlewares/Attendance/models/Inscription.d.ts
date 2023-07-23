@@ -12,4 +12,5 @@ export interface Inscription {
   observations: string | null;
   english_level: string | null;
   spanish_level: string | null;
+  validation: string | null;
 }

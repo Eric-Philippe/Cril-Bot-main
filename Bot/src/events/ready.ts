@@ -2,12 +2,6 @@ import { Client, Events } from "discord.js";
 import interactionCreate from "./interactionCreate";
 import LogsRuntime from "../logger/LogsRuntime";
 import { LogsLevels } from "../logger/Logs.levels";
-import {
-  getFolderIdByName,
-  mooveFile,
-} from "../GoogleSpreadsheet/Drive/Folder.service";
-import { getMostRecentSheetId } from "../GoogleSpreadsheet/Drive/File.database";
-import { listFiles } from "../GoogleSpreadsheet/Drive/File.service";
 
 export default (client: Client) => {
   client.once(Events.ClientReady, (c) => {
