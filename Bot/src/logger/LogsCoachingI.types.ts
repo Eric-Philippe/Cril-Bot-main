@@ -1,4 +1,6 @@
 export enum LogsCoachingITypes {
   UPDATE = "UPDATE",
   FETCHING_FILES = "FETCHING_FILES",
+  FETCHING_FOLDER = "FETCHING_FOLDER",
+  MOOVE = "MOOVE",
 }

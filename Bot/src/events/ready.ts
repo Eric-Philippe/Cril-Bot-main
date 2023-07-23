@@ -2,7 +2,12 @@ import { Client, Events } from "discord.js";
 import interactionCreate from "./interactionCreate";
 import LogsRuntime from "../logger/LogsRuntime";
 import { LogsLevels } from "../logger/Logs.levels";
-import GoogleDrive from "../GoogleSpreadsheet/Drive/Drive";
+import {
+  getFolderIdByName,
+  mooveFile,
+} from "../GoogleSpreadsheet/Drive/Folder.service";
+import { getMostRecentSheetId } from "../GoogleSpreadsheet/Drive/File.database";
+import { listFiles } from "../GoogleSpreadsheet/Drive/File.service";
 
 export default (client: Client) => {
   client.once(Events.ClientReady, (c) => {
@@ -17,6 +22,8 @@ export default (client: Client) => {
   });
 };
 
-const body = () => {
-  GoogleDrive.setLatestFileId();
-};
+/**
+ * @deprecated
+ * Only for debugging purpose
+ */
+const body = async () => {};

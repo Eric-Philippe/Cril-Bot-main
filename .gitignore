@@ -5,4 +5,5 @@ OLD_BOT/
 OLD_SERVER/
 dist/
 ormconfig.json
+build/
 ```
