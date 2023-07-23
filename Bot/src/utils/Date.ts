@@ -50,3 +50,11 @@ export const getCurrentSchoolYear = (): string => {
 
   return `${firstYear}/${secondYear}`;
 };
+
+export const dateToHHMM = (date: Date): string => {
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let strHours = hours < 10 ? `0${hours}` : `${hours}`;
+  let strMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  return `${strHours}:${strMinutes}`;
+};

@@ -3,7 +3,7 @@ import { Command } from "../../Command";
 import { textToArray } from "../../middlewares/Attendance/TextToInscriptions";
 import InscriptionManager from "../../middlewares/Attendance/InscriptionManager";
 import SheetsService from "../../GoogleAPI/Sheets/Sheets.service";
-import initSheet from "../../GoogleAPI/Sheets/Sheets";
+import { initSheet, fillSheet } from "../../GoogleAPI/Sheets/Sheets";
 
 const ping: Command = {
   description: "Replies with Pong!",
@@ -19,6 +19,8 @@ const ping: Command = {
     ),
 
   async run(interaction: CommandInteraction) {
+    interaction.deferReply();
+
     // Get the content of the file
     const file = interaction.options.get("file");
     const text = interaction.options.get("text");
@@ -40,8 +42,8 @@ const ping: Command = {
     let result = textToArray(content);
     if (result.returnCode == 0) {
       InscriptionManager.saveInscription(result.result);
-      initSheet("17OIbxRCHFXaQFzGR2Y-oN2XBtmfs0q1rueeCVGOSrmU");
-      await interaction.reply(
+      await initSheet("17OIbxRCHFXaQFzGR2Y-oN2XBtmfs0q1rueeCVGOSrmU");
+      await interaction.editReply(
         `J'ai trouvé ${result.result.length} inscriptions`
       );
     } else {

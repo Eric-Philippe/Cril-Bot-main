@@ -111,6 +111,33 @@ export default class SheetsService {
       console.log(err);
     }
   }
+
+  public static async autoResize(fileId: string, sheetId: number) {
+    const autoResizeRequest = {
+      spreadsheetId: fileId,
+      requestBody: {
+        requests: [
+          {
+            autoResizeDimensions: {
+              dimensions: {
+                sheetId: sheetId,
+                dimension: "COLUMNS",
+                startIndex: 0,
+                endIndex: 26,
+              },
+            },
+          },
+        ],
+      },
+    };
+
+    try {
+      await Sheets.spreadsheets.batchUpdate(autoResizeRequest);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   public static async hasTwoSheets(fileId: string): Promise<boolean> {
     const getSheetsRequest = {
       spreadsheetId: fileId,

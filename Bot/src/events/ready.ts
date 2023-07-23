@@ -2,6 +2,7 @@ import { Client, Events } from "discord.js";
 import interactionCreate from "./interactionCreate";
 import LogsRuntime from "../logger/LogsRuntime";
 import { LogsLevels } from "../logger/Logs.levels";
+import InscriptionManager from "../middlewares/Attendance/InscriptionManager";
 
 export default (client: Client) => {
   client.once(Events.ClientReady, (c) => {
@@ -20,4 +21,8 @@ export default (client: Client) => {
  * @deprecated
  * Only for debugging purpose
  */
-const body = async () => {};
+const body = async () => {
+  InscriptionManager.refreshInscriptions(
+    "17OIbxRCHFXaQFzGR2Y-oN2XBtmfs0q1rueeCVGOSrmU"
+  );
+};
