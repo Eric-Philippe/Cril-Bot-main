@@ -4,21 +4,30 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+    // launch the current file
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Current JS File",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${file}"
+    },
+
     // Compile the ts
     {
       "type": "node",
       "request": "launch",
-      "name": "Compile Program",
+      "name": "Build Program",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/Bot/node_modules/typescript/bin/tsc",
       "args": ["-p", "${workspaceFolder}/Bot/tsconfig.json"],
-      "outFiles": ["${workspaceFolder}/Bot/dist/**/*.js"]
+      "outFiles": ["${workspaceFolder}/Bot/build/**/*.js"]
     },
     // rest the commands
     {
       "type": "node",
       "request": "launch",
-      "name": "Rest Commands",
+      "name": "Update Commands with REST",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/Bot/rest.js"
     },
@@ -26,14 +35,26 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Launch Program (JS)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start-prod"],
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/Bot/dist/index.js",
-      "preLaunchTask": "Compile Program"
+      "preLaunchTask": "npm: build - Bot",
+      "cwd": "${workspaceFolder}/Bot"
+    },
+    // npm run start
+    {
+      "name": "Launch Bot (TS)",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+      "skipFiles": ["<node_internals>/**"],
+      "cwd": "${workspaceFolder}/Bot"
     },
     // Lauch Bot dev
     {
-      "name": "Launch Bot Dev",
+      "name": "Launch Bot Dev (Watch)",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npm",
