@@ -1,9 +1,5 @@
 node_modules/
 *.env
-Bot/ormconfig.json
-OLD_BOT/
-OLD_SERVER/
-dist/
 ormconfig.json
 build/
 ```
