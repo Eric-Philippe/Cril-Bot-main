@@ -1,15 +1,11 @@
 import { AppDataSource } from "../../data-source";
 import { CurrentSpreadsheets } from "../../entities/CurrentSpreadsheets";
-import { listFiles } from "./File.service";
 
-const setMostRecentSheetId = async () => {
-  let files = await listFiles();
-  let latestFile = files[0];
-
+const setMostRecentSheetId = async (fileId: string) => {
   let repo = AppDataSource.getRepository(CurrentSpreadsheets);
   await repo.delete({});
   let entity = new CurrentSpreadsheets();
-  entity.id = latestFile.id;
+  entity.id = fileId;
   entity.entryDate = new Date();
 
   await repo.save(entity);
