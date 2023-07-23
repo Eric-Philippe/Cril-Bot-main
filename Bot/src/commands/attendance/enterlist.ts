@@ -1,6 +1,9 @@
 import { CommandInteraction, SlashCommandBuilder } from "discord.js";
 import { Command } from "../../Command";
-import { textToArray } from "../../middlewares/Attendance/utils/converter";
+import { textToArray } from "../../middlewares/Attendance/TextToInscriptions";
+import InscriptionManager from "../../middlewares/Attendance/InscriptionManager";
+import SheetsService from "../../GoogleAPI/Sheets/Sheets.service";
+import initSheet from "../../GoogleAPI/Sheets/Sheets";
 
 const ping: Command = {
   description: "Replies with Pong!",
@@ -36,6 +39,8 @@ const ping: Command = {
 
     let result = textToArray(content);
     if (result.returnCode == 0) {
+      InscriptionManager.saveInscription(result.result);
+      initSheet("17OIbxRCHFXaQFzGR2Y-oN2XBtmfs0q1rueeCVGOSrmU");
       await interaction.reply(
         `J'ai trouvé ${result.result.length} inscriptions`
       );

@@ -1,8 +1,8 @@
-import Operation from "../../../Operation";
-import { HEADERS_RESACRIL } from "../../../res/ContexteRessources";
-import { HHMMToDate } from "../../../utils/Date";
-import { isEmpty } from "../../../utils/String";
-import { Inscription } from "../models/Inscription";
+import Operation from "../../Operation";
+import { HEADERS_RESACRIL } from "../../res/ContexteRessources";
+import { HHMMToDate } from "../../utils/Date";
+import { isEmpty } from "../../utils/String";
+import { Inscription } from "./models/Inscription";
 
 class TextToInscriptions {
   public results: Inscription[] = [];

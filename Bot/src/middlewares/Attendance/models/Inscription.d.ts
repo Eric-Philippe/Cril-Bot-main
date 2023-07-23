@@ -1,5 +1,3 @@
-import { InscriptionTypes } from "./InscriptionType";
-
 export interface Inscription {
   type: string;
   activity_name: string;

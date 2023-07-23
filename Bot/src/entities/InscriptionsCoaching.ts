@@ -9,7 +9,7 @@ export class InscriptionsCoaching {
   @Column("timestamp without time zone", { name: "slot" })
   slot: Date;
 
-  @Column("character varying", { name: "lieu", length: 255 })
+  @Column("character varying", { name: "lieu", nullable: true, length: 255 })
   lieu: string;
 
   @Column("character varying", { name: "langue", length: 255 })

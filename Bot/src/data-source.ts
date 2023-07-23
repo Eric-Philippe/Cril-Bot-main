@@ -15,6 +15,8 @@ import { LogsEntry } from "./entities/LogsEntry";
 import { LogsError } from "./entities/LogsError";
 import { LogsGeneral } from "./entities/LogsGeneral";
 import { CurrentSpreadsheets } from "./entities/CurrentSpreadsheets";
+import { InscriptionsAtelier } from "./entities/InscriptionsAtelier";
+import { InscriptionsCoaching } from "./entities/InscriptionsCoaching";
 
 /** ORM DataSource Main Access / Setup */
 export const AppDataSource = new DataSource({
@@ -33,6 +35,8 @@ export const AppDataSource = new DataSource({
     LogsError,
     LogsGeneral,
     CurrentSpreadsheets,
+    InscriptionsAtelier,
+    InscriptionsCoaching,
   ],
   migrations: [],
   subscribers: [],
