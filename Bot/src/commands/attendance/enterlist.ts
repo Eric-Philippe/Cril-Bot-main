@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from "discord.js";
-import { Command } from "../../Command";
 import { textToArray } from "../../middlewares/Attendance/TextToInscriptions";
 import InscriptionManager from "../../middlewares/Attendance/InscriptionManager";
 import { getSheetURL, initSheet } from "../../GoogleAPI/Sheets/Sheets";
@@ -13,7 +12,7 @@ import { Emotes } from "../../middlewares/Messages/Emotes";
 import Controllers from "../../middlewares/Controllers/Controllers";
 import { Colors } from "../../middlewares/Messages/Colors";
 
-const enterlist: Command = {
+const enterlist = {
   description: "Replies with Pong!",
 
   data: new SlashCommandBuilder()

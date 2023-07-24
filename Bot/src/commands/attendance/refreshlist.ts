@@ -1,5 +1,4 @@
-import { CommandInteraction, SlashCommandBuilder } from "discord.js";
-import { Command } from "../../Command";
+import { SlashCommandBuilder } from "discord.js";
 import { isMostRecentSheetSetup } from "../../GoogleAPI/Drive/File.database";
 import Messages from "../../middlewares/Messages/Messages";
 import InscriptionManager from "../../middlewares/Attendance/InscriptionManager";
@@ -9,7 +8,7 @@ import { Emotes } from "../../middlewares/Messages/Emotes";
 import { getSheetURL } from "../../GoogleAPI/Sheets/Sheets";
 import Controllers from "../../middlewares/Controllers/Controllers";
 
-const refreshlist: Command = {
+const refreshlist = {
   description: "Refresh the list of inscriptions",
 
   data: new SlashCommandBuilder()

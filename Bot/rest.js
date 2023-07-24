@@ -55,4 +55,7 @@ const rest = new REST().setToken(process.env.BOT_TOKEN);
     // And of course, make sure you catch and log any errors!
     console.error(error);
   }
+
+  // Exit the process when you're done refreshing commands
+  process.exit();
 })();

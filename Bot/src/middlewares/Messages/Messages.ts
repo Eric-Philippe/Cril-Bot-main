@@ -33,6 +33,20 @@ export default class Messages {
     await this.sendInteraction(i, embed);
   }
 
+  public static async sendInfo(
+    i: ChatInputCommandInteraction,
+    msg: string,
+    title?: string
+  ) {
+    const embed = this.buildEmbed(
+      `${Emotes.INFO} | ${msg}`,
+      title,
+      Colors.PURPLE
+    );
+
+    await this.sendInteraction(i, embed);
+  }
+
   public static async sendError(
     i: ChatInputCommandInteraction,
     msg: string,
@@ -110,13 +124,15 @@ export default class Messages {
   public static async sendInteraction(
     i: ChatInputCommandInteraction,
     embed: EmbedBuilder,
-    rows?: ActionRowBuilder[]
+    rows?: ActionRowBuilder[],
+    content?: string
   ) {
     let body = {
       embeds: [embed],
     };
 
     if (rows) body["components"] = rows;
+    if (content) body["content"] = content;
 
     try {
       switch (true) {

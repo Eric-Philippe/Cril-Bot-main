@@ -29,7 +29,8 @@
       "request": "launch",
       "name": "Update Commands with REST",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/Bot/rest.js"
+      "program": "rest.js",
+      "cwd": "${workspaceFolder}/Bot"
     },
     // launch index.js
     {

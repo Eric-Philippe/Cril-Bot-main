@@ -1,20 +1,12 @@
-import { CommandInteraction, SlashCommandBuilder } from "discord.js";
-import { Command } from "../../Command";
+import { SlashCommandBuilder } from "discord.js";
 
-const ping: Command = {
+const ping = {
   description: "Replies with Pong!",
 
   data: new SlashCommandBuilder()
     .setName("ping")
-    .setDescription("Replies with Pong!")
-    .addAttachmentOption((option) =>
-      option
-        .setName("file")
-        .setDescription("The file to upload")
-        .setRequired(true)
-    ),
-
-  async run(interaction: CommandInteraction) {
+    .setDescription("Replies with Pong!"),
+  async run(interaction) {
     await interaction.reply("Pong!");
   },
 };
