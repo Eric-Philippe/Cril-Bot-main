@@ -31,6 +31,8 @@ export default class SheetsCoaching {
     } catch (err) {
       console.log(err);
     }
+
+    return;
   }
 
   public static async addRow(
@@ -82,6 +84,8 @@ export default class SheetsCoaching {
   }
 
   public static async renameFirstSheet(fileId: string) {
-    SheetsService.renameSheet(fileId, 0, "Coachings");
+    await SheetsService.renameSheet(fileId, 0, "Coachings");
+
+    return;
   }
 }

@@ -58,3 +58,16 @@ export const dateToHHMM = (date: Date): string => {
   let strMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
   return `${strHours}:${strMinutes}`;
 };
+
+/**
+ * Return true if the date are equal (Only considering the day, month and year)
+ * @param date1
+ * @param date2
+ */
+export const areDatesEqual = (date1: Date, date2: Date): boolean => {
+  return (
+    date1.getDate() == date2.getDate() &&
+    date1.getMonth() == date2.getMonth() &&
+    date1.getFullYear() == date2.getFullYear()
+  );
+};

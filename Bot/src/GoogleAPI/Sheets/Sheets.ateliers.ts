@@ -93,5 +93,7 @@ export default class SheetsAteliers {
     } else {
       SheetsService.renameSheet(fileId, 1, "Ateliers");
     }
+
+    return;
   }
 }

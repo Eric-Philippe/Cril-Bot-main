@@ -12,7 +12,7 @@ import { InscriptionAtelier } from "./models/InscriptionAtelier";
 import { InscriptionCoaching } from "./models/InscriptionCoaching";
 
 export default class InscriptionManager {
-  public static async saveInscription(inscription: Inscription[]) {
+  public static async saveInscriptionOnDB(inscription: Inscription[]) {
     await this.deleteInscriptionsFromDb();
     let ateliers = await this.getAteliers(inscription);
     let coachings = await this.getCoachings(inscription);
@@ -38,54 +38,70 @@ export default class InscriptionManager {
 
   public static async deleteInscriptionsFromDb() {
     let repoAtelier = AppDataSource.getRepository(InscriptionsAtelier);
-    let repoCoach = AppDataSource.getRepository(InscriptionsAtelier);
+    let repoCoach = AppDataSource.getRepository(InscriptionsCoaching);
 
     await repoAtelier.delete({});
     await repoCoach.delete({});
   }
 
-  public static async refreshInscriptions(sheetId: string) {
+  public static async refreshInscriptions(sheetId: string): Promise<number> {
     await this.deleteInscriptionsFromDb();
+    let errorCode = 0;
     let secondId = (await SheetsService.getSecondSheetId(sheetId)).toString();
     let ateliers = await SheetsAteliers.getData(sheetId, secondId);
-    let coachings = await SheetsCoaching.getData(sheetId, "0");
+    if (ateliers != null) {
+      let repoAteliers = AppDataSource.getRepository(InscriptionsAtelier);
+      for (let i = 0; i < ateliers.length; i++) {
+        let ins = await this.createInscriptionAtelierFromSheet(ateliers[i]);
+        repoAteliers.save(ins);
+      }
+    }
 
-    console.log(ateliers);
+    let coachings = await SheetsCoaching.getData(sheetId, "0");
+    if (coachings != null) {
+      let repoCoach = await AppDataSource.getRepository(InscriptionsCoaching);
+      for (let i = 0; i < coachings.length; i++) {
+        let ins = await this.createInscriptionCoachingFromSheet(coachings[i]);
+        repoCoach.save(ins);
+      }
+    }
+
+    return errorCode;
   }
 
   public static createInscriptionAtelierFromSheet(
     inscription: any[]
-  ): InscriptionAtelier {
-    return {
-      slot: HHMMToDate(inscription[0]),
-      lieu: inscription[1],
-      titre: inscription[2],
-      langue: inscription[3],
-      niveau: inscription[4],
-      nom: inscription[5],
-      prenom: inscription[6],
-      presence: inscription[7],
-      nivConsAnglais: inscription[8],
-      nivConsEspagnol: inscription[9],
-      observations: inscription[10],
-      groupe: inscription[11],
-    };
+  ): InscriptionsAtelier {
+    let ins = new InscriptionsAtelier();
+    ins.slot = HHMMToDate(inscription[0]);
+    ins.lieu = inscription[1];
+    ins.activity = inscription[2];
+    ins.langue = inscription[3];
+    ins.activityLevel = inscription[4];
+    ins.lastname = inscription[5];
+    ins.firstname = inscription[6];
+    ins.angLevel = isEmpty(inscription[8]) ? null : inscription[8];
+    ins.espLevel = isEmpty(inscription[9]) ? null : inscription[9];
+    ins.observations = isEmpty(inscription[10]) ? null : inscription[10];
+    ins.groupe = isEmpty(inscription[11]) ? null : inscription[11];
+
+    return ins;
   }
 
   public static createInscriptionCoachingFromSheet(
     inscription: any[]
-  ): InscriptionCoaching {
-    return {
-      slot: HHMMToDate(inscription[0]),
-      lieu: inscription[1],
-      langue: inscription[2],
-      nom: inscription[3],
-      prenom: inscription[4],
-      presence: inscription[5],
-      observations: inscription[6],
-      groupe: inscription[7],
-      commentCoaching: inscription[8],
-    };
+  ): InscriptionsCoaching {
+    let ins = new InscriptionsCoaching();
+    ins.slot = HHMMToDate(inscription[0]);
+    ins.lieu = inscription[1];
+    ins.langue = inscription[2];
+    ins.lastname = inscription[3];
+    ins.firstname = inscription[4];
+    ins.observations = isEmpty(inscription[6]) ? null : inscription[6];
+    ins.groupe = isEmpty(inscription[7]) ? null : inscription[7];
+    ins.commentCoaching = isEmpty(inscription[8]) ? null : inscription[8];
+
+    return ins;
   }
 
   public static async createInscriptionAtelier(inscription: Inscription) {

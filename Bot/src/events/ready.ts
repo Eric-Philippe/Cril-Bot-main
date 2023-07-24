@@ -21,8 +21,4 @@ export default (client: Client) => {
  * @deprecated
  * Only for debugging purpose
  */
-const body = async () => {
-  InscriptionManager.refreshInscriptions(
-    "17OIbxRCHFXaQFzGR2Y-oN2XBtmfs0q1rueeCVGOSrmU"
-  );
-};
+const body = async () => {};
