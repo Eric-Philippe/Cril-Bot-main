@@ -2,7 +2,6 @@ import { Client, Events } from "discord.js";
 import interactionCreate from "./interactionCreate";
 import LogsRuntime from "../logger/LogsRuntime";
 import { LogsLevels } from "../logger/Logs.levels";
-import InscriptionManager from "../middlewares/Attendance/InscriptionManager";
 
 export default (client: Client) => {
   client.once(Events.ClientReady, (c) => {
@@ -11,8 +10,6 @@ export default (client: Client) => {
       LogsLevels.INFO,
       `Bot logged in ${client.user.tag}`
     );
-
-    let channel = client.channels.cache.get("1017375045649190922");
 
     body();
     interactionCreate(client);
