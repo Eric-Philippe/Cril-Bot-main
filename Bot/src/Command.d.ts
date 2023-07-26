@@ -15,8 +15,19 @@ import {
 export interface Command {
   description: string;
   data:
-    | Omit<SlashCommandBuilder, "addSubCommandGroup" | "addSubcommand">
-    | SlashCommandSubcommandsOnlyBuilder;
+    | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">
+    | Omit<
+        SlashCommandBuilder,
+        | "addBooleanOption"
+        | "addUserOption"
+        | "addChannelOption"
+        | "addRoleOption"
+        | "addAttachmentOption"
+        | "addMentionableOption"
+        | "addStringOption"
+        | "addIntegerOption"
+        | "addNumberOption"
+      >;
   autocomplete?: (interaction: AutocompleteInteraction) => Promise<void>;
   run: (interaction: ChatInputCommandInteraction) => Promise<void>;
 }

@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
+import { Command } from "../../Command";
 import { getRandInt } from "../../utils/Number";
 import {
   strToBinaire,
@@ -9,7 +10,7 @@ import {
 } from "../../utils/Converter";
 import Messages from "../../middlewares/Messages/Messages";
 
-const louise = {
+const louise: Command = {
   description: "Replies with Pong!",
 
   data: new SlashCommandBuilder()

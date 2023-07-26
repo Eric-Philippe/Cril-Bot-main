@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from "discord.js";
+import { Command } from "../../Command";
 
-const ping = {
+const ping: Command = {
   description: "Replies with Pong!",
 
   data: new SlashCommandBuilder()

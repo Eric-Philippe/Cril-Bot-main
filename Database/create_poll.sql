@@ -1,0 +1,5 @@
+CREATE TABLE POLL (
+   msgId VARCHAR(50) PRIMARY KEY,
+   userid VARCHAR(50) NOT NULL,
+   answer INT NOT NULL
+);

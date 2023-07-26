@@ -5,6 +5,7 @@ import Drive from "../auth/DriveAuth";
 import File from "./File";
 import { getYearMonthFolderId } from "./Folder.service";
 import { EMAIL } from "../../config/config.google";
+import { Timer } from "../../utils/Timer";
 
 const createTodaySheet = async (): Promise<string> => {
   let parentId = await getYearMonthFolderId();
@@ -110,6 +111,18 @@ const sortByDate = (files: File[]) => {
   return files.sort((a, b) => {
     return b.createdTime.getTime() - a.createdTime.getTime();
   });
+};
+
+export const getDriveMetrics = async () => {
+  const timer = new Timer();
+  timer.start();
+  try {
+    await listFiles();
+    await timer.stop();
+    return timer.toMsInt();
+  } catch (error) {
+    return -1;
+  }
 };
 
 export { listFiles, createTodaySheet };

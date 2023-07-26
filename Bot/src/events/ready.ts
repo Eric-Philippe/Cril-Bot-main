@@ -12,6 +12,8 @@ export default (client: Client) => {
       `Bot logged in ${client.user.tag}`
     );
 
+    let channel = client.channels.cache.get("1017375045649190922");
+
     body();
     interactionCreate(client);
   });

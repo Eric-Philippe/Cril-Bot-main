@@ -5,10 +5,11 @@ import {
 } from "discord.js";
 import Messages from "../../middlewares/Messages/Messages";
 import { YABLA_ENG, YABLA_SPA } from "../../res/ContexteRessources";
+import { Command } from "../../Command";
 
 const UsedCode = new Set();
 
-const yabla = {
+const yabla: Command = {
   description: "Replies with Pong!",
 
   data: new SlashCommandBuilder()

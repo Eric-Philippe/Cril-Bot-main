@@ -17,6 +17,7 @@ import { LogsGeneral } from "./entities/LogsGeneral";
 import { CurrentSpreadsheets } from "./entities/CurrentSpreadsheets";
 import { InscriptionsAtelier } from "./entities/InscriptionsAtelier";
 import { InscriptionsCoaching } from "./entities/InscriptionsCoaching";
+import { Timer } from "./utils/Timer";
 
 /** ORM DataSource Main Access / Setup */
 export const AppDataSource = new DataSource({
@@ -49,3 +50,16 @@ AppDataSource.initialize()
     client.emit(Events.DatabaseReady, DB_HOST, DB_NAME);
   })
   .catch((error) => console.log(error));
+
+export const getDbMetrics = async () => {
+  let repo = AppDataSource.getRepository(LogsGeneral);
+  let t = new Timer();
+  t.start();
+  try {
+    await repo.count();
+    t.stop();
+    return t.toMsInt();
+  } catch (err) {
+    return -1;
+  }
+};

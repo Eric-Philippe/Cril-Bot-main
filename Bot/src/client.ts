@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client, GatewayIntentBits, Partials } from "discord.js";
 
 import { BOT_TOKEN } from "./config/config.bot";
 
@@ -12,6 +12,7 @@ const client = new Client({
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
   ],
+  partials: [Partials.Message, Partials.Channel],
 });
 
 client.login(BOT_TOKEN);

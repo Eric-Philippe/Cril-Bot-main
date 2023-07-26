@@ -22,7 +22,8 @@ export default class Messages {
   public static async sendSuccess(
     i: ChatInputCommandInteraction,
     msg: string,
-    title?: string
+    title?: string,
+    ephemeral: boolean = false
   ) {
     const embed = this.buildEmbed(
       `${Emotes.SUCCESS} | ${msg}`,
@@ -30,13 +31,14 @@ export default class Messages {
       Colors.GREEN
     );
 
-    await this.sendInteraction(i, embed);
+    await this.sendInteraction(i, embed, null, null, ephemeral);
   }
 
   public static async sendInfo(
     i: ChatInputCommandInteraction,
     msg: string,
-    title?: string
+    title?: string,
+    ephemeral: boolean = false
   ) {
     const embed = this.buildEmbed(
       `${Emotes.INFO} | ${msg}`,
@@ -44,7 +46,7 @@ export default class Messages {
       Colors.PURPLE
     );
 
-    await this.sendInteraction(i, embed);
+    await this.sendInteraction(i, embed, null, null, ephemeral);
   }
 
   public static async sendError(
@@ -125,10 +127,12 @@ export default class Messages {
     i: ChatInputCommandInteraction,
     embed: EmbedBuilder,
     rows?: ActionRowBuilder[],
-    content?: string
+    content?: string,
+    ephemeral: boolean = false
   ) {
     let body = {
       embeds: [embed],
+      ephemeral: ephemeral,
     };
 
     if (rows) body["components"] = rows;

@@ -36,5 +36,8 @@ export default (client: Client) => {
         console.error(error);
       }
     }
+
+    if (i.isButton()) {
+    }
   });
 };
