@@ -12,7 +12,7 @@ const ban = {
   data: new SlashCommandBuilder()
     .setName("ban")
     .setDescription("Ban un member")
-    .setDefaultMemberPermissions(PermissionsBitField.Flags.PrioritySpeaker)
+    .setDefaultMemberPermissions(PermissionsBitField.Flags.BanMembers)
     .addUserOption((option) =>
       option
         .setName("target")

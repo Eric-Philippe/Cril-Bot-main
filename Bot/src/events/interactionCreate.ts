@@ -2,6 +2,8 @@ import { Client, Events } from "discord.js";
 
 import Commands from "../Commands";
 import { Command } from "../Command";
+import { ButtonId } from "../res/ButtonID";
+import { PollsManager } from "../middlewares/Poll/PollManager";
 
 export default (client: Client) => {
   client.on(Events.InteractionCreate, (i) => {
@@ -38,6 +40,9 @@ export default (client: Client) => {
     }
 
     if (i.isButton()) {
+      if (i.customId.startsWith(ButtonId.POLL)) {
+        PollsManager.updatePoll(i);
+      }
     }
   });
 };

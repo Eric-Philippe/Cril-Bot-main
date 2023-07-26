@@ -20,7 +20,7 @@ const status: Command = {
   data: new SlashCommandBuilder()
     .setName("status")
     .setDescription("Informe sur l'état actuel du bot et de ses services.")
-    .setDefaultMemberPermissions(PermissionFlagsBits.PrioritySpeaker),
+    .setDefaultMemberPermissions(PermissionFlagsBits.MuteMembers),
   async run(interaction) {
     Messages.sendLoading(interaction, "Récupération des données...");
 

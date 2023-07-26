@@ -30,7 +30,7 @@ const ping: Command = {
   data: new SlashCommandBuilder()
     .setName("poll")
     .setDescription("Start a new interactive poll !")
-    .setDefaultMemberPermissions(PermissionFlagsBits.PrioritySpeaker)
+    .setDefaultMemberPermissions(PermissionFlagsBits.MuteMembers)
     .addStringOption((option) =>
       option
         .setName("question")
@@ -38,10 +38,18 @@ const ping: Command = {
         .setRequired(true)
     )
     .addStringOption((option) =>
-      option.setName("answer1").setDescription("Answer 1").setMaxLength(35)
+      option
+        .setName("answer1")
+        .setDescription("Answer 1")
+        .setMaxLength(35)
+        .setRequired(true)
     )
     .addStringOption((option) =>
-      option.setName("answer2").setDescription("Answer 2").setMaxLength(35)
+      option
+        .setName("answer2")
+        .setDescription("Answer 2")
+        .setMaxLength(35)
+        .setRequired(true)
     )
     .addStringOption((option) =>
       option.setName("answer3").setDescription("Answer 3").setMaxLength(35)
@@ -54,6 +62,7 @@ const ping: Command = {
     ),
   async run(interaction) {
     const enonce = interaction.options.getString("question");
+    interaction.reply("Sondage créé avec succès !");
 
     let answers = [];
     let answer;
@@ -81,16 +90,16 @@ const ping: Command = {
         new ButtonBuilder()
           .setEmoji(Emote_Numbers_Array[i])
           .setStyle(ButtonStyle.Primary)
-          .setCustomId(ButtonId.POLL + String(i + 1))
+          .setCustomId(ButtonId.POLL + String(i))
       );
     }
 
-    let pollMsg = await interaction.channel.send({
+    await interaction.channel.send({
       embeds: [pollEmbed],
       components: [row],
     });
 
-    Messages.sendSuccess(interaction, "Sondage créé avec succès !", null, true);
+    //Messages.sendSuccess(interaction, "Sondage créé avec succès !", null, true);
   },
 };
 

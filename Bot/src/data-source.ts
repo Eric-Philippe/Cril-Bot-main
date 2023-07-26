@@ -18,6 +18,7 @@ import { CurrentSpreadsheets } from "./entities/CurrentSpreadsheets";
 import { InscriptionsAtelier } from "./entities/InscriptionsAtelier";
 import { InscriptionsCoaching } from "./entities/InscriptionsCoaching";
 import { Timer } from "./utils/Timer";
+import { Poll } from "./entities/Poll";
 
 /** ORM DataSource Main Access / Setup */
 export const AppDataSource = new DataSource({
@@ -38,6 +39,7 @@ export const AppDataSource = new DataSource({
     CurrentSpreadsheets,
     InscriptionsAtelier,
     InscriptionsCoaching,
+    Poll,
   ],
   migrations: [],
   subscribers: [],

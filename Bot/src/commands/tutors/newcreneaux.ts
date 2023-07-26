@@ -4,11 +4,7 @@ import {
   EmbedBuilder,
 } from "discord.js";
 
-import {
-  ETU_ROLE,
-  ROLE_CHANNEL,
-  SUPPORT_CHANNEL,
-} from "../../res/ContexteRessources";
+import { ETU_ROLE, SUPPORT_CHANNEL } from "../../res/ContexteRessources";
 import { Command } from "../../Command";
 
 const newcreneaux: Command = {
@@ -31,7 +27,6 @@ const newcreneaux: Command = {
           "Toutes les précisions sur le thème, le niveau et le lieu sont affichées sur Résacril au moment de la réservation. \n" +
           "Des créneaux sont susceptibles d’être ajoutés au fil de l’eau. \n\n" +
           "Retrouvez les principaux thèmes et jeux prévus dans l’affiche ci-dessous. \n\n" +
-          `N’oubliez pas que vous pouvez prendre les rôles des thèmes qui vous intéressent pour être avertis de l’ouverture d’activités correspondantes ; <#${ROLE_CHANNEL}> \n\n` +
           `En cas de question, <#${SUPPORT_CHANNEL}> Support ou mail à \n __cril.langues@iut-tlse3.fr__ \n\n` +
           "A bientôt au CRIL!"
       )

@@ -10,7 +10,7 @@ export class InscriptionsCoaching {
   slot: Date;
 
   @Column("character varying", { name: "lieu", nullable: true, length: 255 })
-  lieu: string;
+  lieu: string | null;
 
   @Column("character varying", { name: "langue", length: 255 })
   langue: string;
