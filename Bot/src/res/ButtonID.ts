@@ -1,3 +1,5 @@
 export enum ButtonId {
   POLL = "POLL_ANSWER_",
+  TOSS_PARTICIPATE = "TOSS_PARTICIPATE",
+  TOSS_END = "TOSS_END",
 }

@@ -2,7 +2,6 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
-  Embed,
   EmbedBuilder,
   PermissionFlagsBits,
   SlashCommandBuilder,
@@ -24,12 +23,12 @@ const Emote_Numbers_Array = [
   "🔟",
 ];
 
-const ping: Command = {
-  description: "Replies with Pong!",
+const poll: Command = {
+  description: "Créé un sondage interactif !",
 
   data: new SlashCommandBuilder()
     .setName("poll")
-    .setDescription("Start a new interactive poll !")
+    .setDescription("Créé un sondage interactif !")
     .setDefaultMemberPermissions(PermissionFlagsBits.MuteMembers)
     .addStringOption((option) =>
       option
@@ -99,8 +98,8 @@ const ping: Command = {
       components: [row],
     });
 
-    //Messages.sendSuccess(interaction, "Sondage créé avec succès !", null, true);
+    Messages.sendSuccess(interaction, "Sondage créé avec succès !", null, true);
   },
 };
 
-export default ping;
+export default poll;

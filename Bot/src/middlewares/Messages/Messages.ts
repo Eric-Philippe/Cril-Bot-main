@@ -1,5 +1,6 @@
 import {
   ActionRowBuilder,
+  ButtonInteraction,
   ChatInputCommandInteraction,
   ColorResolvable,
   EmbedBuilder,
@@ -20,7 +21,7 @@ export default class Messages {
   }
 
   public static async sendSuccess(
-    i: ChatInputCommandInteraction,
+    i: ChatInputCommandInteraction | ButtonInteraction,
     msg: string,
     title?: string,
     ephemeral: boolean = false
@@ -50,9 +51,10 @@ export default class Messages {
   }
 
   public static async sendError(
-    i: ChatInputCommandInteraction,
+    i: ChatInputCommandInteraction | ButtonInteraction,
     msg: string,
-    title?: string
+    title?: string,
+    ephemeral: boolean = false
   ) {
     const embed = this.buildEmbed(
       `${Emotes.ERROR} | ${msg}`,
@@ -60,13 +62,14 @@ export default class Messages {
       Colors.RED
     );
 
-    await this.sendInteraction(i, embed);
+    await this.sendInteraction(i, embed, null, null, ephemeral);
   }
 
   public static async sendWarning(
-    i: ChatInputCommandInteraction,
+    i: ChatInputCommandInteraction | ButtonInteraction,
     msg: string,
-    title?: string
+    title?: string,
+    ephemeral: boolean = false
   ) {
     const embed = this.buildEmbed(
       `${Emotes.WARNING} | ${msg}`,
@@ -74,7 +77,7 @@ export default class Messages {
       Colors.YELLOW
     );
 
-    await this.sendInteraction(i, embed);
+    await this.sendInteraction(i, embed, null, null, ephemeral);
   }
 
   public static async sendLoading(
@@ -124,7 +127,7 @@ export default class Messages {
   }
 
   public static async sendInteraction(
-    i: ChatInputCommandInteraction,
+    i: ChatInputCommandInteraction | ButtonInteraction,
     embed: EmbedBuilder,
     rows?: ActionRowBuilder[],
     content?: string,

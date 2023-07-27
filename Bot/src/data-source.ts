@@ -19,6 +19,8 @@ import { InscriptionsAtelier } from "./entities/InscriptionsAtelier";
 import { InscriptionsCoaching } from "./entities/InscriptionsCoaching";
 import { Timer } from "./utils/Timer";
 import { Poll } from "./entities/Poll";
+import { TossParticipants } from "./entities/TossParticipants";
+import { TossState } from "./entities/TossState";
 
 /** ORM DataSource Main Access / Setup */
 export const AppDataSource = new DataSource({
@@ -40,6 +42,8 @@ export const AppDataSource = new DataSource({
     InscriptionsAtelier,
     InscriptionsCoaching,
     Poll,
+    TossParticipants,
+    TossState,
   ],
   migrations: [],
   subscribers: [],

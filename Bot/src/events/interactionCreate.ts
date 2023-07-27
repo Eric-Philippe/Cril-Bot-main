@@ -4,6 +4,7 @@ import Commands from "../Commands";
 import { Command } from "../Command";
 import { ButtonId } from "../res/ButtonID";
 import { PollsManager } from "../middlewares/Poll/PollManager";
+import { TossesManager } from "../middlewares/Toss/TossesManager";
 
 export default (client: Client) => {
   client.on(Events.InteractionCreate, (i) => {
@@ -40,8 +41,15 @@ export default (client: Client) => {
     }
 
     if (i.isButton()) {
-      if (i.customId.startsWith(ButtonId.POLL)) {
-        PollsManager.updatePoll(i);
+      switch (true) {
+        case i.customId.startsWith(ButtonId.POLL):
+          PollsManager.updatePoll(i);
+          break;
+        case i.customId == ButtonId.TOSS_PARTICIPATE:
+          TossesManager.newParticipation(i, i.message.id, i.user.id);
+          break;
+        case i.customId == ButtonId.TOSS_END:
+          TossesManager.endToss(i, i.message.id);
       }
     }
   });

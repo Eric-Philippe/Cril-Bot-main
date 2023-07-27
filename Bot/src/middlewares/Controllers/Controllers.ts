@@ -33,4 +33,21 @@ export default class Controllers {
 
     return rows;
   };
+
+  public static createButton = (
+    label: string,
+    customId: string,
+    style: ButtonStyle,
+    emote?: string,
+    disabled?: boolean
+  ) => {
+    const button = new ButtonBuilder()
+      .setLabel(label)
+      .setCustomId(customId)
+      .setStyle(style);
+    if (emote) button.setEmoji(emote);
+    if (disabled) button.setDisabled(disabled);
+
+    return button;
+  };
 }
