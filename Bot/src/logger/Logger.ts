@@ -8,6 +8,8 @@ import { LogsCoachingITypes } from "./LogsCoachingI.types";
 import { LogsCoachingI } from "../entities/LogsCoachingI";
 import { LogsEntry } from "../entities/LogsEntry";
 import LogsRuntime from "./LogsRuntime";
+import { ColorsDPlace } from "../app/DPlace/Colors.enum";
+import { LogsDplace } from "../entities/LogsDplace";
 
 /**
  * @class Logger
@@ -23,7 +25,7 @@ export default class Logger {
    * @param msg The message to log
    */
   public static logGeneral(level: LogsGeneralLevels, msg: string) {
-    let entity = new LogsGeneral();
+    const entity = new LogsGeneral();
     entity.entryDate = new Date();
     entity.type = LogsGeneralLevels[level];
     entity.msg = msg;
@@ -37,7 +39,7 @@ export default class Logger {
    * @param error The error to log
    */
   public static logError(error: Error) {
-    let entity = new LogsError();
+    const entity = new LogsError();
     entity.entryDate = new Date();
     entity.errorType = error.name;
     entity.msg = error.message;
@@ -47,13 +49,34 @@ export default class Logger {
     AppDataSource.getRepository(LogsError).save(entity);
   }
 
+  public static logDPlace(
+    userId: string,
+    color: ColorsDPlace,
+    x: number,
+    y: number
+  ) {
+    const entity = new LogsDplace();
+    entity.actionDate = new Date();
+    entity.userId = userId;
+    entity.color = color;
+    entity.x = x;
+    entity.y = y;
+
+    this.LoggerRuntime.log(
+      LogsLevels.INFO,
+      `DPlace: ${userId} placed a ${color} at (${x}, ${y})`
+    );
+
+    AppDataSource.getRepository(LogsDplace).save(entity);
+  }
+
   /**
    * Log a Coaching message in the database and in the runtime file
    * @param userId User id
    * @param msg The message to log
    */
   public static logCoaching(userId: string, msg: string) {
-    let entity = new LogsCoaching();
+    const entity = new LogsCoaching();
     entity.entryDate = new Date();
     entity.userId = userId;
     entity.msg = msg;
@@ -73,7 +96,7 @@ export default class Logger {
     type: LogsCoachingITypes,
     msg: string
   ) {
-    let entity = new LogsCoachingI();
+    const entity = new LogsCoachingI();
     entity.entryDate = new Date();
     entity.userId = userId;
     entity.action = LogsCoachingITypes[type];
@@ -89,7 +112,7 @@ export default class Logger {
    * @param msg The message to log
    */
   public static logEntry(userid: string, msg: string) {
-    let entity = new LogsEntry();
+    const entity = new LogsEntry();
     entity.entryDate = new Date();
     entity.userId = userid;
     entity.msg = msg;

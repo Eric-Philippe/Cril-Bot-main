@@ -7,4 +7,5 @@ export enum LogsLevels {
   COACHING = "COACHING",
   COACHINGI = "COACHINGI",
   ENTRY = "ENTRY",
+  DPLACE = "DPLACE",
 }

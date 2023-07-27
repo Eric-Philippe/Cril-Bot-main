@@ -2,6 +2,7 @@ import { Client, Events } from "discord.js";
 import interactionCreate from "./interactionCreate";
 import LogsRuntime from "../logger/LogsRuntime";
 import { LogsLevels } from "../logger/Logs.levels";
+import { init } from "../app/DPlace/script/initCanvaData";
 
 export default (client: Client) => {
   client.once(Events.ClientReady, (c) => {
