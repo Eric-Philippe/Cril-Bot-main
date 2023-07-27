@@ -3,8 +3,8 @@ import { Client, Events } from "discord.js";
 import Commands from "../Commands";
 import { Command } from "../Command";
 import { ButtonId } from "../res/ButtonID";
-import { PollsManager } from "../middlewares/Poll/PollManager";
-import { TossesManager } from "../middlewares/Toss/TossesManager";
+import { PollsManager } from "../app/Poll/PollManager";
+import { TossesManager } from "../app/Toss/TossesManager";
 
 export default (client: Client) => {
   client.on(Events.InteractionCreate, (i) => {

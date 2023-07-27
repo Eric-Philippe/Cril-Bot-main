@@ -8,8 +8,8 @@ import { AppDataSource } from "../../data-source";
 import { TossParticipants } from "../../entities/TossParticipants";
 import { TossState } from "../../entities/TossState";
 import { TossStates } from "./TossStates.enum";
-import Messages from "../Messages/Messages";
-import { Colors } from "../Messages/Colors";
+import Messages from "../../middlewares/Messages/Messages";
+import { Colors } from "../../middlewares/Messages/Colors";
 
 export class TossesManager {
   public static async newParticipation(

@@ -11,7 +11,7 @@ import { Command } from "../../Command";
 import { ButtonId } from "../../res/ButtonID";
 import Controllers from "../../middlewares/Controllers/Controllers";
 import { Colors } from "../../middlewares/Messages/Colors";
-import { TossesManager } from "../../middlewares/Toss/TossesManager";
+import { TossesManager } from "../../app/Toss/TossesManager";
 
 const toss: Command = {
   description: "Créé un tirage au sort dynamique !",
