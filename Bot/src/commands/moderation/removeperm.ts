@@ -13,6 +13,7 @@ const removeperm = {
     .setName("removeperm")
     .setDescription("Retire les permissions de parler à un membre")
     .setDefaultMemberPermissions(PermissionsBitField.Flags.PrioritySpeaker)
+    .setDMPermission(false)
     .addUserOption((option) =>
       option.setName("target").setDescription("Le membre").setRequired(true)
     ),

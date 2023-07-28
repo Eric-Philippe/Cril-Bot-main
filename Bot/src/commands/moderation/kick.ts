@@ -13,6 +13,7 @@ const kick = {
     .setName("kick")
     .setDescription("Kick un member")
     .setDefaultMemberPermissions(PermissionsBitField.Flags.PrioritySpeaker)
+    .setDMPermission(false)
     .addUserOption((option) =>
       option
         .setName("target")

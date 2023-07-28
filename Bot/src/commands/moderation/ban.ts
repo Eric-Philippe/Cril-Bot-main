@@ -13,6 +13,7 @@ const ban = {
     .setName("ban")
     .setDescription("Ban un member")
     .setDefaultMemberPermissions(PermissionsBitField.Flags.BanMembers)
+    .setDMPermission(false)
     .addUserOption((option) =>
       option
         .setName("target")

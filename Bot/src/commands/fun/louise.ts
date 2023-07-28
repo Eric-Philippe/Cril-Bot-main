@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
-import { Command } from "../../Command";
+import { Command } from "../../models/Command";
 import { getRandInt } from "../../utils/Number";
 import {
   strToBinaire,

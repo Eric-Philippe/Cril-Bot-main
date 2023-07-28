@@ -5,13 +5,14 @@ import {
 } from "discord.js";
 
 import { ETU_ROLE, SUPPORT_CHANNEL } from "../../res/ContexteRessources";
-import { Command } from "../../Command";
+import { Command } from "../../models/Command";
 
 const newcreneaux: Command = {
   description: "Message générique pour de nouveaux créneaux.",
   data: new SlashCommandBuilder()
     .setName("new-creneaux")
     .setDefaultMemberPermissions(PermissionFlagsBits.PrioritySpeaker)
+    .setDMPermission(false)
     .setDescription("Message générique pour de nouveaux créneaux."),
   /**
    * @param {ChatInputCommandInteraction} interaction

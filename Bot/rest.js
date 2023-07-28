@@ -29,6 +29,32 @@ for (const folder of commandFolders) {
   }
 }
 
+const contextMenu = [];
+
+// Grab all the command files from the commands directory you created earlier
+const foldersPathCtx = path.join(__dirname, "build/contextmenu");
+const commandFoldersCtx = fs.readdirSync(foldersPathCtx);
+
+// Grab all the command files from the commands directory you created earlier
+const commandsPath = path.join(foldersPathCtx);
+const commandFiles = fs
+  .readdirSync(commandsPath)
+  .filter((file) => file.endsWith(".js"));
+// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
+for (const file of commandFiles) {
+  const filePath = path.join(commandsPath, file);
+  const command = require(filePath).default;
+  if ("data" in command && "run" in command) {
+    contextMenu.push(command.data.toJSON());
+  } else {
+    console.log(
+      `[WARNING] The command at ${filePath} is missing a required "data" or "run" property.`
+    );
+  }
+}
+
+commands.push(...contextMenu);
+
 // Construct and prepare an instance of the REST module
 const rest = new REST().setToken(process.env.BOT_TOKEN);
 

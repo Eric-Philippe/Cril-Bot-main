@@ -11,7 +11,7 @@ import { createTodaySheet } from "../../GoogleAPI/Drive/File.service";
 import { Emotes } from "../../middlewares/Messages/Emotes";
 import Controllers from "../../middlewares/Controllers/Controllers";
 import { Colors } from "../../middlewares/Messages/Colors";
-import { Command } from "../../Command";
+import { Command } from "../../models/Command";
 
 const enterlist: Command = {
   description: "Replies with Pong!",

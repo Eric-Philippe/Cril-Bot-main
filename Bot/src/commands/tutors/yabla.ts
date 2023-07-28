@@ -5,7 +5,7 @@ import {
 } from "discord.js";
 import Messages from "../../middlewares/Messages/Messages";
 import { YABLA_ENG, YABLA_SPA } from "../../res/ContexteRessources";
-import { Command } from "../../Command";
+import { Command } from "../../models/Command";
 
 const UsedCode = new Set();
 
@@ -16,6 +16,7 @@ const yabla: Command = {
     .setName("yabla")
     .setDescription("Envoie les codes Yabla lié au jour.")
     .setDefaultMemberPermissions(PermissionFlagsBits.PrioritySpeaker)
+    .setDMPermission(false)
     .addStringOption((option) =>
       option
         .setName("codes_espagnol")

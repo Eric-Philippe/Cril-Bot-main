@@ -7,7 +7,7 @@ import {
   SlashCommandBuilder,
 } from "discord.js";
 import Messages from "../../middlewares/Messages/Messages";
-import { Command } from "../../Command";
+import { Command } from "../../models/Command";
 import { ButtonId } from "../../res/ButtonID";
 import Controllers from "../../middlewares/Controllers/Controllers";
 import { Colors } from "../../middlewares/Messages/Colors";
@@ -20,6 +20,7 @@ const toss: Command = {
     .setName("toss")
     .setDescription("Créé un tirage au sort dynamique !")
     .setDefaultMemberPermissions(PermissionFlagsBits.MuteMembers)
+    .setDMPermission(false)
     .addStringOption((option) =>
       option
         .setName("titre")

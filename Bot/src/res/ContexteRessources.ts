@@ -99,6 +99,7 @@ const YABLA_SPA = [
   },
 ];
 
+export const ADMIN_ROLE = "688866979460939776";
 export const ETU_ROLE = "727554276267786300";
 export const SUPPORT_CHANNEL = "1018802206536896532";
 

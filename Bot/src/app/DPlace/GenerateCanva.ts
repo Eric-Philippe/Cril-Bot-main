@@ -8,8 +8,6 @@ export const generateCanva = (data: DplaceData): Buffer => {
   const jsonData = data.canvasJson;
   const pixelColorArray = (jsonData as CanvaData).data;
 
-  console.log(pixelColorArray);
-
   const HEIGHT_COUNT = data.height;
   const WIDTH_COUNT = data.width;
 

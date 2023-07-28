@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, TextChannel } from "discord.js";
-import { Command } from "../../Command";
+import { Command } from "../../models/Command";
 
 import { ColorsDPlace } from "../../app/DPlace/Colors.enum";
 import Messages from "../../middlewares/Messages/Messages";

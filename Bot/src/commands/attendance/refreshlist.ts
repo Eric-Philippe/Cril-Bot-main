@@ -7,7 +7,7 @@ import { Colors } from "../../middlewares/Messages/Colors";
 import { Emotes } from "../../middlewares/Messages/Emotes";
 import { getSheetURL } from "../../GoogleAPI/Sheets/Sheets";
 import Controllers from "../../middlewares/Controllers/Controllers";
-import { Command } from "../../Command";
+import { Command } from "../../models/Command";
 
 const refreshlist: Command = {
   description: "Refresh the list of inscriptions",

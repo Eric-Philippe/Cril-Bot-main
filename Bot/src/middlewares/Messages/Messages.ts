@@ -4,6 +4,7 @@ import {
   ChatInputCommandInteraction,
   ColorResolvable,
   EmbedBuilder,
+  UserContextMenuCommandInteraction,
 } from "discord.js";
 import { Colors } from "./Colors";
 import { Emotes } from "./Emotes";
@@ -21,7 +22,10 @@ export default class Messages {
   }
 
   public static async sendSuccess(
-    i: ChatInputCommandInteraction | ButtonInteraction,
+    i:
+      | ChatInputCommandInteraction
+      | ButtonInteraction
+      | UserContextMenuCommandInteraction,
     msg: string,
     title?: string,
     ephemeral: boolean = false
@@ -51,7 +55,10 @@ export default class Messages {
   }
 
   public static async sendError(
-    i: ChatInputCommandInteraction | ButtonInteraction,
+    i:
+      | ChatInputCommandInteraction
+      | ButtonInteraction
+      | UserContextMenuCommandInteraction,
     msg: string,
     title?: string,
     ephemeral: boolean = false
@@ -127,7 +134,10 @@ export default class Messages {
   }
 
   public static async sendInteraction(
-    i: ChatInputCommandInteraction | ButtonInteraction,
+    i:
+      | ChatInputCommandInteraction
+      | ButtonInteraction
+      | UserContextMenuCommandInteraction,
     embed: EmbedBuilder,
     rows?: ActionRowBuilder[],
     content?: string,

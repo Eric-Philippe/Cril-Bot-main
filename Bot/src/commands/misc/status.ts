@@ -7,7 +7,7 @@ import Messages from "../../middlewares/Messages/Messages";
 import { getDriveMetrics } from "../../GoogleAPI/Drive/File.service";
 import { getDbMetrics } from "../../data-source";
 import { Colors } from "../../middlewares/Messages/Colors";
-import { Command } from "../../Command";
+import { Command } from "../../models/Command";
 
 const googleMetricScale = [1000, 1500, 9999];
 const dbMetricScale = [50, 500, 9999];

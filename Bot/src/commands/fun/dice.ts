@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "discord.js";
 import Messages from "../../middlewares/Messages/Messages";
 import { getRandInt } from "../../utils/Number";
-import { Command } from "../../Command";
+import { Command } from "../../models/Command";
 
 const dice: Command = {
   description: "Lance un dé!",

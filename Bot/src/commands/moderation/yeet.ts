@@ -5,14 +5,16 @@ import {
 } from "discord.js";
 import Messages from "../../middlewares/Messages/Messages";
 import Logger from "../../logger/Logger";
+import { Command } from "../../models/Command";
 
-const yeet = {
+const yeet: Command = {
   description: "Yeet un membre",
 
   data: new SlashCommandBuilder()
     .setName("yeet")
     .setDescription("yeet un member")
     .setDefaultMemberPermissions(PermissionsBitField.Flags.PrioritySpeaker)
+    .setDMPermission(false)
     .addUserOption((option) =>
       option
         .setName("target")

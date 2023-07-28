@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
-import { Command } from "../../Command";
+import { Command } from "../../models/Command";
 
 const ping: Command = {
   description: "Replies with Pong!",

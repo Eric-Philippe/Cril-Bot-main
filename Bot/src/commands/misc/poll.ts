@@ -7,7 +7,7 @@ import {
   SlashCommandBuilder,
 } from "discord.js";
 import Messages from "../../middlewares/Messages/Messages";
-import { Command } from "../../Command";
+import { Command } from "../../models/Command";
 import { ButtonId } from "../../res/ButtonID";
 
 const Emote_Numbers_Array = [

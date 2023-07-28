@@ -1,4 +1,4 @@
-import Operation from "../../Operation";
+import Operation from "../../models/Operation";
 import { HEADERS_RESACRIL } from "../../res/ContexteRessources";
 import { HHMMToDate } from "../../utils/Date";
 import { isEmpty } from "../../utils/String";
