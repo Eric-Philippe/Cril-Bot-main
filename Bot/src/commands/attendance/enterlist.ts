@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from "discord.js";
-
 import { textToArray } from "../../middlewares/Attendance/TextToInscriptions";
 import InscriptionManager from "../../middlewares/Attendance/InscriptionManager";
 import { getSheetURL, initSheet } from "../../GoogleAPI/Sheets/Sheets";
