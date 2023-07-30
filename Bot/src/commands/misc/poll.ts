@@ -61,7 +61,6 @@ const poll: Command = {
     ),
   async run(interaction) {
     const enonce = interaction.options.getString("question");
-    interaction.reply("Sondage créé avec succès !");
 
     let answers = [];
     let answer;

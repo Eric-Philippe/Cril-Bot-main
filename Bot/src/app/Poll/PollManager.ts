@@ -1,4 +1,4 @@
-import { ButtonInteraction, EmbedBuilder } from "discord.js";
+import { ButtonInteraction } from "discord.js";
 import { AppDataSource } from "../../data-source";
 import { Poll } from "../../entities/Poll";
 import { PollResult } from "./PollResult";

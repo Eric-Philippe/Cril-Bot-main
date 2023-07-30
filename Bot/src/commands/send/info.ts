@@ -4,7 +4,7 @@ import {
   SlashCommandBuilder,
 } from "discord.js";
 import { Command } from "../../models/Command";
-import { SUPPORT_CHANNEL } from "../../res/ContexteRessources";
+import { GUILD_SUPPORT_C_ID } from "../../config/config.guild";
 
 const INFO_COLOR = "#66c9ed";
 const INFO_EMOTE = "ℹ️";
@@ -58,7 +58,7 @@ const info: Command = {
           "⚠️ | Bonjour, merci de vérifier le type, l’heure, le lieu et le niveau de votre réservation et vous présenter dans le channel adéquat – [RésaCRIL](http://resacril.iut-tlse3.fr/etudiant/recapitulatifPlanningEtudiant/)";
         break;
       case "support":
-        desc = `🕳️ | Merci de poser votre question dans le <#${SUPPORT_CHANNEL}> et pas dans un channel au hasard..`;
+        desc = `🕳️ | Merci de poser votre question dans le <#${GUILD_SUPPORT_C_ID}> et pas dans un channel au hasard..`;
         break;
     }
 

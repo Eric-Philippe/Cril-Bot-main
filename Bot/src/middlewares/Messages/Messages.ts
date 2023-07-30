@@ -4,6 +4,7 @@ import {
   ChatInputCommandInteraction,
   ColorResolvable,
   EmbedBuilder,
+  ModalSubmitInteraction,
   UserContextMenuCommandInteraction,
 } from "discord.js";
 import { Colors } from "./Colors";
@@ -25,7 +26,8 @@ export default class Messages {
     i:
       | ChatInputCommandInteraction
       | ButtonInteraction
-      | UserContextMenuCommandInteraction,
+      | UserContextMenuCommandInteraction
+      | ModalSubmitInteraction,
     msg: string,
     title?: string,
     ephemeral: boolean = false
@@ -58,7 +60,8 @@ export default class Messages {
     i:
       | ChatInputCommandInteraction
       | ButtonInteraction
-      | UserContextMenuCommandInteraction,
+      | UserContextMenuCommandInteraction
+      | ModalSubmitInteraction,
     msg: string,
     title?: string,
     ephemeral: boolean = false
@@ -137,15 +140,16 @@ export default class Messages {
     i:
       | ChatInputCommandInteraction
       | ButtonInteraction
-      | UserContextMenuCommandInteraction,
+      | UserContextMenuCommandInteraction
+      | ModalSubmitInteraction,
     embed: EmbedBuilder,
     rows?: ActionRowBuilder[],
     content?: string,
-    ephemeral: boolean = false
+    bEphemeral: boolean = false
   ) {
     let body = {
       embeds: [embed],
-      ephemeral: ephemeral,
+      ephemeral: bEphemeral,
     };
 
     if (rows) body["components"] = rows;

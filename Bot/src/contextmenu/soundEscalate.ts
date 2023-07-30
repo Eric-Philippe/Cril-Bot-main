@@ -7,7 +7,7 @@ import {
 } from "discord.js";
 
 import { ContextMenu } from "../models/ContextMenu";
-import { ADMIN_ROLE } from "../res/ContexteRessources";
+import { ADMIN_ROLE } from "../config/config.guild";
 
 const soundEscalate: ContextMenu = {
   data: new ContextMenuCommandBuilder()

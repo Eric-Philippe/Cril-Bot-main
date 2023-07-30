@@ -1,4 +1,4 @@
-import { Client, Events } from "discord.js";
+import { Client, Events, GuildMember } from "discord.js";
 
 import Commands from "../Commands";
 import { Command } from "../models/Command";
@@ -7,6 +7,8 @@ import { PollsManager } from "../app/Poll/PollManager";
 import { TossesManager } from "../app/Toss/TossesManager";
 import { ContextMenu } from "../models/ContextMenu";
 import ContextMenuCommands from "../ContextMenusCommands";
+import Entry from "../app/Entry/Entry";
+import { ModalId } from "../res/ModalID";
 
 export default (client: Client) => {
   client.on(Events.InteractionCreate, (i) => {
@@ -70,6 +72,26 @@ export default (client: Client) => {
           break;
         case i.customId == ButtonId.TOSS_END:
           TossesManager.endToss(i, i.message.id);
+        case i.customId == ButtonId.ENTRY_RENAME:
+          Entry.init(i, i.member as GuildMember);
+          break;
+        case i.customId == ButtonId.LAUNCH_CODE_MODAL:
+          Entry.askCodeModalIHM(i);
+          break;
+        case i.customId == ButtonId.DONT_HAVE_CODE:
+          Entry.askCodeCancelIHM(i);
+          break;
+      }
+    }
+
+    if (i.isModalSubmit()) {
+      switch (i.customId) {
+        case ModalId.ENTRY_RENAME:
+          Entry.renameData(i);
+          break;
+        case ModalId.CODE_SUBMIT:
+          Entry.askCodeData(i);
+          break;
       }
     }
   });
