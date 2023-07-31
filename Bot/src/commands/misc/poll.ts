@@ -9,19 +9,7 @@ import {
 import Messages from "../../middlewares/Messages/Messages";
 import { Command } from "../../models/Command";
 import { ButtonId } from "../../res/ButtonID";
-
-const Emote_Numbers_Array = [
-  "1️⃣",
-  "2️⃣",
-  "3️⃣",
-  "4️⃣",
-  "5️⃣",
-  "6️⃣",
-  "7️⃣",
-  "8️⃣",
-  "9️⃣",
-  "🔟",
-];
+import { NumberEmotes } from "../../middlewares/Messages/Emotes";
 
 const poll: Command = {
   description: "Créé un sondage interactif !",
@@ -80,13 +68,13 @@ const poll: Command = {
 
     for (let i = 0; i < answers.length; i++) {
       pollEmbed.addFields({
-        name: Emote_Numbers_Array[i] + " " + answers[i],
+        name: NumberEmotes[i] + " " + answers[i],
         value: "``" + "⬛⬛⬛⬛⬛⬛⬛⬛⬛" + "`` | 0.0% (0)",
       });
 
       row.addComponents(
         new ButtonBuilder()
-          .setEmoji(Emote_Numbers_Array[i])
+          .setEmoji(NumberEmotes[i])
           .setStyle(ButtonStyle.Primary)
           .setCustomId(ButtonId.POLL + String(i))
       );
