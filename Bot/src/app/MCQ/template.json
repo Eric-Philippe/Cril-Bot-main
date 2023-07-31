@@ -1,0 +1,30 @@
+{
+  "QUESTIONS": [
+    {
+      "question": "What is the capital of France?",
+      "answers": ["Paris", "London", "New York", "Berlin"],
+      "rightAnswer": 0
+    },
+    {
+      "question": "What is the capital of Germany?",
+      "answers": ["Paris", "London", "New York", "Berlin"],
+      "rightAnswer": 3
+    },
+    {
+      "question": "What is the capital of Great Britain?",
+      "answers": ["Paris", "London", "New York", "Berlin"],
+      "rightAnswer": 1
+    },
+    {
+      "question": "What is the capital of USA?",
+      "answers": ["Paris", "London", "New York", "Berlin"],
+      "rightAnswer": 2
+    },
+    {
+      "question": "What is the capital of USA?",
+      "answers": ["Paris", "London", "New York", "Berlin"],
+      "rightAnswer": 2,
+      "imgURL": ""
+    }
+  ]
+}
