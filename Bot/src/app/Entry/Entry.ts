@@ -11,7 +11,6 @@ import {
   Role,
   TextInputBuilder,
   TextInputStyle,
-  ThreadChannel,
 } from "discord.js";
 import CoolDownManager from "../../utils/CoolDown";
 import Logger from "../../logger/Logger";
@@ -27,11 +26,13 @@ import {
   ROLE_DEF,
   TEACHER_ROLE,
   TEACHER_TEMP_ROLE,
+  TEMP_ROLES_ID,
   TEMP_ROLES_ID_WITH_PERM,
   TUTOR_ROLE,
   TUTOR_TEMP_ROLE,
 } from "../../config/config.guild";
 import { CODE_INVITE, CODE_TEACHER, CODE_TUTOR } from "../../config/config.bot";
+import EntryThread from "./EntryThread";
 
 /**
  * @unstable
@@ -55,7 +56,7 @@ export default class Entry {
   private member: GuildMember;
   private userId: string;
 
-  private threadChannel: ThreadChannel;
+  private threadManager: EntryThread;
   /**
    * @Step 1.
    * @DATA
@@ -92,7 +93,7 @@ export default class Entry {
 
     let hasNotTempRole = Entry.getDefRole(member) === null;
 
-    if (!hasFinishedOnboarding) {
+    if (!hasFinishedOnboarding && false) {
       const embed = Messages.buildEmbed(
         "Merci de terminer les étapes décrites dans <id:guide> avant de passer à la suite",
         "⏸️ | Pas si vite !",
@@ -100,7 +101,7 @@ export default class Entry {
       );
 
       Messages.sendInteraction(i, embed, null, null, true);
-    } else if (!hasNotTempRole) {
+    } else if (!hasNotTempRole && false) {
       const embed = Messages.buildEmbed(
         `Vous avez déjà fait cette étape. \n\nSi vous avez besoin d'aide pour trouver où aller, consultez la documentation dans <id:guide>, rendez-vous dans le channel <#${GUILD_SUPPORT_C_ID}> ou écrivez un mail à cril.langues@iut-tlse3.fr`,
         "🛑 | Stop",
@@ -180,7 +181,38 @@ export default class Entry {
 
     if (TEMP_ROLES_ID_WITH_PERM.includes(mainTempRole.id)) {
       await Entry.askCodeIHM(interaction, mainTempRole);
+    } else {
+      await Entry.createThreadIHMData(interaction);
     }
+  }
+
+  public static async createThreadIHMData(interaction: ModalSubmitInteraction) {
+    interaction.deferReply({ ephemeral: true });
+
+    const thread = new EntryThread(interaction);
+    await thread.create();
+
+    const embed = new EmbedBuilder()
+      .setTitle("📋  Création du channel")
+      .setDescription(
+        "Vous allez maintenant faire un court quiz formatif sur les fonctionnalités de base de Discord et les salons utiles sur le serveur du CRIL. \n\n❕ Si nécessaire, prenez le temps de relire la documentation Bases de Discord présentés dans le <id:guide>. \n\n⚠️ Si vous faites ce quiz dans le cadre de l’activité de rentrée du CL, votre ratio temps/réponses correctes influera sur la validation du jeu pour votre équipe. \n\nCliquez sur Aller vers le quiz quand vous êtes prêt."
+      )
+      .setFooter({
+        text: "En cas de problème, prenez une capture d'écran et envoyez-la à cril.langues@iut-tlse3.fr",
+      })
+      .setColor("#66c9ed");
+
+    const button = new ButtonBuilder()
+      .setLabel("Aller vers le quiz")
+      .setStyle(ButtonStyle.Link)
+      .setURL(await thread.getThreadURL());
+
+    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(button);
+
+    await interaction.editReply({
+      embeds: [embed],
+      components: [row],
+    });
   }
 
   /**
@@ -364,7 +396,7 @@ export default class Entry {
   private async clean() {
     CoolDownManager.eagerStop(this.userId, Entry.CATEGORY_COOLDOWN);
     try {
-      if (this.threadChannel) await this.threadChannel.delete();
+      if (this.threadManager) await this.threadManager.safeClean();
     } catch (e) {}
   }
 
@@ -387,7 +419,7 @@ export default class Entry {
   private static getTempRole(member: GuildMember) {
     const memberRoles = member.roles.cache.map((role) => role);
     for (const role of memberRoles) {
-      if (TEMP_ROLES_ID_WITH_PERM.includes(role.id)) {
+      if (TEMP_ROLES_ID.includes(role.id)) {
         return role;
       }
     }
