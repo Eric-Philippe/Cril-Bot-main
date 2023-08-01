@@ -1,16 +1,22 @@
 import {
+  ActionRow,
   ActionRowBuilder,
   ButtonBuilder,
+  ButtonComponent,
   ButtonInteraction,
   ButtonStyle,
   CommandInteraction,
   EmbedBuilder,
   GuildMember,
+  Message,
+  MessageActionRowComponent,
   ModalBuilder,
   ModalSubmitInteraction,
   Role,
+  TextChannel,
   TextInputBuilder,
   TextInputStyle,
+  ThreadChannel,
 } from "discord.js";
 import CoolDownManager from "../../utils/CoolDown";
 import Logger from "../../logger/Logger";
@@ -20,6 +26,7 @@ import { Colors } from "../../middlewares/Messages/Colors";
 import { ButtonId } from "../../res/ButtonID";
 import { firstLetterUppercase, removeAccents } from "../../utils/String";
 import {
+  GUILD_LOGS_C_ID,
   GUILD_SUPPORT_C_ID,
   INVITE_ROLE,
   INVITE_TEMP_ROLE,
@@ -33,6 +40,8 @@ import {
 } from "../../config/config.guild";
 import { CODE_INVITE, CODE_TEACHER, CODE_TUTOR } from "../../config/config.bot";
 import EntryThread from "./EntryThread";
+import MCQ from "../MCQ/MCQ";
+import EntryManager from "./EntryManager";
 
 /**
  * @unstable
@@ -51,12 +60,13 @@ const hasFinishedOnboardingFlags = [
  */
 export default class Entry {
   public static CATEGORY_COOLDOWN = "ENTRY";
-  public static ENTRY_COOLDOWN = 1000 * 60 * 30; // 30 minutes
+  public static ENTRY_COOLDOWN = 1000 * 45; // 30 minutes
 
   private member: GuildMember;
   private userId: string;
 
-  private threadManager: EntryThread;
+  public coolDownId: string;
+  public threadManager: EntryThread;
   /**
    * @Step 1.
    * @DATA
@@ -68,7 +78,7 @@ export default class Entry {
     this.member = member;
     this.userId = member.id;
 
-    CoolDownManager.startCooldDown(
+    this.coolDownId = CoolDownManager.startCooldDown(
       this.userId,
       Entry.ENTRY_COOLDOWN,
       this.cooldownCallback.bind(this),
@@ -173,6 +183,10 @@ export default class Entry {
         await member.setNickname(
           `${firstLetterUppercase(firstname)} ${lastname.toUpperCase()}`
         );
+        Logger.logEntry(
+          member.id,
+          `L'utilisateur a été renommé en ${firstname} ${lastname.toUpperCase()}`
+        );
       }
     } catch (e) {}
 
@@ -187,9 +201,10 @@ export default class Entry {
   }
 
   public static async createThreadIHMData(interaction: ModalSubmitInteraction) {
-    interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ ephemeral: true });
 
     const thread = new EntryThread(interaction);
+    EntryManager.attachThread(interaction.member.user.id, thread);
     await thread.create();
 
     const embed = new EmbedBuilder()
@@ -213,6 +228,37 @@ export default class Entry {
       embeds: [embed],
       components: [row],
     });
+  }
+
+  public static async launchMCQ(i: ButtonInteraction) {
+    const channel = i.channel as ThreadChannel;
+    i.deferUpdate();
+    const originMsg = i.message as Message;
+    const row = originMsg.components[0] as ActionRow<MessageActionRowComponent>;
+    const button = row.components[0] as ButtonComponent;
+    const disabledButton = new ButtonBuilder()
+      .setLabel(button.label)
+      .setStyle(ButtonStyle.Primary)
+      .setDisabled(true)
+      .setCustomId(button.customId);
+    const newRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
+      disabledButton
+    );
+
+    await originMsg.edit({
+      components: [newRow],
+    });
+
+    const questions = require("../MCQ/template.json").QUESTIONS;
+    const myMCQ = new MCQ(i, questions, true);
+    const res = await myMCQ.launch();
+
+    channel.send({ content: "BRAVO" });
+    const report = await myMCQ.buildMcqReport();
+    const logChannel = i.guild.channels.cache.get(
+      GUILD_LOGS_C_ID
+    ) as TextChannel;
+    await logChannel.send(report);
   }
 
   /**
@@ -322,6 +368,12 @@ export default class Entry {
       ephemeral: true,
     });
 
+    const member = interaction.member as GuildMember;
+    Logger.logEntry(
+      member.id,
+      `${member.nickname} a déclaré ne pas avoir de code. et s'est fait kick.`
+    );
+
     setTimeout(() => {
       try {
         const member = interaction.member as GuildMember;
@@ -347,6 +399,8 @@ export default class Entry {
         break;
     }
 
+    const member = interaction.member as GuildMember;
+
     const inputCode = interaction.fields.getTextInputValue(ModalId.ENTRY_CODE);
     if (inputCode !== code) {
       Messages.sendError(
@@ -354,6 +408,10 @@ export default class Entry {
         "Mauvaise saisie ! Veuillez réessayer.",
         null,
         true
+      );
+      Logger.logEntry(
+        member.id,
+        `L'utilisateur ${member.id} a mal saisi le code. Code entré : ${inputCode} pour le rôle ${mainTempRole.name}`
       );
     } else {
       let definitiveRoleId;
@@ -374,8 +432,6 @@ export default class Entry {
 
       if (!definitiveRole) return;
 
-      const member = interaction.member as GuildMember;
-
       try {
         await member.roles.add(definitiveRole);
         await member.roles.remove(mainTempRole);
@@ -385,6 +441,10 @@ export default class Entry {
           null,
           true
         );
+        Logger.logEntry(
+          member.id,
+          `${member.nickname} a correctement entré le code en tant que ${definitiveRole.name}`
+        );
       } catch (e) {}
     }
   }
@@ -393,7 +453,7 @@ export default class Entry {
    * @InnerClass
    * @Tools
    */
-  private async clean() {
+  public async clean() {
     CoolDownManager.eagerStop(this.userId, Entry.CATEGORY_COOLDOWN);
     try {
       if (this.threadManager) await this.threadManager.safeClean();

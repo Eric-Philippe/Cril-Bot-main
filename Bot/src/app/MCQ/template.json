@@ -19,12 +19,6 @@
       "question": "What is the capital of USA?",
       "answers": ["Paris", "London", "New York", "Berlin"],
       "rightAnswer": 2
-    },
-    {
-      "question": "What is the capital of USA?",
-      "answers": ["Paris", "London", "New York", "Berlin"],
-      "rightAnswer": 2,
-      "imgURL": ""
     }
   ]
 }

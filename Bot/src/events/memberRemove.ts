@@ -1,9 +1,9 @@
 import { Client, Events } from "discord.js";
-import CoolDownManager from "../utils/CoolDown";
-import Entry from "../app/Entry/Entry";
+import EntryManager from "../app/Entry/EntryManager";
 
 export default (client: Client) => {
   client.on(Events.GuildMemberRemove, (member) => {
-    CoolDownManager.softStop(member.id, Entry.CATEGORY_COOLDOWN);
+    const entry = EntryManager.getEntry(member.id);
+    if (entry) entry.clean();
   });
 };

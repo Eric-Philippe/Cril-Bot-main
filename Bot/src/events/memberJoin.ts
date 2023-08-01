@@ -1,8 +1,9 @@
-import { Client, Events } from "discord.js";
-import Entry from "../app/Entry/Entry";
+import { Client, Events, GuildMember } from "discord.js";
+import EntryManager from "../app/Entry/EntryManager";
 
 export default (client: Client) => {
   client.on(Events.GuildMemberAdd, (member) => {
-    new Entry(member);
+    const memberIn = member as GuildMember;
+    EntryManager.createEntry(memberIn);
   });
 };

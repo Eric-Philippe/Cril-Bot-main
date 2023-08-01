@@ -9,6 +9,7 @@ import { ContextMenu } from "../models/ContextMenu";
 import ContextMenuCommands from "../ContextMenusCommands";
 import Entry from "../app/Entry/Entry";
 import { ModalId } from "../res/ModalID";
+import MCQ from "../app/MCQ/MCQ";
 
 export default (client: Client) => {
   client.on(Events.InteractionCreate, (i) => {
@@ -80,6 +81,9 @@ export default (client: Client) => {
           break;
         case i.customId == ButtonId.DONT_HAVE_CODE:
           Entry.askCodeCancelIHM(i);
+          break;
+        case i.customId == ButtonId.START_QUIZZ:
+          Entry.launchMCQ(i);
           break;
       }
     }

@@ -55,11 +55,16 @@ export default class MCQ {
 
         let firstTry = true;
         while (true) {
-          const answer = await this.buttonCollector(msg);
-          if (typeof answer == "number") {
-            this.channel.send(
-              "Une erreur s'est produite merci de contacter un administrateur !"
-            );
+          let answer: Map<number, ButtonInteraction> | number = -1;
+          try {
+            answer = await this.buttonCollector(msg);
+            if (typeof answer == "number") {
+              this.channel.send(
+                "Une erreur s'est produite merci de contacter un administrateur !"
+              );
+            }
+          } catch (e) {
+            return;
           }
 
           const answerIndex = (answer as Map<number, ButtonInteraction>)
@@ -71,7 +76,7 @@ export default class MCQ {
 
           if (answerIndex == rightAnswer) {
             this.answersHistory.push(firstTry);
-            Messages.sendSuccess(
+            await Messages.sendSuccess(
               answerButton,
               "Bonne réponse ! \nProchaine question !",
               "Bravo !",
@@ -85,7 +90,7 @@ export default class MCQ {
             if (this.totalErrors >= 2)
               text += `\n\n**Pensez à répondre sérieusement sans vous précipiter !**`;
 
-            Messages.sendError(answerButton, text, "Dommage !", true);
+            await Messages.sendError(answerButton, text, "Dommage !", true);
             firstTry = false;
           }
         }
@@ -164,7 +169,7 @@ export default class MCQ {
       .setDescription(`**${this.member.user}** a fini le QCM !`)
       .setTimestamp();
 
-    Logger.logCoaching(this.member.id, `${this.member.nickname} MCQ Terminé`);
+    Logger.logEntry(this.member.id, `${this.member.nickname} MCQ Terminé`);
     return { embeds: [embed] };
   }
 

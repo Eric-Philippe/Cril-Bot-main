@@ -22,19 +22,25 @@ export default class CoolDownManager {
     time: number,
     callback: Function,
     category?: string
-  ) {
+  ): string {
     const cooldown = new CoolDown(id, time, callback, category);
     const cooldownId = CoolDownManager.toId(id, category);
 
-    if (!CoolDownManager.cooldowns.has(cooldownId)) return;
+    if (CoolDownManager.cooldowns.has(cooldownId)) return cooldownId;
+
+    console.log("CoolDownManager", `Cooldown ${cooldownId} started`);
 
     const timeoutId = setTimeout(() => {
+      console.log("CoolDownManager", `Cooldown ${cooldownId} ended`);
+
       cooldown.callback();
       CoolDownManager.cooldowns.delete(cooldownId);
     }, cooldown.time);
 
     cooldown.setTimeoutId(timeoutId);
     CoolDownManager.cooldowns.set(cooldownId, cooldown);
+
+    return cooldownId;
   }
 
   /**

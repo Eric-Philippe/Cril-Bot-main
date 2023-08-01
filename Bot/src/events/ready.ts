@@ -4,6 +4,8 @@ import LogsRuntime from "../logger/LogsRuntime";
 import { LogsLevels } from "../logger/Logs.levels";
 import { init } from "../app/DPlace/script/initCanvaData";
 import memberUpdate from "./memberUpdate";
+import memberJoin from "./memberJoin";
+import memberRemove from "./memberRemove";
 
 export default (client: Client) => {
   client.once(Events.ClientReady, (c) => {
@@ -16,6 +18,8 @@ export default (client: Client) => {
     body();
     interactionCreate(client);
     memberUpdate(client);
+    memberJoin(client);
+    memberRemove(client);
   });
 };
 
