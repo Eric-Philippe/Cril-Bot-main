@@ -29,7 +29,7 @@ export default class CoolDownManager {
     if (CoolDownManager.cooldowns.has(cooldownId)) return cooldownId;
 
     const timeoutId = setTimeout(() => {
-      cooldown.callback();
+      if (cooldown.callback) cooldown.callback();
       CoolDownManager.cooldowns.delete(cooldownId);
     }, cooldown.time);
 
@@ -47,6 +47,26 @@ export default class CoolDownManager {
    */
   public static get(id: string, category: string = GENERAL_COOLDOWN): CoolDown {
     return this.cooldowns.get(CoolDownManager.toId(id, category));
+  }
+
+  public static getRemainingTime(
+    id: string,
+    category: string = GENERAL_COOLDOWN
+  ) {
+    const cooldown = this.get(id, category);
+    if (!cooldown) return 0;
+
+    return cooldown.getRemainingTime();
+  }
+
+  /**
+   * Check if a cooldown exists
+   * @param id id of the cooldown
+   * @param category category of the cooldown
+   * @returns {boolean} true if the cooldown exists
+   */
+  public static has(id: string, category: string = GENERAL_COOLDOWN): boolean {
+    return this.cooldowns.has(CoolDownManager.toId(id, category));
   }
 
   /**
@@ -99,6 +119,7 @@ class CoolDown {
   public id: string;
   public timeoutId: NodeJS.Timeout;
   public time: number;
+  public startDate: number;
   public callback: Function;
   public category: string;
 
@@ -116,5 +137,10 @@ class CoolDown {
 
   public setTimeoutId(timeoutId: NodeJS.Timeout) {
     this.timeoutId = timeoutId;
+    this.startDate = Date.now();
+  }
+
+  public getRemainingTime() {
+    return this.time - (Date.now() - this.startDate);
   }
 }

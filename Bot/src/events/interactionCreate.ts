@@ -9,6 +9,7 @@ import { ContextMenu } from "../models/ContextMenu";
 import ContextMenuCommands from "../ContextMenusCommands";
 import Entry from "../app/Entry/Entry";
 import { ModalId } from "../res/ModalID";
+import Coaching from "../app/Coaching/Coaching";
 
 export default (client: Client) => {
   client.on(Events.InteractionCreate, (i) => {
@@ -83,6 +84,9 @@ export default (client: Client) => {
           break;
         case i.customId == ButtonId.START_QUIZZ:
           Entry.launchMCQ(i);
+          break;
+        case i.customId == ButtonId.COACHING + ":start":
+          new Coaching(i);
           break;
       }
     }

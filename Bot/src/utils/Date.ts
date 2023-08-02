@@ -71,3 +71,24 @@ export const areDatesEqual = (date1: Date, date2: Date): boolean => {
     date1.getFullYear() == date2.getFullYear()
   );
 };
+
+export const getMsToMMSS = (ms: number): string => {
+  let seconds = Math.floor(ms / 1000);
+  let minutes = Math.floor(seconds / 60);
+  seconds = seconds % 60;
+  let strMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  let strSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+  return `${strMinutes} minute(s) ${strSeconds} seconde(s)`;
+};
+
+export const isLate = (date: Date): boolean => {
+  const now = new Date();
+  const fifteenMinutes = 15 * 60 * 1000;
+  return date.getTime() < now.getTime() - fifteenMinutes;
+};
+
+export const isMoreEarlyThan = (date: Date, minutes: number): boolean => {
+  const now = new Date();
+  const ms = minutes * 60 * 1000;
+  return date.getTime() < now.getTime() - ms;
+};

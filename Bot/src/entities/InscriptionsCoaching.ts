@@ -36,5 +36,5 @@ export class InscriptionsCoaching {
     nullable: true,
     length: 255,
   })
-  commentCoaching: string | null;
+  comment_coaching: string | null;
 }

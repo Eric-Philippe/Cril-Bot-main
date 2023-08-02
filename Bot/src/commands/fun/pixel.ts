@@ -6,6 +6,7 @@ import Messages from "../../middlewares/Messages/Messages";
 import { CHAN_DPLACE } from "../../config/config.guild";
 import DPlaceDatabase from "../../app/DPlace/Dplace.database";
 import { generateCanva } from "../../app/DPlace/GenerateCanva";
+import Logger from "../../logger/Logger";
 
 const pixel: Command = {
   description: "Replies with Pong!",
@@ -133,6 +134,8 @@ const pixel: Command = {
     let message = messages[1];
 
     await DPlaceDatabase.setPixel(x - 1, y - 1, colorPicked);
+
+    Logger.logDPlace(interaction.user.id, colorPicked, x, y);
     const currentData = await DPlaceDatabase.get();
 
     await message.edit({

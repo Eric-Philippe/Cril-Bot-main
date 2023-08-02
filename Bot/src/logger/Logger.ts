@@ -81,7 +81,7 @@ export default class Logger {
     entity.userId = userId;
     entity.msg = msg;
 
-    this.LoggerRuntime.log(LogsLevels.COACHING, entity.msg);
+    LogsRuntime.getInstance().log(LogsLevels.COACHING, entity.msg);
     AppDataSource.getRepository(LogsCoaching).save(entity);
   }
 
