@@ -28,11 +28,7 @@ export default class CoolDownManager {
 
     if (CoolDownManager.cooldowns.has(cooldownId)) return cooldownId;
 
-    console.log("CoolDownManager", `Cooldown ${cooldownId} started`);
-
     const timeoutId = setTimeout(() => {
-      console.log("CoolDownManager", `Cooldown ${cooldownId} ended`);
-
       cooldown.callback();
       CoolDownManager.cooldowns.delete(cooldownId);
     }, cooldown.time);

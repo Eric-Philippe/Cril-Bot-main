@@ -62,7 +62,7 @@ const hasFinishedOnboardingFlags = [
  */
 export default class Entry {
   public static CATEGORY_COOLDOWN = "ENTRY";
-  public static ENTRY_COOLDOWN = 1000 * 45; // 30 minutes
+  public static ENTRY_COOLDOWN = 1000 * 60 * 30; // 30 minutes
 
   private member: GuildMember;
   private userId: string;
@@ -103,9 +103,9 @@ export default class Entry {
       if (!userFlags.includes(flag)) hasFinishedOnboarding = false;
     }
 
-    let hasNotTempRole = Entry.getDefRole(member) === null;
+    let hasTempRole = Entry.getTempRole(member) != null;
 
-    if (!hasFinishedOnboarding && false) {
+    if (!hasFinishedOnboarding) {
       const embed = Messages.buildEmbed(
         "Merci de terminer les étapes décrites dans <id:guide> avant de passer à la suite",
         "⏸️ | Pas si vite !",
@@ -113,7 +113,7 @@ export default class Entry {
       );
 
       Messages.sendInteraction(i, embed, null, null, true);
-    } else if (!hasNotTempRole && false) {
+    } else if (!hasTempRole) {
       const embed = Messages.buildEmbed(
         `Vous avez déjà fait cette étape. \n\nSi vous avez besoin d'aide pour trouver où aller, consultez la documentation dans <id:guide>, rendez-vous dans le channel <#${CHAN_SUPPORT}> ou écrivez un mail à cril.langues@iut-tlse3.fr`,
         "🛑 | Stop",
@@ -204,6 +204,9 @@ export default class Entry {
 
   public static async createThreadIHMData(interaction: ModalSubmitInteraction) {
     await interaction.deferReply({ ephemeral: true });
+
+    let member = interaction.member as GuildMember;
+    if (member.nickname === null) return;
 
     const thread = new EntryThread(interaction);
     EntryManager.attachThread(interaction.member.user.id, thread);
