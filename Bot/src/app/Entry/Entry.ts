@@ -495,7 +495,7 @@ export default class Entry {
    * @InnerClass
    * @Tools
    */
-  private static getTempRole(member: GuildMember) {
+  public static getTempRole(member: GuildMember) {
     const memberRoles = member.roles.cache.map((role) => role);
     for (const role of memberRoles) {
       if (TEMP_ROLES_ID.includes(role.id)) {
@@ -508,7 +508,7 @@ export default class Entry {
    * @InnerClass
    * @Tools
    */
-  private static getDefRole(member: GuildMember) {
+  public static getDefRole(member: GuildMember) {
     const memberRoles = member.roles.cache.map((role) => role);
     for (const role of memberRoles) {
       if (ROLE_DEF.includes(role.id)) {

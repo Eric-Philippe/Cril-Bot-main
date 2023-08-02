@@ -5,6 +5,7 @@ import { LogsLevels } from "../logger/Logs.levels";
 import memberUpdate from "./memberUpdate";
 import memberJoin from "./memberJoin";
 import memberRemove from "./memberRemove";
+import messageCreate from "./messageCreate";
 
 export default (client: Client) => {
   client.once(Events.ClientReady, (c) => {
@@ -19,6 +20,7 @@ export default (client: Client) => {
     memberUpdate(client);
     memberJoin(client);
     memberRemove(client);
+    messageCreate(client);
   });
 };
 
