@@ -1,7 +1,6 @@
 import SheetsAteliers from "../../GoogleAPI/Sheets/Sheets.ateliers";
 import SheetsCoaching from "../../GoogleAPI/Sheets/Sheets.coachings";
 import SheetsService from "../../GoogleAPI/Sheets/Sheets.service";
-import Sheets from "../../GoogleAPI/auth/SheetsAuth";
 import { AppDataSource } from "../../data-source";
 import { InscriptionsAtelier } from "../../entities/InscriptionsAtelier";
 import { InscriptionsCoaching } from "../../entities/InscriptionsCoaching";

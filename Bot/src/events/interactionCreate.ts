@@ -9,7 +9,6 @@ import { ContextMenu } from "../models/ContextMenu";
 import ContextMenuCommands from "../ContextMenusCommands";
 import Entry from "../app/Entry/Entry";
 import { ModalId } from "../res/ModalID";
-import MCQ from "../app/MCQ/MCQ";
 
 export default (client: Client) => {
   client.on(Events.InteractionCreate, (i) => {

@@ -1,7 +1,6 @@
 import {
   ButtonInteraction,
   EmbedBuilder,
-  PermissionFlagsBits,
   PermissionsBitField,
 } from "discord.js";
 import { AppDataSource } from "../../data-source";

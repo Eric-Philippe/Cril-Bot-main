@@ -1,6 +1,7 @@
 import { GuildMember } from "discord.js";
 import Entry from "./Entry";
 import EntryThread from "./EntryThread";
+import CoolDownManager from "../../utils/CoolDown";
 
 export default class EntryManager {
   private static entryMap: Map<string, Entry> = new Map();
@@ -19,5 +20,19 @@ export default class EntryManager {
 
     if (!entry) return;
     entry.threadManager = thread;
+  }
+
+  public static finishEntry(id: string) {
+    const entry = EntryManager.getEntry(id);
+    const cooldown = CoolDownManager.cooldowns.get(entry.coolDownId);
+    CoolDownManager.eagerStop(cooldown.id, cooldown.category);
+
+    setTimeout(async () => {
+      if (entry.threadManager) {
+        try {
+          await entry.threadManager.safeClean();
+        } catch (e) {}
+      }
+    }, 1000 * 60 * 2);
   }
 }

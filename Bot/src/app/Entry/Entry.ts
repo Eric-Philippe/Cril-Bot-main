@@ -26,17 +26,19 @@ import { Colors } from "../../middlewares/Messages/Colors";
 import { ButtonId } from "../../res/ButtonID";
 import { firstLetterUppercase, removeAccents } from "../../utils/String";
 import {
-  GUILD_LOGS_C_ID,
-  GUILD_SUPPORT_C_ID,
-  INVITE_ROLE,
-  INVITE_TEMP_ROLE,
+  CHAN_LOGS,
+  CHAN_SUPPORT,
   ROLE_DEF,
-  TEACHER_ROLE,
-  TEACHER_TEMP_ROLE,
+  ROLE_ETU,
+  ROLE_INVITE,
+  ROLE_TEACHER,
+  ROLE_TEMP_ETU,
+  ROLE_TEMP_INVITE,
+  ROLE_TEMP_TEACHER,
+  ROLE_TEMP_TUTOR,
+  ROLE_TUTOR,
   TEMP_ROLES_ID,
   TEMP_ROLES_ID_WITH_PERM,
-  TUTOR_ROLE,
-  TUTOR_TEMP_ROLE,
 } from "../../config/config.guild";
 import { CODE_INVITE, CODE_TEACHER, CODE_TUTOR } from "../../config/config.bot";
 import EntryThread from "./EntryThread";
@@ -113,7 +115,7 @@ export default class Entry {
       Messages.sendInteraction(i, embed, null, null, true);
     } else if (!hasNotTempRole && false) {
       const embed = Messages.buildEmbed(
-        `Vous avez déjà fait cette étape. \n\nSi vous avez besoin d'aide pour trouver où aller, consultez la documentation dans <id:guide>, rendez-vous dans le channel <#${GUILD_SUPPORT_C_ID}> ou écrivez un mail à cril.langues@iut-tlse3.fr`,
+        `Vous avez déjà fait cette étape. \n\nSi vous avez besoin d'aide pour trouver où aller, consultez la documentation dans <id:guide>, rendez-vous dans le channel <#${CHAN_SUPPORT}> ou écrivez un mail à cril.langues@iut-tlse3.fr`,
         "🛑 | Stop",
         Colors.RED
       );
@@ -251,13 +253,27 @@ export default class Entry {
 
     const questions = require("../MCQ/template.json").QUESTIONS;
     const myMCQ = new MCQ(i, questions, true);
-    const res = await myMCQ.launch();
+    await myMCQ.launch();
 
-    channel.send({ content: "BRAVO" });
+    const embed = new EmbedBuilder()
+      .setTitle("🎉 | Bravo!")
+      .setDescription(
+        "Vous avez terminé le QCM! Vous avez accès aux différents salons du serveur et donc aux activités en ligne que vous avez réservées. \n\nEn cas de problème ou question, rdv dans le salon support. \n\nVous serez ejecté du salon dans lequel vous vous trouvez dans 2 minutes !"
+      )
+      .setFooter({ text: "cril.langues@iut-tlse3.fr" });
+
+    await channel.send({ embeds: [embed] });
+
+    EntryManager.finishEntry(i.user.id);
+
+    const etuRole = i.guild.roles.cache.get(ROLE_ETU);
+    const tempEtuRole = i.guild.roles.cache.get(ROLE_TEMP_ETU);
+    const member = i.member as GuildMember;
+    await member.roles.remove(tempEtuRole);
+    await member.roles.add(etuRole);
+
     const report = await myMCQ.buildMcqReport();
-    const logChannel = i.guild.channels.cache.get(
-      GUILD_LOGS_C_ID
-    ) as TextChannel;
+    const logChannel = i.guild.channels.cache.get(CHAN_LOGS) as TextChannel;
     await logChannel.send(report);
   }
 
@@ -274,13 +290,13 @@ export default class Entry {
   ) {
     let role;
     switch (mainTempRole.id) {
-      case TEACHER_TEMP_ROLE:
+      case ROLE_TEMP_TEACHER:
         role = "Enseignant";
         break;
-      case TUTOR_TEMP_ROLE:
+      case ROLE_TEMP_TUTOR:
         role = "Tuteur";
         break;
-      case INVITE_TEMP_ROLE:
+      case ROLE_TEMP_INVITE:
         role = "Invité";
         break;
     }
@@ -388,13 +404,13 @@ export default class Entry {
 
     let code;
     switch (mainTempRole.id) {
-      case TEACHER_TEMP_ROLE:
+      case ROLE_TEMP_TEACHER:
         code = CODE_TEACHER;
         break;
-      case TUTOR_TEMP_ROLE:
+      case ROLE_TEMP_TUTOR:
         code = CODE_TUTOR;
         break;
-      case INVITE_TEMP_ROLE:
+      case ROLE_TEMP_INVITE:
         code = CODE_INVITE;
         break;
     }
@@ -416,14 +432,14 @@ export default class Entry {
     } else {
       let definitiveRoleId;
       switch (mainTempRole.id) {
-        case TEACHER_TEMP_ROLE:
-          definitiveRoleId = TEACHER_ROLE;
+        case ROLE_TEMP_TEACHER:
+          definitiveRoleId = ROLE_TEACHER;
           break;
-        case TUTOR_TEMP_ROLE:
-          definitiveRoleId = TUTOR_ROLE;
+        case ROLE_TEMP_TUTOR:
+          definitiveRoleId = ROLE_TUTOR;
           break;
-        case INVITE_TEMP_ROLE:
-          definitiveRoleId = INVITE_ROLE;
+        case ROLE_TEMP_INVITE:
+          definitiveRoleId = ROLE_INVITE;
           break;
       }
 
@@ -437,7 +453,7 @@ export default class Entry {
         await member.roles.remove(mainTempRole);
         Messages.sendSuccess(
           interaction,
-          `Parfait! \n\nVous avez accès au serveur. \n\nEn cas de problème d'utilisation, consultez la documentation dans <id:guide>, rendez-vous dans le channel <#${GUILD_SUPPORT_C_ID}> ou écrivez un mail à cril.langues@iut-tlse3.fr.`,
+          `Parfait! \n\nVous avez accès au serveur. \n\nEn cas de problème d'utilisation, consultez la documentation dans <id:guide>, rendez-vous dans le channel <#${CHAN_SUPPORT}> ou écrivez un mail à cril.langues@iut-tlse3.fr.`,
           null,
           true
         );

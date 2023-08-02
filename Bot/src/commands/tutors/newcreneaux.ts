@@ -4,7 +4,7 @@ import {
   EmbedBuilder,
 } from "discord.js";
 
-import { ETU_ROLE, GUILD_SUPPORT_C_ID } from "../../config/config.guild";
+import { ROLE_ETU, CHAN_SUPPORT } from "../../config/config.guild";
 import { Command } from "../../models/Command";
 
 const newcreneaux: Command = {
@@ -28,7 +28,7 @@ const newcreneaux: Command = {
           "Toutes les précisions sur le thème, le niveau et le lieu sont affichées sur Résacril au moment de la réservation. \n" +
           "Des créneaux sont susceptibles d’être ajoutés au fil de l’eau. \n\n" +
           "Retrouvez les principaux thèmes et jeux prévus dans l’affiche ci-dessous. \n\n" +
-          `En cas de question, <#${GUILD_SUPPORT_C_ID}> Support ou mail à \n __cril.langues@iut-tlse3.fr__ \n\n` +
+          `En cas de question, <#${CHAN_SUPPORT}> Support ou mail à \n __cril.langues@iut-tlse3.fr__ \n\n` +
           "A bientôt au CRIL!"
       )
       .setThumbnail(
@@ -40,7 +40,7 @@ const newcreneaux: Command = {
       ephemeral: true,
     });
     interaction.channel.send({
-      content: `||<@&${ETU_ROLE}>||`,
+      content: `||<@&${ROLE_ETU}>||`,
       embeds: [embed],
     });
   },

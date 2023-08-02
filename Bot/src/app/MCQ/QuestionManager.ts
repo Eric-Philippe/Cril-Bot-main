@@ -4,7 +4,6 @@ import {
   ButtonStyle,
   ColorResolvable,
   EmbedBuilder,
-  InteractionReplyOptions,
   MessageCreateOptions,
 } from "discord.js";
 import { Question } from "./Question";

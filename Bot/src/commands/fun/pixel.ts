@@ -3,7 +3,7 @@ import { Command } from "../../models/Command";
 
 import { ColorsDPlace } from "../../app/DPlace/Colors.enum";
 import Messages from "../../middlewares/Messages/Messages";
-import { GUILD_DPLACE_C_ID } from "../../config/config.guild";
+import { CHAN_DPLACE } from "../../config/config.guild";
 import DPlaceDatabase from "../../app/DPlace/Dplace.database";
 import { generateCanva } from "../../app/DPlace/GenerateCanva";
 
@@ -78,10 +78,10 @@ const pixel: Command = {
         )
     ),
   async run(interaction) {
-    if (interaction.channelId !== GUILD_DPLACE_C_ID) {
+    if (interaction.channelId !== CHAN_DPLACE) {
       Messages.sendWarning(
         interaction,
-        `Cette commande ne peut être utilisée que dans le channel <#${GUILD_DPLACE_C_ID}> !`,
+        `Cette commande ne peut être utilisée que dans le channel <#${CHAN_DPLACE}> !`,
         null,
         true
       );
@@ -114,7 +114,7 @@ const pixel: Command = {
     }
 
     const placeChannel = (await interaction.guild.channels.cache.get(
-      GUILD_DPLACE_C_ID
+      CHAN_DPLACE
     )) as TextChannel;
 
     let messagesCollection = await placeChannel.messages.fetch({

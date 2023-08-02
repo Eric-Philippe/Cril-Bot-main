@@ -58,7 +58,7 @@ export default class CoolDownManager {
    * @param id id of the cooldown
    * @param category category of the cooldown
    */
-  public static eagerStop(id: string, category: string = GENERAL_COOLDOWN) {
+  public static eagerStop(id: string, category?: string) {
     const cooldown = this.get(id, category);
     if (!cooldown) return;
 

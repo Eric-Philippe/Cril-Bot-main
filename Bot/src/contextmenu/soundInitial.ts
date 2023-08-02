@@ -8,7 +8,7 @@ import {
 } from "discord.js";
 
 import { ContextMenu } from "../models/ContextMenu";
-import { ADMIN_ROLE } from "../config/config.guild";
+import { ROLE_ADMIN } from "../config/config.guild";
 
 const soundInitial: ContextMenu = {
   data: new ContextMenuCommandBuilder()
@@ -27,8 +27,8 @@ const soundInitial: ContextMenu = {
     const file = new AttachmentBuilder("./docs/Support_Vocal.pdf");
 
     interaction.reply({
-      content: `<@${user.id}> | <@&${ADMIN_ROLE}>`,
-      allowedMentions: { roles: [ADMIN_ROLE] },
+      content: `<@${user.id}> | <@&${ROLE_ADMIN}>`,
+      allowedMentions: { roles: [ROLE_ADMIN] },
       embeds: [embed],
       files: [file],
     });

@@ -2,7 +2,6 @@ import { Client, Events } from "discord.js";
 import interactionCreate from "./interactionCreate";
 import LogsRuntime from "../logger/LogsRuntime";
 import { LogsLevels } from "../logger/Logs.levels";
-import { init } from "../app/DPlace/script/initCanvaData";
 import memberUpdate from "./memberUpdate";
 import memberJoin from "./memberJoin";
 import memberRemove from "./memberRemove";

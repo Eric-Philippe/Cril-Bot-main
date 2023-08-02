@@ -7,7 +7,7 @@ import {
 } from "discord.js";
 
 import { ContextMenu } from "../models/ContextMenu";
-import { ADMIN_ROLE } from "../config/config.guild";
+import { ROLE_ADMIN } from "../config/config.guild";
 
 const soundEscalate: ContextMenu = {
   data: new ContextMenuCommandBuilder()
@@ -24,8 +24,8 @@ const soundEscalate: ContextMenu = {
       );
 
     interaction.reply({
-      content: `<@${user.id}> | <@&${ADMIN_ROLE}>`,
-      allowedMentions: { roles: [ADMIN_ROLE] },
+      content: `<@${user.id}> | <@&${ROLE_ADMIN}>`,
+      allowedMentions: { roles: [ROLE_ADMIN] },
       embeds: [embed],
     });
   },

@@ -5,7 +5,7 @@ import {
   TextChannel,
 } from "discord.js";
 import { Command } from "../../models/Command";
-import { GUILD_SUPPORT_C_ID } from "../../config/config.guild";
+import { CHAN_SUPPORT } from "../../config/config.guild";
 
 const COACHING_COLOR = "#e0821d";
 const COACHING_EMOTE = "🎓";
@@ -54,7 +54,7 @@ const coaching: Command = {
 
     switch (subcommand) {
       case "deb-pas-faite":
-        desc = `🛑 | Bonjour, vous n'aviez pas rempli la fiche début de parcours la veille comme demandé dans le mail de confirmation et de rappel. \n\nJe ne peux pas vous accepter en coaching aujourd'hui, vous serez noté en excusé pour cette fois. \nSi vous avez rencontré un souci avec la fiche, merci de vous diriger vers le <#${GUILD_SUPPORT_C_ID}>`;
+        desc = `🛑 | Bonjour, vous n'aviez pas rempli la fiche début de parcours la veille comme demandé dans le mail de confirmation et de rappel. \n\nJe ne peux pas vous accepter en coaching aujourd'hui, vous serez noté en excusé pour cette fois. \nSi vous avez rencontré un souci avec la fiche, merci de vous diriger vers le <#${CHAN_SUPPORT}>`;
         footer = "Vous perdrez vos permissions dans 5 minutes.";
         break;
       case "deb-comm":
