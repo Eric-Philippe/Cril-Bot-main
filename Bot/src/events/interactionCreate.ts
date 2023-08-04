@@ -73,6 +73,7 @@ export default (client: Client) => {
           break;
         case i.customId == ButtonId.TOSS_END:
           TossesManager.endToss(i, i.message.id);
+          break;
         case i.customId == ButtonId.ENTRY_RENAME:
           Entry.init(i, i.member as GuildMember);
           break;

@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import { textToArray } from "../../middlewares/Attendance/TextToInscriptions";
 import InscriptionManager from "../../middlewares/Attendance/InscriptionManager";
 import { getSheetURL, initSheet } from "../../GoogleAPI/Sheets/Sheets";
@@ -14,11 +14,12 @@ import { Colors } from "../../middlewares/Messages/Colors";
 import { Command } from "../../models/Command";
 
 const enterlist: Command = {
-  description: "Replies with Pong!",
+  description: "Entrer une liste de présence de Resacril",
 
   data: new SlashCommandBuilder()
     .setName("enterlist")
     .setDescription("Entrer une liste de présence de Resacril")
+    .setDefaultMemberPermissions(PermissionFlagsBits.PrioritySpeaker)
     .addAttachmentOption((option) =>
       option.setName("file").setDescription("Contenu collé du tableau")
     )
