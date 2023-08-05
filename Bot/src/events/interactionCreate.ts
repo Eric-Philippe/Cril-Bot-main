@@ -10,6 +10,10 @@ import ContextMenuCommands from "../ContextMenusCommands";
 import Entry from "../app/Entry/Entry";
 import { ModalId } from "../res/ModalID";
 import Coaching from "../app/Coaching/Coaching";
+import Desk from "../app/HelpDesk/Desk";
+import Support from "../app/HelpDesk/Support";
+import Buttons from "../StaticButtons";
+import { StaticButton } from "../models/StaticButton";
 
 export default (client: Client) => {
   client.on(Events.InteractionCreate, (i) => {
@@ -64,31 +68,28 @@ export default (client: Client) => {
     }
 
     if (i.isButton()) {
-      switch (true) {
-        case i.customId.startsWith(ButtonId.POLL):
-          PollsManager.updatePoll(i);
-          break;
-        case i.customId == ButtonId.TOSS_PARTICIPATE:
-          TossesManager.newParticipation(i, i.message.id, i.user.id);
-          break;
-        case i.customId == ButtonId.TOSS_END:
-          TossesManager.endToss(i, i.message.id);
-          break;
-        case i.customId == ButtonId.ENTRY_RENAME:
-          Entry.init(i, i.member as GuildMember);
-          break;
-        case i.customId == ButtonId.LAUNCH_CODE_MODAL:
-          Entry.askCodeModalIHM(i);
-          break;
-        case i.customId == ButtonId.DONT_HAVE_CODE:
-          Entry.askCodeCancelIHM(i);
-          break;
-        case i.customId == ButtonId.START_QUIZZ:
-          Entry.launchMCQ(i);
-          break;
-        case i.customId == ButtonId.COACHING + ":start":
-          new Coaching(i);
-          break;
+      // If the button is from a message that has been sent from the bot
+      if (i.message.author.id != client.user?.id) return;
+
+      const button: StaticButton | undefined = Buttons.find((b) =>
+        b.validator.check(i.customId)
+      );
+
+      if (!button) {
+        i.reply({
+          content: "Bouton non reconnu",
+          ephemeral: true,
+        });
+      }
+
+      try {
+        button.run(i);
+      } catch (error) {
+        console.error(error);
+        i.reply({
+          content: "There was an error while executing this button command !",
+          ephemeral: true,
+        });
       }
     }
 
@@ -100,7 +101,12 @@ export default (client: Client) => {
         case ModalId.CODE_SUBMIT:
           Entry.askCodeData(i);
           break;
+        case ModalId.HELP_MODAL:
+          Support.needMoreHelpModalSubmit(i);
+          break;
       }
+
+      if (i.customId.startsWith("validation_")) Support.treatValidation(i);
     }
   });
 };

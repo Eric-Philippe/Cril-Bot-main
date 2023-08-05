@@ -4,4 +4,5 @@ export enum ModalId {
   LASTNAME = "LASTNAME",
   CODE_SUBMIT = "CODE_SUBMIT",
   ENTRY_CODE = "ENTRY_CODE",
+  HELP_MODAL = "HELP_MODAL",
 }

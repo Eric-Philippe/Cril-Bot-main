@@ -13,6 +13,7 @@ const {
   CHAN_COACH_SEC,
   CHAN_COACH_THIRD,
   CHAN_COACH_PLUS,
+  CHAN_SUPPORTPP,
   ROLE_ADMIN,
   ROLE_TEMP_TEACHER,
   ROLE_TEMP_TUTOR,
@@ -22,6 +23,7 @@ const {
   ROLE_TUTOR,
   ROLE_ETU,
   ROLE_INVITE,
+  ROLE_SUPPORTPP,
 } = process.env;
 
 if (
@@ -37,6 +39,7 @@ if (
   !CHAN_COACH_SEC ||
   !CHAN_COACH_THIRD ||
   !CHAN_COACH_PLUS ||
+  !CHAN_SUPPORTPP ||
   !ROLE_ADMIN ||
   !ROLE_TEMP_TEACHER ||
   !ROLE_TEMP_TUTOR ||
@@ -45,7 +48,8 @@ if (
   !ROLE_TEACHER ||
   !ROLE_TUTOR ||
   !ROLE_ETU ||
-  !ROLE_INVITE
+  !ROLE_INVITE ||
+  !ROLE_SUPPORTPP
 ) {
   throw new Error("Missing environment variables");
 }
@@ -86,6 +90,7 @@ export {
   CHAN_COACH_SEC,
   CHAN_COACH_THIRD,
   CHAN_COACH_PLUS,
+  CHAN_SUPPORTPP,
   ROLE_ADMIN,
   ROLE_TEMP_TEACHER,
   ROLE_TEMP_TUTOR,
@@ -95,6 +100,7 @@ export {
   ROLE_TUTOR,
   ROLE_ETU,
   ROLE_INVITE,
+  ROLE_SUPPORTPP,
   TEMP_ROLES_ID,
   TEMP_ROLES_ID_WITH_PERM,
   ROLE_DEF,
