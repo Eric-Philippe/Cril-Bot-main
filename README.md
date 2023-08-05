@@ -6,20 +6,6 @@
 
 ---
 
----
-
----
-
----
-
----
-
----
-
----
-
----
-
 This project is a refactor of the Discord Bot for the Languages and International Relations Centre for the Toulouse Institute of Technologies Paul Sabatier Universtiry.
 
 ## Specifications
