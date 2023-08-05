@@ -36,6 +36,17 @@ export const YYYY_MONTH = (year?: number, month?: number): string => {
   return `${currentYear} ${strMonth}`;
 };
 
+export const dateToDateHours = (date: Date): string => {
+  // Return DD/MM/YYYY HH:MM:SS
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+};
+
 export const getCurrentSchoolYear = (): string => {
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();

@@ -33,3 +33,12 @@ for (const file of commandFiles) {
 }
 
 export default Commands;
+
+/**
+ * @Permissions
+ *             - Everyone
+ * MuteMembers - Tuteurs Assistant
+ * PrioritySpeaker - Tuteurs
+ * BanMembers - Admin
+ *
+ */
