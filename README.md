@@ -6,9 +6,32 @@
 
 ---
 
-## This project is a refactor of the Discord Bot for the Languages and International Relations Centre for the Toulouse Institute of Technologies Paul Sabatier Universtiry. Everything is developed under Node v20.5.0 and mainly discord.js 14.11.0 module.
+---
 
-The project was initially made in Javascript, but I decided to refactor it in Typescript to make it more readable and maintainable.
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+This project is a refactor of the Discord Bot for the Languages and International Relations Centre for the Toulouse Institute of Technologies Paul Sabatier Universtiry.
+
+## Specifications
+
+| Name                   | Value      |
+| ---------------------- | ---------- |
+| **Name**               | Cril Bot   |
+| **Version**            | 2.0.0      |
+| **Language**           | TypeScript |
+| **Database**           | PostgreSQL |
+| **Node Version**       | 20.5.0     |
+| **Discord.js Version** | 14.11.0    |
 
 ## Features
 
@@ -17,17 +40,24 @@ The project was initially made in Javascript, but I decided to refactor it in Ty
 - 1 ⚙️ Interactive Help Desk with an Assistance Channel
 - 2 🗳️ Slash Commands Support / Context Menu
 - 3 🖼️ Many Plugin (Toss, Poll, etc.)
-- 6 📝 A bunch of fun commands (calculator, dice, status changer, etc.)
+- 4 📝 A bunch of fun commands (calculator, dice, status changer, etc.)
+- 5 📚 A complete logging system using the brand new Databse in PostgreSQL
 
-### Commands
+### 📝 Commands
 
-All the command are repertoried in a proper wiki [here](https://eric-p.gitbook.io/cril-bot-documentation/)
+All the command are repertoried in a proper wiki [here](https://eric-p.gitbook.io/cril-bot-documentation/), wich I'm really proud of !
 
 ---
 
 ## Highly flexible over time
 
 > The bot was built in such a way as to have an architecture to be able to easily evolve over time
+
+---
+
+## Refactor
+
+The bot was originally written in JavaScript, but I decided to refactor it in TypeScript to make it more readable and easier to maintain also less error-prone. You can still consult the old version of the bot in the old version of the repository.
 
 ---
 
