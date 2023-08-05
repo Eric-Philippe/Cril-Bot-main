@@ -11,18 +11,11 @@ const ContextMenuCommands: ContextMenu[] = [];
 const commandsPath = path.join(__dirname, "contextmenu");
 const commandFiles: string[] = [];
 
-for (const folder of readdirSync(commandsPath)) {
-  const folderPath = path.join(commandsPath, folder);
-  if (!folder.endsWith(".js") && !folder.endsWith(".ts")) {
-    for (const file of readdirSync(folderPath)) {
-      if (file.endsWith(".js") || file.endsWith(".ts")) {
-        commandFiles.push(path.join(folder, file));
-      }
-    }
-  } else {
-    commandFiles.push(folder);
+readdirSync(commandsPath).forEach((file) => {
+  if (file.endsWith(".js") || file.endsWith(".ts")) {
+    commandFiles.push(file);
   }
-}
+});
 
 for (const file of commandFiles) {
   const command = require(path.join(commandsPath, file)).default;

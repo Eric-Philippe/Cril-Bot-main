@@ -1,14 +1,8 @@
-import {
-  Collection,
-  GuildMember,
-  PermissionFlagsBits,
-  PermissionsBitField,
-  PresenceUpdateStatus,
-} from "discord.js";
+import { GuildMember, PermissionFlagsBits } from "discord.js";
 
 import client from "../../client";
 import { BOT_GUILD_ID } from "../../config/config.bot";
-const { STATUS } = require("./Status.json"); // All the template sentences
+const { STATUS } = require("../../../Status.json"); // All the template sentences
 
 /**
  * Edit the status of the bot with personnalized users and setences randomly picked
