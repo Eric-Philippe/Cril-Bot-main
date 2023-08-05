@@ -13,52 +13,49 @@ const { STATUS } = require("./Status.json"); // All the template sentences
 /**
  * Edit the status of the bot with personnalized users and setences randomly picked
  */
-const statusEdit = () => {
+const statusEdit = async () => {
   let guild = client.guilds.cache.find((g) => g.id === BOT_GUILD_ID); // Find the Guild target
   if (!guild) return; // Error Handler
 
   // Pick a random sentence
-  let sentence = STATUS[Math.floor(Math.random() * STATUS.length)];
-  let usersAmount = sentence[1];
-  let usersPicked = [];
-  let tempUsers: Collection<string, GuildMember>;
-  let tempUser: GuildMember;
+  const sentence = STATUS[Math.floor(Math.random() * STATUS.length)];
+  // Compte le nombre de $ dans la phrase
+  const usersAmount = sentence[0].split("$").length - 1;
+  const membersToFill: GuildMember[] = [];
 
+  const members = await guild.members.fetch();
   for (let i = 0; i < usersAmount; i++) {
-    // Pick a permed user with 75% chance
-    if (Math.random() < 0.75) {
-      // Only pick a member that has the permission to mute members
-      tempUsers = guild.members.cache.filter((m) =>
-        m.permissions.has(PermissionFlagsBits.MuteMembers)
-      );
+    let member: GuildMember;
+    if (Math.random() < 0.85) {
+      // Pick a random member with Mute Permissions
+      member = members
+        .filter(
+          (m) =>
+            m.permissions.has(PermissionFlagsBits.MuteMembers) && !m.user.bot
+        )
+        .random();
     } else {
-      // Pick a member that is connected
-      tempUsers = guild.members.cache.filter(
-        (m) => m.presence && m.presence.status === PresenceUpdateStatus.Online
-      );
+      // Pick a random member who is connected
+      member = members.filter((m) => !m.user.bot && m.user).random();
     }
-
-    // Pick a random user
-    tempUser = tempUsers.random();
-    usersPicked.push(tempUser); // push the user in the array
+    if (!member) continue; // Error Handler
+    membersToFill.push(member);
   }
 
-  if (usersPicked.length != 0) {
-    // Replace all the "?" in the given sentence replacing them with the users picked
-    for (let i = 0; i < usersPicked.length; i++) {
-      let userName = usersPicked[i].nickname
-        ? usersPicked[i].nickname
-        : usersPicked[i].user.username;
-      sentence[0] = sentence[0].replace("$", userName);
-    }
+  if (membersToFill.length === 0) return statusEdit(); // Error Handler
 
-    client.user.setActivity(sentence[0]); // Set the activity
+  // Replace all the $ in the sentence by the members
+  let status = sentence[0];
+  for (let i = 0; i < usersAmount; i++) {
+    status = status.replace("$", membersToFill[i].nickname);
   }
 
-  // Loop all the 50 seconds
+  // Set the status
+  client.user.setActivity(status);
+
   setTimeout(() => {
     statusEdit();
-  }, 1000 * 60);
+  }, 1000 * 60 * 3);
 };
 
 export default statusEdit;
