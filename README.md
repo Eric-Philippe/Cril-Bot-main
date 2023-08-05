@@ -6,27 +6,46 @@
 
 ---
 
-## This project is a Discord Bot for the Languages and International Relations Centre for the Toulouse Institute of Technologies Paul Sabatier Universtiry). Everything is developed under Node v18.8.0 and mainly discord.js 14.3.0 module.
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+This project is a refactor of the Discord Bot for the Languages and International Relations Centre for the Toulouse Institute of Technologies Paul Sabatier Universtiry.
+
+## Specifications
+
+| Name                   | Value      |
+| ---------------------- | ---------- |
+| **Name**               | Cril Bot   |
+| **Version**            | 3.0.1      |
+| **Language**           | TypeScript |
+| **Database**           | PostgreSQL |
+| **Node Version**       | 20.5.0     |
+| **Discord.js Version** | 14.11.0    |
 
 ## Features
 
 ### Automatic System
 
 - 1 ⚙️ Interactive Help Desk with an Assistance Channel
-- 2 🗳️ New Slash Commands Update
-- 3 👩‍💼 Message Reaction Roles
-- 4 🖼️ Embed Plugin (Toss, Poll, etc.)
-- 5 💡 An independent Tips Displayer that works with CronTab
-- 6 📝 A bunch of fun commands (calculator, dice, status changer, etc.)
+- 2 🗳️ Slash Commands Support / Context Menu
+- 3 🖼️ Many Plugin (Toss, Poll, etc.)
+- 4 📝 A bunch of fun commands (calculator, dice, status changer, etc.)
+- 5 📚 A complete logging system using the brand new Databse in PostgreSQL
 
-### Commands
+### 📝 Commands
 
-Cril-bot offers (non-exhaustive list):
-
-- 1 🖨️ Miscellanous commands (userinfo, coffee _only on gif.._, avatar, dice, embed...)
-- 2 😀 Interactive polls and draws and tosses
-- 3 👑 Commands Permission Manager
-- 4 📝 An Alias complete system for all the recurring admin / tutors messages
+All the command are repertoried in a proper wiki [here](https://eric-p.gitbook.io/cril-bot-documentation/), wich I'm really proud of !
 
 ---
 
@@ -36,9 +55,17 @@ Cril-bot offers (non-exhaustive list):
 
 ---
 
+## Refactor
+
+The bot was originally written in JavaScript, but I decided to refactor it in TypeScript to make it more readable and easier to maintain also less error-prone. You can still consult the old version of the bot in the old version of the repository.
+
+---
+
 ## Links
 
 - [GitHub](https://github.com/Zaorhion/Cril-Bot-main)
+
+- [GitBook](https://eric-p.gitbook.io/cril-bot-documentation/)
 
 ## Logos
 
@@ -59,7 +86,7 @@ Cril-bot offers (non-exhaustive list):
 
 ## Contributing
 
-> Thank you to the language centers for allowing me to undertake this project. Particularly to Louise and Marie for their help, and all the B.Tester.
+> Thank you to the language centers for allowing me to undertake this project. Particularly to Louise for her help.
 
 ---
 
@@ -70,4 +97,4 @@ Cril Bot is licensed under the GPL 3.0 license. See the file `LICENSE` for more 
 ## Author
 
 @Eric PHILIPPE
-Discord : Sunrise#1318
+Discord : zaorhion

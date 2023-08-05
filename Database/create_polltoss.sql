@@ -1,0 +1,19 @@
+CREATE TABLE POLL (
+   msgId VARCHAR(50),
+   userid VARCHAR(50),
+   answer INT NOT NULL,
+   PRIMARY KEY (msgId, userid)
+);
+
+CREATE TABLE TOSS_STATE (
+   msgId VARCHAR(50),
+   etat VARCHAR(50),
+   PRIMARY KEY (msgId)
+)
+
+CREATE TABLE TOSS_PARTICIPANTS (
+   msgId VARCHAR(50),
+   userid VARCHAR(50),
+   FOREIGN KEY (msgId) REFERENCES TOSS_STATE(msgId),
+   PRIMARY KEY (msgId, userid)
+)
