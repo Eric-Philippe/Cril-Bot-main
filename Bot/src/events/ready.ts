@@ -6,6 +6,7 @@ import memberUpdate from "./memberUpdate";
 import memberJoin from "./memberJoin";
 import memberRemove from "./memberRemove";
 import messageCreate from "./messageCreate";
+import statusEdit from "../app/BotStatus/BotStatus";
 
 export default (client: Client) => {
   client.once(Events.ClientReady, (c) => {
@@ -16,6 +17,7 @@ export default (client: Client) => {
     );
 
     body();
+    statusEdit();
     interactionCreate(client);
     memberUpdate(client);
     memberJoin(client);
