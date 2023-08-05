@@ -27,7 +27,7 @@ This project is a refactor of the Discord Bot for the Languages and Internationa
 | Name                   | Value      |
 | ---------------------- | ---------- |
 | **Name**               | Cril Bot   |
-| **Version**            | 2.0.0      |
+| **Version**            | 3.0.1      |
 | **Language**           | TypeScript |
 | **Database**           | PostgreSQL |
 | **Node Version**       | 20.5.0     |
