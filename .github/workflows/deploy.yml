@@ -40,6 +40,8 @@ jobs:
 
       - name: SSH to VPS and Configure known_hosts
         run: |
+          mkdir -p $HOME/.ssh
+          touch $HOME/.ssh/known_hosts
           ssh-keyscan ${{ secrets.VPS_HOST }} >> $HOME/.ssh/known_hosts
           echo "$VPS_HOST $VPS_PUBLIC_KEY" >> $HOME/.ssh/known_hosts
         env:
