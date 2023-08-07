@@ -61,7 +61,7 @@ jobs:
               "embeds": [{
                 "title": "Build Succeeded! :white_check_mark:",
                 "color": 65280,
-                "description": "A new commit has been pushed to the repository.",
+                "description": "A new awesome bot update has been deployed !",
                 "fields": [
                   {
                     "name": "Commit Message",
@@ -75,7 +75,7 @@ jobs:
               "embeds": [{
                 "title": "Build Failed! :x:",
                 "color": 16711680,
-                "description": "A new commit has been pushed to the repository.",
+                "description": "Something went wrong with the deployment !",
                 "fields": [
                   {
                     "name": "Commit Message",
