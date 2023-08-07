@@ -51,3 +51,18 @@ jobs:
             cd Bot
             npm install
             pm2 restart Cril
+
+      - name: Check build status and notify Discord
+        id: notify
+        env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      run: |
+        if [ ${{ job.status }} == 'success' ]; then
+          curl -H "Content-Type: application/json" -d '{
+            "content": "Build succeeded! :white_check_mark:"
+          }' $DISCORD_WEBHOOK
+        else
+          curl -H "Content-Type: application/json" -d '{
+            "content": "Build failed! :x:"
+          }' $DISCORD_WEBHOOK
+        fi
