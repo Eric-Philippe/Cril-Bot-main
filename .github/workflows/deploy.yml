@@ -20,6 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        woworking-directory: ./Bot
 
       - name: Build TypeScript
         run: npx tsc
