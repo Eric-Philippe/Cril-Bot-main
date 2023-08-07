@@ -47,6 +47,7 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           script: |
             cd BotCril
-            rm -r Bot
+            rm -r Bot/build
             unzip -o discord-bot-deployment.zip 
             cd Bot
+            npm install
