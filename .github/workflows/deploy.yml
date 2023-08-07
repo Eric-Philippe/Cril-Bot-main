@@ -27,7 +27,7 @@ jobs:
         working-directory: ./Bot
 
       - name: Create deployment package
-        run: zip -r discord-bot-deployment.zip dist node_modules package.json
+        run: zip -r discord-bot-deployment.zip build node_modules package.json
         working-directory: ./Bot
 
       - name: Deploy to VPS
