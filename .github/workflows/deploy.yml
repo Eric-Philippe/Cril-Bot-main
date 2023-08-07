@@ -39,4 +39,4 @@ jobs:
           target: BotCril
 
       - name: Restart the bot
-        run: ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} "cd /path/to/remote/folder && pm2 restart index.js"
+        run: ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} "cd BotCril && ls -l"
