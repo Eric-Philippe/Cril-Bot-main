@@ -38,18 +38,13 @@ jobs:
           source: discord-bot-deployment.zip
           target: BotCril
 
-      - name: SSH to VPS and Configure known_hosts
-        run: |
-          mkdir -p $HOME/.ssh
-          touch $HOME/.ssh/known_hosts
-          ssh-keyscan ${{ secrets.VPS_HOST }} >> $HOME/.ssh/known_hosts
-          echo "$VPS_HOST $VPS_PUBLIC_KEY" >> $HOME/.ssh/known_hosts
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_PUBLIC_KEY: ${{ secrets.VPS_PUBLIC_KEY }}
-
-      - name: Unzip the deployment package
-        run: ssh -v ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} "unzip BotCril/discord-bot-deployment.zip -d BotCril"
-
-      - name: Restart the bot
-        run: ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} "cd BotCril && pm2 restart index.js"
+      - name: Connect to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          script: |
+            cd BotCril
+            unzip discord-bot-deployment.zip
+            cd Bot
