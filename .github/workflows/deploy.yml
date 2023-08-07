@@ -24,6 +24,7 @@ jobs:
 
       - name: Build TypeScript
         run: npx tsc
+        working-directory: ./Bot
 
       - name: Create deployment package
         run: zip -r discord-bot-deployment.zip dist node_modules package.json
