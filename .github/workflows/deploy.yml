@@ -38,5 +38,8 @@ jobs:
           source: discord-bot-deployment.zip
           target: BotCril
 
+      - name: Unzip the deployment package
+        run: ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} "unzip BotCril/discord-bot-deployment.zip -d BotCril"
+
       - name: Restart the bot
-        run: ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} "cd BotCril && ls -l"
+        run: ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} "cd BotCril && pm2 restart index.js"
