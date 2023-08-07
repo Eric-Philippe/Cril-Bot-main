@@ -27,7 +27,7 @@ jobs:
         working-directory: ./Bot
 
       - name: Zip deployment package
-        run: zip -r discord-bot-deployment.zip ./Bot/build ./Bot/package.json ./Bot/package-lock.json ./Bot/Status.json ./Bot/docs
+        run: zip -r discord-bot-deployment.zip ./Bot/build ./Bot/package.json ./Bot/package-lock.json ./Bot/Status.json ./Bot/docs ./Bot/MCQ_Entry.json
 
       - name: Copy deployment package to VPS
         uses: appleboy/scp-action@v0.1.4
