@@ -27,7 +27,8 @@ jobs:
         working-directory: ./Bot
 
       - name: Create deployment package
-        run: zip -r discord-bot-deployment.zip ./Bot
+        # ZIp the build folder and the package.json file
+        run: zip -r discord-bot-deployment.zip ./Bot/build ./Bot/package.json ./Bot/package-lock.json ./Bot/Status.json ./Bot/docs
 
       - name: Zip deployment package
         uses: appleboy/scp-action@v0.1.4
@@ -47,5 +48,5 @@ jobs:
           script: |
             cd BotCril
             rm -r Bot
-            unzip discord-bot-deployment.zip 
+            unzip -o discord-bot-deployment.zip 
             cd Bot
