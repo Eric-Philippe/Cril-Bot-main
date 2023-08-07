@@ -134,7 +134,7 @@ export default class MCQ {
     const score = this.answersHistory.filter((e) => e).length;
 
     const color =
-      score <= 0 || errorPerMinute >= 0.8 ? Colors.RED : Colors.GREEN;
+      score <= 7 || errorPerMinute >= 1.2 ? Colors.RED : Colors.GREEN;
 
     const reportHistory = this.buildReportHistory();
 
