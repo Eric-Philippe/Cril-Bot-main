@@ -9,6 +9,7 @@ const ping: Command = {
     .setDescription("Replies with Pong!"),
   async run(interaction) {
     await interaction.reply("Pong! 🏓");
+    await interaction.followUp("Plop... I don't do sports anyway.");
   },
 };
 
