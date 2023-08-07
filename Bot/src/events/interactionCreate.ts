@@ -71,6 +71,8 @@ export default (client: Client) => {
       // If the button is from a message that has been sent from the bot
       if (i.message.author.id != client.user?.id) return;
 
+      if (i.customId.startsWith(ButtonId.MCQ_ANSWER)) return;
+
       const button: StaticButton | undefined = Buttons.find((b) =>
         b.validator.check(i.customId)
       );
