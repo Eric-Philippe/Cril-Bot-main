@@ -56,12 +56,32 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
-          if [ ${{ job.status }} == 'success' ]; then
-            curl -H "Content-Type: application/json" -d '{
-              "content": "Build succeeded! :white_check_mark:"
-              }' $DISCORD_WEBHOOK
-          else
-            curl -H "Content-Type: application/json" -d '{
-              "content": "Build failed! :x:"
-            }' $DISCORD_WEBHOOK
-          fi
+        if [ ${{ job.status }} == 'success' ]; then
+          curl -H "Content-Type: application/json" -d '{
+            "embeds": [{
+              "title": "Build Succeeded! :white_check_mark:",
+              "color": 65280,
+              "description": "A new commit has been pushed to the repository.",
+              "fields": [
+                {
+                  "name": "Commit Message",
+                  "value": "'"$(git log -1 --pretty=%B)"'"
+                }
+              ]
+            }]
+          }' $DISCORD_WEBHOOK
+        else
+          curl -H "Content-Type: application/json" -d '{
+            "embeds": [{
+              "title": "Build Failed! :x:",
+              "color": 16711680,
+              "description": "A new commit has been pushed to the repository.",
+              "fields": [
+                {
+                  "name": "Commit Message",
+                  "value": "'"$(git log -1 --pretty=%B)"'"
+                }
+              ]
+            }]
+          }' $DISCORD_WEBHOOK
+        fi
