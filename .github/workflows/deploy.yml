@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
@@ -26,11 +26,10 @@ jobs:
         run: npx tsc
         working-directory: ./Bot
 
-      - name: Create deployment package
-        # ZIp the build folder and the package.json file
+      - name: Zip deployment package
         run: zip -r discord-bot-deployment.zip ./Bot/build ./Bot/package.json ./Bot/package-lock.json ./Bot/Status.json ./Bot/docs
 
-      - name: Zip deployment package
+      - name: Copy deployment package to VPS
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -39,7 +38,7 @@ jobs:
           source: discord-bot-deployment.zip
           target: BotCril
 
-      - name: Connect to VPS
+      - name: Deploy Bot on VPS
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -51,3 +50,4 @@ jobs:
             unzip -o discord-bot-deployment.zip 
             cd Bot
             npm install
+            pm2 restart Cril
