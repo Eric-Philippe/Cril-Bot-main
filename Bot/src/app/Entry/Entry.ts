@@ -254,7 +254,7 @@ export default class Entry {
       components: [newRow],
     });
 
-    const questions = require("../MCQ/template.json").QUESTIONS;
+    const questions = require("../../../MCQ_Entry.json").QUESTIONS;
     const myMCQ = new MCQ(i, questions, true);
     await myMCQ.launch();
 
