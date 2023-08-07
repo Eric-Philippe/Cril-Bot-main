@@ -29,7 +29,7 @@ jobs:
       - name: Create deployment package
         run: zip -r discord-bot-deployment.zip ./Bot/build node_modules
 
-      - name: Deploy to VPS
+      - name: Zip deployment package
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.VPS_HOST }}
