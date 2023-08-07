@@ -1,4 +1,4 @@
-name: Deploy Discord Bot
+name: Deploy Discord Bot Cril
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
         working-directory: ./Bot
 
       - name: Create deployment package
-        run: zip -r discord-bot-deployment.zip ./Bot/build
+        run: zip -r discord-bot-deployment.zip ./Bot/build node_modules
 
       - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.4
