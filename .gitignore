@@ -3,4 +3,5 @@ node_modules/
 ormconfig.json
 build/
 runtime.log
+logs/
 ```
