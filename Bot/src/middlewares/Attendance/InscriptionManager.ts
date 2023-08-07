@@ -98,7 +98,7 @@ export default class InscriptionManager {
     ins.firstname = inscription[4];
     ins.observations = isEmpty(inscription[6]) ? null : inscription[6];
     ins.groupe = isEmpty(inscription[7]) ? null : inscription[7];
-    ins.commentCoaching = isEmpty(inscription[8]) ? null : inscription[8];
+    ins.comment_coaching = isEmpty(inscription[8]) ? null : inscription[8];
 
     return ins;
   }
@@ -149,7 +149,7 @@ export default class InscriptionManager {
     ins.firstname = sheet.prenom;
     ins.observations = isEmpty(sheet.observations) ? null : sheet.observations;
     ins.groupe = isEmpty(sheet.groupe) ? null : sheet.groupe;
-    ins.commentCoaching = isEmpty(sheet.commentCoaching)
+    ins.comment_coaching = isEmpty(sheet.commentCoaching)
       ? null
       : sheet.commentCoaching;
   }

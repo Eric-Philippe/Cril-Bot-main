@@ -55,7 +55,7 @@ export default class SheetsCoaching {
             "",
             inscription.observations,
             inscription.groupe,
-            inscription.commentCoaching,
+            inscription.comment_coaching,
           ],
         ],
       },
