@@ -1,4 +1,4 @@
-name: Deploy Discord Cril Bot
+name: Deploy Discord Bot
 
 on:
   push:
