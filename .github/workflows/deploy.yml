@@ -1,4 +1,4 @@
-name: Deploy Discord Bot t
+name: Deploy Discord Bot
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 20
+          node-version: 14
 
       - name: Install dependencies
         run: npm install
@@ -38,8 +38,10 @@ jobs:
           source: discord-bot-deployment.zip
           target: BotCril
 
-      - name: Configure known_hosts
-        run: echo "$VPS_HOST $VPS_PUBLIC_KEY" >> $HOME/.ssh/known_hosts
+      - name: SSH to VPS and Configure known_hosts
+        run: |
+          ssh-keyscan ${{ secrets.VPS_HOST }} >> $HOME/.ssh/known_hosts
+          echo "$VPS_HOST $VPS_PUBLIC_KEY" >> $HOME/.ssh/known_hosts
         env:
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_PUBLIC_KEY: ${{ secrets.VPS_PUBLIC_KEY }}
