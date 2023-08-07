@@ -27,7 +27,7 @@ jobs:
         working-directory: ./Bot
 
       - name: Create deployment package
-        run: zip -r discord-bot-deployment.zip ./Bot/build node_modules
+        run: zip -r discord-bot-deployment.zip ./Bot
 
       - name: Zip deployment package
         uses: appleboy/scp-action@v0.1.4
