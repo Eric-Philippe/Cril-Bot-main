@@ -46,5 +46,6 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           script: |
             cd BotCril
-            unzip discord-bot-deployment.zip
+            rm -r Bot
+            unzip discord-bot-deployment.zip 
             cd Bot
