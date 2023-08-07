@@ -26,6 +26,12 @@ jobs:
         run: npx tsc
         working-directory: ./Bot
 
+      - name: List files in the build directory
+        run: ls -l ./Bot/build
+
+      - name: List files in the node_modules directory
+        run: ls -l ./Bot/node_modules
+
       - name: Create deployment package
         run: zip -r discord-bot-deployment.zip build node_modules package.json
         working-directory: ./Bot
