@@ -1,5 +1,4 @@
 name: Deploy Discord Cril Bot
-
 on:
   push:
     branches:
