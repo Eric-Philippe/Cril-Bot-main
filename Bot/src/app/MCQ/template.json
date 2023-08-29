@@ -4,7 +4,7 @@
       "question": "Sur l'image, lequel des salons est un salon textuel? ",
       "answers": ["Coaching", "Débutant", "Avancé", "Tutos du CRIL"],
       "rightAnswer": 3,
-      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1138032622547771452/image.png"
+      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1145706418444451850/image.png"
     },
     {
       "question": "Sur l'image, lequel des salons est un salon vocal?",
@@ -15,21 +15,21 @@
         "Films et séries"
       ],
       "rightAnswer": 0,
-      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1138033847565557890/image.png"
+      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1139188244328747008/image.png"
     },
     {
-      "question": "Dans l'image, on ne voit que le titre des catégories Coaching et Interaction anglais. Comment faire pour accéder au choix des salons comme dans Interaction Espagnol?",
+      "question": "Sur l'image, on ne voit que le titre des catégories Coaching et Interaction anglais. Comment faire pour accéder au choix des salons comme dans Interaction Espagnol?",
       "answers": [
         "Désinstaller Discord",
         "Il n'y a rien à faire, c'est bugué",
-        "Cliquer sur la petite flèche à gauche de la catérorie",
+        "Cliquer sur la petite flèche à gauche de la catégorie",
         "Aller au CRIL pour faire les activités"
       ],
       "rightAnswer": 2,
-      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1138034849727397958/image.png"
+      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1139188212317823038/image.png"
     },
     {
-      "question": "Qu'est-ce que ça veut dire?",
+      "question": "Qu'est-ce que le message dans l'image veut dire?",
       "answers": [
         "Vous avez eu la mention bien au bac",
         "On vous a mentionné/tag dans un message, il faut aller voir ce que c'est",
@@ -37,10 +37,10 @@
         "Vous avez mentionné quelqu'un deux fois"
       ],
       "rightAnswer": 1,
-      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1138041204307656714/image.png"
+      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1139188389892067478/image.png"
     },
     {
-      "question": "Vous êtes Louise TEST. Pourquoi le message est-il en surbrillance et votre nom est précédé d'un @?",
+      "question": "Dans cet exemple, vous êtes Louise TEST. Pourquoi le message est-il en surbrillance et votre nom est précédé d'un @?",
       "answers": [
         "Vous êtes en retard",
         "Louise a une crise identitaire",
@@ -48,29 +48,29 @@
         "Louise vous mentionne dans le message, qui vous est donc adressé"
       ],
       "rightAnswer": 3,
-      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1138038001914613770/image.png"
+      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1139188285349056623/image.png"
     },
     {
-      "question": "Comment ouvrir et accéder à la conversation chat liée au vocal où vous êtes connecté?",
+      "question": "Comment ouvrir et accéder à la conversation écrite liée au vocal où vous êtes connecté?",
       "answers": [
-        "Il n'y a pas de conversation chat, c'est un vocal",
+        "Il n'y a pas de conversation écrite, c'est un vocal",
         "Utiliser un second appareil",
         "Se déconnecter puis reconnecter du vocal",
         "Cliquer sur le symbole 'message' "
       ],
       "rightAnswer": 3,
-      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1138042538033422346/image.png"
+      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1139188429356290108/image.png"
     },
     {
       "question": "Que faire en cas de problème de son pendant une activité interaction sur discord?",
       "answers": [
-        "Aller dans les Paramètres et suivre les étapes dans le document fourni par le CRIL",
+        "Suivre les étapes dans le document fourni par le CRIL",
         "Faire comme si de rien n'était",
         "Participer à l'écrit",
         "Appeler le CRIL pour faire l'activité par téléphone"
       ],
       "rightAnswer": 0,
-      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1138046412957941760/image.png"
+      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1139188488101695508/image.png"
     },
     {
       "question": "Que faire si vous n'arrivez tout de même pas à régler le problème?",
@@ -81,7 +81,7 @@
         "Jeter votre ordinateur"
       ],
       "rightAnswer": 1,
-      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1138048901258170490/image.png"
+      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1139188512319619133/image.png"
     },
     {
       "question": "Où trouver cette page qui rassemble la documentation utile pour Discord et le CRIL en général?",
@@ -92,18 +92,18 @@
         "Dans le labo de langues"
       ],
       "rightAnswer": 2,
-      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1138048732798144522/image.png"
+      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1139188555952955546/image.png"
     },
     {
-      "question": "Complétez la réponse à donner à cette utilisatrice perdue :",
+      "question": "Dans quel salon devez-vous vous rendre si vous avez une question?",
       "answers": [
         "Dans le salon vocal de votre réservation",
         "Dans le salon Support",
         "Dans le salon de thé du CRIL",
         "Dans le salon Anime et Manga"
       ],
-      "rightAnswer": 2,
-      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1138038439820931092/image.png"
+      "rightAnswer": 1,
+      "imgURL": "https://cdn.discordapp.com/attachments/986200113523343391/1139188354957725746/image.png"
     }
   ]
 }
