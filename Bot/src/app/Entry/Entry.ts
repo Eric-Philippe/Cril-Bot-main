@@ -454,6 +454,8 @@ export default class Entry {
       try {
         await member.roles.add(definitiveRole);
         await member.roles.remove(mainTempRole);
+
+        EntryManager.finishEntry(member.id);
         Messages.sendSuccess(
           interaction,
           `Parfait! \n\nVous avez accès au serveur. \n\nEn cas de problème d'utilisation, consultez la documentation dans <id:guide>, rendez-vous dans le channel <#${CHAN_SUPPORT}> ou écrivez un mail à cril.langues@iut-tlse3.fr.`,
