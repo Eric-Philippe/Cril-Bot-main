@@ -56,6 +56,12 @@ const hasFinishedOnboardingFlags = [
   "CompletedHomeActions",
 ];
 
+const hasBeenKickedAndCamBackFlags = [
+  "DidRejoin",
+  "CompletedOnboarding",
+  "StartedOnboarding",
+];
+
 /**
  * Class to manage the entry system for the guild
  *
@@ -99,8 +105,17 @@ export default class Entry {
   public static async init(i: ButtonInteraction, member: GuildMember) {
     const userFlags = member.flags.toArray() as string[];
     let hasFinishedOnboarding = true;
-    for (const flag of hasFinishedOnboardingFlags) {
-      if (!userFlags.includes(flag)) hasFinishedOnboarding = false;
+    console.log(userFlags);
+
+    let hasBeenKicked = userFlags.includes("DidRejoin");
+    if (!hasBeenKicked) {
+      for (const flag of hasFinishedOnboardingFlags) {
+        if (!userFlags.includes(flag)) hasFinishedOnboarding = false;
+      }
+    } else {
+      for (const flag of hasBeenKickedAndCamBackFlags) {
+        if (!userFlags.includes(flag)) hasFinishedOnboarding = false;
+      }
     }
 
     let hasTempRole = Entry.getTempRole(member) != null;
