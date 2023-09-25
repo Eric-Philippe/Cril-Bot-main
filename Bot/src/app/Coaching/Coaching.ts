@@ -57,7 +57,11 @@ export default class Coaching {
     const nickname = this.member.nickname;
 
     if (!nickname)
-      return this.i.reply({ content: "You don't have a nickname setup !" });
+      return this.i.reply({
+        content:
+          "Vos nom et prénom ne sont pas configurés correctement. Contactez une responsable !",
+        ephemeral: true,
+      });
 
     // Split the text to fetch the firstname and lastname, the firstname can be on or two words starting with a capital letter and the lastname is the last word of the nickname being fully capitalized
     const { firstname: firstname, lastname: lastname } =
@@ -66,10 +70,13 @@ export default class Coaching {
     const res = await AppDataSource.createQueryBuilder()
       .select()
       .from(InscriptionsCoaching, "i")
-      .where("i.firstname LIKE :firstname AND i.lastname LIKE :lastname", {
-        firstname: wordToSqlJokerReady(firstname),
-        lastname: wordToSqlJokerReady(lastname),
-      })
+      .where(
+        "LOWER(i.firstname) LIKE LOWER(:firstname) AND LOWER(i.lastname) LIKE LOWER(:lastname)",
+        {
+          firstname: wordToSqlJokerReady(firstname),
+          lastname: wordToSqlJokerReady(lastname),
+        }
+      )
       .execute();
 
     if (res.length == 0) return this.userNotFound(this.i);
