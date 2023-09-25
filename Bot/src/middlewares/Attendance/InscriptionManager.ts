@@ -171,10 +171,10 @@ export default class InscriptionManager {
   }
 
   public static async getCoachings(inscriptions: Inscription[]) {
-    return inscriptions.filter((i) => i.type === "Coaching");
+    return inscriptions.filter((i) => i.type.trim() === "Coaching");
   }
 
   public static async getAteliers(inscriptions: Inscription[]) {
-    return inscriptions.filter((i) => i.type === "Atelier");
+    return inscriptions.filter((i) => i.type.trim() === "Atelier");
   }
 }

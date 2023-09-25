@@ -51,7 +51,7 @@ export const getCurrentSchoolYear = (): string => {
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   let firstYear, secondYear;
-  if (currentMonth < 9) {
+  if (currentMonth < 8) {
     firstYear = currentYear - 1;
     secondYear = currentYear;
   } else {
