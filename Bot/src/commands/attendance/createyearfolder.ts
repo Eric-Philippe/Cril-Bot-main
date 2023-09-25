@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import { Command } from "../../models/Command";
 import { createScolarYearFolders } from "../../GoogleAPI/Drive/Folder.service";
 import Messages from "../../middlewares/Messages/Messages";
@@ -8,6 +8,7 @@ const createyearfolder: Command = {
 
   data: new SlashCommandBuilder()
     .setName("createyearfolder")
+    .setDefaultMemberPermissions(PermissionFlagsBits.PrioritySpeaker)
     .setDescription("Create all the google drive folders for the year"),
   async run(interaction) {
     await interaction.deferReply();

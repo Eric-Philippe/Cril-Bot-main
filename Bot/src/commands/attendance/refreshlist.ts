@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import { isMostRecentSheetSetup } from "../../GoogleAPI/Drive/File.database";
 import Messages from "../../middlewares/Messages/Messages";
 import InscriptionManager from "../../middlewares/Attendance/InscriptionManager";
@@ -14,6 +14,7 @@ const refreshlist: Command = {
 
   data: new SlashCommandBuilder()
     .setName("refreshlist")
+    .setDefaultMemberPermissions(PermissionFlagsBits.PrioritySpeaker)
     .setDescription(
       "Read the list of the sheets and save them in the database"
     ),
