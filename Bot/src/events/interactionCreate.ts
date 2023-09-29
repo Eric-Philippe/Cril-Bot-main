@@ -71,17 +71,27 @@ export default (client: Client) => {
       // If the button is from a message that has been sent from the bot
       if (i.message.author.id != client.user?.id) return;
 
-      if (i.customId.startsWith(ButtonId.MCQ_ANSWER)) return;
+      if (
+        i.customId.startsWith(ButtonId.MCQ_ANSWER) ||
+        i.customId.includes(":yes") ||
+        i.customId.includes(":no")
+      )
+        return;
 
       const button: StaticButton | undefined = Buttons.find((b) =>
         b.validator.check(i.customId)
       );
 
       if (!button) {
-        i.reply({
-          content: "Bouton non reconnu",
-          ephemeral: true,
-        });
+        setTimeout(() => {
+          if (!i.replied)
+            i.reply({
+              content: "Bouton non reconnu",
+              ephemeral: true,
+            });
+        }, 1000);
+
+        return;
       }
 
       try {

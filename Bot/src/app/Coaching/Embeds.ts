@@ -154,9 +154,12 @@ export default class EmbedsCoaching {
       .setTitle("⁉️ | Fiche Début de parcours introuvable")
       .setThumbnail(GRADUATION_CAP_THUMBNAIL)
       .setDescription(
-        "Nous n'avons pas trouvé votre fiche début de parcours remplie.\n Il est demandé dans le mail de confirmation et de rappel de remplir cette fiche la veille de votre coaching.\n Aviez-vous rempli cette fiche? Si oui cliquez sur **OUI**. Si non, cliquez sur **NON**.\n Attention, si vous cliquez sur oui alors que vous n'avez pas rempli cette fiche en avance (quelle qu'en soit la raison), les coachs __**ne vous accepteront pas**__ aujourd'hui et se réservent le droit de **__ne plus vous accepter__** en coaching à l'avenir.\n Pour parler a une responsable et expliquer un éventuel problème avec la fiche, merci de cliquer sur le bouton **SUPPORT**"
+        "Nous n'avons pas trouvé votre fiche début de parcours remplie. \n\nIl est demandé dans le mail de confirmation et de rappel de remplir cette fiche la veille de votre coaching.\n Aviez-vous rempli cette fiche?\n - Si oui cliquez sur **OUI**.\n - Si non, cliquez sur **NON**.\n\n Attention, si vous cliquez sur oui alors que vous n'avez pas rempli cette fiche en avance (quelle qu'en soit la raison), les coachs __**ne vous accepteront pas**__ aujourd'hui et se réservent le droit de **__ne plus vous accepter__** en coaching à l'avenir.\n\n Pour parler a une responsable et expliquer un éventuel problème avec la fiche, merci de cliquer sur le bouton **SUPPORT**"
       )
-      .setColor("DarkRed");
+      .setColor("DarkRed")
+      .setFooter({
+        text: "Vous avez 10 minutes MAX pour répondre à ce message !",
+      });
 
     const row = new ActionRowBuilder<ButtonBuilder>();
 
