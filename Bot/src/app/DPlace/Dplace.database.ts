@@ -30,6 +30,23 @@ export default class DPlaceDatabase {
     await this.repository.save(dplace_data);
   }
 
+  public static async replacePixelsByColor(
+    colorToReplace: ColorsDPlace,
+    newColor: ColorsDPlace
+  ) {
+    const dplace_data = await this.get();
+    const data = dplace_data.canvasJson as CanvaData;
+    data.data.forEach((row, x) => {
+      row.forEach((pixel, y) => {
+        if (pixel === colorToReplace) {
+          data.data[x][y] = newColor;
+        }
+      });
+    });
+    dplace_data.canvasJson = data;
+    await this.repository.save(dplace_data);
+  }
+
   public static async create(data: CanvaData) {
     const dplace_data = new DplaceData();
     dplace_data.canvasJson = data;
