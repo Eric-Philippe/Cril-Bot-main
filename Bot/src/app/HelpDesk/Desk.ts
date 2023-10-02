@@ -4,6 +4,7 @@ import {
   InteractionReplyOptions,
 } from "discord.js";
 import Support from "./Support";
+import reply from "../../utils/Interaction";
 
 const HELP_DESK_SUFFIX = "-help-desk";
 
@@ -56,7 +57,7 @@ export default class Desk {
         break;
     }
 
-    await interaction.reply(params);
+    reply(interaction, params);
   }
 }
 

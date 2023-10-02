@@ -24,15 +24,17 @@ export default class EntryManager {
 
   public static finishEntry(id: string) {
     const entry = EntryManager.getEntry(id);
-    const cooldown = CoolDownManager.cooldowns.get(entry.coolDownId);
-    CoolDownManager.eagerStop(cooldown.id, cooldown.category);
+    if (entry) {
+      const cooldown = CoolDownManager.cooldowns.get(entry.coolDownId);
+      CoolDownManager.eagerStop(cooldown.id, cooldown.category);
 
-    setTimeout(async () => {
-      if (entry.threadManager) {
-        try {
-          await entry.threadManager.safeClean();
-        } catch (e) {}
-      }
-    }, 1000 * 60 * 2);
+      setTimeout(async () => {
+        if (entry.threadManager) {
+          try {
+            await entry.threadManager.safeClean();
+          } catch (e) {}
+        }
+      }, 1000 * 60 * 2);
+    }
   }
 }

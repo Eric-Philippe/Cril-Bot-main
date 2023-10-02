@@ -44,6 +44,7 @@ import { CODE_INVITE, CODE_TEACHER, CODE_TUTOR } from "../../config/config.bot";
 import EntryThread from "./EntryThread";
 import MCQ from "../MCQ/MCQ";
 import EntryManager from "./EntryManager";
+import reply from "../../utils/Interaction";
 
 /**
  * @unstable
@@ -397,7 +398,7 @@ export default class Entry {
       })
       .setColor(Colors.RED);
 
-    interaction.reply({
+    reply(interaction, {
       embeds: [embed],
       ephemeral: true,
     });

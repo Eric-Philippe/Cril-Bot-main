@@ -31,7 +31,7 @@ export default (client: Client) => {
         i.reply({
           content: "There was an error while executing this command!",
           ephemeral: true,
-        });
+        }).catch();
       }
     }
 
@@ -49,7 +49,7 @@ export default (client: Client) => {
         i.reply({
           content: "There was an error while executing this command!",
           ephemeral: true,
-        });
+        }).catch();
       }
     }
 
@@ -88,7 +88,7 @@ export default (client: Client) => {
             i.reply({
               content: "Bouton non reconnu",
               ephemeral: true,
-            });
+            }).catch();
         }, 1000);
 
         return;
@@ -101,7 +101,7 @@ export default (client: Client) => {
         i.reply({
           content: "There was an error while executing this button command !",
           ephemeral: true,
-        });
+        }).catch();
       }
     }
 

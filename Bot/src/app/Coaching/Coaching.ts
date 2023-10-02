@@ -23,6 +23,7 @@ import {
   CHAN_COACH_SEC,
   CHAN_COACH_THIRD,
 } from "../../config/config.guild";
+import reply from "../../utils/Interaction";
 
 const log = Logger.logCoaching;
 const COACHING = "COACHING";
@@ -45,7 +46,7 @@ export default class Coaching {
       const remainingTime = Cooldown.getRemainingTime(userId, COACHING);
       const remainingTimeStr = getMsToMMSS(remainingTime);
       log(userId, "ALREADY CLICKED : " + remainingTimeStr);
-      return this.i.reply(Options.coolDownEmbed(remainingTimeStr));
+      return reply(this.i, Options.coolDownEmbed(remainingTimeStr));
     }
 
     Cooldown.startCooldDown(userId, 1000 * 90, null, COACHING);
@@ -57,12 +58,11 @@ export default class Coaching {
     const nickname = this.member.nickname;
 
     if (!nickname)
-      return this.i.reply({
+      return reply(this.i, {
         content:
           "Vos nom et prénom ne sont pas configurés correctement. Contactez une responsable !",
         ephemeral: true,
       });
-
     // Split the text to fetch the firstname and lastname, the firstname can be on or two words starting with a capital letter and the lastname is the last word of the nickname being fully capitalized
     const { firstname: firstname, lastname: lastname } =
       separateFirstNameAndLastName(nickname);
@@ -86,12 +86,12 @@ export default class Coaching {
     const coachingDate = coachingSelected.slot;
     if (isLate(coachingDate)) {
       log(this.member.id, "USER LATE");
-      return this.i.reply(Options.lateEmbed());
+      return reply(this.i, Options.lateEmbed());
     }
 
     if (isMoreEarlyThan(coachingDate, 60)) {
       log(this.member.id, "USER EARLY");
-      return this.i.reply(Options.earlyEmbed());
+      return reply(this.i, Options.earlyEmbed());
     }
 
     await this.determineWichCoaching(coachingSelected);
@@ -144,7 +144,7 @@ export default class Coaching {
       ViewChannel: true,
     });
 
-    this.i.reply(Options.channelUnlockedEmbedIn(channelId));
+    reply(this.i, Options.channelUnlockedEmbedIn(channelId));
     coachingChannel.send(Options.channelUnlockedEmbedOut(this.member.id));
 
     setTimeout(() => {
@@ -162,17 +162,17 @@ export default class Coaching {
       `${firstname} ${lastname} not found in the coaching inscriptions`
     );
 
-    await this.i.reply(Options.verificationCoaching());
+    reply(i, Options.verificationCoaching());
 
     const response = await this.i.fetchReply();
 
     const isYes = await this.collectorYesOrNo(response);
     if (isYes) this.determineWichCoaching();
-    else this.i.reply(Options.tryAgainEmbed());
+    else reply(this.i, Options.tryAgainEmbed());
   }
 
   async ficheAFaire() {
-    this.i.reply(Options.ficheAFaireEmbed());
+    reply(this.i, Options.ficheAFaireEmbed());
 
     const response = await this.i.fetchReply();
 
@@ -181,11 +181,11 @@ export default class Coaching {
     if (isYes) {
       const coachingIndex = await this.askWichCoaching();
       this.unlockChannel(coachingIndex);
-    } else this.i.reply(Options.sorryEmbed());
+    } else reply(this.i, Options.sorryEmbed());
   }
 
   async debAFaire() {
-    this.i.reply(Options.debAFaireEmbed());
+    reply(this.i, Options.debAFaireEmbed());
 
     const response = await this.i.fetchReply();
 
@@ -194,12 +194,12 @@ export default class Coaching {
     if (isYes) {
       const coachingIndex = await this.askWichCoaching();
       this.unlockChannel(coachingIndex);
-    } else this.i.reply(Options.sorryEmbed());
+    } else reply(this.i, Options.sorryEmbed());
   }
 
   askWichCoaching(): Promise<number> {
     return new Promise(async (resolve, reject) => {
-      await this.i.reply(Options.coachingChoice());
+      await reply(this.i, Options.coachingChoice());
       const response = await this.i.fetchReply();
       if (!response) return;
 

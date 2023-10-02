@@ -164,7 +164,7 @@ export default class Messages {
           await i.editReply(body);
           break;
         default:
-          await i.reply(body);
+          await i.reply(body).catch();
       }
     } catch (err) {
       await Logger.logError(err);
