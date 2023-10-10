@@ -156,7 +156,7 @@ export default class Entry {
       .setLabel("Prénom 📇")
       .setStyle(TextInputStyle.Short)
       .setMinLength(2)
-      .setMaxLength(10)
+      .setMaxLength(15)
       .setRequired(true)
       .setPlaceholder("Prénom");
 
@@ -198,9 +198,16 @@ export default class Entry {
     const member = interaction.member as GuildMember;
     try {
       if (member.manageable) {
-        await member.setNickname(
-          `${firstLetterUppercase(firstname)} ${lastname.toUpperCase()}`
-        );
+        let newNickname = `${firstLetterUppercase(
+          firstname
+        )} ${lastname.toUpperCase()}`;
+
+        if (newNickname.length > 32) {
+          newNickname = `${firstLetterUppercase(firstname)} ${lastname
+            .toUpperCase()
+            .slice(0, 32 - firstname.length - 1)}`;
+        }
+        await member.setNickname(newNickname);
         Logger.logEntry(
           member.id,
           `L'utilisateur a été renommé en ${firstname} ${lastname.toUpperCase()}`
