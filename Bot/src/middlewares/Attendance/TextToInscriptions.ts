@@ -30,6 +30,8 @@ class TextToInscriptions {
    * @returns 1 if the size of the headers is not the same as the one in the file
    */
   private convert(): Operation<Inscription[]> {
+    this.text = this.text.replace(/\r/g, "");
+    this.text = this.text.replace(/\n/g, "");
     let cells = this.text.split("\t");
     this.getHeadersSize(cells);
     let headersResacrilSize = HEADERS_RESACRIL.length;
@@ -79,6 +81,8 @@ class TextToInscriptions {
     slot = isEmpty(slot) ? this.lastSlot : slot;
     langue = isEmpty(langue) ? this.lastLanguage : langue;
     niveau = isEmpty(niveau) ? this.lastLevel : niveau;
+    lastname = isEmpty(lastname) ? "ERROR" : lastname;
+    firstname = isEmpty(firstname) ? "ERROR" : firstname;
 
     this.results.push({
       type: type,
@@ -112,7 +116,8 @@ class TextToInscriptions {
 
   private removeHeaders(cells: string[]) {
     cells = cells.slice(this.givenSize);
-    cells[0] = cells[0].split(" ")[1];
+    if (cells[0].includes("Atelier")) cells[0] = "Atelier";
+    else if (cells[0].includes("Coaching")) cells[0] = "Coaching";
     return cells;
   }
 }

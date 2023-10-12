@@ -13,12 +13,12 @@ import { InscriptionCoaching } from "./models/InscriptionCoaching";
 export default class InscriptionManager {
   public static async saveInscriptionOnDB(inscription: Inscription[]) {
     await this.deleteInscriptionsFromDb();
-    let ateliers = await this.getAteliers(inscription);
+    //let ateliers = await this.getAteliers(inscription);
     let coachings = await this.getCoachings(inscription);
 
-    for (let i = 0; i < ateliers.length; i++) {
-      await this.createInscriptionAtelier(ateliers[i]);
-    }
+    // for (let i = 0; i < ateliers.length; i++) {
+    //   await this.createInscriptionAtelier(ateliers[i]);
+    // }
 
     for (let i = 0; i < coachings.length; i++) {
       await this.createInscriptionCoach(coachings[i]);
@@ -171,10 +171,10 @@ export default class InscriptionManager {
   }
 
   public static async getCoachings(inscriptions: Inscription[]) {
-    return inscriptions.filter((i) => i.type.trim() === "Coaching");
+    return inscriptions.filter((i) => i.type && i.type.trim() === "Coaching");
   }
 
   public static async getAteliers(inscriptions: Inscription[]) {
-    return inscriptions.filter((i) => i.type.trim() === "Atelier");
+    return inscriptions.filter((i) => i.type && i.type.trim() === "Atelier");
   }
 }

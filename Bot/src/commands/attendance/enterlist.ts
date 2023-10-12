@@ -12,6 +12,8 @@ import { Emotes } from "../../middlewares/Messages/Emotes";
 import Controllers from "../../middlewares/Controllers/Controllers";
 import { Colors } from "../../middlewares/Messages/Colors";
 import { Command } from "../../models/Command";
+import Operation from "../../models/Operation";
+import { Inscription } from "../../middlewares/Attendance/models/Inscription";
 
 const enterlist: Command = {
   description: "Entrer une liste de présence de Resacril",
@@ -63,7 +65,7 @@ const enterlist: Command = {
       return;
     }
 
-    let result;
+    let result: Operation<Inscription[]>;
     try {
       result = textToArray(content);
     } catch (e) {
