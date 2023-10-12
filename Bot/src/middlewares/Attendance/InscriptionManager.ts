@@ -27,12 +27,16 @@ export default class InscriptionManager {
 
   public static async getInscriptionsAtelier() {
     let repo = AppDataSource.getRepository(InscriptionsAtelier);
-    return await repo.find();
+    return (await repo.find()).sort(
+      (a, b) => a.slot.getTime() - b.slot.getTime()
+    );
   }
 
   public static async getInscriptionsCoaching() {
     let repo = AppDataSource.getRepository(InscriptionsCoaching);
-    return await repo.find();
+    return (await repo.find()).sort(
+      (a, b) => a.slot.getTime() - b.slot.getTime()
+    );
   }
 
   public static async deleteInscriptionsFromDb() {
