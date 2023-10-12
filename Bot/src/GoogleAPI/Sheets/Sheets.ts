@@ -23,18 +23,6 @@ export const getSheetURL = async (fileId: string) => {
   return `https://docs.google.com/spreadsheets/d/${fileId}`;
 };
 
-export const fillSheetOld = async (fileId: string) => {
-  let ateliers = await InscriptionManager.getInscriptionsAtelier();
-  for (let i = 0; i < ateliers.length; i++) {
-    await SheetsAteliers.addRow(ateliers[i], fileId, i + 2);
-  }
-
-  let coachings = await InscriptionManager.getInscriptionsCoaching();
-  for (let i = 0; i < coachings.length; i++) {
-    await SheetsCoaching.addRow(coachings[i], fileId, i + 2);
-  }
-};
-
 export const fillSheet = async (fileId: string) => {
   let ateliers = await InscriptionManager.getInscriptionsAtelier();
   let coachings = await InscriptionManager.getInscriptionsCoaching();
