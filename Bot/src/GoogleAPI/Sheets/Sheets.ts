@@ -30,11 +30,11 @@ export const fillSheet = async (fileId: string) => {
   const dataCoaching = [];
   const dataAteliers = [];
 
-  for (let i = 0; i < ateliers.length - 1; i++) {
+  for (let i = 0; i < ateliers.length; i++) {
     dataAteliers.push(await SheetsAteliers.createRowData(ateliers[i], i + 2));
   }
 
-  for (let i = 0; i < coachings.length - 1; i++) {
+  for (let i = 0; i < coachings.length; i++) {
     dataCoaching.push(await SheetsCoaching.createRowData(coachings[i], i + 2));
   }
 
