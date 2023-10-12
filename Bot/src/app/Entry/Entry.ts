@@ -106,7 +106,6 @@ export default class Entry {
   public static async init(i: ButtonInteraction, member: GuildMember) {
     const userFlags = member.flags.toArray() as string[];
     let hasFinishedOnboarding = true;
-    console.log(userFlags);
 
     let hasBeenKicked = userFlags.includes("DidRejoin");
     if (!hasBeenKicked) {

@@ -36,40 +36,21 @@ export default class SheetsAteliers {
     }
   }
 
-  public static async addRow(
-    inscription: InscriptionsAtelier,
-    fileId: string,
-    index: number
-  ) {
-    const writeRowRequest = {
-      spreadsheetId: fileId,
-      valueInputOption: "USER_ENTERED",
-      range: `Ateliers!A${index}:L${index}`,
-      requestBody: {
-        values: [
-          [
-            dateToHHMM(inscription.slot),
-            inscription.lieu,
-            inscription.activity,
-            inscription.langue,
-            inscription.activityLevel,
-            inscription.lastname,
-            inscription.firstname,
-            "",
-            inscription.angLevel,
-            inscription.espLevel,
-            inscription.observations,
-            inscription.groupe,
-          ],
-        ],
-      },
-    };
-
-    try {
-      await Sheets.spreadsheets.values.update(writeRowRequest);
-    } catch (err) {
-      console.log(err);
-    }
+  public static async createRowData(inscription, index) {
+    return [
+      dateToHHMM(inscription.slot),
+      inscription.lieu,
+      inscription.activity,
+      inscription.langue,
+      inscription.activityLevel,
+      inscription.lastname,
+      inscription.firstname,
+      "",
+      inscription.angLevel,
+      inscription.espLevel,
+      inscription.observations,
+      inscription.groupe,
+    ];
   }
 
   public static async getData(fileId: string, sheetId: string) {

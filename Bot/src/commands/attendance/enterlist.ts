@@ -1,5 +1,5 @@
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
-import { textToArray } from "../../middlewares/Attendance/TextToInscriptions";
+import { convertTextToInscription } from "../../middlewares/Attendance/TextToInscriptions";
 import InscriptionManager from "../../middlewares/Attendance/InscriptionManager";
 import { getSheetURL, initSheet } from "../../GoogleAPI/Sheets/Sheets";
 import Messages from "../../middlewares/Messages/Messages";
@@ -67,7 +67,7 @@ const enterlist: Command = {
 
     let result: Operation<Inscription[]>;
     try {
-      result = textToArray(content);
+      result = convertTextToInscription(content, file ? true : false);
     } catch (e) {
       await Messages.sendError(
         interaction,

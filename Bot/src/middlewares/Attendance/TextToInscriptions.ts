@@ -1,129 +1,101 @@
 import Operation from "../../models/Operation";
-import { HEADERS_RESACRIL } from "../../res/ContexteRessources";
 import { HHMMToDate } from "../../utils/Date";
-import { isEmpty } from "../../utils/String";
 import { Inscription } from "./models/Inscription";
 
+const HEADERS_SIZE = 12;
+
 class TextToInscriptions {
-  public results: Inscription[] = [];
-  private text: string;
-  private givenSize: number = 0;
-  private lastType: string;
-  private lastActivity: string;
-  private lastSlot: string;
-  private lastLanguage: string;
-  private lastLevel: string;
-  private code: number = 0;
-
-  private constructor(text: string) {
-    this.text = text;
-  }
-
-  public static fromText(text: string): Operation<Inscription[]> {
-    let converter = new TextToInscriptions(text);
-    return converter.convert();
-  }
-
-  /**
-   *
-   * @param text
-   * @returns 1 if the size of the headers is not the same as the one in the file
-   */
-  private convert(): Operation<Inscription[]> {
-    this.text = this.text.replace(/\r/g, "");
-    this.text = this.text.replace(/\n/g, "");
-    let cells = this.text.split("\t");
-    this.getHeadersSize(cells);
-    let headersResacrilSize = HEADERS_RESACRIL.length;
-    if (this.givenSize + 1 !== headersResacrilSize)
-      return { result: [], returnCode: 1 };
-    cells = this.removeHeaders(cells);
-
-    this.fillInscription(cells);
-    return { result: this.results, returnCode: 0 };
-  }
-
-  private fillInscription(cells: string[]) {
-    for (let i = 0; i < cells.length; i += this.givenSize) {
-      this.createInscription(
-        cells[i],
-        cells[i + 1],
-        cells[i + 2],
-        cells[i + 3],
-        cells[i + 4],
-        cells[i + 5],
-        cells[i + 6],
-        cells[i + 7],
-        cells[i + 8],
-        cells[i + 9],
-        cells[i + 10],
-        cells[i + 11]
-      );
+  public static adjust(rows: string[][]): Operation<Inscription[]> {
+    for (let row of rows) {
+      const rowLength = row.length;
+      if (rowLength != HEADERS_SIZE) {
+        row.push(...new Array(HEADERS_SIZE - rowLength).fill(""));
+      }
     }
+
+    let results: Inscription[] = [];
+
+    let _type, _activity, _slot, _language, _level;
+    // If we meet those words, we forget the previous values
+    const boundariesWords = ["Atelier", "Coaching"];
+
+    for (let row of rows) {
+      if (boundariesWords.includes(row[0])) {
+        _type = row[0];
+        _activity = row[1];
+        _slot = row[2];
+        _language = row[3];
+        _level = row[4];
+      }
+
+      if (row[0] == "") {
+        row[0] = _type;
+        row[1] = _activity;
+        row[2] = _slot;
+        row[3] = _language;
+        row[4] = _level;
+      }
+
+      results.push({
+        type: row[0],
+        activity_name: row[1],
+        time: HHMMToDate(row[2]),
+        language: row[3],
+        niveau: row[4],
+        student_lastname: row[5],
+        student_firstname: row[6],
+        group: row[7],
+        observations: row[8],
+        english_level: row[9],
+        spanish_level: row[10],
+        validation: row[11],
+      });
+    }
+
+    return { result: results, returnCode: 0 };
   }
 
-  private createInscription(
-    type: string,
-    activty: string,
-    slot: string,
-    langue: string,
-    niveau: string,
-    lastname: string,
-    firstname: string,
-    group: string,
-    observations: string,
-    eng: string,
-    esp: string,
-    validation: string
-  ) {
-    type = isEmpty(type) ? this.lastType : type;
-    activty = isEmpty(activty) ? this.lastActivity : activty;
-    slot = isEmpty(slot) ? this.lastSlot : slot;
-    langue = isEmpty(langue) ? this.lastLanguage : langue;
-    niveau = isEmpty(niveau) ? this.lastLevel : niveau;
-    lastname = isEmpty(lastname) ? "ERROR" : lastname;
-    firstname = isEmpty(firstname) ? "ERROR" : firstname;
+  public static parseTextFileToRows(text: string): string[][] {
+    const textRows = text
+      .trim()
+      .replace(/\r/g, "")
+      .split("\n")
+      .map((line) => line.split("\t"));
 
-    this.results.push({
-      type: type,
-      activity_name: activty,
-      time: HHMMToDate(slot),
-      language: langue,
-      niveau: niveau,
-      student_lastname: lastname,
-      student_firstname: firstname,
-      group: group,
-      observations: observations,
-      english_level: eng,
-      spanish_level: esp,
-      validation: validation,
-    });
-
-    this.lastType = type;
-    this.lastActivity = activty;
-    this.lastSlot = slot;
-    this.lastLanguage = langue;
-    this.lastLevel = niveau;
+    textRows.shift();
+    return textRows;
   }
 
-  private getHeadersSize(cells: string[]) {
-    const i = cells.findIndex(
-      (cell, index) =>
-        cell !== HEADERS_RESACRIL[index] || index >= HEADERS_RESACRIL.length
-    );
-    this.givenSize = i !== -1 ? i : cells.length;
-  }
+  public static parseTextToRows(text: string): string[][] {
+    const rowsText = text.trim().split("\t ");
+    let firstWord;
+    if (rowsText[0].includes("Atelier")) firstWord = "Atelier";
+    else firstWord = "Coaching";
 
-  private removeHeaders(cells: string[]) {
-    cells = cells.slice(this.givenSize);
-    if (cells[0].includes("Atelier")) cells[0] = "Atelier";
-    else if (cells[0].includes("Coaching")) cells[0] = "Coaching";
-    return cells;
+    const firstRowSplitted = rowsText[0].split(` ${firstWord}`);
+    rowsText[0] = firstRowSplitted[0];
+    // Put the [1] of the split at the second place
+    rowsText.splice(1, 0, firstRowSplitted[1]);
+
+    const rowsArray = rowsText.map((row) => row.split("\t"));
+    rowsArray[1][0] = firstWord;
+
+    rowsArray.shift();
+
+    return rowsArray;
   }
 }
 
-const textToArray = (text: string): Operation<Inscription[]> => {
-  return TextToInscriptions.fromText(text);
+const convertTextToInscription = (
+  text: string,
+  fromFile: boolean = false
+): Operation<Inscription[]> => {
+  let rows;
+  if (fromFile) rows = TextToInscriptions.parseTextFileToRows(text);
+  else rows = TextToInscriptions.parseTextToRows(text);
+
+  const operation = TextToInscriptions.adjust(rows);
+  return operation;
 };
 
-export { textToArray };
+export { convertTextToInscription };
