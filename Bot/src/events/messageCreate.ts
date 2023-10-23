@@ -19,7 +19,10 @@ export default (client: Client) => {
 
     const hasTempRole = Entry.getTempRole(msg.member) != null;
     if (hasTempRole) {
-      if (ENTRY_CHANNELS.includes(channel.id)) msg.delete();
+      if (ENTRY_CHANNELS.includes(channel.id)) {
+        await threadLogger(msg);
+        await msg.delete();
+      }
     }
   });
 };
