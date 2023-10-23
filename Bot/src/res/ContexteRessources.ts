@@ -97,6 +97,16 @@ const YABLA_SPA = [
       "JOyablaEsp3",
     ],
   },
+  {
+    "yabla.espagnol4": [
+      "LyablaEsp4",
+      "MyablaEsp4",
+      "MEyablaEsp4",
+      "JyablaEsp4",
+      "VyablaEsp4",
+      "JOyablaEsp4",
+    ],
+  },
 ];
 
 export { HEADERS_RESACRIL, YABLA_ENG, YABLA_SPA };
