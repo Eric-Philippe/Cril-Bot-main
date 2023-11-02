@@ -11,18 +11,27 @@ const getFolderIdByName = async (folderName: string, userId?: string) => {
 
   try {
     const response = await Drive.files.list({
-      q: "mimeType='application/vnd.google-apps.folder'", // Filtre pour les folders accessibles
+      q: "mimeType='application/vnd.google-apps.folder'", // Filtre pour les dossiers accessibles
       fields: "files(id, name, createdTime)",
     });
 
     const files = response.data.files;
 
+    // Filter and keep the most recent folder if there are duplicates
     if (files && files.length) {
-      files.forEach((file: any) => {
+      const filteredFiles = files.reduce((acc, file) => {
         if (file.name.includes(folderName)) {
-          folderId = file.id;
+          if (
+            !acc[file.name] ||
+            file.createdTime > acc[file.name].createdTime
+          ) {
+            acc[file.name] = file;
+          }
         }
-      });
+        return acc;
+      }, {});
+
+      folderId = Object.values(filteredFiles)[0]?.id;
     }
 
     logMsg = LogsLevels.SUCCESS;
