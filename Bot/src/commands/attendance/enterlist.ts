@@ -14,6 +14,7 @@ import { Colors } from "../../middlewares/Messages/Colors";
 import { Command } from "../../models/Command";
 import Operation from "../../models/Operation";
 import { Inscription } from "../../middlewares/Attendance/models/Inscription";
+import Logger from "../../logger/Logger";
 
 const enterlist: Command = {
   description: "Entrer une liste de présence de Resacril",
@@ -69,6 +70,7 @@ const enterlist: Command = {
     try {
       result = convertTextToInscription(content, file ? true : false);
     } catch (e) {
+      Logger.logError(e);
       await Messages.sendError(
         interaction,
         "Une erreur est survenue lors de son découpage. Merci de vérifier que le texte envoyé est bien correct."

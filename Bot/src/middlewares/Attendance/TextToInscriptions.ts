@@ -4,6 +4,14 @@ import { Inscription } from "./models/Inscription";
 
 const HEADERS_SIZE = 12;
 
+const PRESENCE_WORDS = [
+  "Validé",
+  "Absence justifiée",
+  "Absence injustifiée",
+  "Fiche Moodle à reprendre",
+  "Fiche Moodle à faire",
+];
+
 class TextToInscriptions {
   public static adjust(rows: string[][]): Operation<Inscription[]> {
     for (let row of rows) {
@@ -67,11 +75,14 @@ class TextToInscriptions {
   }
 
   public static parseTextToRows(text: string): string[][] {
+    // Split the text by the tabulation
     const rowsText = text.trim().split("\t ");
     let firstWord;
+    // If the first word is Atelier, we keep it
     if (rowsText[0].includes("Atelier")) firstWord = "Atelier";
     else firstWord = "Coaching";
 
+    // Split the first row by the first word
     const firstRowSplitted = rowsText[0].split(` ${firstWord}`);
     rowsText[0] = firstRowSplitted[0];
     // Put the [1] of the split at the second place
@@ -82,7 +93,36 @@ class TextToInscriptions {
 
     rowsArray.shift();
 
-    return rowsArray;
+    const fixedArray = [];
+    for (let row of rowsArray) {
+      if (row.length > 12) {
+        for (let i = 1; i < row.length; i++) {
+          if (PRESENCE_WORDS.some((word) => row[i].includes(word))) {
+            const wordSplitter = row[i].includes("Validé")
+              ? "Validé"
+              : row[i].includes("Absence justifiée")
+              ? "Absence justifiée"
+              : row[i].includes("Absence injustifiée")
+              ? "Absence injustifiée"
+              : row[i].includes("Fiche Moodle à reprendre")
+              ? "Fiche Moodle à reprendre"
+              : "Fiche Moodle à faire";
+
+            const wordSplitted = row[i].split(wordSplitter + " ");
+            // On met la première partie dans row[i]
+            row[i] = wordSplitter;
+            // On met la deuxième partie dans row[i+1]
+            row.splice(i + 1, 0, wordSplitted[1]);
+
+            // On découpe la row en deux et on push la première partie dans fixedArray et on recommence
+            const rowSplitted = row.splice(0, i + 1);
+            fixedArray.push(rowSplitted);
+          }
+        }
+      } else fixedArray.push(row);
+    }
+
+    return fixedArray;
   }
 }
 
