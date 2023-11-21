@@ -116,7 +116,9 @@ class TextToInscriptions {
 
             // On découpe la row en deux et on push la première partie dans fixedArray et on recommence
             const rowSplitted = row.splice(0, i + 1);
+            const rowSplitted2 = row.splice(0, row.length);
             fixedArray.push(rowSplitted);
+            fixedArray.push(rowSplitted2);
           }
         }
       } else fixedArray.push(row);
