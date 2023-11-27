@@ -47,9 +47,9 @@ jobs:
             cd BotCril
             rm -r Bot/build
             rm -r scripts
-            cp .env scripts/.env
             unzip -o discord-bot-deployment.zip 
             rm discord-bot-deployment.zip
+            cp .env scripts/.env
             cd Bot
             npm install
             pm2 restart Cril
