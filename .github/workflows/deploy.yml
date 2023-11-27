@@ -26,7 +26,7 @@ jobs:
         working-directory: ./Bot
 
       - name: Zip deployment package
-        run: zip -r discord-bot-deployment.zip ./Bot/build ./Bot/package.json ./Bot/package-lock.json ./Bot/Status.json ./Bot/docs ./Bot/MCQ_Entry.json
+        run: zip -r discord-bot-deployment.zip ./Bot/build ./Bot/package.json ./Bot/package-lock.json ./Bot/Status.json ./Bot/docs ./Bot/MCQ_Entry.json ./scripts
 
       - name: Copy deployment package to VPS
         uses: appleboy/scp-action@v0.1.4
@@ -46,7 +46,10 @@ jobs:
           script: |
             cd BotCril
             rm -r Bot/build
+            rm -r scripts
+            cp .env scripts/.env
             unzip -o discord-bot-deployment.zip 
+            rm discord-bot-deployment.zip
             cd Bot
             npm install
             pm2 restart Cril
