@@ -6,6 +6,8 @@ import {
 } from "discord.js";
 import { Command } from "../../models/Command";
 import { CHAN_SUPPORT } from "../../config/config.guild";
+import Logger from "../../logger/Logger";
+import { LogsGeneralLevels } from "../../logger/LogsGeneral.Levels";
 
 const COACHING_COLOR = "#e0821d";
 const COACHING_EMOTE = "🎓";
@@ -87,6 +89,11 @@ const coaching: Command = {
     await interaction.reply(msgParams);
 
     if (subcommand == "deb-pas-faite") {
+      Logger.logGeneral(
+        LogsGeneralLevels.INFO,
+        `${userTarget.username} n'a pas fait la fiche deb`
+      );
+
       setTimeout(() => {
         const channel = interaction.channel as TextChannel;
         channel.permissionOverwrites.delete(userTarget.id);
