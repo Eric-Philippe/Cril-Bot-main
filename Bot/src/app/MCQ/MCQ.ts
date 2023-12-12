@@ -19,7 +19,7 @@ export default class MCQ {
   private questionManager: QuestionManager;
   private member: GuildMember;
   private channel: ThreadChannel | TextChannel;
-  private totalErrors: number = 0;
+  public totalErrors: number = 0;
   private stopwatch: Stopwatch;
   private answersHistory: boolean[] = [];
 

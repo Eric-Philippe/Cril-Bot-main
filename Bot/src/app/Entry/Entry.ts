@@ -287,6 +287,18 @@ export default class Entry {
     const myMCQ = new MCQ(i, questions, true);
     await myMCQ.launch();
 
+    const member = i.member as GuildMember;
+
+    if (myMCQ.totalErrors > 2) {
+      const mcqMasterRole = member.guild.roles.cache.find(
+        (role) => role.id == "1184098430008709150"
+      );
+      if (mcqMasterRole) member.roles.add(mcqMasterRole);
+      await channel.send(
+        "Félicitation, vous avez réussi le QCM avec succès sans faute, vous obtenez le rôle de **QCM Master** !"
+      );
+    }
+
     const embed = new EmbedBuilder()
       .setTitle("🎉 | Bravo!")
       .setDescription(
@@ -300,7 +312,6 @@ export default class Entry {
 
     const etuRole = i.guild.roles.cache.get(ROLE_ETU);
     const tempEtuRole = i.guild.roles.cache.get(ROLE_TEMP_ETU);
-    const member = i.member as GuildMember;
     await member.roles.remove(tempEtuRole);
     await member.roles.add(etuRole);
 
