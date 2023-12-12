@@ -222,6 +222,13 @@ export default class Entry {
       })
       .setColor("#66c9ed");
 
+    const embedWarning = new EmbedBuilder()
+      .setTitle("📋  Avertissement")
+      .setDescription(
+        "Prenez le temps de répondre correctement, de ne pas bâcler le QCM sinon vous devrez tout recommencer !!"
+      )
+      .setColor(Colors.RED);
+
     const button = new ButtonBuilder()
       .setLabel("Aller vers le quiz")
       .setStyle(ButtonStyle.Link)
@@ -230,7 +237,7 @@ export default class Entry {
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(button);
 
     await interaction.editReply({
-      embeds: [embed],
+      embeds: [embedWarning, embed],
       components: [row],
     });
   }
