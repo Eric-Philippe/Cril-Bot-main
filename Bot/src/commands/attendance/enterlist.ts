@@ -163,6 +163,7 @@ const enterlist: Command = {
  * @returns all the missing columns
  */
 const containsColumns = function (text: string): string[] {
+  text = text.substring(0, 130);
   const columns = [
     "Type",
     "Activité",
