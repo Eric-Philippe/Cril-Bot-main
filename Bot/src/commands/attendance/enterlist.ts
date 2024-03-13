@@ -66,6 +66,17 @@ const enterlist: Command = {
       return;
     }
 
+    const missingColumns = containsColumns(content);
+    if (missingColumns.length > 0) {
+      await Messages.sendError(
+        interaction,
+        `Le fichier ne contient pas les colonnes suivantes : ${missingColumns.join(
+          ", "
+        )}. Merci de vérifier que vous avez copié la totalité du tableau sur Resacril.`
+      );
+      return;
+    }
+
     let result: Operation<Inscription[]>;
     try {
       result = convertTextToInscription(content, file ? true : false);
@@ -143,6 +154,38 @@ const enterlist: Command = {
       );
     }
   },
+};
+
+/**
+ * Check if the text contains all the columns
+ * @param text
+ *
+ * @returns all the missing columns
+ */
+const containsColumns = function (text: string): string[] {
+  const columns = [
+    "Type",
+    "Activité",
+    "Créneau",
+    "Langue",
+    "Niveau",
+    "Nom",
+    "Prénom",
+    "Groupe",
+    "Observations",
+    "Niv. Ang. cons.",
+    "Niv. Esp. cons.",
+    "Validation",
+  ];
+
+  let missingColumns = [];
+  for (let column of columns) {
+    if (!text.includes(column)) {
+      missingColumns.push(column);
+    }
+  }
+
+  return missingColumns;
 };
 
 export default enterlist;
