@@ -14,7 +14,8 @@ export default (client: Client) => {
 
     // If the message contains a discord invite link
     if (
-      msg.content.match(/discord.gg/) &&
+      (msg.content.match(/discord.gg/) ||
+        msg.content.match(/steamcommunity\.com\/gift/)) &&
       !msg.member.permissions.has(PermissionFlagsBits.DeafenMembers)
     ) {
       await msg.delete();
