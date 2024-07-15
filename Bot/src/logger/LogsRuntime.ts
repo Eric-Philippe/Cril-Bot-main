@@ -45,7 +45,9 @@ export default class LogsRuntime {
     try {
       openSync(FILE_PATH, "r");
     } catch (error) {
-      throw new Error("Runtime file doesn't exist");
+      writeFile(FILE_PATH, "", (err) => {
+        if (err) throw new Error("Runtime file doesn't exist");
+      });
     }
   }
 

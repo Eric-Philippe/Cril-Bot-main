@@ -8,6 +8,8 @@ services:
       - .env
     depends_on:
       - postgres
+    networks:
+      - cril-bot
     restart: always
 
   postgres:
@@ -18,11 +20,16 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      # - ./Database:/docker-entrypoint-initdb.d
+      - postgres_data_discord:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - cril-bot
     restart: always
 
 volumes:
-  postgres_data:
+  postgres_data_discord:
+
+networks:
+  cril-bot:
+    external: true
