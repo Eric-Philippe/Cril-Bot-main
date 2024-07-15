@@ -35,7 +35,7 @@ export default class LogsRuntime {
    */
   public log(type: LogsLevels, msg: string) {
     let msgLog = `[${LogsLevels[type]}] ${getDayToMs()} ${msg}\n`;
-    appendFileSync(FILE_PATH, msgLog);
+    console.log(msgLog);
   }
 
   /**
