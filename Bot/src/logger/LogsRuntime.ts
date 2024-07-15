@@ -15,8 +15,8 @@ export default class LogsRuntime {
   private static instance = new LogsRuntime();
 
   private constructor() {
-    LogsRuntime.getRuntimeFile();
-    LogsRuntime.emptyRuntimeFile();
+    // LogsRuntime.getRuntimeFile();
+    // LogsRuntime.emptyRuntimeFile();
   }
 
   /**
