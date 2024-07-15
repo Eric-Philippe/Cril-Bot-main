@@ -17,7 +17,14 @@ if (
   !GOOGLE_CLIENT_ID ||
   !EMAIL
 ) {
-  throw new Error("Missing environment variables");
+  let missing_variables = "";
+  if (!GOOGLE_PROJECT_ID) missing_variables += "GOOGLE_PROJECT_ID ";
+  if (!GOOGLE_PRIVATE_KEY_ID) missing_variables += "GOOGLE_PRIVATE_KEY_ID ";
+  if (!GOOGLE_PRIVATE_KEY) missing_variables += "GOOGLE_PRIVATE_KEY ";
+  if (!GOOGLE_EMAIL) missing_variables += "GOOGLE_EMAIL ";
+  if (!GOOGLE_CLIENT_ID) missing_variables += "GOOGLE_CLIENpT_ID ";
+  if (!EMAIL) missing_variables += "EMAIL ";
+  throw new Error(`Missing environment variables: ${missing_variables}`);
 }
 
 const credentials = {

@@ -22,7 +22,7 @@ const status: Command = {
     .setDescription("Informe sur l'état actuel du bot et de ses services.")
     .setDefaultMemberPermissions(PermissionFlagsBits.MuteMembers),
   async run(interaction) {
-    Messages.sendLoading(interaction, "Récupération des données....");
+    // Messages.sendLoading(interaction, "Récupération des données....");
 
     let googleMetric = await withTimeout(getDriveMetrics(), 5000); // Timeout après 5000 ms
     let dbMetric = await withTimeout(getDbMetrics(), 5000);
@@ -60,7 +60,7 @@ const status: Command = {
       .setColor(Colors.PURPLE)
       .setFooter({ text: "🟢 Good | 🟡 Slow | 🔴 Off" });
 
-    Messages.sendInteraction(interaction, embed);
+    interaction.reply({ embeds: [embed] });
   },
 };
 
