@@ -8,12 +8,9 @@ import { LogsLevels } from "../logger/Logs.levels";
 let activity = false;
 
 export default (client: Client, appDataSource: DataSource) => {
-  client.once(Events.DatabaseReady, (host: string, dbName: string) => {
+  client.once(Events.DatabaseReady, (dbName: string) => {
     activity = true;
-    console.log(
-      `%c 💾 Database connected on ${host}/${dbName}`,
-      "color: #00ff00"
-    );
+    console.log(`%c 💾 Database connected on ${dbName}`, "color: #00ff00");
     LogsRuntime.getInstance().log(
       LogsLevels.INFO,
       `Database connected on ${dbName}`

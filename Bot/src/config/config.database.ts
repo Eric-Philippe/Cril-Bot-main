@@ -1,11 +1,11 @@
 require("dotenv").config();
 
-const { DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME } = process.env;
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB } = process.env;
 
-if (!DB_HOST || !DB_PORT || !DB_USER || !DB_PASS || !DB_NAME) {
+if (!POSTGRES_USER || !POSTGRES_PASSWORD || !POSTGRES_DB) {
   throw new Error("Missing environment variables");
 }
 
-const DB_URL = `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
+const DB_URL = `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}`;
 
-export { DB_URL, DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME };
+export { DB_URL, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB };

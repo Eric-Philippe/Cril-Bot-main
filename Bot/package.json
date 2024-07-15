@@ -8,7 +8,8 @@
     "start": "ts-node src/index.ts",
     "start-prod": "node build/index.js",
     "build": "tsc -p tsconfig.json --skipLibCheck",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migrate": "typeorm migration:run -- -d ormconfig.json"
   },
   "author": "ericp",
   "license": "ISC",

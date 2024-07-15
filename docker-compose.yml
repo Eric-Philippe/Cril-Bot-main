@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  discord-bot:
+    build: ./Bot
+    container_name: discord-bot
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    restart: always
+
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./Database:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    restart: always
+
+volumes:
+  postgres_data:

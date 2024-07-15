@@ -22,10 +22,10 @@ const status: Command = {
     .setDescription("Informe sur l'état actuel du bot et de ses services.")
     .setDefaultMemberPermissions(PermissionFlagsBits.MuteMembers),
   async run(interaction) {
-    Messages.sendLoading(interaction, "Récupération des données...");
+    Messages.sendLoading(interaction, "Récupération des données....");
 
-    let googleMetric = await getDriveMetrics();
-    let dbMetric = await getDbMetrics();
+    let googleMetric = await withTimeout(getDriveMetrics(), 5000); // Timeout après 5000 ms
+    let dbMetric = await withTimeout(getDbMetrics(), 5000);
     let ping = interaction.client.ws.ping;
     let uptime = interaction.client.uptime;
 
@@ -60,7 +60,7 @@ const status: Command = {
       .setColor(Colors.PURPLE)
       .setFooter({ text: "🟢 Good | 🟡 Slow | 🔴 Off" });
 
-    await Messages.updateReply(interaction, embed);
+    Messages.sendInteraction(interaction, embed);
   },
 };
 
@@ -70,5 +70,25 @@ const getMetricIndex = (metric: number, scale: number[]) => {
   }
   return scale.length - 1;
 };
+
+function withTimeout<T>(promise: Promise<T>, timeout: number): Promise<T> {
+  return new Promise((resolve, reject) => {
+    // Set a timer to reject the promise if not resolved in time
+    const timer = setTimeout(() => {
+      reject(new Error("Operation timed out"));
+    }, timeout);
+
+    promise.then(
+      (value) => {
+        clearTimeout(timer);
+        resolve(value);
+      },
+      (error) => {
+        clearTimeout(timer);
+        reject(error);
+      }
+    );
+  });
+}
 
 export default status;

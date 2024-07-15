@@ -7,52 +7,18 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "20"
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./Bot
-
-      - name: Build TypeScript
-        run: npx tsc
-        working-directory: ./Bot
-
-      - name: Zip deployment package
-        run: zip -r discord-bot-deployment.zip ./Bot/build ./Bot/package.json ./Bot/package-lock.json ./Bot/Status.json ./Bot/docs ./Bot/MCQ_Entry.json ./scripts
-
-      - name: Copy deployment package to VPS
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          source: discord-bot-deployment.zip
-          target: BotCril
-
       - name: Deploy Bot on VPS
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd BotCril
-            rm -r Bot/build
-            rm -r scripts
-            unzip -o discord-bot-deployment.zip 
-            rm discord-bot-deployment.zip
-            cp .env scripts/.env
-            cd Bot
-            npm install
-            pm2 restart Cril
+            cd services/discord_bot/Cril-Bot-main
+            git pull
+            docker-compose down
+            docker-compose up -d
 
       - name: Check build status and notify Discord
         env:
