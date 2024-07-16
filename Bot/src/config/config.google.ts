@@ -22,7 +22,7 @@ if (
   if (!GOOGLE_PRIVATE_KEY_ID) missing_variables += "GOOGLE_PRIVATE_KEY_ID ";
   if (!GOOGLE_PRIVATE_KEY) missing_variables += "GOOGLE_PRIVATE_KEY ";
   if (!GOOGLE_EMAIL) missing_variables += "GOOGLE_EMAIL ";
-  if (!GOOGLE_CLIENT_ID) missing_variables += "GOOGLE_CLIENpT_ID ";
+  if (!GOOGLE_CLIENT_ID) missing_variables += "GOOGLE_CLIENT_ID ";
   if (!EMAIL) missing_variables += "EMAIL ";
   throw new Error(`Missing environment variables: ${missing_variables}`);
 }

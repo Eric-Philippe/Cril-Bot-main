@@ -18,6 +18,7 @@ jobs:
             cd services/discord_bot/Cril-Bot-main
             git pull
             docker-compose down
+            docker-compose build
             docker-compose up -d
 
       - name: Check build status and notify Discord
