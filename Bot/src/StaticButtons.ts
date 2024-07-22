@@ -42,9 +42,12 @@ const NoCode: StaticButton = {
 };
 
 const StartQuizz: StaticButton = {
-  validator:
-    new StaticButtonBuilder().equals(ButtonId.START_QUIZZ) ||
-    new StaticButtonBuilder().equals(ButtonId.RETRY_MCQ),
+  validator: new StaticButtonBuilder().equals(ButtonId.START_QUIZZ),
+  run: (i) => Entry.launchMCQ(i),
+};
+
+const RetryQuizz: StaticButton = {
+  validator: new StaticButtonBuilder().equals(ButtonId.RETRY_MCQ),
   run: (i) => Entry.launchMCQ(i),
 };
 
@@ -75,7 +78,8 @@ Buttons.push(
   StartQuizz,
   CoachingStart,
   HelpDesk,
-  EndSupport
+  EndSupport,
+  RetryQuizz
 );
 
 export default Buttons;
