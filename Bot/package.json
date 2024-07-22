@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "start": "ts-node src/index.ts",
-    "start-prod": "node build/src/index.js",
+    "start-prod": "node build/index.js",
     "build": "tsc -p tsconfig.json --skipLibCheck",
     "typeorm": "typeorm-ts-node-commonjs",
     "migrate": "typeorm migration:run -- -d ormconfig.json"
