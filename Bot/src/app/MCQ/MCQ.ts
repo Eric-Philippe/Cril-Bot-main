@@ -124,6 +124,14 @@ export default class MCQ {
     });
   }
 
+  public isLowScore(): boolean {
+    if (this.answersHistory.length == 0) return false;
+
+    const score = this.answersHistory.filter((e) => e).length;
+
+    return score >= 7;
+  }
+
   public buildMcqReport(): MessageCreateOptions {
     const elapsedTimeInMin = this.stopwatch.elapsedTimeMin;
 

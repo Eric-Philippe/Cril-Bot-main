@@ -42,7 +42,9 @@ const NoCode: StaticButton = {
 };
 
 const StartQuizz: StaticButton = {
-  validator: new StaticButtonBuilder().equals(ButtonId.START_QUIZZ),
+  validator:
+    new StaticButtonBuilder().equals(ButtonId.START_QUIZZ) ||
+    new StaticButtonBuilder().equals(ButtonId.RETRY_MCQ),
   run: (i) => Entry.launchMCQ(i),
 };
 

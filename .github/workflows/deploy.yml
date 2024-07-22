@@ -15,11 +15,9 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd services/discord_bot/Cril-Bot-main
+            cd services/bot/Cril-Bot-main
             git pull
-            docker-compose down
-            docker-compose build
-            docker-compose up -d
+            docker compose up -d --build
 
       - name: Check build status and notify Discord
         env:

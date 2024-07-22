@@ -289,7 +289,7 @@ export default class Entry {
 
     const member = i.member as GuildMember;
 
-    if (myMCQ.totalErrors > 2) {
+    if (myMCQ.totalErrors < 2) {
       const mcqMasterRole = member.guild.roles.cache.find(
         (role) => role.id == "1184098430008709150"
       );
@@ -299,21 +299,40 @@ export default class Entry {
       );
     }
 
-    const embed = new EmbedBuilder()
-      .setTitle("🎉 | Bravo!")
-      .setDescription(
-        "Vous avez terminé le QCM! Vous avez accès aux différents salons du serveur et donc aux activités en ligne que vous avez réservées. \n\nEn cas de problème ou question, rdv dans le salon support. \n\nVous serez ejecté du salon dans lequel vous vous trouvez dans 2 minutes !"
-      )
-      .setFooter({ text: "cril.langues@iut-tlse3.fr" });
+    // If final score is less than 7 out of 10
+    if (!myMCQ.isLowScore()) {
+      // Retry Button
+      const retryButton = new ButtonBuilder()
+        .setLabel("Recommencer")
+        .setStyle(ButtonStyle.Primary)
+        .setCustomId(ButtonId.RETRY_MCQ);
 
-    await channel.send({ embeds: [embed] });
+      const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
+        retryButton
+      );
 
-    EntryManager.finishEntry(i.user.id);
+      await channel.send({
+        content:
+          "Vous avez obtenu un score insuffisant, il vous faut refaire le QCM.",
+        components: [row],
+      });
+    } else {
+      const embed = new EmbedBuilder()
+        .setTitle("🎉 | Bravo!")
+        .setDescription(
+          "Vous avez terminé le QCM! Vous avez accès aux différents salons du serveur et donc aux activités en ligne que vous avez réservées. \n\nEn cas de problème ou question, rdv dans le salon support. \n\nVous serez ejecté du salon dans lequel vous vous trouvez dans 2 minutes !"
+        )
+        .setFooter({ text: "cril.langues@iut-tlse3.fr" });
 
-    const etuRole = i.guild.roles.cache.get(ROLE_ETU);
-    const tempEtuRole = i.guild.roles.cache.get(ROLE_TEMP_ETU);
-    await member.roles.remove(tempEtuRole);
-    await member.roles.add(etuRole);
+      await channel.send({ embeds: [embed] });
+
+      EntryManager.finishEntry(i.user.id);
+
+      const etuRole = i.guild.roles.cache.get(ROLE_ETU);
+      const tempEtuRole = i.guild.roles.cache.get(ROLE_TEMP_ETU);
+      await member.roles.remove(tempEtuRole);
+      await member.roles.add(etuRole);
+    }
 
     const report = await myMCQ.buildMcqReport();
     const logChannel = i.guild.channels.cache.get(CHAN_LOGS) as TextChannel;

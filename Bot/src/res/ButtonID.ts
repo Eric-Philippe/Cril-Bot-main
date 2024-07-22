@@ -11,4 +11,5 @@ export enum ButtonId {
   START_QUIZZ = "START_QUIZZ",
   END_SUPPORT = "END_SUPPORT",
   HELP_DESK_SUFFIX = "-help-desk",
+  RETRY_MCQ = "RETRY_MCQ",
 }
