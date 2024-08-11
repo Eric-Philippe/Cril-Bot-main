@@ -3,18 +3,16 @@ version: "3.8"
 services:
   bot-cril:
     build: ./Bot
-    container_name: discord-bot
+    container_name: bot-cril
     env_file:
       - .env
     depends_on:
-      - postgres
-    networks:
-      - cril-bot
-    restart: always
+      - bot-db-cril
+    restart: unless-stopped
 
-  postgres:
+  bot-db-cril:
     image: postgres:13
-    container_name: postgres
+    container_name: bot-db-cril
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -22,14 +20,8 @@ services:
     volumes:
       - postgres_data_discord:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
-    networks:
-      - cril-bot
-    restart: always
+      - ${DB_OUT_PORT}:5432
+    restart: unless-stopped
 
 volumes:
   postgres_data_discord:
-
-networks:
-  cril-bot:
-    external: true
