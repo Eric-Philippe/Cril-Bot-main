@@ -102,7 +102,7 @@ const listFiles = async (userId?: string) => {
     listFiles = sortByDate(listFiles);
 
     userId = userId ? userId : LogsLevels.SYSTEM;
-    Logger.logCoachingI(userId, LogsCoachingITypes.FETCHING_FILES, logMsg);
+    //Logger.logCoachingI(userId, LogsCoachingITypes.FETCHING_FILES, logMsg);
     return listFiles;
   }
 };
