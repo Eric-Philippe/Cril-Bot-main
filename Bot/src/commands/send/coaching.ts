@@ -60,7 +60,7 @@ const coaching: Command = {
         footer = "Vous perdrez vos permissions dans 5 minutes.";
         break;
       case "deb-comm":
-        desc = `🎓 | Vous pouvez ouvrir la fiche début de parcours que vous avez remplie. Dans le champ Conseil coachs nous vous avons donné des conseils de travail pour cette séance. Prenez-en connaissance et commencez à travailler.\n\n
+        desc = `🎓 | Vous pouvez ouvrir la fiche **"Début de parcours"** que vous avez remplie auparavant. Cette fiche se trouve sur Moodle, dans le cours "CRIL - Dossier de suivi" de la langue travaillée aujourd'hui, dans votre PACK\n\n
         1️⃣ Les ressources mentionnées dans les conseils sont disponibles en cliquant sur le symbole épingle en haut de ce chat. La séance dure 1h. \n\n
         2️⃣ Vous devez remplir la fiche coaching 1 au fur et à mesure de la séance : cela fait partie de votre heure de travail, mais si vous n’avez pas le temps de terminer, vous pouvez enregistrer et la modifier plus tard. \n\n
         3️⃣ Si vous avez des questions, besoin d’aide ou d’identifiants, revenez vers nous, nous sommes là pour vous répondre`;
