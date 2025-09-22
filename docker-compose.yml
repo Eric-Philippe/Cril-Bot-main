@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
 
   bot-db-cril:
-    image: postgres:13
+    image: postgres:16
     container_name: bot-db-cril
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
