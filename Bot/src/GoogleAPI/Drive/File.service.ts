@@ -52,6 +52,8 @@ const createTodaySheet = async (): Promise<string> => {
     });
 
     const file = response.data;
+    console.log(file);
+
     if (file) {
       Logger.logCoachingI(
         LogsLevels.SYSTEM,
