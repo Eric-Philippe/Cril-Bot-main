@@ -28,7 +28,7 @@ const enterlist: Command = {
     )
     .addStringOption((option) =>
       option.setName("text").setDescription("Si le texte est trop court")
-    ),
+    ) as SlashCommandBuilder,
 
   async run(interaction) {
     await interaction.deferReply();
