@@ -96,6 +96,9 @@ const enterlist: Command = {
       await Messages.updateReply(interaction, embed);
 
       let sheetId = await isMostRecentSheetSetup();
+
+      console.log(sheetId);
+
       if (sheetId != null)
         return Messages.sendError(
           interaction,
