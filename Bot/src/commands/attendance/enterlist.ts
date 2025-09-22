@@ -116,6 +116,17 @@ const enterlist: Command = {
           interaction,
           "Une erreur est survenue lors de la création de la feuille. Merci de contacter un administrateur pour plus d'informations."
         );
+
+        // Send in a .log file the stack trace
+        let fileContent = `Error occurred: ${e.message}\nStack trace:\n${e.stack}`;
+        interaction.channel.send({
+          files: [
+            {
+              attachment: Buffer.from(fileContent, "utf-8"),
+              name: "error.log",
+            },
+          ],
+        });
         return;
       }
 
