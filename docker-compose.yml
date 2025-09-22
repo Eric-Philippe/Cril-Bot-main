@@ -6,6 +6,8 @@ services:
     container_name: bot-cril
     env_file:
       - .env
+    environment:
+      TZ: Europe/Paris
     depends_on:
       - bot-db-cril
     restart: unless-stopped
