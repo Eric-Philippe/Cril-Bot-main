@@ -28,7 +28,7 @@ const coachingAccess: Command = {
           { name: "3ème-Coaching", value: CHAN_COACH_THIRD },
           { name: "Coaching-Plus", value: CHAN_COACH_PLUS }
         )
-    ),
+    ) as SlashCommandBuilder,
   async run(interaction) {
     await interaction.deferReply();
     const user = interaction.options.getUser("user");
