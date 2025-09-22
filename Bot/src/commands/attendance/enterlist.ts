@@ -89,6 +89,11 @@ const enterlist: Command = {
       return;
     }
 
+    // Filter any inscription with a null slot
+    result.result = result.result.filter(
+      (inscription) => inscription.time !== null
+    );
+
     if (result.returnCode == 0) {
       embed = Messages.buildEmbed(
         `${Emotes.INFO} | Enregistrement des informations en cours...`
@@ -96,8 +101,6 @@ const enterlist: Command = {
       await Messages.updateReply(interaction, embed);
 
       let sheetId = await isMostRecentSheetSetup();
-
-      console.log(sheetId);
 
       if (sheetId != null)
         return Messages.sendError(
