@@ -89,6 +89,8 @@ const enterlist: Command = {
       return;
     }
 
+    console.log(result);
+
     // Filter any inscription with a null slot
     result.result = result.result.filter(
       (inscription) => inscription.time !== null
