@@ -20,8 +20,7 @@ const yeet: Command = {
         .setName("target")
         .setDescription("Le membre à yeet")
         .setRequired(true)
-    ),
-
+    ) as SlashCommandBuilder,
   async run(interaction) {
     let member = interaction.options.getMember("target") as GuildMember;
     // Remove the user from the vocal if he is in one

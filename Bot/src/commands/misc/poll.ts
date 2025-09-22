@@ -46,7 +46,7 @@ const poll: Command = {
     )
     .addStringOption((option) =>
       option.setName("answer5").setDescription("Answer 5").setMaxLength(35)
-    ),
+    ) as SlashCommandBuilder,
   async run(interaction) {
     const enonce = interaction.options.getString("question");
 

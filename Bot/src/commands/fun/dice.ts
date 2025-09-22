@@ -11,7 +11,7 @@ const dice: Command = {
     .setDescription("Lance un dé à 6 faces !")
     .addIntegerOption((option) =>
       option.setName("faces").setDescription("Le nombre de faces du dé")
-    ),
+    ) as SlashCommandBuilder,
 
   async run(interaction) {
     let faces = interaction.options.getInteger("faces") || 6;

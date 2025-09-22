@@ -121,7 +121,7 @@ const pixel: Command = {
             value: "BROWN",
           }
         )
-    ),
+    ) as SlashCommandBuilder,
   async run(interaction) {
     if (interaction.channelId !== CHAN_DPLACE) {
       Messages.sendWarning(

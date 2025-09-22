@@ -38,7 +38,7 @@ const link: Command = {
         .addUserOption((option) =>
           option.setName("user").setDescription("Utilisateur à cibler")
         )
-    ),
+    ) as SlashCommandBuilder,
   async run(interaction) {
     const subcommand = interaction.options.getSubcommand();
     const userTarget = interaction.options.getUser("user");

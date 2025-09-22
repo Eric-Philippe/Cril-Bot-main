@@ -39,7 +39,7 @@ const toss: Command = {
         .setName("footer")
         .setDescription("Footer du tirage au sort")
         .setRequired(true)
-    ),
+    ) as SlashCommandBuilder,
   async run(interaction) {
     const title = interaction.options.getString("titre");
     let description = interaction.options.getString("description");

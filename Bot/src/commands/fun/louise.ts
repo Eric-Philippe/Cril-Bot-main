@@ -72,7 +72,7 @@ const louise: Command = {
             .setRequired(true)
             .setAutocomplete(true)
         )
-    ),
+    ) as SlashCommandBuilder,
   async autocomplete(interaction) {
     const possibleAnswers = [
       { name: "Math ? Wtf.", value: 0 },

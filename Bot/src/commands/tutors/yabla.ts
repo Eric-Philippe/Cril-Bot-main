@@ -30,7 +30,7 @@ const yabla: Command = {
     .addUserOption((option) =>
       option.setName("utilisateur").setDescription("Utilisateur Cible.")
     )
-    .setDMPermission(false),
+    .setDMPermission(false) as SlashCommandBuilder,
   async run(interaction) {
     let currentDay = new Date().getDay();
     if (currentDay === 0 || currentDay === 6) {

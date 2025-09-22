@@ -58,7 +58,7 @@ const logs: Command = {
               { name: "Tout", value: "all" }
             )
         )
-    ),
+    ) as SlashCommandBuilder,
   async run(interaction) {
     await interaction.deferReply();
 
