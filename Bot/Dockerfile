@@ -1,7 +1,10 @@
 FROM node:20-alpine
 
-# Install required system dependencies for canvas
+# Install build dependencies and canvas dependencies
 RUN apk add --no-cache \
+  python3 \
+  make \
+  g++ \
   cairo-dev \
   jpeg-dev \
   pango-dev \
@@ -10,7 +13,8 @@ RUN apk add --no-cache \
   pixman-dev \
   pangomm-dev \
   libjpeg-turbo-dev \
-  freetype-dev
+  freetype-dev \
+  pkgconfig
 
 # Create app directory
 WORKDIR /app
@@ -18,6 +22,9 @@ WORKDIR /app
 # Install app dependencies
 COPY package*.json ./
 RUN npm install
+
+# Clean up build dependencies to reduce image size
+RUN apk del python3 make g++ pkgconfig
 
 # Install globally typeorm
 RUN npm install -g typeorm
