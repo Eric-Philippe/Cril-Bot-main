@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:20-alpine
 
 # Install required system dependencies for canvas
 RUN apt-get update && apt-get install -y \
@@ -23,6 +23,9 @@ COPY . .
 
 # Build the app
 RUN npm run build
+
+# Purge unnecessary files
+RUN npm prune --production
 
 # Run the app
 CMD ["npm", "run", "start-prod"]
