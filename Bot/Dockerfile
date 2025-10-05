@@ -1,12 +1,16 @@
 FROM node:20-alpine
 
 # Install required system dependencies for canvas
-RUN apt-get update && apt-get install -y \
-  libcairo2-dev \
-  libjpeg-dev \
-  libpango1.0-dev \
-  libgif-dev \
-  librsvg2-dev
+RUN apk add --no-cache \
+  cairo-dev \
+  jpeg-dev \
+  pango-dev \
+  giflib-dev \
+  librsvg-dev \
+  pixman-dev \
+  pangomm-dev \
+  libjpeg-turbo-dev \
+  freetype-dev
 
 # Create app directory
 WORKDIR /app
